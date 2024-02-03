@@ -1,0 +1,71 @@
+/* FONT STYLES */
+@import 'ngx-toastr/toastr';/* Styles for toast messages*/
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/* GLOBAL APP STYLES */
+:root {
+  --red:rgb(232,60,70);
+  --brown:rgb(53,22,17);
+  --beige:rgb(240,234,200);
+  
+  --white: #FFFFFF;
+  --white-opaque8: rgb(255, 255, 255, .8);
+  /* --brown: #2C1E1E;
+  --brown-dark:rgb(31, 22, 21); */
+  --blue: #55C0CF;
+  --orange: #b65f28;
+  --orange-opaque8: rgb(182, 95, 40,.8);
+  --yellow:#FFD543;
+}
+
+html {
+  font-size: 62.5%; /* 16px*62.5%=10px, 1rem=10px*/
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+} 
+/* 
+font-family: "Mochiy Pop P One",
+sans-serif;
+*/
+
+body {
+  font-family: "Roboto",sans-serif;
+  background-color: rgb(0, 255, 115);
+  width:100vw;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+button {
+  font-family: "Montserrat", sans-serif;
+}
+
+h1 {
+  font-size: 4rem;
+}
+.debug {
+  font-size: 1.2rem;
+  width:100%;
+}
+/* TOAST MESSAGES */
+.toast-message {
+  font-size: 1.5rem;
+}
