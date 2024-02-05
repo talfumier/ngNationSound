@@ -1,0 +1,107 @@
+footer {
+  background-color: var(--black);
+  width: 100%;
+  min-width: 330px;
+}
+
+div.footer-main-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  color: var(--white);
+  max-width: 1300px;
+  height: 130px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+ul.list-group {
+  min-width: 200px;
+  max-width: 20%;
+  padding: 10px 15px 0;
+  margin: 0;
+}
+ul.list-group.social-network {
+  margin-bottom: 10px;
+}
+
+li.list-group-item {
+  list-style: none;
+}
+
+li:not(.title) {
+  padding-left:10px;
+}
+
+p {
+  font-size: 1.3rem;
+  margin:5px 0;
+}
+p.newsletter-text {
+  margin-left: 10px;
+  min-width: 200px;
+}
+
+address {
+  font-size: 1.3rem;
+  line-height: 2.2rem;
+}
+div.phone-email {
+  display:flex;
+  align-items: center;
+}
+
+
+.title {
+  text-wrap: nowrap;
+  text-align: center;
+  padding-bottom:5px;
+  font-size: 1.6rem;
+  font-weight: bolder;
+}
+
+svg {
+  fill: var(--white);
+  height: 2rem;
+  width: 2rem;
+}
+address svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-right: 10px;
+}
+
+li.list-group-item.input {
+  position: relative;
+  width: 200px;
+}
+
+input {
+  height: 2.5rem;
+  width: 100%;
+  border: none;
+  background-color: var(--white);
+}
+
+svg#rss {
+  position: absolute;/*positioning vs list-group-item.input*/
+  top: 0;
+  right: -4px;
+  background-color: var(--orange);
+  height: 2.5rem;
+  width: 3rem;
+  padding: 1px;
+  margin: 0;
+}
+
+ul.list-group.in-line *:not(.title) {
+  display: inline;
+  margin-top: 15px;
+}
+
+div.footer-copyright {
+  font-size: 1.3rem;
+  color: var(--white);
+  text-align: center;
+  padding:0 0 5px;
+}

@@ -1,13 +1,8 @@
 div.wrapper {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 70px 1fr auto;
+  grid-template-rows: 90px 1fr auto;
   background-color: var(--beige);
   height: 100vh;
-}
-
-@media screen and (min-width: 450px) {
-  div.wrapper {
-    grid-template-rows: 90px 1fr auto;
-  }
+  min-width: 350px;
 }
