@@ -2,7 +2,6 @@ import { NgModule,LOCALE_ID,ErrorHandler } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 
-import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -18,12 +17,6 @@ import { GenericErrorHandler } from './error/errorHandler';
 
 registerLocaleData(localeFr); //register fr-FR locale, default is en-US
 
-const routes:Routes=[
-  {path:'',component:HomeComponent},  
-  {path: '**', component: NotFoundComponent}
-
-];
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +28,6 @@ const routes:Routes=[
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes),  
     BrowserAnimationsModule,
     ToastrModule.forRoot({timeOut:3000}),    
   ],

@@ -1,1 +1,37 @@
-<p>header works!</p>
+<header>
+  <div class="button-title">
+    <button class="ticketing">Billetterie</button>
+    <div class="logo-container" routerLink="/">
+      <img src="../../assets/images/logo.jpg" alt="Logo NationSound festival" />
+    </div>
+    <h1>
+      <p>Nation Sound Festival</p>
+      <p>
+        <span class="day">14</span><span class="day">15</span>
+        <span class="day">16</span><span class="month-year">Juin 2024</span>
+      </p>
+    </h1>
+  </div>
+  <nav class="navbar">
+    <ul class="list-group" [ngClass]="{ toggled: isToggled }">
+      <li
+        class="list-group-item"
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Accueil
+      </li>
+      <li class="list-group-item">Programmation</li>
+      <li class="list-group-item">Carte</li>
+      <li class="list-group-item">Artistes</li>
+      <li class="list-group-item">Rencontres</li>
+      <li class="list-group-item">Billetterie</li>
+    </ul>
+    <button class="menu-toggle" (click)="handleToggle()">
+      <svg>
+        <use href="../../assets/icons/icons.svg#hamMenuIcon" />
+      </svg>
+    </button>
+  </nav>
+</header>

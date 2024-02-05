@@ -6,17 +6,16 @@
 /* GLOBAL APP STYLES */
 :root {
   --red:rgb(232,60,70);
-  --brown:rgb(53,22,17);
-  --beige:rgb(240,234,200);
-  
+  --orange: #b65f28;
+  --orange-opaque8: rgb(182, 95, 40, .8);
+  --black:rgb(36, 35, 35);  
+  --yellow: #FFD543;  
   --white: #FFFFFF;
   --white-opaque8: rgb(255, 255, 255, .8);
+  --beige: rgb(240, 234, 200);
   /* --brown: #2C1E1E;
   --brown-dark:rgb(31, 22, 21); */
   --blue: #55C0CF;
-  --orange: #b65f28;
-  --orange-opaque8: rgb(182, 95, 40,.8);
-  --yellow:#FFD543;
 }
 
 html {
@@ -47,7 +46,9 @@ body {
   box-sizing: border-box;
 }
 
-h1,
+h1 {
+  font-family: "Mochiy Pop P One",sans-serif;
+}
 h2,
 h3,
 h4,
