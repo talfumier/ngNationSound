@@ -4,4 +4,5 @@ div.wrapper {
   grid-template-rows: 90px 1fr auto;
   background-color: var(--beige);
   height: 100vh;
+  min-width: 350px;
 }

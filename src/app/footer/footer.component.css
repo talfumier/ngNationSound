@@ -103,5 +103,5 @@ div.footer-copyright {
   font-size: 1.3rem;
   color: var(--white);
   text-align: center;
-  padding: 15px 0;
+  padding:0 0 5px;
 }

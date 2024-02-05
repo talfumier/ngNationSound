@@ -9,6 +9,7 @@ header {
   color: var(--white-opaque8);
   width: 100vw;
   max-height: 90px;
+  min-width: 350px;
   z-index: 1000;
   padding:0;
 }
