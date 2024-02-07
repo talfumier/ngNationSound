@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 import { GenericErrorHandler } from './error/errorHandler';
+import { AccordionComponent } from './home/accordion/accordion.component';
 
 registerLocaleData(localeFr); //register fr-FR locale, default is en-US
 
@@ -23,7 +24,8 @@ registerLocaleData(localeFr); //register fr-FR locale, default is en-US
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AccordionComponent
   ],
   imports: [
     BrowserModule,

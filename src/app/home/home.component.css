@@ -1,16 +1,16 @@
 main {
-  height: 100vh;
+  width: 100vw;
+  min-height: 100vh;
   background-image: url("../../assets/images/festival1.jpg");
-  background-size:repeat;
+  background-size:cover;
   background-position:center;
+  /* background-color: var(--white); */
   opacity:0.8;
 }
 main section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width:100vw;
-
 }
 div.fixed-container {
   display:flex;
@@ -21,17 +21,19 @@ div.fixed-container {
   border: 10px solid var(--beige);
   overflow: hidden;
   background-color: var(--white);
-  box-shadow: 0 .25em .5em #CCC, inset 0 0 1em .25em #CCC;
+  box-shadow: 0 .5rem .9rem #CCC, inset 0 0 1.7rem .5rem #CCC;
+}
+h2 {
+  font-size: 1.7rem;
+  vertical-align: middle;
+  margin: 0;
+  white-space: nowrap;
 }
 h2.moving-text{
   display: inline-block;
-  font-size: 1.7rem;
-  vertical-align: middle;
-  color: var(--red);
-  margin:0;
+  color: var(--blue);
   padding-right: 2rem;/* space for transition */
   padding-left: 100%;/* start at right most position */
-  white-space: nowrap;
   animation: defilement-rtl 20s infinite linear;
 }
 @keyframes defilement-rtl {
@@ -42,4 +44,119 @@ h2.moving-text{
     transform: translate3d(-100%, 0, 0);/* final position to the left */
   }
 }
+h2.title {
+  position:relative;
+  font-size: 2.5rem;
+  padding:5px 0;
+  color: var(--red);
+  text-shadow: 2px 2px 2px white;
+  border: 1px solid;
+  border-radius: 10px;
+  background-color: var(--beige-opaque8);
+  width:40rem;
+  text-align: center;
+}
+button.chevron {
+  position:absolute;
+  top:8px;
+  right:0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+svg {
+  width: 25px;
+  height: 25px;
+  fill: var(--red);
+  transition: transform 1s;
+}
+
+button.chevron.rotated svg {
+  transform: rotate(90deg);
+}
+
+div.program-grid {
+  display:grid;
+  grid-template-columns: 25px repeat(3,auto);
+  grid-template-rows: 30px auto;
+  row-gap: 10px;
+  column-gap: 5px;
+  padding:5px 15px;
+  opacity: 1;
+  transition: opacity 1.5s;
+}
+div.program-grid.hidden {
+  opacity:0;
+  height:0;
+  padding:0 15px 0;
+  transition: opacity 1.5s,height 1.5s;
+}
+
+:host ::ng-deep div.grid-item {/* : host::ng-deep required for html content rendered via [innerHtml]*/
+  display:flex;
+  align-items: top;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border:1px solid;
+  border-radius: 5px;
+  background-color: var(--beige);
+}
+:host ::ng-deep div.program-grid div.grid-item:first-child {
+  border: none;
+  background-color: transparent;
+}
+:host ::ng-deep div.grid-item:has(.column-header),
+:host ::ng-deep div.grid-item:has(.row-header) {
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  background-color: var(--red-opaque9);
+  color:var(--white);
+}
+:host ::ng-deep div.row-header {
+  transform: rotate(-90deg);
+  text-wrap: nowrap;
+}
+:host ::ng-deep div.grid-item ul {
+  padding:5px 5px 5px 20px;
+  line-height: 1.5rem;;
+  margin:0;
+}
+@media screen and (min-width: 600px) {
+  div.program-grid {
+    grid-template-columns: repeat(4, auto);
+  }
+  :host ::ng-deep div.grid-item:has(.row-header) {
+    justify-content:left;
+    padding:0 5px;
+  }
+  :host ::ng-deep div.row-header {
+    transform: rotate(0deg);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  :host ::ng-deep div.grid-item {
+    font-size: 1.5rem;
+    padding: 5px 10px;
+  }
+  :host ::ng-deep div.grid-item ul {
+    padding-left: 15px;
+    line-height: 1.7rem;
+    ;
+    margin: 0;
+  }
+  :host ::ng-deep div.grid-item:has(.column-header) {
+    font-size: 1.6rem;
+  }
+  :host ::ng-deep div.grid-item:has(.row-header) {
+    font-size: 1.5rem;
+    padding: 0 10px;
+  }
+}
+
+
+
   

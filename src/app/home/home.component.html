@@ -10,6 +10,38 @@
     </div>
   </section>
   <section class="program-summary">
-    <h2 class="program-title">Programmation</h2>
+    <h2 class="program title">
+      Programmation
+      <button
+        class="chevron"
+        [ngClass]="{ rotated: isRotated[0] }"
+        (click)="rotateChevron(0)"
+      >
+        <svg>
+          <use href="../../assets/icons/icons.svg#chevronIcon" />
+        </svg>
+      </button>
+    </h2>
+    <div #program class="program-grid" [ngClass]="{ hidden: !isRotated[0] }">
+      <div
+        *ngFor="let item of formattedData"
+        class="grid-item"
+        [innerHTML]="item"
+      ></div>
+    </div>
+  </section>
+  <section class="map">
+    <h2 class="map title">
+      Carte interactive
+      <button
+        class="chevron"
+        [ngClass]="{ rotated: isRotated[1] }"
+        (click)="rotateChevron(1)"
+      >
+        <svg>
+          <use href="../../assets/icons/icons.svg#chevronIcon" />
+        </svg>
+      </button>
+    </h2>
   </section>
 </main>
