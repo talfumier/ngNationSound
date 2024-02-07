@@ -1,1 +1,19 @@
-<p>accordion works!</p>
+<h2 class="title">
+  {{ title }}
+  <button
+    class="chevron"
+    [ngClass]="{ rotated: value }"
+    (click)="rotateChevron()"
+  >
+    <input
+      #checkbox
+      name="accordion"
+      type="checkbox"
+      class="form-control"
+      [(ngModel)]="value"
+    />
+    <svg>
+      <use href="../../assets/icons/icons.svg#chevronIcon" />
+    </svg>
+  </button>
+</h2>

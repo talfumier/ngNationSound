@@ -1,4 +1,5 @@
-import { Component, ViewChild,ElementRef, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { EvtsSummaryService } from '../../services/evts-summary.service';
 
 @Component({
@@ -8,9 +9,6 @@ import { EvtsSummaryService } from '../../services/evts-summary.service';
 })
 export class HomeComponent {
   private _formattedData:string[]=[];
-  isRotated:boolean[]=[false,false,false];
-
-  @ViewChild('program') program: ElementRef={} as ElementRef;
 
   constructor(private service:EvtsSummaryService){
     this._formattedData=service.getFormattedData();
@@ -19,8 +17,7 @@ export class HomeComponent {
   get formattedData():string[]{
     return this._formattedData;
   }
-  rotateChevron(idx:number) {
-    this.isRotated[idx]=!this.isRotated[idx];
+  handleChange(form:NgForm) {
+    console.log(form.value)
   }
-
 }

@@ -1,4 +1,5 @@
 import { NgModule,LOCALE_ID,ErrorHandler } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 
@@ -32,6 +33,7 @@ registerLocaleData(localeFr); //register fr-FR locale, default is en-US
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({timeOut:3000}),    
+    FormsModule
   ],
   providers: [    
     { provide: ErrorHandler, useClass: GenericErrorHandler },

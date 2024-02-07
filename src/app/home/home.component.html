@@ -1,47 +1,35 @@
 <main>
-  <section class="banner">
-    <div class="fixed-container">
-      <h2 class="moving-text">
-        Bienvenue sur l'hippodrome de Chantilly pour cette 3e édition du Music
-        Festival Paris 2024, où musique et diversité culturelle se rejoignent
-        pour créer une expérience inoubliable ... Achetez vos billets dès
-        maintenant et préparez-vous à un voyage extraordinaire !
-      </h2>
-    </div>
-  </section>
-  <section class="program-summary">
-    <h2 class="program title">
-      Programmation
-      <button
-        class="chevron"
-        [ngClass]="{ rotated: isRotated[0] }"
-        (click)="rotateChevron(0)"
-      >
-        <svg>
-          <use href="../../assets/icons/icons.svg#chevronIcon" />
-        </svg>
-      </button>
-    </h2>
-    <div #program class="program-grid" [ngClass]="{ hidden: !isRotated[0] }">
+  <form #form="ngForm">
+    <section class="banner">
+      <div class="fixed-container">
+        <h2 class="moving-text">
+          Bienvenue sur l'hippodrome de Chantilly pour cette 3e édition du Music
+          Festival Paris 2024, où musique et diversité culturelle se rejoignent
+          pour créer une expérience inoubliable ... Achetez vos billets dès
+          maintenant et préparez-vous à un voyage extraordinaire !
+        </h2>
+      </div>
+    </section>
+    <section class="program-summary" ngModelGroup="program">
+      <app-accordion title="Programmation"></app-accordion>
       <div
-        *ngFor="let item of formattedData"
-        class="grid-item"
-        [innerHTML]="item"
-      ></div>
-    </div>
-  </section>
-  <section class="map">
-    <h2 class="map title">
-      Carte interactive
-      <button
-        class="chevron"
-        [ngClass]="{ rotated: isRotated[1] }"
-        (click)="rotateChevron(1)"
+        class="program-grid"
+        [ngClass]="{
+          hidden:
+            form.value.program !== undefined
+              ? !form.value.program.accordion
+              : true
+        }"
       >
-        <svg>
-          <use href="../../assets/icons/icons.svg#chevronIcon" />
-        </svg>
-      </button>
-    </h2>
-  </section>
+        <div
+          *ngFor="let item of formattedData"
+          class="grid-item"
+          [innerHTML]="item"
+        ></div>
+      </div>
+    </section>
+    <section class="map" ngModelGroup="map">
+      <app-accordion title="Carte interactive"></app-accordion>
+    </section>
+  </form>
 </main>
