@@ -1,4 +1,5 @@
 import { NgModule,LOCALE_ID,ErrorHandler } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 
@@ -14,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 import { GenericErrorHandler } from './error/errorHandler';
+import { AccordionComponent } from './home/accordion/accordion.component';
 
 registerLocaleData(localeFr); //register fr-FR locale, default is en-US
 
@@ -23,16 +25,18 @@ registerLocaleData(localeFr); //register fr-FR locale, default is en-US
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AccordionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({timeOut:3000}),    
+    FormsModule
   ],
   providers: [    
-    { provide: ErrorHandler, useClass: GenericErrorHandler },
+    { provide: ErrorHandler,useClass: GenericErrorHandler },
     { provide: LOCALE_ID, useValue: 'fr-FR'},  //reset default locale to fr-FR
   ],
   bootstrap: [AppComponent]

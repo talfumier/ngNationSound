@@ -6,6 +6,7 @@
 /* GLOBAL APP STYLES */
 :root {
   --red:rgb(223, 6, 17);
+  --red-opaque9: rgb(223, 6, 17,.9);
   --orange: #b65f28;
   --orange-opaque8: rgb(182, 95, 40, .8);
   --black:rgb(36, 35, 35);  
@@ -13,9 +14,11 @@
   --white: #FFFFFF;
   --white-opaque8: rgb(255, 255, 255, .8);
   --beige: rgb(240, 234, 200);
+  --beige-opaque8: rgb(240, 234, 200,.8);
+  --beige-opaque9: rgb(240, 234, 200, .9);
   /* --brown: #2C1E1E;
   --brown-dark:rgb(31, 22, 21); */
-  --blue: #55C0CF;
+  --blue: #4472C4;
 }
 
 html {
@@ -31,16 +34,15 @@ body::-webkit-scrollbar {
 body {
   -ms-overflow-style: none;
   /* IE and Edge */
-  scrollbar-width: none;
+  scrollbar-width: 0;
   /* Firefox */
 } 
 
 body {
   font-family: "Roboto",sans-serif;
-  background-color: rgb(0, 255, 115);
-  width:100vw;
-  max-width:100vw;
+  /* background-color: rgb(255, 0, 0); */
   box-sizing: border-box;
+  width: 100vw;
 }
 
 h1 {

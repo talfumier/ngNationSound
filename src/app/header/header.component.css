@@ -8,8 +8,8 @@ header {
   background-color: var(--black);
   color: var(--white-opaque8);
   width: 100vw;
-  max-height: 90px;
   min-width: 350px;
+  height:97px;
   z-index: 1000;
   padding:0;
 }
@@ -46,6 +46,7 @@ h1 {
   align-items:center;
   white-space: nowrap;
   font-size: 1.5rem;
+  margin:10px 0;
   color: var(--white);
 }
 h1 p {
