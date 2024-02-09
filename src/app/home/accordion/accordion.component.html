@@ -1,12 +1,11 @@
-<h2 class="title">
+<h2 class="title" (click)="rotateChevron($event)">
   {{ title }}
   <button
     class="chevron"
     [ngClass]="{ rotated: value }"
-    (click)="rotateChevron()"
+    (click)="rotateChevron($event)"
   >
     <input
-      #checkbox
       name="accordion"
       type="checkbox"
       class="form-control"

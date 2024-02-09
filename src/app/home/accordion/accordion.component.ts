@@ -1,5 +1,7 @@
-import { Component,Input,ViewChild,ElementRef } from '@angular/core';
+import { Component,Input, OnInit } from '@angular/core';
 import { ControlContainer, NgModelGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-accordion',
@@ -7,11 +9,20 @@ import { ControlContainer, NgModelGroup } from '@angular/forms';
   styleUrl: './accordion.component.css',
   viewProviders: [{ provide: ControlContainer, useExisting: NgModelGroup }]
 })
-export class AccordionComponent {    
-  @Input() title:string="";
-  @ViewChild('checkbox') cb: ElementRef={} as ElementRef;
+export class AccordionComponent implements OnInit {    
+  @Input() title:string=""; 
+
   private _value:boolean=false;
 
+  constructor(private route: ActivatedRoute,private location: Location){}
+
+  ngOnInit(): void {
+    const param:string=this.route.snapshot.queryParamMap.get('param') as string;
+    if(param==="program" && this.title==="programmation") {
+      this.rotateChevron();
+      this.location.replaceState("/");//remove query parameter from url
+    }    
+  }
   get value(){
     return this._value;
   }
@@ -19,7 +30,8 @@ export class AccordionComponent {
     this._value=data;
   }
 
-  rotateChevron() {
-    this.cb.nativeElement.click()
+  rotateChevron(evt?:Event) { 
+    if(evt) evt.stopPropagation();  
+    this._value=!this._value;
   }
 }
