@@ -69,6 +69,7 @@ export interface Poi {
 export interface Artist {
   id:number,
   name:string,
+  country:string,
   description:string,
   composition:string,
   style:string

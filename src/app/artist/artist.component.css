@@ -1,0 +1,81 @@
+main {
+  display: flex;
+  justify-content: top;
+  align-items: left;
+  flex-direction: column;
+  height: 100%;
+}
+div.back-button {
+  position:fixed;
+  top:100px;
+  display:flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  white-space: nowrap;
+  padding: 5px 10px;
+  color: var(--blue);
+  vertical-align: middle;
+  cursor: pointer;
+}
+div.back-button svg {
+  width: 15px;
+  height: 15px;
+  margin-right: 15px;
+  fill: var(--blue);
+}
+
+section.artist {
+  margin-top: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  padding:10px 20px;
+  width:100%;
+}
+img {
+  object-fit: cover;
+  width:100%;
+  border-radius: 10px;
+}
+div.artist-details {
+  width: 100%;
+  display:flex;
+  flex-direction: column;
+  align-items: start;
+}
+h2 {
+  font-size:2.5rem;
+  align-self: center;
+  text-align:center;
+}
+h3 {
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin:0;
+  padding:10px 20px;
+}
+h3.country,h3.style {
+  color:var(--red);
+}
+
+@media screen and (min-width: 768px) {
+  div.back-button {
+    top:105px;
+  }
+  img {
+    width:45%;
+  }
+  section.artist {
+    margin-top: 40px;
+  }
+  div.artist-details {
+    width: 45%;
+    padding: 10px 20px;
+  }
+  
+
+}

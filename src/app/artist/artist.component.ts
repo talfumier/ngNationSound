@@ -18,7 +18,7 @@ export class ArtistComponent{
     this._artist=service.getArtistById(parseInt(id));
     switch(from){
       case "program":
-        this._backToText="Retour à la programmation";
+        this._backToText="accueil > programmation";
         this._backToOptions.queryParam=from;
         break;
     }

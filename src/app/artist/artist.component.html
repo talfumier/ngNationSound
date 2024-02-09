@@ -1,11 +1,14 @@
 <main>
-  <button
-    class="back"
+  <div
+    class="back-button"
     [routerLink]="[backToOptions.url]"
     [queryParams]="{ param: backToOptions.queryParam }"
   >
-    {{ backToText }}
-  </button>
+    <svg>
+      <use href="../../assets/icons/icons.svg#leftIcon" />
+    </svg>
+    <span> {{ backToText }}</span>
+  </div>
   <section class="artist">
     <img
       src="{{ '../../assets/images/artists/' + artist.name + '.jpg' }}"
@@ -13,6 +16,7 @@
     />
     <div class="artist-details">
       <h2 class="name">{{ artist.name }}</h2>
+      <h3 class="country">{{ artist.country }}</h3>
       <h3 class="description">{{ artist.description }}</h3>
       <h3 class="composition">{{ artist.composition }}</h3>
       <h3 class="style">{{ artist.style }}</h3>

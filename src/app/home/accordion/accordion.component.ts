@@ -12,7 +12,7 @@ import { Location } from '@angular/common';
 export class AccordionComponent implements OnInit {    
   @Input() title:string=""; 
 
-  private _value:boolean=false;
+  private _value:boolean=false; // value binded to NgForm in home page
 
   constructor(private route: ActivatedRoute,private location: Location){}
 
