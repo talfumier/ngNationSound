@@ -1,5 +1,8 @@
 <main>
   <form #form="ngForm">
+    <p class="debug">
+      {{ form.value | json }}
+    </p>
     <section class="banner">
       <div class="fixed-container">
         <h2 class="moving-text">
@@ -11,7 +14,7 @@
       </div>
     </section>
     <section class="program-summary" ngModelGroup="program">
-      <app-accordion title="Programmation"></app-accordion>
+      <app-accordion title="programmation"></app-accordion>
       <div
         class="program-grid"
         [ngClass]="{
@@ -22,14 +25,14 @@
         }"
       >
         <div
-          *ngFor="let item of formattedData"
+          *ngFor="let item of innerHTML"
           class="grid-item"
           [innerHTML]="item"
         ></div>
       </div>
     </section>
     <section class="map" ngModelGroup="map">
-      <app-accordion title="Carte interactive"></app-accordion>
+      <app-accordion title="carte interactive"></app-accordion>
     </section>
   </form>
 </main>

@@ -10,6 +10,7 @@ h2.title {
   background-color: var(--beige-opaque8);
   width: 12em;
   text-align: center;
+  cursor: pointer;
 }
 
 button.chevron {
@@ -19,8 +20,8 @@ button.chevron {
   height:2em;
   background-color: transparent;
   border: none;
-  cursor: pointer;
   padding:5px;
+  cursor: pointer;
 }
 
 svg {
