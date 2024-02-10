@@ -25,7 +25,7 @@ export class GenericErrorHandler implements ErrorHandler {
             default:
                 msg="Unexpected";
         }
-        this.injector.get(ToastService).toastError(`${msg} error ${error.status} has occured : ${error.message} !`);   
+        this.injector.get(ToastService).toastError(`${msg} error ${error.status!==undefined?error.status:""} has occured : ${error.message} !`);   
         console.error(new Date()+" : ",error);
     }
 }

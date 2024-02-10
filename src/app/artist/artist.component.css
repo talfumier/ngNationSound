@@ -63,14 +63,8 @@ h3.country,h3.style {
 }
 
 @media screen and (min-width: 768px) {
-  div.back-button {
-    top:105px;
-  }
   img {
     width:45%;
-  }
-  section.artist {
-    margin-top: 40px;
   }
   div.artist-details {
     width: 45%;

@@ -14,9 +14,11 @@
       </div>
     </section>
     <section class="program-summary" ngModelGroup="program">
-      <app-accordion title="programmation"></app-accordion>
+      <div class="section-header">
+        <app-accordion index="0" title="concerts 2024"></app-accordion>
+      </div>
       <div
-        class="program-grid"
+        class="section-content program-grid"
         [ngClass]="{
           hidden:
             form.value.program !== undefined
@@ -32,7 +34,64 @@
       </div>
     </section>
     <section class="map" ngModelGroup="map">
-      <app-accordion title="carte interactive"></app-accordion>
+      <div class="section-header">
+        <app-accordion index="1" title="carte du festival"></app-accordion>
+      </div>
+      <div
+        class="section-content test"
+        [ngClass]="{
+          hidden:
+            form.value.map !== undefined ? !form.value.map.accordion : true
+        }"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis veniam
+        consectetur nam suscipit non aliquid qui laudantium, officiis ipsum eius
+        unde numquam obcaecati ea ipsam velit culpa magnam officia commodi nihil
+        molestias tenetur nemo temporibus minus et. Repudiandae eius, totam
+        tenetur facere obcaecati perferendis nostrum aspernatur eligendi, optio
+        repellat consequuntur nemo repellendus temporibus modi beatae dolore.
+        Asperiores corrupti sequi tenetur in impedit perferendis officia
+        doloremque, numquam voluptatibus id dolorem excepturi accusantium quod
+        non enim sapiente a officiis dolores hic at? Incidunt quaerat
+        reprehenderit dolor saepe sint placeat rem repellat minus architecto et
+        eos consequatur laudantium, eum commodi eveniet pariatur quas aut error
+        magnam! Id a nam suscipit animi quidem, recusandae velit inventore unde
+        amet enim fugit ullam dolorem ab at aperiam molestiae? Quis, quas
+        labore. Rerum tempore ad, a hic explicabo, dolorum voluptatem soluta
+        voluptates maxime velit aliquam magni ipsum! In dolore ratione esse id.
+        Ullam dignissimos perferendis facilis iusto blanditiis iure asperiores,
+        praesentium deserunt? Eaque impedit nemo iste. Reiciendis sint, illo at,
+        id explicabo sunt earum vitae autem non a saepe, placeat amet neque quod
+        nostrum ratione. Repellendus, tempora ut voluptate asperiores quisquam
+        consectetur nemo, eum id voluptatum nihil, autem reiciendis at sit
+        necessitatibus. Deleniti modi reprehenderit sed tenetur! Lorem ipsum
+        dolor sit amet consectetur adipisicing elit. Modi aut voluptatum
+        incidunt aliquid, rem voluptates eum labore deleniti laudantium atque
+        cum voluptate, quae, esse voluptatibus repellat ducimus quisquam eveniet
+        libero? Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
+        laborum eaque dolorem possimus quibusdam impedit maiores repellat sit
+        quasi! Laudantium, culpa sunt molestias ut, quis quae dicta blanditiis
+        veritatis nihil beatae repellendus eaque praesentium reiciendis numquam
+        ex ducimus quo labore ab? Rerum dolores atque veniam dolor eaque unde ut
+        nulla consequatur nostrum impedit reiciendis voluptas necessitatibus
+        voluptates corporis ipsa neque expedita nemo tempore voluptate
+        perferendis ipsam quia, assumenda aliquam sit. Dolores sed, sunt
+        voluptatibus libero fuga soluta, illo recusandae deserunt veniam
+        obcaecati temporibus tempora voluptate, officia doloremque molestiae!
+        Iste dolore ducimus distinctio expedita eum exercitationem nobis quia
+        eligendi, nulla possimus nesciunt quod eos neque ipsum officia placeat
+        inventore earum voluptatibus. Cum cupiditate deserunt laboriosam
+        commodi, voluptate aperiam neque, nostrum eum quia ex aspernatur
+        repellat illum cumque perferendis sed voluptatibus esse quibusdam alias.
+        Perferendis natus illo quisquam voluptatibus ipsam. Nisi pariatur
+        aliquam molestias voluptate enim repellat, corporis laboriosam tenetur
+        aliquid ut ipsa quas cupiditate eius, totam omnis corrupti quos numquam
+        asperiores adipisci, sunt deleniti odit. Suscipit illum nesciunt ex vel
+        ad obcaecati quisquam, facere optio perspiciatis necessitatibus officia!
+        Nostrum, eos vero eum quibusdam aliquid hic omnis consequatur quo aut
+        suscipit fugit facilis ipsam facere ducimus voluptatum accusamus quas
+        cupiditate corporis illo.
+      </div>
     </section>
   </form>
 </main>

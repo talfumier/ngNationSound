@@ -44,7 +44,14 @@ h2.moving-text{
     transform: translate3d(-100%, 0, 0);/* final position to the left */
   }
 }
-
+div.section-header {
+  position:sticky;
+  top:97px;
+  display:flex;
+  justify-content: center;
+  width:100%;
+  z-index:1000;
+}
 div.program-grid {
   display:grid;
   grid-template-columns: 25px repeat(3,auto);
@@ -103,11 +110,26 @@ div.program-grid.hidden {
 :host ::ng-deep a:hover {
   color: var(--red);
 }
+div.test.hidden {
+  opacity: 0;
+  height: 0;
+  padding: 0 15px 0;
+  transition: opacity 1.5s, height 1.5s;
+  overflow:hidden;
+}
+div.test {
+  opacity: 1;
+  transition: opacity 1.5s;
+  font-size: 2rem;
+  padding:20px;
+  background-color: var(--beige);
+  color: var(--blue);
+}
 
 @media screen and (min-width: 600px) {
   div.program-grid {
     grid-template-columns: repeat(4, auto);
-  }
+      }
   :host ::ng-deep div.grid-item:has(.row-header) {
     justify-content:left;
     padding:0 5px;

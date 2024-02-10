@@ -185,27 +185,27 @@
 "pois":[
  {
   "id": "st1",
-  "name": "Scène tribune",
+  "name": "Tribune",
   "type": "stage"
  },
  {
   "id": "st2",
-  "name": "Scène virage",
+  "name": "Virage",
   "type": "stage"
  },
  {
   "id": "st3",
-  "name": "Scène château",
+  "name": "Château",
   "type": "stage"
  },
  {
   "id": "st4",
-  "name": "Scène grandes écuries",
+  "name": "Grandes écuries",
   "type": "stage"
  },
  {
   "id": "st5",
-  "name": "Scène petite pelouse",
+  "name": "Petite pelouse",
   "type": "stage"
  },
  {
