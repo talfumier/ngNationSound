@@ -17,6 +17,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { GenericErrorHandler } from './error/errorHandler';
 import { AccordionComponent } from './home/accordion/accordion.component';
 import { ArtistComponent } from './artist/artist.component';
+import { ProgramComponent } from './program/program.component';
+import { InputComponent } from './utilities/input/input.component';
+import { SelectComponent } from './utilities/select/select.component';
+import { EventComponent } from './program/event/event.component';
 
 registerLocaleData(localeFr); //register fr-FR locale, default is en-US
 
@@ -28,7 +32,11 @@ registerLocaleData(localeFr); //register fr-FR locale, default is en-US
     HomeComponent,
     NotFoundComponent,
     AccordionComponent,
-    ArtistComponent
+    ArtistComponent,
+    ProgramComponent,
+    InputComponent,
+    SelectComponent,
+    EventComponent
   ],
   imports: [
     BrowserModule,

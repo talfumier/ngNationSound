@@ -1,4 +1,12 @@
 {
+"dates":[
+ {
+  "days": "14,15,16",
+  "month": "Juin",
+  "year": 2024,
+  "opening": "11h00 - 24h00"
+ }
+],
 "artists":[
  {
   "id": 1,
@@ -7,7 +15,8 @@
   "description": "Maîtres de la fusion jazz, connus pour leurs improvisations innovantes.",
   "albums": "Interstellar Grooves et \"Celestial Harmony\"",
   "composition": "Quatuor avec saxophone, claviers, et une section rythmique.",
-  "style": "Fusion jazz avec des nuances cosmiques."
+  "style": "Fusion jazz avec des nuances cosmiques.",
+  "cat": 1
  },
  {
   "id": 2,
@@ -16,7 +25,8 @@
   "description": "Révolutionnaires du funk, salués pour leur énergie contagieuse.",
   "albums": "Funk Odyssey et \"Cosmic Groove Revolution\"",
   "composition": "Ensemble de neuf musiciens avec cuivres, guitares, et des beats funky.",
-  "style": "Funk avec une touche cosmique."
+  "style": "Funk avec une touche cosmique.",
+  "cat": 2
  },
  {
   "id": 3,
@@ -25,7 +35,8 @@
   "description": "Maestros de l'électronique, réputés pour leurs paysages sonores captivants.",
   "albums": "Electric Quantum et \"Synthetic Echoes\"",
   "composition": "Duo axé sur les synthétiseurs et les beats électroniques.",
-  "style": "Electro avec des éléments expérimentaux."
+  "style": "Electro avec des éléments expérimentaux.",
+  "cat": 3
  },
  {
   "id": 4,
@@ -34,7 +45,8 @@
   "description": "Maîtres de la fusion, mêlant sitar traditionnel et sonorités contemporaines.",
   "albums": "Sitar Journeys et \"Celestial Strings\"",
   "composition": "Duo avec sitar et percussions, créant une expérience sonore unique.",
-  "style": "Fusion de musique classique indienne et ambient."
+  "style": "Fusion de musique classique indienne et ambient.",
+  "cat": 4
  },
  {
   "id": 5,
@@ -43,7 +55,8 @@
   "description": " Innovateurs du hip-hop, connus pour leurs paroles engagées et leurs beats percutants.",
   "albums": "Galactic Rhymes et \"Astral Vibes\"",
   "composition": "Groupe diversifié avec MCs, DJs, et instruments live.",
-  "style": "Hip-hop avec des thèmes cosmiques et conscients."
+  "style": "Hip-hop avec des thèmes cosmiques et conscients.",
+  "cat": 5
  },
  {
   "id": 6,
@@ -52,7 +65,8 @@
   "description": "Têtes d'affiche des plus grands festivals européens, acclamés pour des performances envoutantes.",
   "albums": "Whispers of Time et \"Transient Dreams\"",
   "composition": "Quatuor avec des voix éthérées, des guitares complexes et une section rythmique.",
-  "style": "Rock atmosphérique indépendant avec des textures oniriques."
+  "style": "Rock atmosphérique indépendant avec des textures oniriques.",
+  "cat": 6
  },
  {
   "id": 7,
@@ -61,16 +75,18 @@
   "description": "Hits en tête des classements, connus pour des concerts énergiques dans des lieux emblématiques.",
   "albums": " \"Luminous Grooves\" et \"Rhythmic Odyssey\"",
   "composition": "Groupe de sept musiciens avec cuivres, claviers, et harmonies vocales dynamiques.",
-  "style": "Fusion de funk, soul, et dance."
+  "style": "Fusion de funk, soul, et dance.",
+  "cat": "2,8,9"
  },
  {
   "id": 8,
   "name": "Mystic Soundscapes Orchestra",
-  "country": "Italy",
+  "country": "Italie",
   "description": "Collaboration avec des symphonies renommées à travers le monde, acclamations critiques.",
   "albums": "\"Enchanted Overtures\" et \"Celestial Harmonies\"",
   "composition": "Orchestre mêlant instruments classiques et éléments électroniques.",
-  "style": "Fusion cinématographique d'orchestre et d'électronique."
+  "style": "Fusion cinématographique d'orchestre et d'électronique.",
+  "cat": "10,3"
  },
  {
   "id": 9,
@@ -79,7 +95,8 @@
   "description": "Virtuoses du métal progressif, récipiendaires de nombreux prix.",
   "albums": "Quantum Fusion et \"Pulse Resonance\"",
   "composition": "Quartet technique avec un travail de guitare complexe, une batterie puissante, et des vocaux dynamiques.",
-  "style": "Métal progressif avec des éléments de djent."
+  "style": "Métal progressif avec des éléments de djent.",
+  "cat": 11
  },
  {
   "id": 10,
@@ -88,7 +105,8 @@
   "description": "Pionniers électroniques underground, célébrés pour des performances immersives.",
   "albums": "Interstellar Beats et \"Groove Odyssey\"",
   "composition": "Trio spécialisé dans les beats expérimentaux, l'échantillonnage live, et les synthétiseurs.",
-  "style": "Musique électronique psychédélique avec des influences de techno et ambient."
+  "style": "Musique électronique psychédélique avec des influences de techno et ambient.",
+  "cat": "3,12,18"
  },
  {
   "id": 11,
@@ -97,7 +115,8 @@
   "description": "Sensations du blues-rock avec une touche soul, salués pour leur narration émouvante.",
   "albums": " \"Northern Blues Tales\" et \"Aurora Serenade\"",
   "composition": "Quatuor blues rock avec des voix expressives et des riffs de guitare bluesy.",
-  "style": "Blues-rock avec une touche d'americana."
+  "style": "Blues-rock avec une touche d'americana.",
+  "cat": "13,6,19"
  },
  {
   "id": 12,
@@ -106,7 +125,8 @@
   "description": "Acclamés internationalement pour leur fusion de sons classiques et contemporains.",
   "albums": "Solar Symphony et \"Eclipsed Melodies\"",
   "composition": "Ensemble avec cordes, bois, et éléments électroniques.",
-  "style": "Crossover classique avec des influences électroniques et ambient."
+  "style": "Crossover classique avec des influences électroniques et ambient.",
+  "cat": "15,3,18"
  },
  {
   "id": 13,
@@ -115,7 +135,8 @@
   "description": "Sensations internet avec des millions de vues pour leurs reprises de synthwave.",
   "albums": "Synthwave Chronicles et \"Retro Galaxy\"",
   "composition": "Trio spécialisé dans les synthétiseurs et la batterie électronique.",
-  "style": " Reprises de synthwave et compositions originales."
+  "style": " Reprises de synthwave et compositions originales.",
+  "cat": 14
  },
  {
   "id": 14,
@@ -124,7 +145,8 @@
   "description": "Favoris du folk avec une énorme audience sur les plateformes de streaming.",
   "albums": "Nebula Tales et \"Galactic Folklore\"",
   "composition": "Quatuor avec instruments acoustiques, harmonies vocales, et paroles inspirées du folklore.",
-  "style": "Folk-pop avec une narration cosmique."
+  "style": "Folk-pop avec une narration cosmique.",
+  "cat": 16
  },
  {
   "id": 15,
@@ -133,7 +155,86 @@
   "description": " Pionniers du post-rock ambient, connus pour leurs paysages sonores immersifs.",
   "albums": " \"Celestial Echoes\" et \"Aetheric Dreams\"",
   "composition": "Trio avec des guitares superposées, des synthétiseurs atmosphériques, et une percussion minimaliste.",
-  "style": "Post-rock ambient avec une ambiance rêveuse et introspective."
+  "style": "Post-rock ambient avec une ambiance rêveuse et introspective.",
+  "cat": 17
+ }
+],
+"cat":[
+ {
+  "id": 1,
+  "description": "Jazz"
+ },
+ {
+  "id": 2,
+  "description": "Funk"
+ },
+ {
+  "id": 3,
+  "description": "Electro"
+ },
+ {
+  "id": 4,
+  "description": "Indy"
+ },
+ {
+  "id": 5,
+  "description": "Hip-hop"
+ },
+ {
+  "id": 6,
+  "description": "Rock"
+ },
+ {
+  "id": 7,
+  "description": "Funk"
+ },
+ {
+  "id": 8,
+  "description": "Soul"
+ },
+ {
+  "id": 9,
+  "description": "Dance"
+ },
+ {
+  "id": 10,
+  "description": "Classique"
+ },
+ {
+  "id": 11,
+  "description": "Métal"
+ },
+ {
+  "id": 12,
+  "description": "Techno"
+ },
+ {
+  "id": 13,
+  "description": "Blues"
+ },
+ {
+  "id": 14,
+  "description": "Synthwave"
+ },
+ {
+  "id": 15,
+  "description": "Cross-over"
+ },
+ {
+  "id": 16,
+  "description": "Folk-pop"
+ },
+ {
+  "id": 17,
+  "description": "Post rock"
+ },
+ {
+  "id": 18,
+  "description": "Ambient"
+ },
+ {
+  "id": 19,
+  "description": "Americana"
  }
 ],
 "poi_types":[

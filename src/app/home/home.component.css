@@ -110,20 +110,20 @@ div.program-grid.hidden {
 :host ::ng-deep a:hover {
   color: var(--red);
 }
+div.test {
+  opacity: 1;
+  transition: opacity 1.5s;
+  font-size: 2rem;
+  padding: 20px;
+  background-color: var(--beige);
+  color: var(--blue);
+}
 div.test.hidden {
   opacity: 0;
   height: 0;
   padding: 0 15px 0;
   transition: opacity 1.5s, height 1.5s;
   overflow:hidden;
-}
-div.test {
-  opacity: 1;
-  transition: opacity 1.5s;
-  font-size: 2rem;
-  padding:20px;
-  background-color: var(--beige);
-  color: var(--blue);
 }
 
 @media screen and (min-width: 600px) {

@@ -7,8 +7,8 @@
     <h1>
       <p>Nation Sound Festival</p>
       <p>
-        <span class="day">14</span><span class="day">15</span>
-        <span class="day">16</span><span class="month-year">Juin 2024</span>
+        <span *ngFor="let day of dates.days" class="day">{{ day }}</span
+        ><span class="month-year">{{ dates.month }} {{ dates.year }}</span>
       </p>
     </h1>
   </div>
@@ -22,7 +22,14 @@
       >
         Accueil
       </li>
-      <li class="list-group-item">Programme</li>
+      <li
+        class="list-group-item"
+        routerLink="/program"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Programme
+      </li>
       <li class="list-group-item">Carte</li>
       <li class="list-group-item">Artistes</li>
       <li class="list-group-item">Rencontres</li>
