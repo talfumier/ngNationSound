@@ -48,7 +48,8 @@ registerLocaleData(localeFr); //register fr-FR locale, default is en-US
   providers: [    
     { provide: ErrorHandler,useClass: GenericErrorHandler },
     { provide: LOCALE_ID, useValue: 'fr-FR'},  //reset default locale to fr-FR
-    { provide: Window, useValue: window }
+    { provide: Window, useValue: window },    
+    { provide: Document, useValue: document }
   ],
   bootstrap: [AppComponent]
 })

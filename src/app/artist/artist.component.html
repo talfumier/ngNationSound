@@ -2,7 +2,9 @@
   <div
     class="back-button"
     [routerLink]="[backToOptions.url]"
-    [queryParams]="{ param: backToOptions.queryParam }"
+    [queryParams]="
+      backToOptions.queryParam ? { param: backToOptions.queryParam } : {}
+    "
   >
     <svg>
       <use href="../../assets/icons/icons.svg#leftIcon" />
@@ -11,7 +13,11 @@
   </div>
   <section class="artist">
     <img
-      src="{{ '../../assets/images/artists/' + artist.name + '.jpg' }}"
+      src="{{
+        '../../assets/images/artists/' +
+          artist.name.replaceAll(' ', '').replaceAll('-', '') +
+          '.jpg'
+      }}"
       alt="{{ artist.name }}"
     />
     <div class="artist-details">

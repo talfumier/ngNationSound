@@ -1,0 +1,15 @@
+section {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding:20px 10px;
+}
+div.container-events {
+  width:100%;
+}
+
+@media screen and (min-width: 992px){
+  div.container-events {
+    width: 80%;
+  }
+}

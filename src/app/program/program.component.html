@@ -1,3 +1,11 @@
 <main>
-  <section class="events"></section>
+  <section class="events">
+    <div class="container-events">
+      <app-event
+        [data]="event"
+        *ngFor="let event of events; index as idx"
+        [last]="idx === events.length - 1"
+      ></app-event>
+    </div>
+  </section>
 </main>

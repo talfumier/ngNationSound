@@ -28,3 +28,12 @@ export interface Event {
   location: Poi,
   date: string
 }
+export interface ArtistEvents {
+  performer:Artist,
+  dates:EventDate[]
+}
+interface EventDate {
+  date:Date,
+  location:Poi,
+  type:string
+}

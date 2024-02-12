@@ -7,7 +7,7 @@ import { DataService } from '../../services/data.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {  
+export class HomeComponent  {  
 
   private _innerHTML:string[]=[];
 

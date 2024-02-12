@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, NgModelGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-accordion',
@@ -16,13 +15,13 @@ export class AccordionComponent implements OnInit {
   private _value:boolean=false; // value binded to NgForm in home page
   private static status:Status={"0":false,"1":false};
 
-  constructor(private route: ActivatedRoute,private location: Location, private window:Window){}
+  constructor(private route: ActivatedRoute, private window:Window, private document:Document){}
 
   ngOnInit(): void {
     const param:string=this.route.snapshot.queryParamMap.get('param') as string;
     if(param==="program" && this.title==="concerts 2024") {
+      this.document.getElementById("home-link")?.click();
       this.rotateChevron();
-      this.location.replaceState("/");//remove query parameter from url
     }  
   }
 

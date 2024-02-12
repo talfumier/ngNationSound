@@ -1,1 +1,30 @@
-<p>event works!</p>
+<div class="artist-events">
+  <div
+    class="artist"
+    [routerLink]="['/artist', event.performer.id, 'program-details']"
+  >
+    <img
+      src="{{
+        '../../../../../assets/images/artists/' +
+          event.performer.name.replaceAll(' ', '').replaceAll('-', '') +
+          '.jpg'
+      }}"
+      alt="{{ event.performer.name }}"
+    />
+    <h2 class="artist-name">
+      {{ event.performer.name }}
+    </h2>
+  </div>
+  <div class="events-info">
+    <ul>
+      <li *ngFor="let date of event.dates" class="date">
+        <span class="date-time">{{
+          date.date | date : "dd MMMM '-' HH:mm"
+        }}</span>
+        <span class="type">{{ date.type }}</span>
+        <span class="location">{{ date.location.name }}</span>
+      </li>
+    </ul>
+  </div>
+  <hr [ngClass]="{ hidden: last }" />
+</div>

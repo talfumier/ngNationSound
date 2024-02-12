@@ -22,6 +22,9 @@ export class ArtistComponent{
         this._backToText="accueil > concerts 2024";
         this._backToOptions.queryParam=from;
         break;
+      case "program-details":        
+        this._backToText="programme";
+        this._backToOptions.url="/program";
     }
   }
   get artist():Artist{

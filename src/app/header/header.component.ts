@@ -11,7 +11,7 @@ export class HeaderComponent {
   private _isToggled:boolean=false;
   private _dates:Dates={} as Dates;
 
-  constructor(private service:DataService ) {
+  constructor(private service:DataService, private window:Window ) {
     this._dates=service.dates;
   }
 
@@ -23,6 +23,9 @@ export class HeaderComponent {
   }
   handleToggle(){
     this._isToggled=!this._isToggled;
+  }
+  handleClick() {
+    this.window.scrollTo(0,0);
   }
   @HostListener('window:resize', ['$event'])
     onWindowResize() {

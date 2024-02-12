@@ -12,9 +12,10 @@
       </p>
     </h1>
   </div>
-  <nav class="navbar">
+  <nav class="navbar" (click)="handleClick()">
     <ul class="list-group" [ngClass]="{ toggled: isToggled }">
       <li
+        id="home-link"
         class="list-group-item"
         routerLink="/"
         routerLinkActive="active"
