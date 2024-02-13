@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import _ from "lodash";
-import {Poi,Dates,Artist,Style,Event} from "./interfaces";
+import {Poi,Dates,Artist,Style,Event, EventType} from "./interfaces";
 import data from "./data.json";
 
 @Injectable({
@@ -9,6 +9,7 @@ import data from "./data.json";
 export class DataService {
   private _innerHTML:string[]=[];// data formatting as html string for use in events summary (home page)
   private _dates:Dates[]=[];
+  private _event_types:EventType[]=[];
   private _pois:Poi[]=[];
   private _artists:Artist[]=[];
   private _styles:Style[]=[];
@@ -20,6 +21,7 @@ export class DataService {
   
   initData(){ 
     this._dates=data.dates;
+    this._event_types=data.event_types;
     this._pois=data.pois;
     this._artists=data.artists;
     this._styles=data.cat;
@@ -43,7 +45,7 @@ export class DataService {
       this._innerHTML.push(`<div class='row-header'>${stage.name}</div>`);
       day="",ul="";
       _.filter(data.events,(evt) => {
-        return evt.location===stage.id && evt.type==="concert";
+        return evt.location===stage.id && evt.type===1;
       }).map((evt) => {
         if(evt.date.slice(0,2)!==day){
           if(ul.length>0) this._innerHTML.push(ul+"</ul>");        
@@ -65,13 +67,15 @@ export class DataService {
           performer:_.filter(this._artists,(artist) => {
               return artist.id===evt.performer;
             })[0],
-          type:evt.type,
+          type:_.filter(data.event_types,(type) => {
+            return type.id===evt.type;
+          })[0].description,
           location:_.filter(this._pois,(poi) => {
               return poi.id===evt.location;
             })[0],
           date:evt.date        
         });
-    })
+    });
   }
   
   getArtistById(id:number):Artist{
@@ -85,6 +89,9 @@ export class DataService {
   }  
   get dates():Dates{
     return this._dates[0];
+  }
+  get event_types():EventType[]{
+    return this._event_types;
   }
   get pois():Poi[]{
     return this._pois;

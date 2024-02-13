@@ -22,6 +22,10 @@ export interface Style {
   id:number,
   description:string
 }
+export interface EventType {
+  id:number,
+  description:string
+}
 export interface Event {
   performer: Artist,
   type: string,
@@ -36,4 +40,12 @@ interface EventDate {
   date:Date,
   location:Poi,
   type:string
+}
+
+export interface KeyLabel {
+  key:string|number, label:string
+}
+export interface Filter {
+  days:object,
+  types:object
 }

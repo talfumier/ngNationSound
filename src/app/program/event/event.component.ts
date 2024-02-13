@@ -8,7 +8,6 @@ import { ArtistEvents } from '../../../services/interfaces';
 })
 export class EventComponent implements OnInit {  
   @Input() data:ArtistEvents={} as ArtistEvents;
-  @Input() last:boolean=false;
 
   private _event:ArtistEvents={}as ArtistEvents;
 

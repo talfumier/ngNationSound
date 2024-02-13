@@ -4,12 +4,72 @@ section {
   align-items: center;
   padding:20px 10px;
 }
-div.container-events {
-  width:100%;
+aside {
+  position: fixed;
+  top: 97px;
+  left:0;
+}
+fieldset {
+  border: 1px solid grey;
+  border-radius: 5px;
+  background-color: #dbd4d4;
+  height: fit-content;
+  max-height: 550px;
+  width: 170px;  
+}
+legend {
+  margin:30px auto 0 20px;
+  padding:0 10px;
 }
 
-@media screen and (min-width: 992px){
-  div.container-events {
-    width: 80%;
-  }
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px;
+}
+div.container-events {
+  width:auto;
+}
+div.container-h3 {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button.chevron {
+  text-align: right;
+  width: 90%;
+  height: 40px;
+  margin: 10px 0 0 0;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+svg {
+  width: 15px;
+  height: 15px;
+  fill: var(--orange);
+  transition: transform 0.5s;
+}
+
+button.chevron.rotated svg {
+  transform: rotate(90deg);
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+button:not(.chevron) {
+  border: none;
+  box-shadow: 5px 5px 5px var(--black);
+  font-size: 1.3rem;
+  padding: 5px 10px;
+  margin: 25px auto;
+  cursor: pointer;
 }

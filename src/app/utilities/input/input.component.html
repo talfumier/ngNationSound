@@ -1,1 +1,11 @@
-<p>input works!</p>
+<div class="form-group">
+  <label [ngClass]="{ highlighted: highlighted }">
+    <input
+      name="{{ cat.key }}"
+      type="checkbox"
+      class="form-control"
+      [(ngModel)]="value"
+    />
+    <p>{{ cat.label }}</p>
+  </label>
+</div>

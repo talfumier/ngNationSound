@@ -1,10 +1,68 @@
 <main>
+  <aside class="filter">
+    <fieldset class="form-filter">
+      <legend>
+        <h2>FILTRE</h2>
+      </legend>
+      <!-- <p class="debug">
+        {{ form.value | json }}
+      </p> -->
+      <form
+        #form="ngForm"
+        (ngSubmit)="filterReset(form)"
+        (change)="handleFilterChange(form)"
+      >
+        <div class="days" ngModelGroup="days">
+          <div class="container-h3">
+            <h3>Jours</h3>
+            <button
+              class="chevron"
+              [ngClass]="{ rotated: isRotated[0] }"
+              (click)="rotateChevron(0)"
+            >
+              <svg>
+                <use href="../../assets/icons/icons.svg#chevronIcon" />
+              </svg>
+            </button>
+          </div>
+          <div *ngIf="isRotated[0]" class="hidable">
+            <app-input
+              *ngFor="let day of days"
+              [cat]="day"
+              [filter]="filter.days"
+            ></app-input>
+          </div>
+        </div>
+        <div class="types" ngModelGroup="types">
+          <div class="container-h3">
+            <h3>Evènements</h3>
+            <button
+              class="chevron"
+              [ngClass]="{ rotated: isRotated[1] }"
+              (click)="rotateChevron(1)"
+            >
+              <svg>
+                <use href="../../assets/icons/icons.svg#chevronIcon" />
+              </svg>
+            </button>
+          </div>
+          <div *ngIf="isRotated[1]" class="hidable">
+            <app-input
+              *ngFor="let type of types"
+              [cat]="type"
+              [filter]="filter.types"
+            ></app-input>
+          </div>
+        </div>
+        <button type="submit">Réinitialiser</button>
+      </form>
+    </fieldset>
+  </aside>
   <section class="events">
     <div class="container-events">
       <app-event
         [data]="event"
         *ngFor="let event of events; index as idx"
-        [last]="idx === events.length - 1"
       ></app-event>
     </div>
   </section>

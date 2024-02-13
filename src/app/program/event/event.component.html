@@ -17,7 +17,14 @@
   </div>
   <div class="events-info">
     <ul>
-      <li *ngFor="let date of event.dates" class="date">
+      <li
+        *ngFor="let date of event.dates"
+        class="date"
+        [ngClass]="{
+          concert: date.type === 'concert',
+          rencontre: date.type === 'rencontre'
+        }"
+      >
         <span class="date-time">{{
           date.date | date : "dd MMMM '-' HH:mm"
         }}</span>
@@ -26,5 +33,4 @@
       </li>
     </ul>
   </div>
-  <hr [ngClass]="{ hidden: last }" />
 </div>

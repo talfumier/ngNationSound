@@ -1,8 +1,12 @@
 div.artist-events {
-  display:flex;
-  flex-wrap: wrap;
-  justify-content: left;
-  align-items: center;
+  display:grid;
+  grid-template-rows: repeat(2,auto);
+  grid-template-columns: 100%;
+  border:1px solid var(--black-opaque8);
+  border-radius: 10px;
+  margin-bottom:10px;
+  padding:15px 0 15px 15px;
+  max-width: 770px;
 }
 div.artist {
   display:flex;
@@ -20,78 +24,93 @@ img {
 h2 {
   font-size: 1.5rem;
   margin:0;
-  padding:0 15px;
+  padding:10px;
   line-height: 2rem;
+  text-wrap: wrap;
+  word-break:keep-all;
 }
 div.events-info {
-  padding:0 20px;
+  padding:0 0 0 25px;
 }
 ul {
   font-size: 1.3rem;
   font-weight:550;
-  margin-left:0px;
+  margin:10px 0 0 0;
   padding-left:0px;
 }
 li {
-  padding:10px 0;
+  height:3.5rem;
+  text-wrap: nowrap;
+  vertical-align: middle;
 }
 span {
   margin-left:0;
   padding:5px 5px;
+  text-align: center;
 }
 span.date-time {
   padding-left:0;
   text-wrap: nowrap;
 }
 span.type {
-  margin-bottom: 20px;
-  background-color: var(--blue);
-  color:var(--white);
+  display:inline-block;
+  margin-bottom: 10px;
   border:2px solid var(--white);
   border-radius: 10px;
+  width:70px;
+}
+li.concert span.type {
+  background-color: var(--blue);
+  color: var(--white);
+}
+li.rencontre span.type {
+  background-color: var(--white-opaque8);
+  border-color:var(--blue) ;
+  color: var(--blue);
 }
 span.location {
   margin-left:5px;
   margin-bottom: 20px;
-  background-color: var(--red-opaque9);
-  color: var(--white);
   border: 2px solid var(--white);
   border-radius: 10px;
   text-wrap: nowrap;
   cursor: pointer;
 }
-hr {
-  border-bottom: 1px solid;
-  width: 100%;
-  color: var(--black);
+li.concert span.location {
+  background-color: var(--red-opaque9);
+  color: var(--white);
 }
-hr.hidden {
-  border:none;
+li.rencontre span.location {
+  background-color: var(--yellow-opaque9);
+  color: var(--orange);
 }
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 768px) {
   div.artist-events {
-    justify-content: center;
+    grid-template-rows: auto;
+    grid-template-columns: 50% 50%;
   }
-  div.artist, div.events-info {
-    width:45%;
+  ul {
+    margin-top:0;
   }
 }
 @media screen and (min-width: 992px) {
+  div.artist-events {
+    grid-template-columns: 45% 55%;
+  }
   h2 {
     font-size: 1.8rem;
   }
   ul {
     font-size: 1.5rem;
   }
-  div.artist,
-  div.events-info {
-    width:40%;
-  }
   span.type, span.location {
     margin-left:20px;
     padding:5px 10px;
   }
-  hr {
-    width:85%;
+}
+@media screen and (min-width: 1127px) {
+  h2 {
+    padding-left: 20px;
+    line-height: 2.2rem;
   }
 }

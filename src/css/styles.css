@@ -9,8 +9,10 @@
   --red-opaque9: rgb(223, 6, 17,.9);
   --orange: #b65f28;
   --orange-opaque8: rgb(182, 95, 40, .8);
-  --black:rgb(36, 35, 35);  
-  --yellow: #FFD543;  
+  --black-opaque8:rgb(36, 35, 35,.8); 
+  --black: rgb(36, 35, 35);
+  --yellow: #FFD543;
+  --yellow-opaque9: rgb(255, 213, 67,.9);
   --white: #FFFFFF;
   --white-opaque8: rgb(255, 255, 255, .8);
   --beige: rgb(240, 234, 200);
