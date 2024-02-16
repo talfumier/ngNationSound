@@ -17,6 +17,6 @@ label.highlighted {
 p {
   padding: 0 10px;
   margin: 0;
-  /* text-wrap: nowrap; */
+  text-wrap: nowrap;
   font-size: 1.5rem;
 }

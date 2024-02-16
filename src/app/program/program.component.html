@@ -1,63 +1,63 @@
-<main>
-  <aside class="filter">
-    <fieldset class="form-filter">
-      <legend>
-        <h2>FILTRE</h2>
-      </legend>
-      <!-- <p class="debug">
-        {{ form.value | json }}
-      </p> -->
-      <form
-        #form="ngForm"
-        (ngSubmit)="filterReset(form)"
-        (change)="handleFilterChange(form)"
-      >
-        <div class="days" ngModelGroup="days">
-          <div class="container-h3">
-            <h3>Jours</h3>
-            <button
-              class="chevron"
-              [ngClass]="{ rotated: isRotated[0] }"
-              (click)="rotateChevron(0)"
-            >
-              <svg>
-                <use href="../../assets/icons/icons.svg#chevronIcon" />
-              </svg>
-            </button>
-          </div>
-          <div *ngIf="isRotated[0]" class="hidable">
-            <app-input
-              *ngFor="let day of days"
-              [cat]="day"
-              [filter]="filter.days"
-            ></app-input>
-          </div>
-        </div>
-        <div class="types" ngModelGroup="types">
-          <div class="container-h3">
-            <h3>Evènements</h3>
-            <button
-              class="chevron"
-              [ngClass]="{ rotated: isRotated[1] }"
-              (click)="rotateChevron(1)"
-            >
-              <svg>
-                <use href="../../assets/icons/icons.svg#chevronIcon" />
-              </svg>
-            </button>
-          </div>
-          <div *ngIf="isRotated[1]" class="hidable">
-            <app-input
-              *ngFor="let type of types"
-              [cat]="type"
-              [filter]="filter.types"
-            ></app-input>
-          </div>
-        </div>
-        <button type="submit">Réinitialiser</button>
-      </form>
-    </fieldset>
-  </aside>
+<main (click)="closeForm()">
+  <section class="header" (click)="rotateChevron($event)">
+    <div class="header">
+      <span>FILTRE</span>
+      <button class="chevron" [ngClass]="{ rotated: isRotated }">
+        <svg>
+          <use href="../../assets/icons/icons.svg#chevronIcon" />
+        </svg>
+      </button>
+    </div>
+    <!-- <p class="debug">
+      {{ form.value | json }}
+    </p> -->
+  </section>
+  <fieldset
+    class="form-filter"
+    [ngClass]="{ hidden: !isRotated }"
+    (click)="formClick($event)"
+  >
+    <form
+      #form="ngForm"
+      (ngSubmit)="filterReset(form)"
+      (change)="handleFilterChange(form)"
+    >
+      <div class="days" ngModelGroup="days">
+        <h3>Quand ?</h3>
+        <app-input
+          *ngFor="let day of days"
+          [cat]="day"
+          [filter]="filter.days"
+        ></app-input>
+      </div>
+      <div class="time" ngModelGroup="time">
+        <h3>A quelle heure ?</h3>
+        <app-select
+          *ngFor="let time of times"
+          [cat]="time"
+          [options]="time.key === 'min' ? timeOptions.min : timeOptions.max"
+          [filter]="filter.time"
+        ></app-select>
+      </div>
+      <div class="types" ngModelGroup="types">
+        <h3>Quoi ?</h3>
+        <app-input
+          *ngFor="let type of types"
+          [cat]="type"
+          [filter]="filter.types"
+        ></app-input>
+      </div>
+      <div class="artist" ngModelGroup="artist">
+        <h3>Qui ?</h3>
+        <app-select
+          [cat]="artist"
+          [options]="artistOptions"
+          [filter]="filter.artist"
+        ></app-select>
+      </div>
+      <button type="submit">Réinitialiser</button>
+    </form>
+  </fieldset>
   <section class="events">
     <div class="container-events">
       <app-event

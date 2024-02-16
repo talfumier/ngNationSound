@@ -15,7 +15,7 @@ export class InputComponent implements OnInit  {
   private _value:boolean=false;
   
   ngOnInit(): void {
-    // this._value=this.filter[this.cat.key as keyof Categories]
+    this._value=this.filter[this.cat.key as keyof KeyLabel]
   }
   get value(){
     return this._value;

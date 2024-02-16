@@ -1,8 +1,8 @@
-import { Component, HostListener} from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component} from '@angular/core';
+import { Form, NgForm } from '@angular/forms';
 import _ from 'lodash';
 import { DataService } from '../../services/data.service';
-import { KeyLabel,Filter,ArtistEvents } from '../../services/interfaces';
+import { KeyLabel,Filter,ArtistEvents, TimeOptions, Option } from '../../services/interfaces';
 
 @Component({
   selector: 'app-program',
@@ -12,32 +12,30 @@ import { KeyLabel,Filter,ArtistEvents } from '../../services/interfaces';
 export class ProgramComponent {  
   private _days:KeyLabel[]=[];
   private _types:KeyLabel[]=[]; // event type such as concert, rencontre ...
-  isRotated:boolean[]=[false,false];
+  private _times:KeyLabel[]=[];
+  private _timeOptions:TimeOptions={} as TimeOptions;
+  private _artist:KeyLabel={} as KeyLabel;
+  private _artistOptions:Option[]=[];
+  isRotated:boolean=false;
   private _filter:Filter={} as Filter;
 
   private _events:ArtistEvents[]=[];  
 
   constructor(private service:DataService){
-    //initialize filter 
-    this._days.push({key:"all",label:"tous"});
-    service.dates.days.split(",").map((day,idx) => {
-      this._days.push({key:`day${idx+1}`,label:`${day} ${service.dates.month}`});
-    });
-    this._types.push({key:"all",label:"tous"});
-    service.event_types.map((type) => {
-      this._types.push({key:type.id,label:type.description});
-    });
-    this._filter=this.getDefaultFilter();
-    console.log(this._filter)
+    //initialize filter
+    const cond=Object.keys(service.activeFilter).length>0;
+    if(cond) this._filter=service.activeFilter;
+    this.initFilter(cond?"":"default");
+    //initialize raw events data
+    service.setFilteredEvents(this._filter);
     //format raw events data
     this._events=this.getFormattedData();
-    console.log(this._events);
   }
 
   getFormattedData(){
     const AllArtistEvents:ArtistEvents[]=[];
-    let artistEvts:ArtistEvents={} as ArtistEvents,i=null,date:any="",x="";
-    this.service.events.map((evt) => {
+    let artistEvts:ArtistEvents={} as ArtistEvents,i=null;
+    this.service.filteredEvents.map((evt) => {
       i=-1;
       artistEvts=_.filter(AllArtistEvents,(artistEvents,idx) => {
         if(artistEvents.performer.id===evt.performer.id){
@@ -51,10 +49,7 @@ export class ProgramComponent {
           performer:evt.performer,
           dates:[]
         };
-      date=evt.date.split(" ")[0].split(".");
-      x=date[0],date[0]=date[1],date[1]=x;
-      date[3]=evt.date.split(" ")[1];
-      artistEvts.dates.push({date:new Date(date.join()),location:evt.location,type:evt.type});
+      artistEvts.dates.push({date:this.service.getDateFromString(evt.date,"dd.mm.yyyy hh:mm") as Date,location:evt.location,type:evt.type});
       if(i===-1) AllArtistEvents.push(artistEvts);
       else AllArtistEvents[i]=artistEvts;  
       artistEvts.dates=_.orderBy(artistEvts.dates,"date","asc")  
@@ -64,8 +59,20 @@ export class ProgramComponent {
   get days(){
     return this._days;
   }
+  get times() {
+    return this._times
+  }
+  get timeOptions(){
+    return this._timeOptions
+  }
   get types(){
     return this._types;
+  }
+  get artist(){
+    return this._artist;
+  }
+  get artistOptions(){
+    return this._artistOptions;
   }
   get filter(){
     return this._filter;
@@ -74,34 +81,92 @@ export class ProgramComponent {
     return this._events;
   }
 
-  getDefaultFilter():Filter{
+  initFilter(cs?:string){
+    this._days=[];
+    this._days.push({key:"all",label:"tous"});
+    this.service.dates.days.split(",").map((day,idx) => {
+      this._days.push({key:`day${idx+1}`,label:`${new Date(day+this.service.dates.month).toLocaleDateString("fr",{day:"numeric",month: "long"})}`});//`${day} ${this.service.dates.month}`
+    });
+    this._types=[];
+    this._types.push({key:"all",label:"tous"});
+    this.service.event_types.map((type) => {
+      this._types.push({key:type.id,label:type.description});
+    });
+    this._times=[{key:"min",label:"de"},{key:"max",label:"à"}];
+    const opts:Option[]=[],obj={id:-1,name:""}; //obj is the default option
+    new Array(13).fill(11).map((item,idx) => opts.push({id:`${item+idx}h00`,name:`${item+idx}h00`}));
+    this._timeOptions={min:[obj,...opts],max:[obj,...opts]};
+
+    this._artist={key:"id",label:""};
+    this._artistOptions.push(obj);
+    this.service.artists.map((artist) => {
+      this._artistOptions.push({id:artist.id,name:artist.name});
+    });
+
+    if(cs==="default") this._filter=this.getDefaultFilter("all");
+  }
+  getDefaultFilter(cs:string):Filter{
     const days:any={} ;
     this._days.map((day:KeyLabel) => {
       days[day.key]=false;
     });
     days.all=true;
+    if(cs==="days") return days;
+
     const types:any={};
     this._types.map((type:KeyLabel) => {
       types[type.key]=false;
     });
-    types.all=true;
-    return {days,types} as Filter;
+    types.all=true;    
+    if(cs==="types") return types;
+
+    const time:any={};
+    this._times.map((tm) => {
+      time[tm.key]=-1;
+    });
+
+    return {days,types,time,artist:{id:-1}} as Filter;
   }
-
   handleFilterChange(form:NgForm){
+    let cats:object={};
+    ["days","types"].map((it:string) => {
+      cats={...form.value[it]};
+      if(form.value[it].all) {
+        if(!this._filter[it as keyof Filter]["all" as keyof object]){
+          cats=this.getDefaultFilter(it);
+          form.setValue({...form.value,[it]:cats});
+        }
+        if(JSON.stringify(form.value[it]).split("true").length>2) {
+          cats={...form.value[it],all:false};
+          form.setValue({...form.value,[it]:cats})
+        }
+      }    
+      this._filter={...this._filter,[it]:cats};  
+    }); 
+    this._filter.time=form.value.time;   
+    this._filter.artist=form.value.artist;
 
+    this.service.setFilteredEvents(this._filter);
+    this._events=this.getFormattedData();
   }
   filterReset (form:NgForm) {
-
+    form.setValue(this.getDefaultFilter("all"));
+    this._filter={...form.value};     
+    this.service.setFilteredEvents(this._filter); 
+    this._events=this.getFormattedData();
   }
-  rotateChevron(idx:number) {
-    this.isRotated[idx]=!this.isRotated[idx];
+  rotateChevron(evt?:Event) {
+    evt?.stopPropagation();
+    this.isRotated=!this.isRotated;
   }
   setRotatingChevron(bl:boolean){
-    this.isRotated=[bl,bl];
+    this.isRotated=bl;
   }
-  @HostListener('window:resize', ['$event'])
-    onWindowResize() {
-      this.setRotatingChevron(window.outerWidth>=576?true:false);
+  closeForm(){
+    if(!this.isRotated) return;
+    this.rotateChevron();
+  }
+  formClick(evt:Event){    
+    evt.stopPropagation();
   }
 }

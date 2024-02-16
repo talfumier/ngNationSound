@@ -1,0 +1,34 @@
+label {
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  padding: 10px 0px 0;
+}
+
+label.highlighted {
+  color: var(--orange);
+}
+
+p {
+  padding: 0 10px 0 0;
+  margin: 0;
+  text-wrap: nowrap;
+  text-align: center;
+  font-size: 1.5rem;
+  width:15%;
+}
+select {
+  height: 20px;
+  width:max-content;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  padding: 0 5px;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+option {
+  direction: rtl;
+  font-family: Arial, 'Courier New', Courier, monospace;
+}

@@ -1,1 +1,15 @@
-<p>select works!</p>
+<div class="form-group">
+  <label [ngClass]="{ highlighted }">
+    <p *ngIf="cat.label.length > 0">{{ cat.label }}</p>
+    <select
+      name="{{ cat.key }}"
+      class="form-control"
+      [(ngModel)]="value"
+      required
+    >
+      <option *ngFor="let option of options" [value]="option.id">
+        {{ option.name }}
+      </option>
+    </select>
+  </label>
+</div>

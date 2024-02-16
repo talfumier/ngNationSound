@@ -2,6 +2,7 @@ div.artist-events {
   display:grid;
   grid-template-rows: repeat(2,auto);
   grid-template-columns: 100%;
+  align-items: center;
   border:1px solid var(--black-opaque8);
   border-radius: 10px;
   margin-bottom:10px;

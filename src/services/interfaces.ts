@@ -28,7 +28,7 @@ export interface EventType {
 }
 export interface Event {
   performer: Artist,
-  type: string,
+  type: EventType,
   location: Poi,
   date: string
 }
@@ -39,13 +39,24 @@ export interface ArtistEvents {
 interface EventDate {
   date:Date,
   location:Poi,
-  type:string
+  type:EventType
 }
 
 export interface KeyLabel {
   key:string|number, label:string
 }
+export interface MinMax {
+  min:string | number,max:string | number
+}
+export interface TimeOptions {
+  "min":Option[],"max":Option[]
+}
+export interface Option {
+  id:(string|number),name:string
+}
 export interface Filter {
   days:object,
-  types:object
+  time:object,
+  types:object,
+  artist:object
 }

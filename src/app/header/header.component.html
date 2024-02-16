@@ -8,7 +8,9 @@
       <p>Nation Sound Festival</p>
       <p>
         <span *ngFor="let day of dates.days" class="day">{{ day }}</span
-        ><span class="month-year">{{ dates.month }} {{ dates.year }}</span>
+        ><span class="month-year">{{
+          dates.monthYear | date : "MMMM yyyy"
+        }}</span>
       </p>
     </h1>
   </div>
@@ -32,8 +34,6 @@
         Programme
       </li>
       <li class="list-group-item">Carte</li>
-      <li class="list-group-item">Artistes</li>
-      <li class="list-group-item">Rencontres</li>
       <li class="list-group-item">Billetterie</li>
     </ul>
     <button class="menu-toggle" (click)="handleToggle()">

@@ -1,8 +1,5 @@
 <div class="artist-events">
-  <div
-    class="artist"
-    [routerLink]="['/artist', event.performer.id, 'program-details']"
-  >
+  <div class="artist">
     <img
       src="{{
         '../../../../../assets/images/artists/' +
@@ -10,8 +7,12 @@
           '.jpg'
       }}"
       alt="{{ event.performer.name }}"
+      [routerLink]="['/artist', event.performer.id, 'program-details']"
     />
-    <h2 class="artist-name">
+    <h2
+      class="artist-name"
+      [routerLink]="['/artist', event.performer.id, 'program-details']"
+    >
       {{ event.performer.name }}
     </h2>
   </div>
@@ -21,14 +22,14 @@
         *ngFor="let date of event.dates"
         class="date"
         [ngClass]="{
-          concert: date.type === 'concert',
-          rencontre: date.type === 'rencontre'
+          concert: date.type.description === 'concert',
+          rencontre: date.type.description === 'rencontre'
         }"
       >
         <span class="date-time">{{
           date.date | date : "dd MMMM '-' HH:mm"
         }}</span>
-        <span class="type">{{ date.type }}</span>
+        <span class="type">{{ date.type.description }}</span>
         <span class="location">{{ date.location.name }}</span>
       </li>
     </ul>
