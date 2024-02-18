@@ -21,6 +21,7 @@ import { ProgramComponent } from './program/program.component';
 import { InputComponent } from './utilities/input/input.component';
 import { SelectComponent } from './utilities/select/select.component';
 import { EventComponent } from './program/event/event.component';
+import { MapComponent } from './map/map.component';
 
 registerLocaleData(localeFr); //register fr-FR locale, default is en-US
 
@@ -36,7 +37,8 @@ registerLocaleData(localeFr); //register fr-FR locale, default is en-US
     ProgramComponent,
     InputComponent,
     SelectComponent,
-    EventComponent
+    EventComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,

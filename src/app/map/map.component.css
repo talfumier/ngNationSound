@@ -1,0 +1,10 @@
+main {
+  position: absolute;
+  top: 97px;  
+}
+
+section#map {
+  height: 100vh;
+  width: 100vw;
+  min-width:350px;
+}

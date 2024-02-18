@@ -33,7 +33,14 @@
       >
         Programme
       </li>
-      <li class="list-group-item">Carte</li>
+      <li
+        class="list-group-item"
+        routerLink="/map"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Carte
+      </li>
       <li class="list-group-item">Billetterie</li>
     </ul>
     <button class="menu-toggle" (click)="handleToggle()">

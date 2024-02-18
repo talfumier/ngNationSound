@@ -1,0 +1,1403 @@
+{
+  "type": "umap",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [2.475657463073731, 49.190994787665545]
+  },
+  "properties": {
+    "name": "NationSound_Chantilly",
+    "zoom": 16,
+    "easing": false,
+    "licence": "",
+    "miniMap": false,
+    "overlay": {},
+    "slideshow": {},
+    "tilelayer": {},
+    "captionBar": false,
+    "description": "",
+    "limitBounds": {
+      "east": 2.496192,
+      "west": 2.458,
+      "north": 49.197,
+      "south": 49.186
+    },
+    "moreControl": true,
+    "zoomControl": true,
+    "captionMenus": true,
+    "embedControl": true,
+    "scaleControl": true,
+    "searchControl": true,
+    "scrollWheelZoom": true,
+    "datalayersControl": true,
+    "fullscreenControl": true,
+    "displayPopupFooter": false,
+    "permanentCreditBackground": true
+  },
+  "uri": "https://umap.openstreetmap.fr/en/map/nationsound_chantilly_1018592",
+  "layers": [
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": { "color": "red", "opacity": 0.4, "weight": 7 },
+            "name": "Sc\u00e8ne chateau"
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.485334, 49.191559],
+                [2.485211, 49.191584],
+                [2.485195, 49.19155],
+                [2.485453, 49.191498],
+                [2.485474, 49.191529],
+                [2.485334, 49.191559]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "Red",
+              "opacity": 0.4,
+              "weight": 7,
+              "stroke": true
+            },
+            "name": "Sc\u00e8ne grandes \u00e9curies"
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.472691, 49.193219],
+                [2.472916, 49.19336],
+                [2.47297, 49.193319],
+                [2.472747, 49.193181],
+                [2.472691, 49.193219]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "red",
+              "opacity": 0.4,
+              "stroke": true,
+              "weight": 7
+            },
+            "name": "Sc\u00e8ne petite pelouse"
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.468705, 49.191885],
+                [2.468786, 49.19185],
+                [2.46855, 49.191692],
+                [2.468491, 49.191735],
+                [2.468705, 49.191885]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "Sc\u00e8ne tribune",
+            "_umap_options": { "color": "red", "weight": 7 }
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.474294, 49.189432],
+                [2.474334, 49.189357],
+                [2.473985, 49.189287],
+                [2.473944, 49.189363],
+                [2.474294, 49.189432]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "fill": true,
+              "color": "red",
+              "stroke": true,
+              "weight": 7
+            },
+            "name": "Sc\u00e8ne virage"
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.481789, 49.192581],
+                [2.481869, 49.192469],
+                [2.481765, 49.192429],
+                [2.481674, 49.192558],
+                [2.481789, 49.192581]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "SteelBlue",
+              "opacity": 0.4,
+              "weight": 7,
+              "fillColor": "Red",
+              "fillOpacity": 0.5
+            },
+            "name": "Zone chateau"
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.485512, 49.191486],
+                [2.485174, 49.191559],
+                [2.484756, 49.191598],
+                [2.483865, 49.190658],
+                [2.48387, 49.190564],
+                [2.484267, 49.190192],
+                [2.484857, 49.190059],
+                [2.485571, 49.190188],
+                [2.485882, 49.191394],
+                [2.485512, 49.191486]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "SteelBlue",
+              "opacity": 0.4,
+              "weight": 7,
+              "fillColor": "Red",
+              "fillOpacity": 0.5
+            },
+            "name": "Zone grandes \u00e9curies"
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.473048, 49.193314],
+                [2.473101, 49.193342],
+                [2.473903, 49.193351],
+                [2.472847, 49.192579],
+                [2.472637, 49.19306],
+                [2.473048, 49.193314]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "SteelBlue",
+              "opacity": 0.4,
+              "weight": 7,
+              "fillColor": "Red",
+              "fillOpacity": 0.5
+            },
+            "name": "Zone petite pelouse"
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.468491, 49.191756],
+                [2.467584, 49.191163],
+                [2.466522, 49.191882],
+                [2.467353, 49.193133],
+                [2.468582, 49.193179],
+                [2.46959, 49.192558],
+                [2.469687, 49.192506],
+                [2.468491, 49.191756]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "Zone tribune",
+            "_umap_options": {
+              "color": "SteelBlue",
+              "opacity": 0.4,
+              "weight": 8,
+              "fillColor": "Red",
+              "fillOpacity": 0.5
+            }
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.472897, 49.188958],
+                [2.475389, 49.189462],
+                [2.475545, 49.189105],
+                [2.473048, 49.18862],
+                [2.472897, 49.188958]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "SteelBlue",
+              "opacity": 0.4,
+              "weight": 8,
+              "stroke": true,
+              "showLabel": false,
+              "labelInteractive": true,
+              "labelDirection": "top",
+              "fillColor": "red",
+              "fillOpacity": 0.5
+            },
+            "name": "Zone virage"
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.481668, 49.192562],
+                [2.481086, 49.192881],
+                [2.47937, 49.192818],
+                [2.480056, 49.191408],
+                [2.481837, 49.191948],
+                [2.481762, 49.192432],
+                [2.481668, 49.192562]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": { "fillColor": "Red" },
+            "name": "Rencontre avec les artistes"
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.474134, 49.191605],
+                [2.474284, 49.191345],
+                [2.473812, 49.191093],
+                [2.473458, 49.191149],
+                [2.473726, 49.191437],
+                [2.474059, 49.191633],
+                [2.474134, 49.191605]
+              ]
+            ]
+          }
+        }
+      ],
+      "_umap_options": {
+        "id": 3146974,
+        "name": "sc\u00e8nes, zones de concert, rencontre avec les artistes",
+        "editMode": "advanced",
+        "browsable": true,
+        "inCaption": true,
+        "remoteData": {},
+        "permissions": { "edit_status": 3 },
+        "displayOnLoad": true
+      }
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/bar.svg",
+              "color": "#D0CECE"
+            },
+            "name": "buvette"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.472031, 49.189571] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/bar.svg",
+              "color": "#D0CECE"
+            },
+            "name": "buvette"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.478168, 49.188351] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/bar.svg",
+              "color": "#D0CECE"
+            },
+            "name": "buvette"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.471623, 49.186865] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/bar.svg",
+              "color": "#D0CECE"
+            },
+            "name": "buvette"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.476881, 49.191352] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/bar.svg",
+              "color": "#D0CECE"
+            },
+            "name": "buvette"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.46789, 49.190553] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/bar.svg",
+              "color": "#D0CECE"
+            },
+            "name": "buvette"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.483404, 49.192138] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/cafe.svg",
+              "color": "#D0CECE"
+            },
+            "name": "caf\u00e9"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.478061, 49.187748] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/cafe.svg",
+              "color": "#D0CECE"
+            },
+            "name": "caf\u00e9"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.471881, 49.190146] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/cafe.svg",
+              "color": "#D0CECE"
+            },
+            "name": "caf\u00e9"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.471452, 49.187412] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/cafe.svg",
+              "color": "#D0CECE"
+            },
+            "name": "caf\u00e9"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.476988, 49.191927] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/cafe.svg",
+              "color": "#D0CECE"
+            },
+            "name": "caf\u00e9"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.467117, 49.190581] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/cafe.svg",
+              "color": "#D0CECE"
+            },
+            "name": "caf\u00e9"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.482932, 49.191941] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/fountain.svg",
+              "color": "DeepSkyBlue"
+            },
+            "name": "point d'eau"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.480743, 49.191408] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/fountain.svg",
+              "color": "DeepSkyBlue"
+            },
+            "name": "point d'eau"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.479842, 49.192797] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/fountain.svg",
+              "color": "DeepSkyBlue"
+            },
+            "name": "point d'eau"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.475722, 49.189151] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/fountain.svg",
+              "color": "DeepSkyBlue"
+            },
+            "name": "point d'eau"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.472675, 49.188702] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/fountain.svg",
+              "color": "DeepSkyBlue"
+            },
+            "name": "point d'eau"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.466774, 49.191829] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/fountain.svg",
+              "color": "DeepSkyBlue"
+            },
+            "name": "point d'eau"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.46922, 49.192671] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/fountain.svg",
+              "color": "DeepSkyBlue"
+            },
+            "name": "point d'eau"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.474906, 49.192797] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/fountain.svg",
+              "color": "DeepSkyBlue"
+            },
+            "name": "point d'eau"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.472332, 49.19246] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/fountain.svg",
+              "color": "DeepSkyBlue"
+            },
+            "name": "point d'eau"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.483811, 49.190749] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/fountain.svg",
+              "color": "DeepSkyBlue"
+            },
+            "name": "point d'eau"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.485914, 49.190329] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/fountain.svg",
+              "color": "DeepSkyBlue"
+            },
+            "name": "point d'eau"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.48512, 49.189936] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/fountain.svg",
+              "color": "DeepSkyBlue"
+            },
+            "name": "point d'eau"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.466795, 49.189936] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/fountain.svg",
+              "color": "DeepSkyBlue"
+            },
+            "name": "point d'eau"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.471216, 49.191577] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/police.svg"
+            },
+            "name": "Police"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.477943, 49.189698] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/hospital.svg",
+              "color": "Crimson"
+            },
+            "name": "Poste m\u00e9dical"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.475893, 49.188463] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/hospital.svg",
+              "color": "Crimson"
+            },
+            "name": "Poste m\u00e9dical"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.478511, 49.192769] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/hospital.svg",
+              "color": "Crimson"
+            },
+            "name": "Poste m\u00e9dical"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.470078, 49.192979] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/hospital.svg",
+              "color": "Crimson"
+            },
+            "name": "Poste m\u00e9dical"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.473898, 49.19211] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/hospital.svg",
+              "color": "Crimson"
+            },
+            "name": "Poste m\u00e9dical"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.483532, 49.190132] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/restaurant.svg",
+              "color": "#D0CECE"
+            },
+            "name": "restauration rapide"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.47746, 49.188099] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/restaurant.svg",
+              "color": "#D0CECE"
+            },
+            "name": "restauration rapide"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.472804, 49.189529] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/restaurant.svg",
+              "color": "#D0CECE"
+            },
+            "name": "restauration rapide"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.472203, 49.187145] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/restaurant.svg",
+              "color": "#D0CECE"
+            },
+            "name": "restauration rapide"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.476194, 49.191577] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/restaurant.svg",
+              "color": "#D0CECE"
+            },
+            "name": "restauration rapide"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.467525, 49.19016] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/toilets.svg",
+              "color": "Yellow"
+            },
+            "name": "toilettes/sanitaires"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.474048, 49.190076] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/toilets.svg",
+              "color": "Yellow"
+            },
+            "name": "toilettes/sanitaires"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.479284, 49.192783] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/toilets.svg",
+              "color": "Yellow"
+            },
+            "name": "toilettes/sanitaires"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.476108, 49.188996] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/toilets.svg",
+              "color": "Yellow"
+            },
+            "name": "toilettes/sanitaires"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.472289, 49.188337] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/toilets.svg",
+              "color": "Yellow"
+            },
+            "name": "toilettes/sanitaires"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.466431, 49.191423] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/toilets.svg",
+              "color": "Yellow"
+            },
+            "name": "toilettes/sanitaires"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.468748, 49.192965] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/toilets.svg",
+              "color": "Yellow"
+            },
+            "name": "toilettes/sanitaires"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.474327, 49.192951] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/toilets.svg",
+              "color": "Yellow"
+            },
+            "name": "toilettes/sanitaires"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.483189, 49.190735] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/toilets.svg",
+              "color": "Yellow"
+            },
+            "name": "toilettes/sanitaires"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.486107, 49.190763] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/toilets.svg",
+              "color": "Yellow"
+            },
+            "name": "toilettes/sanitaires"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.466087, 49.19002] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/toilets.svg",
+              "color": "Yellow"
+            },
+            "name": "toilettes/sanitaires"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.470615, 49.19131] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": { "color": "Blue" },
+            "name": "Police"
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.477658, 49.189796],
+                [2.478157, 49.189901],
+                [2.478238, 49.189715],
+                [2.477733, 49.18962],
+                [2.477658, 49.189796]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "#D0CECE",
+              "iconUrl": "/uploads/pictogram/restaurant-pizza.svg"
+            },
+            "name": "Boutique \u00e0 pizza"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.474864, 49.190876] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "#D0CECE",
+              "iconUrl": "/uploads/pictogram/fast-food.svg"
+            },
+            "name": "Stand hamburger"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.474617, 49.190399] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "#D0CECE",
+              "iconUrl": "/uploads/pictogram/biergarten.svg"
+            },
+            "name": "BierGarten"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.476172, 49.190848] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/table.svg",
+              "color": "#D0CECE"
+            },
+            "name": "Tables"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.483382, 49.191507] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/table.svg",
+              "color": "#D0CECE"
+            },
+            "name": "Tables"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.475379, 49.191493] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/table.svg",
+              "color": "#D0CECE"
+            },
+            "name": "Tables"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.470207, 49.192362] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/table.svg",
+              "color": "#D0CECE"
+            },
+            "name": "Tables"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.470529, 49.186977] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/table.svg",
+              "color": "#D0CECE"
+            },
+            "name": "Tables"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.478726, 49.18852] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/restaurant.svg",
+              "color": "#D0CECE"
+            },
+            "name": "restaurant panoramique de l'hippodrome"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.475185, 49.189095] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/table.svg",
+              "color": "#D0CECE"
+            },
+            "name": "Tables"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.472675, 49.19009] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/table.svg",
+              "color": "#D0CECE"
+            },
+            "name": "Tables"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.47143, 49.190974] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/table.svg",
+              "color": "#D0CECE"
+            },
+            "name": "Tables"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.465701, 49.188828] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconUrl": "/uploads/pictogram/table.svg",
+              "color": "#D0CECE"
+            },
+            "name": "Tables"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.468383, 49.190048] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/toilets.svg",
+              "color": "Yellow"
+            },
+            "name": "toilettes/sanitaires"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.479842, 49.191647] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "iconClass": "Drop",
+              "iconUrl": "/uploads/pictogram/fountain.svg",
+              "color": "DeepSkyBlue"
+            },
+            "name": "point d'eau"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.474778, 49.189964] }
+        }
+      ],
+      "_umap_options": {
+        "id": 3147492,
+        "name": "services",
+        "editMode": "advanced",
+        "browsable": true,
+        "inCaption": true,
+        "remoteData": {},
+        "description": "Point d'eau, toilettes/sanitaires, restauration rapide, bar.",
+        "permissions": { "edit_status": 0 },
+        "displayOnLoad": true
+      }
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "MediumSpringGreen",
+              "iconUrl": "/uploads/pictogram/gate.svg"
+            },
+            "name": "entr\u00e9e/sortie"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.465723, 49.190763] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "MediumSpringGreen",
+              "iconUrl": "/uploads/pictogram/gate.svg"
+            },
+            "name": "entr\u00e9e/sortie"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.473791, 49.18737] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "MediumSpringGreen",
+              "iconUrl": "/uploads/pictogram/gate.svg"
+            },
+            "name": "entr\u00e9e/sortie"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.467611, 49.192993] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "MediumSpringGreen",
+              "iconUrl": "/uploads/pictogram/gate.svg"
+            },
+            "name": "entr\u00e9e/sortie"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.480571, 49.19347] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "MediumSpringGreen",
+              "iconUrl": "/uploads/pictogram/gate.svg"
+            },
+            "name": "entr\u00e9e/sortie"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.475893, 49.187692] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "MediumSpringGreen",
+              "iconUrl": "/uploads/pictogram/gate.svg"
+            },
+            "name": "entr\u00e9e/sortie"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.482159, 49.193035] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "MediumSpringGreen",
+              "iconUrl": "/uploads/pictogram/gate.svg"
+            },
+            "name": "entr\u00e9e/sortie"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.461495, 49.186514] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "MediumSpringGreen",
+              "iconUrl": "/uploads/pictogram/gate.svg"
+            },
+            "name": "entr\u00e9e/sortie"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.484348, 49.18995] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "MediumSpringGreen",
+              "iconUrl": "/uploads/pictogram/gate.svg"
+            },
+            "name": "entr\u00e9e/sortie"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.484326, 49.191423] }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "color": "MediumSpringGreen",
+              "iconUrl": "/uploads/pictogram/gate.svg"
+            },
+            "name": "entr\u00e9e/sortie"
+          },
+          "geometry": { "type": "Point", "coordinates": [2.471066, 49.192544] }
+        }
+      ],
+      "_umap_options": {
+        "id": 3147546,
+        "name": "acc\u00e8s",
+        "editMode": "advanced",
+        "browsable": true,
+        "inCaption": true,
+        "remoteData": {},
+        "permissions": { "edit_status": 0 },
+        "displayOnLoad": true
+      }
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": { "fillColor": "Aqua" },
+            "name": "Activit\u00e9s artistiques & culturelles"
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.475829, 49.190595],
+                [2.478147, 49.191156],
+                [2.478388, 49.19055],
+                [2.476001, 49.190062],
+                [2.475829, 49.190595]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "opacity": 0.5,
+              "fillColor": "Yellow",
+              "stroke": true,
+              "weight": 3
+            },
+            "name": "Terre-plein central"
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.477524, 49.192853],
+                [2.476773, 49.192699],
+                [2.47613, 49.192474],
+                [2.475502, 49.192267],
+                [2.474944, 49.192054],
+                [2.474644, 49.191903],
+                [2.474316, 49.191756],
+                [2.473742, 49.191451],
+                [2.473447, 49.191149],
+                [2.473383, 49.190805],
+                [2.473442, 49.19055],
+                [2.473576, 49.190315],
+                [2.473941, 49.190062],
+                [2.474493, 49.189908],
+                [2.475089, 49.189911],
+                [2.475808, 49.19002],
+                [2.476789, 49.190227],
+                [2.477707, 49.190409],
+                [2.478383, 49.190553],
+                [2.477567, 49.192755],
+                [2.477524, 49.192853]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": { "fillColor": "SpringGreen" },
+            "name": "Zone de d\u00e9tente et de pique-nique"
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.470036, 49.191731],
+                [2.470593, 49.191962],
+                [2.471173, 49.192054],
+                [2.474113, 49.19253],
+                [2.475121, 49.192741],
+                [2.469456, 49.189824],
+                [2.469177, 49.190371],
+                [2.469263, 49.191072],
+                [2.469649, 49.191437],
+                [2.470036, 49.191731]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": { "fillOpacity": 0.5, "fillColor": "SpringGreen" },
+            "name": "Zone de d\u00e9tente et de pique-nique"
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.482545, 49.191969],
+                [2.482181, 49.192923],
+                [2.481086, 49.19333],
+                [2.480614, 49.19347],
+                [2.48055, 49.194059],
+                [2.482052, 49.193372],
+                [2.483597, 49.192825],
+                [2.484262, 49.192334],
+                [2.484326, 49.191955],
+                [2.48394, 49.191437],
+                [2.482181, 49.191114],
+                [2.482545, 49.191969]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": {
+              "opacity": 0.5,
+              "fillOpacity": 0.3,
+              "fillColor": "SpringGreen"
+            },
+            "name": "Zone de d\u00e9tente, pique-nique, jeux pour les enfants."
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.465401, 49.189922],
+                [2.465508, 49.190132],
+                [2.465808, 49.19002],
+                [2.469049, 49.189936],
+                [2.469263, 49.189656],
+                [2.466924, 49.188393],
+                [2.465165, 49.187734],
+                [2.461302, 49.186907],
+                [2.463019, 49.189613],
+                [2.463598, 49.18974],
+                [2.465401, 49.189922]
+              ]
+            ]
+          }
+        }
+      ],
+      "_umap_options": {
+        "id": 3147577,
+        "name": "zones de d\u00e9tente, zones multiculturelles",
+        "editMode": "advanced",
+        "browsable": true,
+        "inCaption": true,
+        "remoteData": {},
+        "permissions": { "edit_status": 0 },
+        "displayOnLoad": true
+      }
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": { "name": "Organisation" },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.477278, 49.189684],
+                [2.476848, 49.18958],
+                [2.476934, 49.189414],
+                [2.477201, 49.189469],
+                [2.477369, 49.189512],
+                [2.477278, 49.189684]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": { "color": "Fuchsia" },
+            "name": "Media, presse"
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.477064, 49.188856],
+                [2.4771, 49.188762],
+                [2.477669, 49.18886],
+                [2.47763, 49.188955],
+                [2.477064, 49.188856]
+              ]
+            ]
+          }
+        }
+      ],
+      "_umap_options": {
+        "id": 3148017,
+        "name": "organisation, media, presse",
+        "editMode": "advanced",
+        "browsable": true,
+        "inCaption": true,
+        "remoteData": {},
+        "permissions": { "edit_status": 0 },
+        "displayOnLoad": true
+      }
+    }
+  ]
+}

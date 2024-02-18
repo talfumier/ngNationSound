@@ -67,6 +67,7 @@ div.program-grid.hidden {
   height:0;
   padding:0 15px 0;
   transition: opacity 1.5s,height 1.5s;
+  z-index: -1000;
 }
 
 :host ::ng-deep div.grid-item {/* : host::ng-deep required for html content rendered via [innerHtml]*/
