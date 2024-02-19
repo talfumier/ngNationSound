@@ -23,11 +23,48 @@ export class UmapService {  //retrieves data from umap.json file
     // layers and features
     const result:Layer[]=[];
     data.layers.map((layer) => {
-      result.push({name:layer._umap_options.name,features:L.geoJson(layer.features as Feature[])});      
+      result.push({name:layer._umap_options.name,features:L.geoJSON(layer.features as Feature[],
+        {
+          style:function(feature) { //applies to polygon shapes
+            return feature?.properties._umap_options;
+          },    
+          pointToLayer:(geoJsonPoint:any, latlng:any) => {
+              return L.marker(latlng,{icon:this.getIcon(geoJsonPoint)});
+          },
+          onEachFeature:function (feature, layer) {
+            layer.bindPopup(`<span style="font-size:1.3rem;">${feature.properties.name}</span>`);            
+          }        
+        } as L.GeoJSONOptions)});      
     });
     return result;
   }
-
+  getIcon(point:any):L.Icon { 
+    try {
+      const file=point.properties._umap_options.iconUrl.split("/").splice(-1)[0];
+      return L.icon({      
+        iconUrl:`assets/icons/map/${file}`,
+        // shadowUrl:'assets/marker-shadow.png',
+        iconSize: [20, 20],
+        iconAnchor: [10, 20],
+        popupAnchor: [0, -18],
+        // tooltipAnchor: [40, -144],
+        className:""
+        //shadowSize: [41, 41]
+      });
+    } catch (error) { //default icon
+      return L.icon({
+        iconRetinaUrl:'assets/icons/map/default/marker-icon-2x.png',
+        iconUrl:'assets/icons/map/default/marker-icon.png',
+        shadowUrl:'assets/icons/map/default/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        tooltipAnchor: [16, -28],
+        shadowSize: [41, 41]
+      });
+    } 
+  }
+  
   get center(){
     return this._center;
   }

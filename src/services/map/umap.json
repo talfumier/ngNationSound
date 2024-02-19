@@ -41,6 +41,27 @@
         {
           "type": "Feature",
           "properties": {
+            "_umap_options": { "fillColor": "Red" },
+            "name": "Rencontre avec les artistes"
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.474134, 49.191605],
+                [2.474284, 49.191345],
+                [2.473812, 49.191093],
+                [2.473458, 49.191149],
+                [2.473726, 49.191437],
+                [2.474059, 49.191633],
+                [2.474134, 49.191605]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
             "_umap_options": { "color": "red", "opacity": 0.4, "weight": 7 },
             "name": "Sc\u00e8ne chateau"
           },
@@ -159,7 +180,7 @@
               "fillColor": "Red",
               "fillOpacity": 0.5
             },
-            "name": "Zone chateau"
+            "name": "Chateau"
           },
           "geometry": {
             "type": "Polygon",
@@ -189,7 +210,7 @@
               "fillColor": "Red",
               "fillOpacity": 0.5
             },
-            "name": "Zone grandes \u00e9curies"
+            "name": "Grandes \u00e9curies"
           },
           "geometry": {
             "type": "Polygon",
@@ -215,7 +236,7 @@
               "fillColor": "Red",
               "fillOpacity": 0.5
             },
-            "name": "Zone petite pelouse"
+            "name": "Petite pelouse"
           },
           "geometry": {
             "type": "Polygon",
@@ -236,7 +257,7 @@
         {
           "type": "Feature",
           "properties": {
-            "name": "Zone tribune",
+            "name": "Tribune",
             "_umap_options": {
               "color": "SteelBlue",
               "opacity": 0.4,
@@ -272,7 +293,7 @@
               "fillColor": "red",
               "fillOpacity": 0.5
             },
-            "name": "Zone virage"
+            "name": "Virage"
           },
           "geometry": {
             "type": "Polygon",
@@ -285,27 +306,6 @@
                 [2.481837, 49.191948],
                 [2.481762, 49.192432],
                 [2.481668, 49.192562]
-              ]
-            ]
-          }
-        },
-        {
-          "type": "Feature",
-          "properties": {
-            "_umap_options": { "fillColor": "Red" },
-            "name": "Rencontre avec les artistes"
-          },
-          "geometry": {
-            "type": "Polygon",
-            "coordinates": [
-              [
-                [2.474134, 49.191605],
-                [2.474284, 49.191345],
-                [2.473812, 49.191093],
-                [2.473458, 49.191149],
-                [2.473726, 49.191437],
-                [2.474059, 49.191633],
-                [2.474134, 49.191605]
               ]
             ]
           }
@@ -1353,23 +1353,6 @@
       "features": [
         {
           "type": "Feature",
-          "properties": { "name": "Organisation" },
-          "geometry": {
-            "type": "Polygon",
-            "coordinates": [
-              [
-                [2.477278, 49.189684],
-                [2.476848, 49.18958],
-                [2.476934, 49.189414],
-                [2.477201, 49.189469],
-                [2.477369, 49.189512],
-                [2.477278, 49.189684]
-              ]
-            ]
-          }
-        },
-        {
-          "type": "Feature",
           "properties": {
             "_umap_options": { "color": "Fuchsia" },
             "name": "Media, presse"
@@ -1383,6 +1366,23 @@
                 [2.477669, 49.18886],
                 [2.47763, 49.188955],
                 [2.477064, 49.188856]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": { "name": "Organisation" },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.477278, 49.189684],
+                [2.476848, 49.18958],
+                [2.476934, 49.189414],
+                [2.477201, 49.189469],
+                [2.477369, 49.189512],
+                [2.477278, 49.189684]
               ]
             ]
           }
