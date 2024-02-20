@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import _ from "lodash";
 import {Poi,Dates,Artist,Style,Event, EventType, Filter} from "./interfaces";
 import data from "./data.json";
+import { removeAccents } from './../app/utilities/functions/utlityFunctions';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +46,7 @@ export class DataService {
     });   
     let day="", ul="",artist="";
     stages.map((stage) => {
-      this._innerHTML.push(`<div class='row-header'>${stage.name}</div>`);
+      this._innerHTML.push(`<div class='row-header'><a href=/map/${removeAccents(stage.name)}/program>${stage.name}</a></div>`);
       day="",ul="";
       _.filter(data.events,(evt) => {
         return evt.location===stage.id && evt.type===1;

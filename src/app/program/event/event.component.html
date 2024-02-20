@@ -30,7 +30,14 @@
           date.date | date : "dd MMMM '-' HH:mm"
         }}</span>
         <span class="type">{{ date.type.description }}</span>
-        <span class="location">{{ date.location.name }}</span>
+        <span
+          class="location"
+          [routerLink]="[
+            '/map',
+            cleanup(date.type.description, date.location.name)
+          ]"
+          >{{ date.location.name }}</span
+        >
       </li>
     </ul>
   </div>

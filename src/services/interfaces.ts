@@ -60,3 +60,7 @@ export interface Filter {
   types:object,
   artist:object
 }
+export interface OverlayLayer {
+  name:string,
+  features:L.GeoJSON
+}

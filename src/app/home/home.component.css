@@ -4,7 +4,6 @@ main {
   background-image: url("../../assets/images/festival1.jpg");
   background-size:cover;
   background-position:center;
-  /* background-color: var(--white); */
   opacity:0.8;
 }
 main section {
@@ -100,30 +99,36 @@ div.program-grid.hidden {
   line-height: 1.5rem;;
   margin:0;
 }
-:host ::ng-deep div.grid-item ul a {
+:host ::ng-deep div.grid-item a {
   text-decoration: none;
   cursor: pointer;
 }
 :host ::ng-deep a:link,:host ::ng-deep a:visited {
   color:inherit;
 }
-:host ::ng-deep a:hover {
+:host ::ng-deep li.list-group-item-program a:hover {
   color: var(--red);
 }
-div.test {
+:host ::ng-deep div.row-header a:hover {
+  color: var(--yellow);
+}
+div.map {
+  display:flex;
+  width:60%;
+  height:50%;
+  height:200px;
+  padding: 5px 15px;
   opacity: 1;
   transition: opacity 1.5s;
-  font-size: 2rem;
-  padding: 20px;
-  background-color: var(--beige);
-  color: var(--blue);
+  overflow: hidden;
+  z-index: 1000;
 }
-div.test.hidden {
+div.map.hidden {
   opacity: 0;
   height: 0;
   padding: 0 15px 0;
   transition: opacity 1.5s, height 1.5s;
-  overflow:hidden;
+  z-index: -1000;
 }
 
 @media screen and (min-width: 600px) {

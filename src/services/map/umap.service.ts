@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as L from 'leaflet';
 import { Feature } from 'geojson';
+import { OverlayLayer } from '../interfaces';
 import data from './umap.json';
 
 @Injectable({
@@ -9,9 +10,11 @@ import data from './umap.json';
 export class UmapService {  //retrieves data from umap.json file
   private _center:number[]=[];
   private _zoom:number=10;
+  private _layers:OverlayLayer[]=[];
 
   constructor() {
     this.initData();
+    this.initLayers();
   }
 
   initData(){
@@ -19,11 +22,11 @@ export class UmapService {  //retrieves data from umap.json file
     this._zoom=data.properties.zoom; //default map zoom level
   }
 
-  getLayers():Layer[] {
+  initLayers() {
     // layers and features
-    const result:Layer[]=[];
+    this._layers=[];
     data.layers.map((layer) => {
-      result.push({name:layer._umap_options.name,features:L.geoJSON(layer.features as Feature[],
+      this._layers.push({name:layer._umap_options.name,features:L.geoJSON(layer.features as Feature[],
         {
           style:function(feature) { //applies to polygon shapes
             return feature?.properties._umap_options;
@@ -32,11 +35,10 @@ export class UmapService {  //retrieves data from umap.json file
               return L.marker(latlng,{icon:this.getIcon(geoJsonPoint)});
           },
           onEachFeature:function (feature, layer) {
-            layer.bindPopup(`<span style="font-size:1.3rem;">${feature.properties.name}</span>`);            
+            layer.bindPopup(`<span class=popup>${feature.properties.name}</span>`);            
           }        
         } as L.GeoJSONOptions)});      
     });
-    return result;
   }
   getIcon(point:any):L.Icon { 
     try {
@@ -64,15 +66,14 @@ export class UmapService {  //retrieves data from umap.json file
       });
     } 
   }
-  
+
   get center(){
     return this._center;
   }
   get zoom(){
     return this._zoom;
   }
-}
-export interface Layer {
-  name:string,
-  features:L.Layer
+  get layers(){
+    return this._layers;
+  }
 }

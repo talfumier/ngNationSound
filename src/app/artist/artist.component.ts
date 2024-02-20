@@ -36,5 +36,4 @@ export class ArtistComponent{
   get backToOptions(){
     return this._backToOptions;
   }
-
 }

@@ -8,8 +8,8 @@ import { MapComponent } from './map/map.component';
 
 const routes:Routes=[  
   {path:'',component:HomeComponent},   
-  {path:'program',component:ProgramComponent},  
-  {path:'map',component:MapComponent},
+  {path:'program',component:ProgramComponent},    
+  {path:'map/:stage/:from',component:MapComponent},
   {path:'artist/:id/:from',component:ArtistComponent},
   {path: '**', component: NotFoundComponent}
 

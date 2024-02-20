@@ -90,6 +90,9 @@ li.concert span.location {
   background-color: var(--red-opaque9);
   color: var(--white);
 }
+span.location:hover {
+  opacity:.8;
+}
 li.rencontre span.location {
   background-color: var(--yellow-opaque9);
   color: var(--orange);
