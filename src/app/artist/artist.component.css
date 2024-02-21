@@ -48,7 +48,9 @@ div.artist-details {
   align-items: start;
 }
 h2 {
+  font-family: "Mochiy Pop P One", sans-serif;
   font-size:2.5rem;
+  color:var(--black-opaque8);
   align-self: center;
   text-align:center;
 }
@@ -63,14 +65,8 @@ h3.country,h3.style {
 }
 
 @media screen and (min-width: 768px) {
-  div.back-button {
-    top:105px;
-  }
   img {
     width:45%;
-  }
-  section.artist {
-    margin-top: 40px;
   }
   div.artist-details {
     width: 45%;

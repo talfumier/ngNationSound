@@ -1,8 +1,8 @@
 <main>
   <form #form="ngForm">
-    <p class="debug">
+    <!-- <p class="debug">
       {{ form.value | json }}
-    </p>
+    </p> -->
     <section class="banner">
       <div class="fixed-container">
         <h2 class="moving-text">
@@ -14,9 +14,11 @@
       </div>
     </section>
     <section class="program-summary" ngModelGroup="program">
-      <app-accordion title="programmation"></app-accordion>
+      <div class="section-header">
+        <app-accordion index="0" title="concerts 2024"></app-accordion>
+      </div>
       <div
-        class="program-grid"
+        class="section-content program-grid"
         [ngClass]="{
           hidden:
             form.value.program !== undefined
@@ -32,7 +34,24 @@
       </div>
     </section>
     <section class="map" ngModelGroup="map">
-      <app-accordion title="carte interactive"></app-accordion>
+      <div class="section-header">
+        <app-accordion index="1" title="carte du festival"></app-accordion>
+      </div>
+      <div
+        class="section-content map"
+        [ngClass]="{
+          hidden:
+            form.value.map !== undefined ? !form.value.map.accordion : true
+        }"
+      >
+        <img
+          src="assets/images/map-thumbnail.jpg"
+          alt="lien vers la carte"
+          routerLink="/map/all/map"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        />
+      </div>
     </section>
   </form>
 </main>

@@ -28,8 +28,20 @@
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/css/normalize.css", "src/css/styles.css"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "/node_modules/leaflet/dist/images",
+                "output": "./assets"
+              }
+            ],
+            "styles": [
+              "src/css/normalize.css",
+              "src/css/styles.css",
+              "./node_modules/leaflet/dist/leaflet.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -80,7 +92,11 @@
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/css/normalize.css", "src/css/styles.css"],
+            "styles": [
+              "src/css/normalize.css",
+              "src/css/styles.css",
+              "./node_modules/leaflet/dist/leaflet.css"
+            ],
             "scripts": []
           }
         }

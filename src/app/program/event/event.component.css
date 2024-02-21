@@ -1,0 +1,129 @@
+div.artist-events {
+  display:grid;
+  grid-template-rows: repeat(2,auto);
+  grid-template-columns: 100%;
+  align-items: center;
+  border:1px solid var(--black-opaque8);
+  border-radius: 10px;
+  margin-bottom:10px;
+  padding:15px 0 15px 15px;
+  max-width: 770px;
+}
+div.artist {
+  display:flex;
+  flex-wrap: nowrap;
+  justify-content: left;
+  align-items: center;
+  cursor: pointer
+}
+img {
+  object-fit: cover;
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  border: 3px solid transparent;
+}
+img:hover {
+  border-color: var(--orange-opaque8);
+}
+h2 {
+  font-family: "Mochiy Pop P One", sans-serif;
+  font-size: 1.5rem;
+  color: var(--black-opaque8);
+  margin:0;
+  padding:10px;
+  line-height: 2rem;
+  text-wrap: wrap;
+  word-break:keep-all;
+}
+h2:hover {
+  color:var(--orange-opaque8);
+}
+div.events-info {
+  padding:0 0 0 25px;
+}
+ul {
+  font-size: 1.3rem;
+  font-weight:550;
+  margin:10px 0 0 0;
+  padding-left:0px;
+}
+li {
+  height:3.5rem;
+  text-wrap: nowrap;
+  vertical-align: middle;
+}
+span {
+  margin-left:0;
+  padding:5px 5px;
+  text-align: center;
+}
+span.date-time {
+  padding-left:0;
+  text-wrap: nowrap;
+}
+span.type {
+  display:inline-block;
+  margin-bottom: 10px;
+  border:2px solid var(--white);
+  border-radius: 10px;
+  width:70px;
+}
+li.concert span.type {
+  background-color: var(--blue);
+  color: var(--white);
+}
+li.rencontre span.type {
+  background-color: var(--white-opaque8);
+  border-color:var(--blue) ;
+  color: var(--blue);
+}
+span.location {
+  margin-left:5px;
+  margin-bottom: 20px;
+  border: 2px solid var(--white);
+  border-radius: 10px;
+  text-wrap: nowrap;
+  cursor: pointer;
+}
+li.concert span.location {
+  background-color: var(--red-opaque9);
+  color: var(--white);
+}
+span.location:hover {
+  opacity:.8;
+}
+li.rencontre span.location {
+  background-color: var(--yellow-opaque9);
+  color: var(--orange);
+}
+@media screen and (min-width: 768px) {
+  div.artist-events {
+    grid-template-rows: auto;
+    grid-template-columns: 50% 50%;
+  }
+  ul {
+    margin-top:0;
+  }
+}
+@media screen and (min-width: 992px) {
+  div.artist-events {
+    grid-template-columns: 45% 55%;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+  ul {
+    font-size: 1.5rem;
+  }
+  span.type, span.location {
+    margin-left:20px;
+    padding:5px 10px;
+  }
+}
+@media screen and (min-width: 1127px) {
+  h2 {
+    padding-left: 20px;
+    line-height: 2.2rem;
+  }
+}

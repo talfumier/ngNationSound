@@ -1,7 +1,5 @@
-import { Component,Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, NgModelGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-accordion',
@@ -9,19 +7,15 @@ import { Location } from '@angular/common';
   styleUrl: './accordion.component.css',
   viewProviders: [{ provide: ControlContainer, useExisting: NgModelGroup }]
 })
-export class AccordionComponent implements OnInit {    
-  @Input() title:string=""; 
+export class AccordionComponent implements OnInit { 
+  @Input() title:string="";     
+  @Input() index:string="";     
 
   private _value:boolean=false; // value binded to NgForm in home page
-
-  constructor(private route: ActivatedRoute,private location: Location){}
+  static status:Status={"0":false,"1":false};
 
   ngOnInit(): void {
-    const param:string=this.route.snapshot.queryParamMap.get('param') as string;
-    if(param==="program" && this.title==="programmation") {
-      this.rotateChevron();
-      this.location.replaceState("/");//remove query parameter from url
-    }    
+    this._value=AccordionComponent.status[this.index as keyof object] ;
   }
   get value(){
     return this._value;
@@ -33,5 +27,10 @@ export class AccordionComponent implements OnInit {
   rotateChevron(evt?:Event) { 
     if(evt) evt.stopPropagation();  
     this._value=!this._value;
+    AccordionComponent.status[this.index as keyof Status]=this.value;
   }
+}
+interface Status { //rotated status of each accordion
+  "0":boolean,
+  "1":boolean
 }

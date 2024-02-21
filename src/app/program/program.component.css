@@ -1,0 +1,105 @@
+main {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+section.header {
+  position: fixed;
+  top: 97px;
+  display:flex;
+  justify-content: center;
+  background-color: #dbd4d4;
+  border: 1px solid grey;
+  width:100%;
+  cursor: pointer;
+}
+div.header {
+  height:20px;
+  padding:5px 10px;
+  display:inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+span {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin:0;
+}
+button.chevron {
+  text-align: right;
+  width: 50px;
+  height: 20px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+svg {
+  width: 15px;
+  height: 15px;
+  fill: var(--orange);
+  transition: transform 0.5s;
+}
+
+button.chevron.rotated svg {
+  transform: rotate(90deg);
+}
+fieldset {
+  position:fixed;
+  top:129px;
+  border:1px solid grey;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+  background-color: #dbd4d4;
+  opacity:1;
+  transition: opacity 1s;
+
+}
+fieldset.hidden {
+  opacity:0;
+  z-index:-1000;
+}
+form {
+  display:grid;
+  grid-template-rows: repeat(2,auto);
+  grid-template-columns: 100px 150px 100px;
+  column-gap: 0px;
+  padding: 5px;
+}
+div.artist {
+  grid-column: 1/-1;
+  justify-self: center;
+  width:400px;
+}
+section.events {
+  padding: 50px 0 10px;
+}
+div.container-events {
+  width:auto;
+}
+
+h3 {
+  text-wrap: nowrap;
+  text-align: center;
+  font-size: 1.4rem;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+button:not(.chevron) {
+  grid-column: 1/span 3;
+  border: none;
+  box-shadow: 5px 5px 5px var(--black);
+  font-size: 1.3rem;
+  padding: 5px 10px;
+  margin: 15px 0 5px;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 1200px) {
+  span,h3 {
+    font-size:1.5rem;
+  }
+}

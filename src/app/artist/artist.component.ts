@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Artist, DataService } from '../../services/data.service';
+import {DataService } from '../../services/data.service';
+import { Artist } from '../../services/interfaces';
 
 @Component({
   selector: 'app-artist',
@@ -10,7 +11,7 @@ import { Artist, DataService } from '../../services/data.service';
 export class ArtistComponent{
   private _artist:Artist={} as Artist;
   private _backToText:string="";
-  private _backToOptions:{url:string,queryParam:string}={url:"/",queryParam:""};
+  private _backToUrl:string="/";
 
   constructor(private route: ActivatedRoute,service:DataService){
     const id = this.route.snapshot.paramMap.get("id"),from=this.route.snapshot.paramMap.get("from");
@@ -18,9 +19,12 @@ export class ArtistComponent{
     this._artist=service.getArtistById(parseInt(id));
     switch(from){
       case "program":
-        this._backToText="accueil > programmation";
-        this._backToOptions.queryParam=from;
+        this._backToText="accueil";
+        // this._backToOptions.queryParam=from;  
         break;
+      case "program-details":        
+        this._backToText="programme";
+        this._backToUrl="/program";
     }
   }
   get artist():Artist{
@@ -29,8 +33,7 @@ export class ArtistComponent{
   get backToText():string{
     return this._backToText;
   }
-  get backToOptions(){
-    return this._backToOptions;
+  get backToUrl(){
+    return this._backToUrl;
   }
-
 }

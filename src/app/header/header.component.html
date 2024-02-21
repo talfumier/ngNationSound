@@ -7,14 +7,17 @@
     <h1>
       <p>Nation Sound Festival</p>
       <p>
-        <span class="day">14</span><span class="day">15</span>
-        <span class="day">16</span><span class="month-year">Juin 2024</span>
+        <span *ngFor="let day of dates.days" class="day">{{ day }}</span
+        ><span class="month-year">{{
+          dates.monthYear | date : "MMMM yyyy"
+        }}</span>
       </p>
     </h1>
   </div>
-  <nav class="navbar">
+  <nav class="navbar" (click)="handleClick()">
     <ul class="list-group" [ngClass]="{ toggled: isToggled }">
       <li
+        id="home-link"
         class="list-group-item"
         routerLink="/"
         routerLinkActive="active"
@@ -22,10 +25,23 @@
       >
         Accueil
       </li>
-      <li class="list-group-item">Programmation</li>
-      <li class="list-group-item">Carte</li>
-      <li class="list-group-item">Artistes</li>
-      <li class="list-group-item">Rencontres</li>
+      <li
+        class="list-group-item"
+        routerLink="/program"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Programme
+      </li>
+      <li
+        id="header-map-link"
+        class="list-group-item"
+        routerLink="/map/all/header"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Carte
+      </li>
       <li class="list-group-item">Billetterie</li>
     </ul>
     <button class="menu-toggle" (click)="handleToggle()">
@@ -35,3 +51,7 @@
     </button>
   </nav>
 </header>
+
+<!-- <li class="list-group-item">
+        <a href="/map/all" (click)="handleClick($event)">Carte</a>
+      </li> -->
