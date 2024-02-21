@@ -85,7 +85,9 @@ export class ProgramComponent {
     this._days=[];
     this._days.push({key:"all",label:"tous"});
     this.service.dates.days.split(",").map((day,idx) => {
-      this._days.push({key:`day${idx+1}`,label:`${new Date(day+this.service.dates.month).toLocaleDateString("fr",{day:"numeric",month: "long"})}`});//`${day} ${this.service.dates.month}`
+      this._days.push({
+        key:`day${idx+1}`,
+        label:`${new Date(this.service.dates.month +" "+day+","+this.service.dates.year).toLocaleDateString("fr",{day:"numeric",month: "long"})}`});
     });
     this._types=[];
     this._types.push({key:"all",label:"tous"});
