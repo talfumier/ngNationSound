@@ -37,7 +37,7 @@ export class ProgramComponent {
     let artistEvts:ArtistEvents={} as ArtistEvents,i=null;
     this.service.filteredEvents.map((evt) => {
       i=-1;
-      // artistEvts=_.filter(AllArtistEvents,(artistEvents,idx) => {
+      artistEvts=_.filter(AllArtistEvents,(artistEvents,idx) => {
         if(artistEvents.performer.id===evt.performer.id){
           i=idx;
           return true;
@@ -49,7 +49,7 @@ export class ProgramComponent {
           performer:evt.performer,
           dates:[]
         };
-      artistEvts.dates.push({date:this.service.getDateFromString(evt.date,"dd.mm.yyyy hh:mm") as Date,location:evt.location,type:evt.type});
+      // artistEvts.dates.push({date:this.service.getDateFromString(evt.date,"dd.mm.yyyy hh:mm") as Date,location:evt.location,type:evt.type});
       if(i===-1) AllArtistEvents.push(artistEvts);
       else AllArtistEvents[i]=artistEvts;  
       artistEvts.dates=_.orderBy(artistEvts.dates,"date","asc")  
