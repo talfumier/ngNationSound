@@ -13,7 +13,7 @@ export class EventComponent implements OnInit {
   private _event:ArtistEvents={}as ArtistEvents;  
 
   ngOnInit(): void {
-    this._event=this.data;    
+    this._event=this.data;  
   }
 
   get event():ArtistEvents{

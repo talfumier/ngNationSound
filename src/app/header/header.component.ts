@@ -19,7 +19,8 @@ export class HeaderComponent {
     return this._isToggled
   }
   get dates():any{
-    return {days:this._dates.days.split(","),monthYear:this._dates.month+this._dates.year};
+    const days=this._dates.days.split(",");
+    return {days,monthYear:`${new Date(this._dates.month+" "+days[0]+","+this._dates.year).toLocaleString("fr-FR",{year:"numeric",month:"long"})}`};
   }
   handleToggle(){
     this._isToggled=!this._isToggled;
