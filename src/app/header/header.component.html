@@ -8,9 +8,7 @@
       <p>Nation Sound Festival</p>
       <p>
         <span *ngFor="let day of dates.days" class="day">{{ day }}</span
-        ><span class="month-year">{{
-          dates.monthYear | date : "MMMM yyyy"
-        }}</span>
+        ><span class="month-year">{{ dates.monthYear }}</span>
       </p>
     </h1>
   </div>
