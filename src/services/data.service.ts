@@ -35,7 +35,7 @@ export class DataService {
   initInnerHTML(){    // data formatted as html string for use in events summary (home page)
     this._innerHTML=[""];
     this._dates.days.split(",").map((day) => {
-      this._innerHTML.push(`${day} ${new Date(this._dates.month+this._dates.year).toLocaleString("fr", { month: "long" })}`);
+      this._innerHTML.push(`${day} ${new Date(this._dates.month+this._dates.year).toLocaleString("fr-FR", { month: "long" })}`);
     });
     this._innerHTML.map((item,idx) => {
       this._innerHTML[idx]=`<div class='column-header'>${item}</div>`
