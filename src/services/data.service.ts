@@ -170,6 +170,7 @@ export class DataService {
         result.push(event); 
     });
     this._filteredEvents=result;
+    window.alert(this._filteredEvents.length)
     this._activeFilter=filter;
   }
   getDateFromString(date:any,format:string,output?:string):Date|number {
