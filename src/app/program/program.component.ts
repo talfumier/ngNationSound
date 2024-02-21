@@ -34,7 +34,8 @@ export class ProgramComponent {
 
   getFormattedData(){
     const AllArtistEvents:ArtistEvents[]=[];
-    let artistEvts:ArtistEvents={} as ArtistEvents,i=null;
+    let artistEvts:ArtistEvents={} as ArtistEvents,i=null;    
+    window.alert(this.service.events.length + "-"+ this.service.filteredEvents.length)
     this.service.filteredEvents.map((evt) => {
       i=-1;
       artistEvts=_.filter(AllArtistEvents,(artistEvents,idx) => {
