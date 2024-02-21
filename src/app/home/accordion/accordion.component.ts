@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, NgModelGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-accordion',
@@ -13,18 +12,11 @@ export class AccordionComponent implements OnInit {
   @Input() index:string="";     
 
   private _value:boolean=false; // value binded to NgForm in home page
-  private static status:Status={"0":false,"1":false};
-
-  constructor(private route: ActivatedRoute, private window:Window, private document:Document){}
+  static status:Status={"0":false,"1":false};
 
   ngOnInit(): void {
-    const param:string=this.route.snapshot.queryParamMap.get('param') as string;
-    if(param==="program" && this.title==="concerts 2024") {
-      this.document.getElementById("home-link")?.click();
-      this.rotateChevron();
-    }  
+    this._value=AccordionComponent.status[this.index as keyof object] ;
   }
-
   get value(){
     return this._value;
   }
@@ -36,8 +28,6 @@ export class AccordionComponent implements OnInit {
     if(evt) evt.stopPropagation();  
     this._value=!this._value;
     AccordionComponent.status[this.index as keyof Status]=this.value;
-    if(JSON.stringify(AccordionComponent.status).indexOf("true")===-1)
-      this.window.scrollTo(0,0);
   }
 }
 interface Status { //rotated status of each accordion

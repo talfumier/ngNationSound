@@ -34,7 +34,8 @@
           class="location"
           [routerLink]="[
             '/map',
-            cleanup(date.type.description, date.location.name)
+            cleanup(date.type.description, date.location.name),
+            'program-details'
           ]"
           >{{ date.location.name }}</span
         >

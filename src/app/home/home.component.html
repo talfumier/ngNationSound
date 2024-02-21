@@ -44,7 +44,13 @@
             form.value.map !== undefined ? !form.value.map.accordion : true
         }"
       >
-        <!-- <app-map></app-map> -->
+        <img
+          src="assets/images/map-thumbnail.jpg"
+          alt="lien vers la carte"
+          routerLink="/map/all/map"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        />
       </div>
     </section>
   </form>

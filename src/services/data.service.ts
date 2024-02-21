@@ -46,7 +46,7 @@ export class DataService {
     });   
     let day="", ul="",artist="";
     stages.map((stage) => {
-      this._innerHTML.push(`<div class='row-header'><a href=/map/${removeAccents(stage.name)}/program>${stage.name}</a></div>`);
+      this._innerHTML.push(`<div class=row-header><a href=/map/${removeAccents(stage.name)}/program>${stage.name}</a></div>`);
       day="",ul="";
       _.filter(data.events,(evt) => {
         return evt.location===stage.id && evt.type===1;

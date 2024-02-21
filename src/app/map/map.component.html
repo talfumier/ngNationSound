@@ -1,10 +1,10 @@
 <main>
   <div
+    *ngIf="backToText.length > 0"
     class="back-button"
-    [routerLink]="[backToOptions.url]"
-    [queryParams]="
-      backToOptions.queryParam ? { param: backToOptions.queryParam } : {}
-    "
+    [routerLink]="[backToUrl]"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
   >
     <svg>
       <use href="../../assets/icons/icons.svg#leftIcon" />

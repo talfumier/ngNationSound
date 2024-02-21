@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import _ from 'lodash';
 import * as L from 'leaflet';
@@ -11,36 +11,35 @@ import { removeAccents } from '../utilities/functions/utlityFunctions';
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
-export class MapComponent implements AfterViewInit, OnDestroy {
+export class MapComponent implements OnInit, OnDestroy {
   private map:L.Map={} as L.Map;
   private layers:OverlayLayer[]=[];
   private stage:any="";
-  private _backToText:string="";
-  private _backToOptions:{url:string,queryParam:string}={url:"/",queryParam:""};
+  private _backToText:string="accueil";
+  private _backToUrl:string="/";
 
   constructor(private route:ActivatedRoute,private umap:UmapService) {
     this.stage = this.route.snapshot.paramMap.get("stage");
     const from=this.route.snapshot.paramMap.get("from");    
     if(!this.stage || !from) return;
-    if(this.stage!=="all") document.getElementById("header-map-link")?.classList.add("active");
-
     switch(from){
-      case "program":
-        this._backToText="accueil > concerts 2024";
-        this._backToOptions.queryParam=from;
-        break;
       case "header": 
-        this._backToText="accueil";
+        this._backToText="";
+        break;
+      case "program-details":
+        this._backToText="programme";
+        this._backToUrl="/program"
     }
   }  
   get backToText():string{
     return this._backToText;
   }
-  get backToOptions(){
-    return this._backToOptions;
+  get backToUrl(){
+    return this._backToUrl;
   }
   
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
+    document.getElementById("header-map-link")?.classList.add("active");
     this.initMap();    
   }
   ngOnDestroy(): void {
