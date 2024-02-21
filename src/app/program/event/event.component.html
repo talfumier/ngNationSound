@@ -27,7 +27,12 @@
         }"
       >
         <span class="date-time">{{
-          date.date | date : "dd MMMM '-' HH:mm"
+          date.date.toLocaleString("fr-FR", {
+            day: "numeric",
+            month: "long",
+            hour: "2-digit",
+            minute: "2-digit"
+          })
         }}</span>
         <span class="type">{{ date.type.description }}</span>
         <span
