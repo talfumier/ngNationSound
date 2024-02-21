@@ -119,7 +119,9 @@ export class DataService {
   get activeFilter():Filter{
     return this._activeFilter;
   }
-  setFilteredEvents(filter:Filter):void{
+  setFilteredEvents(filter:Filter):void{    
+    this._filteredEvents=this._events;
+    return;
     if(_.isEqual(filter,this._activeFilter)) return; //Deep comparison active vs new filter, if no difference no need to re-filter data   
     let dates:any={},x:any="";    
     //dates > object that initially contains event festival dates in milliseconds (set at 00:00:00 time)    
