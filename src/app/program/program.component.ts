@@ -37,7 +37,7 @@ export class ProgramComponent {
     let artistEvts:ArtistEvents={} as ArtistEvents,i=null;
     this.service.filteredEvents.map((evt) => {
       i=-1;
-      artistEvts=_.filter(AllArtistEvents,(artistEvents,idx) => {
+      // artistEvts=_.filter(AllArtistEvents,(artistEvents,idx) => {
         if(artistEvents.performer.id===evt.performer.id){
           i=idx;
           return true;
