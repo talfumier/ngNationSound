@@ -166,7 +166,7 @@ export class DataService {
       if(!bl[2] && filter.artist["id" as keyof object]==event.performer.id)
         bl[2]=true
 
-      if(JSON.stringify(bl).indexOf("false")===-1)
+      // if(JSON.stringify(bl).indexOf("false")===-1)
         result.push(event); 
     });
     this._filteredEvents=result;
