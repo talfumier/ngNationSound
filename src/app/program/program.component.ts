@@ -46,6 +46,8 @@ export class ProgramComponent implements OnInit {
     this._events=this.getFormattedData();  //format raw events data
   }
   getFormattedData(){
+      
+    window.alert(this.dataService.events.length + "-"+ this.filterService.filteredEvents.length)
     const AllArtistEvents:ArtistEvents[]=[];
     let artistEvts:ArtistEvents={} as ArtistEvents,i=null;
     this.filterService.filteredEvents.map((evt) => {
@@ -63,6 +65,7 @@ export class ProgramComponent implements OnInit {
           dates:[]
         };
       artistEvts.dates.push({date:getDateFromString(evt.date,"dd.mm.yyyy hh:mm") as Date,location:evt.location as Poi,type:evt.type as EventType});
+
       if(i===-1) AllArtistEvents.push(artistEvts);
       else AllArtistEvents[i]=artistEvts;  
       artistEvts.dates=_.orderBy(artistEvts.dates,"date","asc")  

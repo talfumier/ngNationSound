@@ -1,6 +1,6 @@
 <div class="artist-events">
   <div class="artist">
-    <img
+<!--     <img
       src="{{
         '../../../../../assets/images/artists/' +
           event.performer.name.replaceAll(' ', '').replaceAll('-', '') +
@@ -8,7 +8,7 @@
       }}"
       alt="{{ event.performer.name }}"
       [routerLink]="['/artist', event.performer.id, 'program-details']"
-    />
+    /> -->
     <h2
       class="artist-name"
       [routerLink]="['/artist', event.performer.id, 'program-details']"
@@ -17,7 +17,7 @@
     </h2>
   </div>
   <div class="events-info">
-    <ul>
+<!--     <ul>
       <li
         *ngFor="let date of event.dates"
         class="date"
@@ -45,6 +45,6 @@
           >{{ date.location.name }}</span
         >
       </li>
-    </ul>
+    </ul> -->
   </div>
 </div>
