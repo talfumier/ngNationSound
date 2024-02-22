@@ -1,18 +1,22 @@
-import { Component,inject} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { Component,OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import _ from 'lodash';
 import { DataService } from '../../services/data.service';
-import { KeyLabel,Filter,ArtistEvents, TimeOptions, Option, Artist, Poi, EventType } from '../../services/interfaces';
+import { KeyLabel,Filter,ArtistEvents, TimeOptions, Option, Poi, EventType } from '../../services/interfaces';
 import { getDateFromString } from '../utilities/functions/utlityFunctions';
 import { FilterService } from '../../services/filter.service';
 
+@Injectable({
+  providedIn: 'root'
+})
 @Component({
   selector: 'app-program',
   templateUrl: './program.component.html',
   styleUrl: './program.component.css'
 })
-export class ProgramComponent {  
+export class ProgramComponent implements OnInit {  
   private _days:KeyLabel[]=[];
   private _types:KeyLabel[]=[]; // event type such as concert, rencontre ...
   private _times:KeyLabel[]=[];
@@ -24,21 +28,23 @@ export class ProgramComponent {
 
   private _events:ArtistEvents[]=[];  
 
-  constructor(private dataService:DataService,private filterService:FilterService){
-    this.initFilterEvents();
-  }
-
-  initFilterEvents(){ //filter and data required before page loading (asynchronous)
-    //initialize filter
+  constructor(private dataService:DataService,private filterService:FilterService){   
+     //initialize filter
     const cond=Object.keys(this.filterService.activeFilter).length>0;
     if(cond) this._filter=this.filterService.activeFilter;
-    this.initFilter(cond?"":"default");    
-    //initialize raw events data
-    this.filterService.setFilteredEvents(this._filter);
-    //format raw events data
-    this._events=this.getFormattedData();
+    this.initFilter(cond?"":"default"); 
+    console.log("const",this.filterService.activeFilter,cond)
+    }
+
+  initFilterEvents(){ //filtered data required before page loading (asynchronous)     
+    this.filterService.setFilteredEvents(this._filter); //initialize raw events data
+    console.log("initFilterEvents",this.filterService.filteredEvents)    
   }
 
+  ngOnInit(): void {    
+    console.log("format")
+    this._events=this.getFormattedData();  //format raw events data
+  }
   getFormattedData(){
     const AllArtistEvents:ArtistEvents[]=[];
     let artistEvts:ArtistEvents={} as ArtistEvents,i=null;
@@ -112,7 +118,10 @@ export class ProgramComponent {
       this._artistOptions.push({id:artist.id,name:artist.name});
     });
 
-    if(cs==="default") this._filter=this.getDefaultFilter("all");
+    if(cs==="default") {
+      this._filter=this.getDefaultFilter("all");
+      this.filterService.activeFilter=this.getDefaultFilter("all");
+    }
   }
   getDefaultFilter(cs:string):Filter{
     const days:any={} ;
@@ -180,7 +189,7 @@ export class ProgramComponent {
   }
 }
 
-export const eventsResolver: ResolveFn<void> =  //program page resolver
+export const filterResolver: ResolveFn<void> =  //program page resolver
   (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
     return inject (ProgramComponent).initFilterEvents();
 };

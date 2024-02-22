@@ -1,9 +1,7 @@
-import {Injectable, inject} from '@angular/core';
-import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import {Injectable} from '@angular/core';
 import _ from "lodash";
 import { DataService } from './data.service';
-import { KeyLabel,Filter,ArtistEvents, TimeOptions, Option, Artist, Poi, EventType } from './interfaces';
-import {Dates,Style,Event} from "./interfaces";
+import { Filter,Event } from './interfaces';
 import { getDateFromString } from '../app/utilities/functions/utlityFunctions';
 
 @Injectable({
@@ -11,22 +9,22 @@ import { getDateFromString } from '../app/utilities/functions/utlityFunctions';
 })
 export class FilterService {
   private _filteredEvents:Event[]=[];
-  private _activeFilter:Filter={} as Filter;
+  private _activeFilter:Filter={} as Filter;//{days:{},time:{},types:{},artist:{}};
 
   constructor(private service:DataService) { }
 
   get filteredEvents(){
   return this._filteredEvents;
   }
-  set filteredEvents(data:Event[]){
-    this._filteredEvents=data;
-  }
   get activeFilter():Filter{
     return this._activeFilter;
   }
-
+  set activeFilter(data){
+    this._activeFilter=data;
+  }
+  
   setFilteredEvents(filter:Filter):void{
-    if(_.isEqual(filter,this._activeFilter)) return; //Deep comparison active vs new filter, if no difference no need to re-filter data   
+    // if(_.isEqual(filter,this._activeFilter)) return; //Deep comparison active vs new filter, if no difference no need to re-filter data  
     let dates:any={},x:any="";    
     //dates > object that initially contains event festival dates in milliseconds (set at 00:00:00 time)    
     Object.values(this.service.dates)[0].split(",").map((day:string,idx:number) => {
@@ -79,3 +77,7 @@ export class FilterService {
     this._activeFilter=filter;
   }
 }
+
+
+
+
