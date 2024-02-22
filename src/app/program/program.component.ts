@@ -1,15 +1,22 @@
-import { Component} from '@angular/core';
-import { Form, NgForm } from '@angular/forms';
+import {Injectable, inject} from '@angular/core';
+import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { Component,OnInit} from '@angular/core';
+import { NgForm } from '@angular/forms';
 import _ from 'lodash';
 import { DataService } from '../../services/data.service';
-import { KeyLabel,Filter,ArtistEvents, TimeOptions, Option } from '../../services/interfaces';
+import { KeyLabel,Filter,ArtistEvents, TimeOptions, Option, Poi, EventType } from '../../services/interfaces';
+import { getDateFromString } from '../utilities/functions/utlityFunctions';
+import { FilterService } from '../../services/filter.service';
 
+@Injectable({
+  providedIn: 'root'
+})
 @Component({
   selector: 'app-program',
   templateUrl: './program.component.html',
   styleUrl: './program.component.css'
 })
-export class ProgramComponent {  
+export class ProgramComponent implements OnInit {  
   private _days:KeyLabel[]=[];
   private _types:KeyLabel[]=[]; // event type such as concert, rencontre ...
   private _times:KeyLabel[]=[];
@@ -21,21 +28,27 @@ export class ProgramComponent {
 
   private _events:ArtistEvents[]=[];  
 
-  constructor(private service:DataService){
-    //initialize filter
-    const cond=Object.keys(service.activeFilter).length>0;
-    if(cond) this._filter=service.activeFilter;
-    this.initFilter(cond?"":"default");
-    //initialize raw events data
-    service.setFilteredEvents(this._filter);
-    //format raw events data
-    this._events=this.getFormattedData();
+  constructor(private dataService:DataService,private filterService:FilterService){   
+     //initialize filter
+    const cond=Object.keys(this.filterService.activeFilter).length>0;
+    if(cond) this._filter=this.filterService.activeFilter;
+    this.initFilter(cond?"":"default"); 
+    console.log("const",this.filterService.activeFilter,cond)
+    }
+
+  initFilterEvents(){ //filtered data required before page loading (asynchronous)     
+    this.filterService.setFilteredEvents(this._filter); //initialize raw events data
+    console.log("initFilterEvents",this.filterService.filteredEvents)    
   }
 
+  ngOnInit(): void {    
+    console.log("format")
+    this._events=this.getFormattedData();  //format raw events data
+  }
   getFormattedData(){
     const AllArtistEvents:ArtistEvents[]=[];
     let artistEvts:ArtistEvents={} as ArtistEvents,i=null;
-    this.service.filteredEvents.map((evt) => {
+    this.filterService.filteredEvents.map((evt) => {
       i=-1;
       artistEvts=_.filter(AllArtistEvents,(artistEvents,idx) => {
         if(artistEvents.performer.id===evt.performer.id){
@@ -49,7 +62,7 @@ export class ProgramComponent {
           performer:evt.performer,
           dates:[]
         };
-      artistEvts.dates.push({date:this.service.getDateFromString(evt.date,"dd.mm.yyyy hh:mm") as Date,location:evt.location,type:evt.type});
+      artistEvts.dates.push({date:getDateFromString(evt.date,"dd.mm.yyyy hh:mm") as Date,location:evt.location as Poi,type:evt.type as EventType});
       if(i===-1) AllArtistEvents.push(artistEvts);
       else AllArtistEvents[i]=artistEvts;  
       artistEvts.dates=_.orderBy(artistEvts.dates,"date","asc")  
@@ -84,14 +97,14 @@ export class ProgramComponent {
   initFilter(cs?:string){
     this._days=[];
     this._days.push({key:"all",label:"tous"});
-    this.service.dates.days.split(",").map((day,idx) => {
+    this.dataService.dates.days.split(",").map((day,idx) => {
       this._days.push({
         key:`day${idx+1}`,
-        label:`${new Date(this.service.dates.month +" "+day+","+this.service.dates.year).toLocaleDateString("fr",{day:"numeric",month: "long"})}`});
+        label:`${new Date(this.dataService.dates.month +" "+day+","+this.dataService.dates.year).toLocaleDateString("fr",{day:"numeric",month: "long"})}`});
     });
     this._types=[];
     this._types.push({key:"all",label:"tous"});
-    this.service.event_types.map((type) => {
+    this.dataService.event_types.map((type) => {
       this._types.push({key:type.id,label:type.description});
     });
     this._times=[{key:"min",label:"de"},{key:"max",label:"à"}];
@@ -101,11 +114,14 @@ export class ProgramComponent {
 
     this._artist={key:"id",label:""};
     this._artistOptions.push(obj);
-    this.service.artists.map((artist) => {
+    this.dataService.artists.map((artist) => {
       this._artistOptions.push({id:artist.id,name:artist.name});
     });
 
-    if(cs==="default") this._filter=this.getDefaultFilter("all");
+    if(cs==="default") {
+      this._filter=this.getDefaultFilter("all");
+      this.filterService.activeFilter=this.getDefaultFilter("all");
+    }
   }
   getDefaultFilter(cs:string):Filter{
     const days:any={} ;
@@ -148,13 +164,13 @@ export class ProgramComponent {
     this._filter.time=form.value.time;   
     this._filter.artist=form.value.artist;
 
-    this.service.setFilteredEvents(this._filter);
+    this.filterService.setFilteredEvents(this._filter);
     this._events=this.getFormattedData();
   }
   filterReset (form:NgForm) {
     form.setValue(this.getDefaultFilter("all"));
     this._filter={...form.value};     
-    this.service.setFilteredEvents(this._filter); 
+    this.filterService.setFilteredEvents(this._filter); 
     this._events=this.getFormattedData();
   }
   rotateChevron(evt?:Event) {
@@ -172,3 +188,8 @@ export class ProgramComponent {
     evt.stopPropagation();
   }
 }
+
+export const filterResolver: ResolveFn<void> =  //program page resolver
+  (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+    return inject (ProgramComponent).initFilterEvents();
+};
