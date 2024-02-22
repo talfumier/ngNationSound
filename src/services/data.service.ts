@@ -63,6 +63,7 @@ export class DataService {
     });
   }
   initEvents(){
+    console.log("initEvents in dataService")
     data.events.map((evt) => {
       this._events.push(
         {
@@ -109,7 +110,7 @@ export class DataService {
   }
 }
 
-export const dataResolver: ResolveFn<void> =  //home page resolver
-  (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-    return inject(DataService).initData();
-};
+// export const dataResolver: ResolveFn<void> =  //home page resolver
+//   (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+//     return inject(DataService).initData();
+// };
