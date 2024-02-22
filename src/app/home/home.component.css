@@ -101,7 +101,6 @@ div.program-grid.hidden {
 }
 :host ::ng-deep div.grid-item a {
   text-decoration: none;
-  text-wrap: nowrap;
   cursor: pointer;
 }
 :host ::ng-deep a:link,:host ::ng-deep a:visited {
