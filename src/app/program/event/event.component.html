@@ -27,12 +27,14 @@
         }"
       >
         <span class="date-time">{{
-          date.date.toLocaleString("fr-FR", {
-            day: "numeric",
-            month: "long",
-            hour: "2-digit",
-            minute: "2-digit"
-          })
+          date.date
+            .toLocaleString("fr-FR", {
+              day: "numeric",
+              month: "long",
+              hour: "2-digit",
+              minute: "2-digit"
+            })
+            .toString()
         }}</span>
         <span class="type">{{ date.type.description }}</span>
         <span
