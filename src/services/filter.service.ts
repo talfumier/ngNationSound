@@ -132,8 +132,8 @@ export class FilterService {
 
         if(JSON.stringify(bl).indexOf("false")===-1)
           result.push(event); 
-      });      
-      resolve(result);      
+      });   
+      resolve(this.service.events);      
     }).then((result) => {
       this._filteredEvents=result as Event[];
       // console.log("getFilteredEvents.then",this._filter,(result as Event[]).length,this._filteredEvents.length)
