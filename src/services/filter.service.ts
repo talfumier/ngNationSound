@@ -83,14 +83,18 @@ export class FilterService {
   }
   async filterEvent(bl:boolean[],x:any,dates:any,result:Event[],event:Event){
     bl.fill(false);
-    new Promise((resolve) => {
+    await new Promise((resolve) => {
       // dealing with 'Quand ? A quelle heure ?' filter
       x=getDateFromString(event.date,"dd.mm.yyyy hh:mm","ms"); //event date and time in milliseconds 
       Object.keys(dates).map((key) => {
         if((key!=="time" && !bl[0] && x>=dates[key]+dates.time.min && x<=dates[key]+dates.time.max)) 
           bl[0]=true;
       });
-      resolve( bl[0]);
+      setTimeout(() => {
+        window.alert("bl[0]"+ " " +bl[0])
+        resolve( bl[0]);
+      },500);
+      
     }).then((rslt) => {
       if(rslt){
         // dealing with 'Quoi ?' filter
@@ -116,7 +120,7 @@ export class FilterService {
       }
       else return false;
     }).then((rslt) => {
-      window.alert(JSON.stringify(bl)+ " - "+rslt+" - "+event.type.description)
+      // window.alert(JSON.stringify(bl)+ " - "+rslt+" - "+event.type.description)
       if(rslt) // JSON.stringify(bl).indexOf("false")===-1
         result.push(event); 
     });
