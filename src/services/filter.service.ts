@@ -81,16 +81,16 @@ export class FilterService {
     this._defaultFilter={...this._defaultFilter,time:ob,artist:{id:-1}};
     this._filter=this._defaultFilter;
   }
-  async filterEvent(bl:boolean[],x:any,dates:any,result:Event[],event:Event){
+  async filterEvent(bl:boolean[],x:number,dates:any,result:Event[],event:Event){
     bl.fill(false);
     await new Promise((resolve) => {
       // dealing with 'Quand ? A quelle heure ?' filter
-      x=getDateFromString(event.date,"dd.mm.yyyy hh:mm","ms"); //event date and time in milliseconds 
+      x=getDateFromString(event.date,"dd.mm.yyyy hh:mm","ms") as number; //event date and time in milliseconds 
       Object.keys(dates).map((key:string) => {
         if(key!=="time" && !bl[0])// && x>=(dates[key]+dates.time.min) && x<=(dates[key]+dates.time.max)) 
           bl[0]=true;
         // console.log(key,dates[key], typeof dates[key],dates.time.min,dates.time.max)
-        window.alert(`${typeof x} ${x}- ${typeof dates[key]} ${dates.time.min} - ${dates.time.max}`)
+        window.alert(typeof x)
       });
       resolve( bl[0]);
       
