@@ -83,7 +83,6 @@ export class FilterService {
   }
   getFilteredEvents(fltr?:Filter):Event[] {
     if(Object.keys(this._filter).length===0) this.setFormFilterElements();
-    console.log("getFilteredEvents",this._filter)
     // if(_.isEqual(filter,this._activeFilter)) return; //Deep comparison active vs new filter, if no difference no need to re-filter data  
     let dates:any={},x:any="";    
     //dates > object that initially contains event festival dates in milliseconds (set at 00:00:00 time)    
@@ -133,7 +132,8 @@ export class FilterService {
       if(JSON.stringify(bl).indexOf("false")===-1)
         result.push(event); 
     });
-    // this._filteredEvents=result;
+    // this._filteredEvents=result;    
+    console.log("getFilteredEvents",this._filter,result)
     return result;
   }
 }

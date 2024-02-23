@@ -27,9 +27,10 @@ export class ProgramComponent implements OnInit {
 
   ngOnInit(): void {    
     this.activatedRoute.data.subscribe(({events}) => { //resolved raw events data from eventsResolver
-    this._formFilterElements=this.filterService.formFilterElements;  //initialize form filter elements
-    this._filter=this.filterService.filter;  //initialize filter
-    this._events=this.getFormattedData(events);  //format raw events data
+      window.alert(events.length)
+      this._formFilterElements=this.filterService.formFilterElements;  //initialize form filter elements
+      this._filter=this.filterService.filter;  //initialize filter
+      this._events=this.getFormattedData(events);  //format raw events data
     });
   }
   getFormattedData(evts:any[]){
