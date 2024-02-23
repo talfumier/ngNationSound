@@ -81,7 +81,32 @@ export class FilterService {
     this._defaultFilter={...this._defaultFilter,time:ob,artist:{id:-1}};
     this._filter=this._defaultFilter;
   }
-  async setFilteredEvents(fltr?:Filter):Promise<void> {
+  async filterEvent(bl:boolean[],x:any,dates:any,result:Event[],event:Event){
+    bl.fill(false);
+    x=getDateFromString(event.date,"dd.mm.yyyy hh:mm","ms"); //event date and time in milliseconds
+    Object.keys(dates).map((key) => {
+      if(key!=="time" && !bl[0] && x>=dates[key]+dates.time.min && x<=dates[key]+dates.time.max) 
+        bl[0]=true;
+    });
+    // dealing with 'Quoi ?' filter
+    if(this._filter.types["all" as keyof object]) 
+      bl[1]=true;
+    else if(!bl[1]){
+      Object.keys(this._filter.types).map((key:any) => {
+        if(key!=="all" && !bl[1] && this._filter.types[key as keyof object] && event.type.id==key )
+          bl[1]=true;
+      });
+    }
+    // dealing with 'Qui ?' filter
+    if(this._filter.artist["id" as keyof object]===-1)        
+      bl[2]=true;
+    if(!bl[2] && this._filter.artist["id" as keyof object]==event.performer.id)
+      bl[2]=true
+
+    if(JSON.stringify(bl).indexOf("false")===-1)
+      result.push(event); 
+  }
+  async setFilteredEvents(fltr?:Filter):Promise<void> {    
     new Promise((resolve,reject) => {
       if(Object.keys(this._filter).length===0) this.setFormFilterElements();
       // if(_.isEqual(filter,this._activeFilter)) return; //Deep comparison active vs new filter, if no difference no need to re-filter data  
@@ -108,32 +133,11 @@ export class FilterService {
           dates.time[key]=parseInt(x.split("h")[0])*3600*1000; //time in milliseconds
       });
       let bl=new Array(3); const result:Event[]=[];
-      this.service.events.map((event) => {
-        bl.fill(false);
-        x=getDateFromString(event.date,"dd.mm.yyyy hh:mm","ms"); //event date and time in milliseconds
-        Object.keys(dates).map((key) => {
-          if(key!=="time" && !bl[0] && x>=dates[key]+dates.time.min && x<=dates[key]+dates.time.max) 
-            bl[0]=true;
-        });
-        // dealing with 'Quoi ?' filter
-        if(this._filter.types["all" as keyof object]) 
-          bl[1]=true;
-        else if(!bl[1]){
-          Object.keys(this._filter.types).map((key:any) => {
-            if(key!=="all" && !bl[1] && this._filter.types[key as keyof object] && event.type.id==key )
-              bl[1]=true;
-          });
-        }
-        // dealing with 'Qui ?' filter
-        if(this._filter.artist["id" as keyof object]===-1)        
-          bl[2]=true;
-        if(!bl[2] && this._filter.artist["id" as keyof object]==event.performer.id)
-          bl[2]=true
-
-        if(JSON.stringify(bl).indexOf("false")===-1)
-          result.push(event); 
-      });   
-      resolve(this.service.events);      
+      Promise.all(
+        this.service.events.map(async(event) => {
+          await this.filterEvent(bl,x,dates,result,event);
+        }));          
+      resolve(result);      
     }).then((result) => {
       this._filteredEvents=result as Event[];
       // console.log("getFilteredEvents.then",this._filter,(result as Event[]).length,this._filteredEvents.length)
