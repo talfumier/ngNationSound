@@ -63,7 +63,6 @@ export class DataService {
     });
   }
   initEvents(){
-    console.log("initEvents in dataService")
     data.events.map((evt) => {
       this._events.push(
         {

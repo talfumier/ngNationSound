@@ -6,11 +6,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ProgramComponent } from './program/program.component';
 import { MapComponent } from './map/map.component';
 // import { dataResolver } from '../services/data.service';
-import { filterResolver } from './program/program.component';
+import { eventsResolver } from '../services/filter.service';
 
 const routes:Routes=[  
   {path:'',component:HomeComponent},   //,resolve:{data:dataResolver}
-  {path:'program',component:ProgramComponent,resolve:{events:filterResolver}}, //,resolve:{events:filterResolver}
+  {path:'program',component:ProgramComponent,resolve:{events:eventsResolver}},
   {path:'map/:stage/:from',component:MapComponent},
   {path:'artist/:id/:from',component:ArtistComponent},
   {path: '**', component: NotFoundComponent}

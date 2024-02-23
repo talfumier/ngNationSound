@@ -25,7 +25,7 @@
       <div class="days" ngModelGroup="days">
         <h3>Quand ?</h3>
         <app-input
-          *ngFor="let day of days"
+          *ngFor="let day of formFilterElements.days"
           [cat]="day"
           [filter]="filter.days"
         ></app-input>
@@ -33,16 +33,20 @@
       <div class="time" ngModelGroup="time">
         <h3>A quelle heure ?</h3>
         <app-select
-          *ngFor="let time of times"
+          *ngFor="let time of formFilterElements.times"
           [cat]="time"
-          [options]="time.key === 'min' ? timeOptions.min : timeOptions.max"
+          [options]="
+            time.key === 'min'
+              ? formFilterElements.timeOptions.min
+              : formFilterElements.timeOptions.max
+          "
           [filter]="filter.time"
         ></app-select>
       </div>
       <div class="types" ngModelGroup="types">
         <h3>Quoi ?</h3>
         <app-input
-          *ngFor="let type of types"
+          *ngFor="let type of formFilterElements.types"
           [cat]="type"
           [filter]="filter.types"
         ></app-input>
@@ -50,8 +54,8 @@
       <div class="artist" ngModelGroup="artist">
         <h3>Qui ?</h3>
         <app-select
-          [cat]="artist"
-          [options]="artistOptions"
+          [cat]="formFilterElements.artist"
+          [options]="formFilterElements.artistOptions"
           [filter]="filter.artist"
         ></app-select>
       </div>

@@ -54,6 +54,9 @@ export interface TimeOptions {
 export interface Option {
   id:(string|number),name:string
 }
+export interface FormFilterElements {
+  days:KeyLabel[],types:KeyLabel[],times:KeyLabel[],timeOptions:TimeOptions,artist:KeyLabel,artistOptions:Option[]
+}
 export interface Filter {
   days:object,
   time:object,

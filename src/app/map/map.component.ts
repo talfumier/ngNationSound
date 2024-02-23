@@ -48,7 +48,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
   private initMap(): void {
     //base layer
-    const osm=L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    const osm=L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       maxZoom: this.umap.zoom+2,
       minZoom: this.umap.zoom-4,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
