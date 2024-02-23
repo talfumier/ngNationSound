@@ -91,7 +91,7 @@ export class FilterService {
         if(key!=="time" && !bl[0])// && x>=(dates[key]+dates.time.min) && x<=(dates[key]+dates.time.max)) 
           bl[0]=true;
         // console.log(key,dates[key], typeof dates[key],dates.time.min,dates.time.max)
-        window.alert(x.getTime() )
+        window.alert(x)
       });
       resolve( bl[0]);
       
