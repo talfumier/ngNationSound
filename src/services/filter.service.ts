@@ -92,6 +92,7 @@ export class FilterService {
       Object.keys(dates).map(async(key) => {
         await ifBlock(key);
     }))
+    bl[0]=true;
     // dealing with 'Quoi ?' filter
     if(this._filter.types["all" as keyof object]) 
       bl[1]=true;
