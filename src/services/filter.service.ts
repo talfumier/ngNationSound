@@ -87,7 +87,7 @@ export class FilterService {
       // dealing with 'Quand ? A quelle heure ?' filter
       x=getDateFromString(event.date,"dd.mm.yyyy hh:mm","ms"); //event date and time in milliseconds 
       Object.keys(dates).map((key) => {
-        if(key!=="time" && !bl[0] && x>=(dates[key]+dates.time.min) && x<=(dates[key]+dates.time.max)) 
+        if(key!=="time" && !bl[0])// && x>=(dates[key]+dates.time.min) && x<=(dates[key]+dates.time.max)) 
           bl[0]=true;
         
         window.alert("bl[0]"+ " " +bl[0]+ " "+key + " " )
