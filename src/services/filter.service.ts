@@ -102,10 +102,10 @@ export class FilterService {
       bl[2]=true;
     if(!bl[2] && this._filter.artist["id" as keyof object]==event.performer.id)
       bl[2]=true
-
-    if(JSON.stringify(bl).indexOf("false")===-1){
+    
+    window.alert(JSON.stringify(bl)+ " - "+event.type.description)
+    if(JSON.stringify(bl).indexOf("false")===-1)
       result.push(event); 
-    window.alert(event.type.description)}
   }
   async setFilteredEvents(fltr?:Filter):Promise<void> {    
     if(Object.keys(this._filter).length===0) this.setFormFilterElements();
