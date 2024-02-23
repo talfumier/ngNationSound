@@ -107,7 +107,7 @@ export class FilterService {
       result.push(event); 
   }
   async setFilteredEvents(fltr?:Filter):Promise<void> {    
-    new Promise((resolve,reject) => {
+    new Promise(async(resolve,reject) => {
       if(Object.keys(this._filter).length===0) this.setFormFilterElements();
       // if(_.isEqual(filter,this._activeFilter)) return; //Deep comparison active vs new filter, if no difference no need to re-filter data  
       let dates:any={},x:any="";    
@@ -133,7 +133,7 @@ export class FilterService {
           dates.time[key]=parseInt(x.split("h")[0])*3600*1000; //time in milliseconds
       });
       let bl=new Array(3); const result:Event[]=[];
-      Promise.all(
+      await Promise.all(
         this.service.events.map(async(event) => {
           await this.filterEvent(bl,x,dates,result,event);
         }));          
