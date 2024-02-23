@@ -84,10 +84,11 @@ export class FilterService {
   async filterEvent(bl:boolean[],x:any,dates:any,result:Event[],event:Event){
     bl.fill(false);
     x=getDateFromString(event.date,"dd.mm.yyyy hh:mm","ms"); //event date and time in milliseconds
-    Object.keys(dates).map((key) => {
-      if(key!=="time" && !bl[0] && x>=dates[key]+dates.time.min && x<=dates[key]+dates.time.max) 
+    await Promise.all(
+      Object.keys(dates).map((key) => {
+      if((key!=="time" && !bl[0] && x>=dates[key]+dates.time.min && x<=dates[key]+dates.time.max)) 
         bl[0]=true;
-    });
+    }))
     // dealing with 'Quoi ?' filter
     if(this._filter.types["all" as keyof object]) 
       bl[1]=true;
