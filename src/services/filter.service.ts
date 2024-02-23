@@ -86,7 +86,6 @@ export class FilterService {
     await new Promise((resolve) => {
       // dealing with 'Quand ? A quelle heure ?' filter
       x=getDateFromString(event.date,"dd.mm.yyyy hh:mm","ms") as number; //event date and time in milliseconds 
-      console.log(x.getTime())
       Object.keys(dates).map((key:string) => {
         if(key!=="time" && !bl[0])// && x>=(dates[key]+dates.time.min) && x<=(dates[key]+dates.time.max)) 
           bl[0]=true;
@@ -156,7 +155,7 @@ export class FilterService {
         await this.filterEvent(bl,x,dates,result,event);
       })).then(() => {
         this._filteredEvents=result as Event[];
-        window.alert((result as Event[]).length+" - "+this._filteredEvents.length)  
+        // window.alert((result as Event[]).length+" - "+this._filteredEvents.length)  
       }); 
       
   }
