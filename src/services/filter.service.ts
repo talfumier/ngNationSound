@@ -90,7 +90,7 @@ export class FilterService {
         if(key!=="time" && !bl[0])// && x>=(dates[key]+dates.time.min) && x<=(dates[key]+dates.time.max)) 
           bl[0]=true;
         
-        window.alert("bl[0]"+ " " +bl[0]+ " "+key + " " )
+        window.alert(`${x} - ${Number(dates[key]+dates.time.min)} - ${Number(dates[key]+dates.time.max)}`)
       });
       resolve( bl[0]);
       
