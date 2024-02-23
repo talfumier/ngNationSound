@@ -1,7 +1,7 @@
 import { NgModule,LOCALE_ID,ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { registerLocaleData } from '@angular/common';
-import localeFr from '@angular/common/locales/fr';
+// import { registerLocaleData } from '@angular/common';
+// import localeFr from '@angular/common/locales/fr';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,7 +23,7 @@ import { SelectComponent } from './utilities/select/select.component';
 import { EventComponent } from './program/event/event.component';
 import { MapComponent } from './map/map.component';
 
-registerLocaleData(localeFr); //register fr-FR locale, default is en-US
+// registerLocaleData(localeFr); //register fr-FR locale, default is en-US
 
 @NgModule({
   declarations: [
