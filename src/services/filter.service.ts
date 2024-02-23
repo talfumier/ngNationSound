@@ -107,44 +107,37 @@ export class FilterService {
       result.push(event); 
   }
   async setFilteredEvents(fltr?:Filter):Promise<void> {    
-    new Promise(async(resolve,reject) => {
-      if(Object.keys(this._filter).length===0) this.setFormFilterElements();
-      // if(_.isEqual(filter,this._activeFilter)) return; //Deep comparison active vs new filter, if no difference no need to re-filter data  
-      let dates:any={},x:any="";    
-      //dates > object that initially contains event festival dates in milliseconds (set at 00:00:00 time)    
-      Object.values(this.service.dates)[0].split(",").map((day:string,idx:number) => {
-          dates[`day${idx+1}`]= Date.parse(day+this.service.dates.month+this.service.dates.year);
-        });
-      dates.time={min:0,max:24*3600*1000}; //time range with no restriction (milliseconds)
-      if(!this._filter.days["all" as keyof object]){ //when all:true, keep all dates
-        Object.keys(this._filter.days).map((key:string) => { //dealing with "Quand ?" filter
-          switch(key){
-            case "all": //do nothing
-              break;
-            default: //remove date when filter 'dayx' is false
-              if(!this._filter.days[key as keyof object])
-                delete dates[key];
-          }
-        });
-      }
-      ["min","max"].map((key) => { //dealing with 'A quelle heure ?' filter
-        x=this._filter.time[key as keyof object];
-        if(x!==-1) //-1 is default value
-          dates.time[key]=parseInt(x.split("h")[0])*3600*1000; //time in milliseconds
+    if(Object.keys(this._filter).length===0) this.setFormFilterElements();
+    // if(_.isEqual(filter,this._activeFilter)) return; //Deep comparison active vs new filter, if no difference no need to re-filter data  
+    let dates:any={},x:any="";    
+    //dates > object that initially contains event festival dates in milliseconds (set at 00:00:00 time)    
+    Object.values(this.service.dates)[0].split(",").map((day:string,idx:number) => {
+        dates[`day${idx+1}`]= Date.parse(day+this.service.dates.month+this.service.dates.year);
       });
-      let bl=new Array(3); const result:Event[]=[];
-      await Promise.all(
-        this.service.events.map(async(event) => {
-          await this.filterEvent(bl,x,dates,result,event);
-        }));          
-      resolve(result);      
-    }).then((result) => {
-      this._filteredEvents=result as Event[];
-      // console.log("getFilteredEvents.then",this._filter,(result as Event[]).length,this._filteredEvents.length)
-      window.alert((result as Event[]).length+" - "+this._filteredEvents.length)
-    }).catch((error) => {
-      window.alert(error)
-    })    
+    dates.time={min:0,max:24*3600*1000}; //time range with no restriction (milliseconds)
+    if(!this._filter.days["all" as keyof object]){ //when all:true, keep all dates
+      Object.keys(this._filter.days).map((key:string) => { //dealing with "Quand ?" filter
+        switch(key){
+          case "all": //do nothing
+            break;
+          default: //remove date when filter 'dayx' is false
+            if(!this._filter.days[key as keyof object])
+              delete dates[key];
+        }
+      });
+    }
+    ["min","max"].map((key) => { //dealing with 'A quelle heure ?' filter
+      x=this._filter.time[key as keyof object];
+      if(x!==-1) //-1 is default value
+        dates.time[key]=parseInt(x.split("h")[0])*3600*1000; //time in milliseconds
+    });
+    let bl=new Array(3); const result:Event[]=[];
+    await Promise.all(
+      this.service.events.map(async(event) => {
+        await this.filterEvent(bl,x,dates,result,event);
+      })); 
+    this._filteredEvents=result as Event[];
+    window.alert((result as Event[]).length+" - "+this._filteredEvents.length)    
   }
 }
 
