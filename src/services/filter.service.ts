@@ -81,7 +81,7 @@ export class FilterService {
     this._defaultFilter={...this._defaultFilter,time:ob,artist:{id:-1}};
     this._filter=this._defaultFilter;
   }
-  async setFilteredEvents(fltr?:Filter) {
+  async setFilteredEvents(fltr?:Filter):Promise<void> {
     new Promise((resolve,reject) => {
       if(Object.keys(this._filter).length===0) this.setFormFilterElements();
       // if(_.isEqual(filter,this._activeFilter)) return; //Deep comparison active vs new filter, if no difference no need to re-filter data  
@@ -132,18 +132,19 @@ export class FilterService {
 
         if(JSON.stringify(bl).indexOf("false")===-1)
           result.push(event); 
-      });
-      console.log("getFilteredEvents",this._filter,result)
+      });      
       resolve(result);      
     }).then((result) => {
       this._filteredEvents=result as Event[];
+      // console.log("getFilteredEvents.then",this._filter,(result as Event[]).length,this._filteredEvents.length)
+      window.alert((result as Event[]).length+" - "+this._filteredEvents.length)
     }).catch((error) => {
       window.alert(error)
     })    
   }
 }
 
-export const eventsResolver: ResolveFn<void> =  //program page resolver
+export const eventsResolver: ResolveFn<Promise<void>> =  //program page resolver
   (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
     return inject (FilterService).setFilteredEvents();
 };
