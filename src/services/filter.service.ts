@@ -137,6 +137,8 @@ export class FilterService {
       resolve(result);      
     }).then((result) => {
       this._filteredEvents=result as Event[];
+    }).catch((error) => {
+      window.alert(error)
     })    
   }
 }

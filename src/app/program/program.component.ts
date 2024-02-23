@@ -26,11 +26,14 @@ export class ProgramComponent implements OnInit {
   }
 
   ngOnInit(): void {    
-    this.activatedRoute.data.subscribe(() => { //resolved raw events data from eventsResolver
-      window.alert(this.filterService.filteredEvents.length)
+    this.activatedRoute.data.subscribe(({events}) => { //resolved raw events data from eventsResolver
+      setTimeout(() => {
+        window.alert(this.filterService.filteredEvents.length)
       this._formFilterElements=this.filterService.formFilterElements;  //initialize form filter elements
       this._filter=this.filterService.filter;  //initialize filter
       this._events=this.getFormattedData(this.filterService.filteredEvents);  //format raw events data
+      },1000);
+      
     });
   }
   getFormattedData(evts:any[]){
