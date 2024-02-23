@@ -26,11 +26,11 @@ export class ProgramComponent implements OnInit {
   }
 
   ngOnInit(): void {    
-    this.activatedRoute.data.subscribe(({events}) => { //resolved raw events data from eventsResolver
-      window.alert(events.length)
+    this.activatedRoute.data.subscribe(() => { //resolved raw events data from eventsResolver
+      window.alert(this.filterService.filteredEvents.length)
       this._formFilterElements=this.filterService.formFilterElements;  //initialize form filter elements
       this._filter=this.filterService.filter;  //initialize filter
-      this._events=this.getFormattedData(events);  //format raw events data
+      this._events=this.getFormattedData(this.filterService.filteredEvents);  //format raw events data
     });
   }
   getFormattedData(evts:any[]){
@@ -63,7 +63,7 @@ export class ProgramComponent implements OnInit {
   get events():ArtistEvents[]{
     return this._events;
   }
-  handleFilterChange(form:NgForm){
+  async handleFilterChange(form:NgForm){
     let cats:object={};
     ["days","types"].map((it:string) => {
       cats={...form.value[it]};
@@ -83,12 +83,14 @@ export class ProgramComponent implements OnInit {
     this._filter.artist=form.value.artist;
     
     this.filterService.filter=this._filter;
-    this._events=this.getFormattedData(this.filterService.getFilteredEvents());
+    await this.filterService.setFilteredEvents();
+    this._events=this.getFormattedData(this.filterService.filteredEvents);
   }
-  filterReset (form:NgForm) {
+  async filterReset (form:NgForm) {
     form.setValue(this.filterService.defaultFilter);
     this._filter={...form.value};  
     this.filterService.filter=this._filter;
+    await this.filterService.setFilteredEvents();
     this._events=this.getFormattedData(this.dataService.events);
   }
   rotateChevron(evt?:Event) {
