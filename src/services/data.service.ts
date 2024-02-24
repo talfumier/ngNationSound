@@ -62,8 +62,9 @@ export class DataService {
     });
   }
   initEvents(){
+    const evts:Event[]=[];
     data.events.map((evt) => {
-      this._events.push(
+      evts.push(
         {
           performer:_.filter(this._artists,(artist) => {
               return artist.id===evt.performer;
@@ -78,6 +79,7 @@ export class DataService {
           datems:getDateFromString(evt.date,"dd.mm.yyyy hh:mm","ms")
         });
     });
+    this._events=evts;
   }
   getArtistById(id:number):Artist{
     return _.filter(this._artists,(artist) => {
