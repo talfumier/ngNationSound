@@ -86,7 +86,11 @@ export class FilterService {
     bl.fill(false);
     // dealing with 'Quand ? A quelle heure ?' filter
     Object.keys(dates).map((key:string) => {
-      if(key!=="time" && !bl[0] && event.datems>=(dates[key] as number+dates.time.min) && event.datems<=(dates[key] as number+dates.time.max)) {
+      //&& event.datems>=(dates[key] as number+dates.time.min) && event.datems<=(dates[key] as number+dates.time.max)
+      if(key!=="time" && !bl[0]) {
+        window.alert(event.datems)
+        window.alert(dates[key] as number)
+        window.alert(dates.time.min)
         bl[0]=true;
         // console.log(key,dates[key])
       }
