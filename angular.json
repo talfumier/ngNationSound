@@ -42,7 +42,7 @@
               "src/css/styles.css",
               "./node_modules/leaflet/dist/leaflet.css"
             ],
-            "scripts": ["assets/js/jsfunctions.js"]
+            "scripts": ["/src/assets/js/jsfunctions.js"]
           },
           "configurations": {
             "production": {
