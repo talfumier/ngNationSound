@@ -17,8 +17,8 @@ function filterEvent(dates, types, artist, event, cs) {
     if (
       key !== "time" &&
       !bl[0] &&
-      event.datems >= dates[key] + dates.time.min &&
-      event.datems <= dates[key] + dates.time.max
+      event.datems >= Number(dates[key]) + Number(dates.time.min) &&
+      event.datems <= Number(dates[key]) + Number(dates.time.max)
     ) {
       // console.log(event.datems, dates[key], dates.time.min);
       // window.alert(event.datems);
