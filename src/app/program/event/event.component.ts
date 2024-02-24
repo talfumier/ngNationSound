@@ -26,6 +26,7 @@ export class EventComponent implements OnInit {
     return this._event;
   }  
   getFormattedDate(date:number){
+    console.log(date)
     return `${format(date,"dd MMMM")} ${format(date," HH:mm").replace(":","h")}`;
 
   }
