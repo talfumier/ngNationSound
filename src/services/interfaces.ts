@@ -39,6 +39,7 @@ export interface ArtistEvents {
 }
 interface EventDate {
   date:Date,
+  datems:number,
   location:Poi,
   type:EventType
 }

@@ -26,14 +26,7 @@
           rencontre: date.type.description === 'rencontre'
         }"
       >
-        <span class="date-time">{{
-          date.date.toLocaleString("fr-FR", {
-            day: "numeric",
-            month: "long",
-            hour: "2-digit",
-            minute: "2-digit"
-          })
-        }}</span>
+        <span class="date-time">{{ date.datems }}</span>
         <span class="type">{{ date.type.description }}</span>
         <span
           class="location"
@@ -48,3 +41,9 @@
     </ul>
   </div>
 </div>
+<!-- date.date.toLocaleString("fr-FR", {
+            day: "numeric",
+            month: "long",
+            hour: "2-digit",
+            minute: "2-digit"
+          }) -->

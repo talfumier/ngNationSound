@@ -50,7 +50,7 @@ export class ProgramComponent implements OnInit {
           performer:evt.performer,
           dates:[]
         };
-      artistEvts.dates.push({date:getDateFromString(evt.date,"dd.mm.yyyy hh:mm") as Date,location:evt.location as Poi,type:evt.type as EventType});
+      artistEvts.dates.push({date:getDateFromString(evt.date,"dd.mm.yyyy hh:mm") as Date,datems:evt.datems,location:evt.location as Poi,type:evt.type as EventType});
       if(i===-1) AllArtistEvents.push(artistEvts);
       else AllArtistEvents[i]=artistEvts;  
       artistEvts.dates=_.orderBy(artistEvts.dates,"date","asc")  
