@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular
 import _ from "lodash";
 import { DataService } from './data.service';
 import { FormFilterElements,Filter,Event, Option, KeyLabel } from './interfaces';
+declare function filterEvent(dates:any,types:any,artist:any,event:Event):boolean;
 
 @Injectable({
   providedIn: 'root'
@@ -85,8 +86,14 @@ export class FilterService {
     bl.fill(false);
     // dealing with 'Quand ? A quelle heure ?' filter
     Object.keys(dates).map((key:string) => {
-      if(key!=="time" && !bl[0] && event.datems>=(dates[key] as number+dates.time.min) && event.datems<=(dates[key] as number+dates.time.max))
+      //&& event.datems>=(dates[key] as number+dates.time.min) && event.datems<=(dates[key] as number+dates.time.max)
+      if(key!=="time" && !bl[0]) {
+        window.alert(event.datems)
+        window.alert(dates[key] as number)
+        window.alert(dates.time.min)
         bl[0]=true;
+        // console.log(key,dates[key])
+      }
     });
     if(!bl[0]) return false;
       // dealing with 'Quoi ?' filter
@@ -135,7 +142,7 @@ export class FilterService {
     });
     const result:Event[]=[];
     this.service.events.map((event) => {
-      if(this.filterEvent(dates,event)) result.push(event);
+      if(filterEvent(dates,this._filter.types,this._filter.artist,event)) result.push(event);
     });
     this._filteredEvents=result;
   }
