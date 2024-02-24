@@ -14,8 +14,13 @@ function filterEvent(dates, types, artist, event, cs) {
   // dealing with 'Quand ? A quelle heure ?' filter
   Object.keys(dates).map((key) => {
     //&& event.datems>=(dates[key] as number+dates.time.min) && event.datems<=(dates[key] as number+dates.time.max)
-    if (key !== "time" && !bl[0]) {
-      console.log(event.datems, dates[key], dates.time.min);
+    if (
+      key !== "time" &&
+      !bl[0] &&
+      event.datems >= dates[key] + dates.time.min &&
+      event.datems <= dates[key] + dates.time.max
+    ) {
+      // console.log(event.datems, dates[key], dates.time.min);
       // window.alert(event.datems);
       // window.alert(dates[key]);
       // window.alert(dates.time.min);
