@@ -19,9 +19,9 @@ export class FilterService {
   get filteredEvents(){
     return this._filteredEvents;
   }
-  // set filteredEvents(data) {
-  //   this._filteredEvents=data;
-  // }
+  set filteredEvents(data) {
+    this._filteredEvents=data;
+  }
   get formFilterElements(){
     return this._formFilterElements;
   }
@@ -86,8 +86,10 @@ export class FilterService {
     bl.fill(false);
     // dealing with 'Quand ? A quelle heure ?' filter
     Object.keys(dates).map((key:string) => {
-      if(key!=="time" && !bl[0] && event.datems>=(dates[key] as number+dates.time.min) && event.datems<=(dates[key] as number+dates.time.max)) 
+      if(key!=="time" && !bl[0] && event.datems>=(dates[key] as number+dates.time.min) && event.datems<=(dates[key] as number+dates.time.max)) {
         bl[0]=true;
+        // console.log(key,dates[key])
+      }
     });
     if(!bl[0]) return false;
       // dealing with 'Quoi ?' filter
@@ -114,7 +116,8 @@ export class FilterService {
     let dates:any={},x:any="";    
     //dates > object that initially contains event festival dates in milliseconds (set at 00:00:00 time)    
     Object.values(this.service.dates)[0].split(",").map((day:string,idx:number) => {
-        dates[`day${idx+1}`]= Date.parse(day+this.service.dates.month+this.service.dates.year);
+        // dates[`day${idx+1}`]= Date.parse(day+this.service.dates.month+this.service.dates.year);
+        dates[`day${idx+1}`]=new Date(`${this.service.dates.month} ${day},${this.service.dates.year}`).getTime();
       });
     dates.time={min:0,max:24*3600*1000}; //time range with no restriction (milliseconds)
     if(!this._filter.days["all" as keyof object]){ //when all:true, keep all dates

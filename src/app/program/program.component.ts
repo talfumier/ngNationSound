@@ -19,19 +19,21 @@ export class ProgramComponent implements OnInit {
 
   private _events:ArtistEvents[]=[];  
 
-  constructor(private dataService:DataService,private filterService:FilterService, private activatedRoute: ActivatedRoute){ }
-
-  get formFilterElements(){
-    return this._formFilterElements;
-  }
-
-  ngOnInit(): void {    
+  constructor(private dataService:DataService,private filterService:FilterService, private activatedRoute: ActivatedRoute){
     this.activatedRoute.data.subscribe(({events}) => { //resolved raw events data from eventsResolver      
       this._formFilterElements=this.filterService.formFilterElements;  //initialize form filter elements
       this._filter=this.filterService.filter;  //initialize filter
       // window.alert(this.filterService.filteredEvents.length)
       this._events=this.getFormattedData(this.filterService.filteredEvents);  //format raw events data
     });
+   }
+
+  get formFilterElements(){
+    return this._formFilterElements;
+  }
+
+  ngOnInit(): void {    
+    
   }
   getFormattedData(evts:any[]){
     const AllArtistEvents:ArtistEvents[]=[];
@@ -63,13 +65,13 @@ export class ProgramComponent implements OnInit {
   get events():ArtistEvents[]{
     return this._events;
   }
-  async handleFilterChange(form:NgForm){
+  handleFilterChange(form:NgForm){
     let cats:object={};
     ["days","types"].map((it:string) => {
       cats={...form.value[it]};
       if(form.value[it].all) {
         if(!this._filter[it as keyof Filter]["all" as keyof object]){
-          cats=this.filterService.formFilterElements[it as keyof object];
+          cats=this.filterService.defaultFilter[it as keyof Filter];
           form.setValue({...form.value,[it]:cats});
         }
         if(JSON.stringify(form.value[it]).split("true").length>2) {
@@ -83,14 +85,14 @@ export class ProgramComponent implements OnInit {
     this._filter.artist=form.value.artist;
     
     this.filterService.filter=this._filter;
-    await this.filterService.setFilteredEvents();
+    this.filterService.setFilteredEvents();
     this._events=this.getFormattedData(this.filterService.filteredEvents);
   }
-  async filterReset (form:NgForm) {
-    form.setValue(this.filterService.defaultFilter);
-    this._filter={...form.value};  
+  filterReset (form?:NgForm) {
+    if(form) form.setValue(this.filterService.defaultFilter);
+    this._filter=this.filterService.defaultFilter;  
     this.filterService.filter=this._filter;
-    await this.filterService.setFilteredEvents();
+    this.filterService.filteredEvents=this.dataService.events;
     this._events=this.getFormattedData(this.dataService.events);
   }
   rotateChevron(evt?:Event) {
