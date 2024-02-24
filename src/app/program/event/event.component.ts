@@ -25,7 +25,7 @@ export class EventComponent implements OnInit {
   get event():ArtistEvents{
     return this._event;
   }  
-  getFormattedDate(date:number){
+  getFormattedDate(date:number | Date){
     console.log(date)
     return `${format(date,"dd MMMM")} ${format(date," HH:mm").replace(":","h")}`;
 
