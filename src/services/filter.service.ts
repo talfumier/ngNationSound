@@ -81,50 +81,34 @@ export class FilterService {
     this._defaultFilter={...this._defaultFilter,time:ob,artist:{id:-1}};
     this._filter=this._defaultFilter;
   }
-  async filterEvent(bl:boolean[],x:any,dates:any,result:Event[],event:Event){
+  filterEvent(dates:any,event:Event):boolean {
+    const bl=new Array(3);
     bl.fill(false);
-    await new Promise((resolve) => {
-      // dealing with 'Quand ? A quelle heure ?' filter
-      x=getDateFromString(event.date,"dd.mm.yyyy hh:mm","ms") as number; //event date and time in milliseconds 
-      Object.keys(dates).map((key:string) => {
-        if(key!=="time" && !bl[0])// && x>=(dates[key]+dates.time.min) && x<=(dates[key]+dates.time.max)) 
-          bl[0]=true;
-        // console.log(key,dates[key], typeof dates[key],dates.time.min,dates.time.max)
-        // window.alert(x)
-      });
-      resolve( bl[0]);
-      
-    }).then((rslt) => {
-      if(rslt){
-        // dealing with 'Quoi ?' filter
-        if(this._filter.types["all" as keyof object]) 
-          bl[1]=true;
-        else if(!bl[1]){
-          Object.keys(this._filter.types).map((key:any) => {
-            if(key!=="all" && !bl[1] && this._filter.types[key as keyof object] && event.type.id==key )
-              bl[1]=true;
-          });
-        }
-        return bl[1];
-      }
-      else return false;
-    }).then((rslt) => {
-      if(rslt){
-        // dealing with 'Qui ?' filter
-        if(this._filter.artist["id" as keyof object]===-1)        
-          bl[2]=true;
-        if(!bl[2] && this._filter.artist["id" as keyof object]==event.performer.id)
-          bl[2]=true;     
-        return bl[2];
-      }
-      else return false;
-    }).then((rslt) => {
-      // window.alert(JSON.stringify(bl)+ " - "+rslt+" - "+event.type.description)
-      if(rslt) // JSON.stringify(bl).indexOf("false")===-1
-        result.push(event); 
+    // dealing with 'Quand ? A quelle heure ?' filter
+    Object.keys(dates).map((key:string) => {
+      if(key!=="time" && !bl[0] && event.datems>=(dates[key] as number+dates.time.min) && event.datems<=(dates[key] as number+dates.time.max)) 
+        bl[0]=true;
     });
+    if(!bl[0]) return false;
+      // dealing with 'Quoi ?' filter
+    if(this._filter.types["all" as keyof object]) 
+      bl[1]=true;
+    else if(!bl[1]){
+      Object.keys(this._filter.types).map((key:any) => {
+        if(key!=="all" && !bl[1] && this._filter.types[key as keyof object] && event.type.id==key )
+          bl[1]=true;
+      });
+    }
+    if(!bl[1]) return false;
+    // dealing with 'Qui ?' filter
+    if(this._filter.artist["id" as keyof object]===-1)        
+      bl[2]=true;
+    if(!bl[2] && this._filter.artist["id" as keyof object]==event.performer.id)
+      bl[2]=true; 
+    if(!bl[2]) return false;
+    return true;
   }
-  async setFilteredEvents(fltr?:Filter):Promise<void> {    
+  setFilteredEvents(fltr?:Filter):void {    
     if(Object.keys(this._filter).length===0) this.setFormFilterElements();
     // if(_.isEqual(filter,this._activeFilter)) return; //Deep comparison active vs new filter, if no difference no need to re-filter data  
     let dates:any={},x:any="";    
@@ -149,19 +133,15 @@ export class FilterService {
       if(x!==-1) //-1 is default value
         dates.time[key]=parseInt(x.split("h")[0])*3600*1000; //time in milliseconds
     });
-    let bl=new Array(3); const result:Event[]=[];
-    await Promise.all(
-      this.service.events.map(async(event) => {
-        await this.filterEvent(bl,x,dates,result,event);
-      })).then(() => {
-        this._filteredEvents=result as Event[];
-        // window.alert((result as Event[]).length+" - "+this._filteredEvents.length)  
-      }); 
-      
+    const result:Event[]=[];
+    this.service.events.map((event) => {
+      if(this.filterEvent(dates,event)) result.push(event);
+    });
+    this._filteredEvents=result;
   }
 }
 
-export const eventsResolver: ResolveFn<Promise<void>> =  //program page resolver
+export const eventsResolver: ResolveFn<void> =  //program page resolver
   (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
     return inject (FilterService).setFilteredEvents();
 };

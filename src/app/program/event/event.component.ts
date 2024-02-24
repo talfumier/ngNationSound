@@ -15,14 +15,18 @@ export class EventComponent implements OnInit {
 
   ngOnInit(): void {
     this._event=this.data; 
-    console.log(format(new Date(2014, 6, 2, 15),"dd.MM.yyyy HH:mm"))
+    // this._event.dates.map((date) => {
+    //   console.log(this.getFormattedDate(date.date));
+    // })
+
   }
 
   get event():ArtistEvents{
     return this._event;
   }  
-  getFormattedDate(date:any){
+  getFormattedDate(date:Date){
     return format(date,"dd MMMM HH:mm")
+
   }
   cleanup(type:string,location:string){
     if(type.includes("rencontre")) return "rencontre";

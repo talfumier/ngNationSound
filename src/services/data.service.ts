@@ -1,8 +1,7 @@
-import {Injectable, inject} from '@angular/core';
-import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import {Injectable} from '@angular/core';
 import _ from "lodash";
 import {Poi,Dates,Artist,Style,Event, EventType} from "./interfaces";
-import { removeAccents} from './../app/utilities/functions/utlityFunctions';
+import { removeAccents,getDateFromString} from './../app/utilities/functions/utlityFunctions';
 import data from "./data.json";
 
 @Injectable({
@@ -75,11 +74,11 @@ export class DataService {
           location:_.filter(this._pois,(poi) => {
               return poi.id===evt.location;
             })[0],
-          date:evt.date
+          date:evt.date,
+          datems:getDateFromString(evt.date,"dd.mm.yyyy hh:mm","ms")
         });
     });
   }
-  
   getArtistById(id:number):Artist{
     return _.filter(this._artists,(artist) => {
       return artist.id===id;
@@ -108,8 +107,3 @@ export class DataService {
     return this._events;
   }
 }
-
-// export const dataResolver: ResolveFn<void> =  //home page resolver
-//   (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-//     return inject(DataService).initData();
-// };

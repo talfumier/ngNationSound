@@ -30,7 +30,8 @@ export interface Event {
   performer: Artist,
   type: EventType,
   location: Poi,
-  date: string
+  date: string,
+  datems:any //date in milliseconds
 }
 export interface ArtistEvents {
   performer:Artist,
