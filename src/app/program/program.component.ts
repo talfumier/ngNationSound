@@ -19,20 +19,18 @@ export class ProgramComponent implements OnInit {
 
   private _events:ArtistEvents[]=[];  
 
-  constructor(private dataService:DataService,private filterService:FilterService, private activatedRoute: ActivatedRoute){
-    this.activatedRoute.data.subscribe(({events}) => { //resolved raw events data from eventsResolver      
-      this._formFilterElements=this.filterService.formFilterElements;  //initialize form filter elements
-      this._filter=this.filterService.filter;  //initialize filter
-      // window.alert(this.filterService.filteredEvents.length)
-      this._events=this.getFormattedData(this.filterService.filteredEvents);  //format raw events data
-    });
-   }
+  constructor(private dataService:DataService,private filterService:FilterService, private activatedRoute: ActivatedRoute){}
 
   get formFilterElements(){
     return this._formFilterElements;
   }
 
   ngOnInit(): void {    
+    this.activatedRoute.data.subscribe(({}) => { //resolved raw events initialized by eventsResolver in filter.service.ts    
+      this._formFilterElements=this.filterService.formFilterElements;  //initialize form filter elements
+      this._filter=this.filterService.filter;  //initialize filter
+      this._events=this.getFormattedData(this.filterService.filteredEvents);  //format raw events data
+    });
     
   }
   getFormattedData(evts:any[]){
