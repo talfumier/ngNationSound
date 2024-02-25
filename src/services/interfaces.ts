@@ -37,8 +37,7 @@ export interface ArtistEvents {
   dates:EventDate[]
 }
 interface EventDate {
-  date:Date,
-  datems:number,
+  date:string,
   location:Poi,
   type:EventType
 }

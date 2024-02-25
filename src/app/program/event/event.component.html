@@ -26,9 +26,7 @@
           rencontre: date.type.description === 'rencontre'
         }"
       >
-        <span class="date-time">{{
-          (date.date | dfnsFormat : "dd MMMM' - 'HH'h'mm").toString()
-        }}</span>
+        <span class="date-time">{{ formattedDate(date.date) }} </span>
         <span class="type">{{ date.type.description }}</span>
         <span
           class="location"
