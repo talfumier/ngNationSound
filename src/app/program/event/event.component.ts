@@ -15,7 +15,7 @@ export class EventComponent implements OnInit {
 
   ngOnInit(): void {
     this._event=this.data; 
-    console.log(this._event)
+    // console.log(format(this._event.dates., "dd "))
     // this._event.dates.map((date) => {
     //   console.log(this.getFormattedDate(date.date));
     // })

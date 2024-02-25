@@ -23,6 +23,9 @@ import { SelectComponent } from './utilities/select/select.component';
 import { EventComponent } from './program/event/event.component';
 import { MapComponent } from './map/map.component';
 
+
+import { DateFnsModule } from 'ngx-date-fns';
+
 // registerLocaleData(localeFr); //register fr-FR locale, default is en-US
 
 @NgModule({
@@ -45,7 +48,8 @@ import { MapComponent } from './map/map.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({timeOut:3000}),    
-    FormsModule
+    FormsModule,
+    DateFnsModule
   ],
   providers: [    
     { provide: ErrorHandler,useClass: GenericErrorHandler },
