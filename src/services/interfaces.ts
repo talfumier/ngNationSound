@@ -31,7 +31,6 @@ export interface Event {
   type: EventType,
   location: Poi,
   date: string,
-  datems:any //date in milliseconds
 }
 export interface ArtistEvents {
   performer:Artist,

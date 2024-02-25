@@ -63,9 +63,8 @@ export class DataService {
     });
   }
   initEvents(){
-    const evts:Event[]=[];
     data.events.map((evt) => {
-      evts.push(
+      this._events.push(
         {
           performer:_.filter(this._artists,(artist) => {
               return artist.id===evt.performer;
@@ -77,10 +76,8 @@ export class DataService {
               return poi.id===evt.location;
             })[0],
           date:evt.date,
-          datems:getDateFromString(evt.date,"dd.mm.yyyy hh:mm","ms")
         });
     });
-    this._events=evts;
   }
   getArtistById(id:number):Artist{
     return _.filter(this._artists,(artist) => {

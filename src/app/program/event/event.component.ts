@@ -20,10 +20,8 @@ export class EventComponent implements OnInit {
   get event():ArtistEvents{
     return this._event;
   }  
-  formattedDate(date:Date):string {
-    return format(date,"dd MMMM ' - ' HH'h'mm");
-    // console.log(parse(date.toDateString(),"dd MMMM yyyy",new Date()))
-    // return parse(date.toDateString(),"dd MMMM yyyy",new Date());
+  formattedDate(date:Date) {
+    // return date;
   }
   cleanup(type:string,location:string){
     if(type.includes("rencontre")) return "rencontre";
