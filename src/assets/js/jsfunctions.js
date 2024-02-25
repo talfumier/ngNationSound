@@ -7,6 +7,7 @@
 //   artist: any,
 //   event: Event
 // ): boolean;
+// import { format } from "date-fns";
 
 function filterEvent(dates, types, artist, event, cs) {
   console.log(dates, event);

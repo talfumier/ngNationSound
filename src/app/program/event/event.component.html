@@ -27,7 +27,7 @@
         }"
       >
         <span class="date-time">{{
-          date.date | dfnsFormat : "dd MMMM yyyy HH:mm"
+          date.date | dfnsFormat : "dd MMMM' - 'HH'h'mm"
         }}</span>
         <span class="type">{{ date.type.description }}</span>
         <span
@@ -43,9 +43,3 @@
     </ul>
   </div>
 </div>
-<!-- date.date.toLocaleString("fr-FR", {
-            day: "numeric",
-            month: "long",
-            hour: "2-digit",
-            minute: "2-digit"
-          }) -->

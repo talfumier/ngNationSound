@@ -4,6 +4,7 @@ import _ from "lodash";
 import { DataService } from './data.service';
 import { FormFilterElements,Filter,Event, Option, KeyLabel } from './interfaces';
 declare function filterEvent(dates:any,types:any,artist:any,event:Event):boolean;
+import { addMilliseconds,addHours,parse } from 'date-fns';
 
 @Injectable({
   providedIn: 'root'
@@ -85,14 +86,11 @@ export class FilterService {
     const bl=new Array(3);
     bl.fill(false);
     // dealing with 'Quand ? A quelle heure ?' filter
-    Object.keys(dates).map((key:string) => {
+   const evtDate=parse(event.date,"dd.MM.yyyy HH:mm",new Date());
+   Object.keys(dates).map((key:string) => {
       //&& event.datems>=(dates[key] as number+dates.time.min) && event.datems<=(dates[key] as number+dates.time.max)
-      if(key!=="time" && !bl[0]) {
-        window.alert(event.datems)
-        window.alert(dates[key] as number)
-        window.alert(dates.time.min)
+      if(key!=="time" && !bl[0] && evtDate>=addHours(dates[key],dates.time.min) && evtDate<=addHours(dates[key],dates.time.max)) {
         bl[0]=true;
-        // console.log(key,dates[key])
       }
     });
     if(!bl[0]) return false;
@@ -118,11 +116,12 @@ export class FilterService {
     if(Object.keys(this._filter).length===0) this.setFormFilterElements();
     // if(_.isEqual(filter,this._activeFilter)) return; //Deep comparison active vs new filter, if no difference no need to re-filter data  
     let dates:any={},x:any="";    
-    //dates > object that initially contains event festival dates in milliseconds (set at 00:00:00 time)    
+    //dates > object that initially contains event festival dates (set at 00:00:00 time)    
     Object.values(this.service.dates)[0].split(",").map((day:string,idx:number) => {
-        dates[`day${idx+1}`]=new Date(`${this.service.dates.month} ${day},${this.service.dates.year}`).getTime();
+        // dates[`day${idx+1}`]=new Date(`${this.service.dates.month} ${day},${this.service.dates.year}`).getTime();
+        dates[`day${idx+1}`]=parse(`${day} Juin ${this.service.dates.year}`,"dd MMMM yyyy",new Date())
       });
-    dates.time={min:0,max:24*3600*1000}; //time range with no restriction (milliseconds)
+    dates.time={min:0,max:24}; //time range with no restriction (hourss)
     if(!this._filter.days["all" as keyof object]){ //when all:true, keep all dates
       Object.keys(this._filter.days).map((key:string) => { //dealing with "Quand ?" filter
         switch(key){
@@ -137,10 +136,11 @@ export class FilterService {
     ["min","max"].map((key) => { //dealing with 'A quelle heure ?' filter
       x=this._filter.time[key as keyof object];
       if(x!==-1) //-1 is default value
-        dates.time[key]=parseInt(x.split("h")[0])*3600*1000; //time in milliseconds
+        dates.time[key]=parseInt(x.split("h")[0]); //time in hours
     });    
     this._filteredEvents=_.filter(this.service.events,(event) => {
-      return filterEvent(dates,this._filter.types,this._filter.artist,event);      
+      return this.filterEvent(dates,event); 
+      // return filterEvent(dates,this._filter.types,this._filter.artist,event);// javascript function      
     })
   }
 }

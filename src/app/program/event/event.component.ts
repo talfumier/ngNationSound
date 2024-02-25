@@ -1,5 +1,4 @@
 import { Component,Input, OnInit } from '@angular/core';
-import { format} from 'date-fns'
 import { ArtistEvents } from '../../../services/interfaces';
 import { removeAccents } from '../../utilities/functions/utlityFunctions';
 
@@ -14,22 +13,12 @@ export class EventComponent implements OnInit {
   private _event:ArtistEvents={}as ArtistEvents;  
 
   ngOnInit(): void {
-    this._event=this.data; 
-    // console.log(format(this._event.dates., "dd "))
-    // this._event.dates.map((date) => {
-    //   console.log(this.getFormattedDate(date.date));
-    // })
-
+    this._event=this.data;
   }
 
   get event():ArtistEvents{
     return this._event;
   }  
-  getFormattedDate(date:number | Date){
-    console.log(date)
-    return `${format(date,"dd MMMM")} ${format(date," HH:mm").replace(":","h")}`;
-
-  }
   cleanup(type:string,location:string){
     if(type.includes("rencontre")) return "rencontre";
     return removeAccents(location);
