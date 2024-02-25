@@ -15,14 +15,13 @@ export class EventComponent implements OnInit {
 
   ngOnInit(): void {
     this._event=this.data;
-    console.log(this._event)
   }
 
   get event():ArtistEvents{
     return this._event;
   }  
   formattedDate(date:string) {
-    return format(parse(date,"dd.MM.yyyy HH:mm",new Date()),"dd MMMM HH'h'mm");
+    return format(parse(date,"dd.MM.yyyy HH:mm",new Date()),"dd MMMM '-' HH'h'mm");
   }
   cleanup(type:string,location:string){
     if(type.includes("rencontre")) return "rencontre";
