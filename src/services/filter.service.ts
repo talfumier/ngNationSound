@@ -120,7 +120,6 @@ export class FilterService {
     let dates:any={},x:any="";    
     //dates > object that initially contains event festival dates in milliseconds (set at 00:00:00 time)    
     Object.values(this.service.dates)[0].split(",").map((day:string,idx:number) => {
-        // dates[`day${idx+1}`]= Date.parse(day+this.service.dates.month+this.service.dates.year);
         dates[`day${idx+1}`]=new Date(`${this.service.dates.month} ${day},${this.service.dates.year}`).getTime();
       });
     dates.time={min:0,max:24*3600*1000}; //time range with no restriction (milliseconds)
@@ -139,12 +138,10 @@ export class FilterService {
       x=this._filter.time[key as keyof object];
       if(x!==-1) //-1 is default value
         dates.time[key]=parseInt(x.split("h")[0])*3600*1000; //time in milliseconds
-    });
-    const result:Event[]=[];
-    this.service.events.map((event) => {
-      if(filterEvent(dates,this._filter.types,this._filter.artist,event)) result.push(event);
-    });
-    this._filteredEvents=result;
+    });    
+    this._filteredEvents=_.filter(this.service.events,(event) => {
+      return filterEvent(dates,this._filter.types,this._filter.artist,event);      
+    })
   }
 }
 
