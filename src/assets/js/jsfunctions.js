@@ -22,12 +22,7 @@ function filterEvent(dates, types, artist, event, cs) {
       Number(event.datems) >= Number(dates[key]) + Number(dates.time.min) &&
       Number(event.datems) <= Number(dates[key]) + Number(dates.time.max)
     ) {
-      // console.log(event.datems, dates[key], dates.time.min);
-      // window.alert(event.datems);
-      // window.alert(dates[key]);
-      // window.alert(dates.time.min);
       bl[0] = true;
-      // console.log(key,dates[key])
     }
   });
   if (!bl[0]) return false;

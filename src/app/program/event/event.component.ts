@@ -1,6 +1,7 @@
 import { Component,Input, OnInit } from '@angular/core';
 import { ArtistEvents } from '../../../services/interfaces';
 import { removeAccents } from '../../utilities/functions/utlityFunctions';
+import {format} from 'date-fns';
 
 @Component({
   selector: 'app-event',
@@ -19,6 +20,11 @@ export class EventComponent implements OnInit {
   get event():ArtistEvents{
     return this._event;
   }  
+  formattedDate(date:Date):string {
+    return format(date,"dd MMMM ' - ' HH'h'mm");
+    // console.log(parse(date.toDateString(),"dd MMMM yyyy",new Date()))
+    // return parse(date.toDateString(),"dd MMMM yyyy",new Date());
+  }
   cleanup(type:string,location:string){
     if(type.includes("rencontre")) return "rencontre";
     return removeAccents(location);

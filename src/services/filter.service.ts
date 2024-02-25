@@ -3,8 +3,8 @@ import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular
 import _ from "lodash";
 import { DataService } from './data.service';
 import { FormFilterElements,Filter,Event, Option, KeyLabel } from './interfaces';
-declare function filterEvent(dates:any,types:any,artist:any,event:Event):boolean;
-import { addMilliseconds,addHours,parse } from 'date-fns';
+import { addHours,parse } from 'date-fns';
+import { enUS } from 'date-fns/locale';
 
 @Injectable({
   providedIn: 'root'
@@ -88,10 +88,8 @@ export class FilterService {
     // dealing with 'Quand ? A quelle heure ?' filter
    const evtDate=parse(event.date,"dd.MM.yyyy HH:mm",new Date());
    Object.keys(dates).map((key:string) => {
-      //&& event.datems>=(dates[key] as number+dates.time.min) && event.datems<=(dates[key] as number+dates.time.max)
-      if(key!=="time" && !bl[0] && evtDate>=addHours(dates[key],dates.time.min) && evtDate<=addHours(dates[key],dates.time.max)) {
+      if(key!=="time" && !bl[0] && evtDate>=addHours(dates[key],dates.time.min) && evtDate<=addHours(dates[key],dates.time.max))
         bl[0]=true;
-      }
     });
     if(!bl[0]) return false;
       // dealing with 'Quoi ?' filter
@@ -118,8 +116,7 @@ export class FilterService {
     let dates:any={},x:any="";    
     //dates > object that initially contains event festival dates (set at 00:00:00 time)    
     Object.values(this.service.dates)[0].split(",").map((day:string,idx:number) => {
-        // dates[`day${idx+1}`]=new Date(`${this.service.dates.month} ${day},${this.service.dates.year}`).getTime();
-        dates[`day${idx+1}`]=parse(`${day} Juin ${this.service.dates.year}`,"dd MMMM yyyy",new Date())
+        dates[`day${idx+1}`]=parse(`${day} ${this.service.dates.month} ${this.service.dates.year}`,"dd MMMM yyyy",new Date(),{locale:enUS});
       });
     dates.time={min:0,max:24}; //time range with no restriction (hourss)
     if(!this._filter.days["all" as keyof object]){ //when all:true, keep all dates
@@ -140,7 +137,6 @@ export class FilterService {
     });    
     this._filteredEvents=_.filter(this.service.events,(event) => {
       return this.filterEvent(dates,event); 
-      // return filterEvent(dates,this._filter.types,this._filter.artist,event);// javascript function      
     })
   }
 }
