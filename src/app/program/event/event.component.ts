@@ -20,7 +20,7 @@ export class EventComponent implements OnInit {
   get event():ArtistEvents{
     return this._event;
   }  
-  formattedDate(date:string) {
+  formattedDate(date:string) { //work-around for avoiding 'invalid date' warning on ios devices
     return format(parse(date,"dd.MM.yyyy HH:mm",new Date()),"dd MMMM '-' HH'h'mm");
   }
   cleanup(type:string,location:string){

@@ -49,7 +49,7 @@ export class ProgramComponent implements OnInit {
         artistEvts={
           performer:evt.performer,
           dates:[]
-        };//getDateFromString(evt.date,"dd.mm.yyyy hh:mm") as Date
+        };
       artistEvts.dates.push({date:evt.date,location:evt.location as Poi,type:evt.type as EventType});
       if(i===-1) AllArtistEvents.push(artistEvts);
       else AllArtistEvents[i]=artistEvts;  

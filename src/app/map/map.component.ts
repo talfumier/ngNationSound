@@ -39,6 +39,7 @@ export class MapComponent implements OnInit, OnDestroy {
   }
   
   ngOnInit(): void {
+    window.scrollTo(0,0);
     document.getElementById("header-map-link")?.classList.add("active");
     this.initMap();    
   }

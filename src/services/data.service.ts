@@ -2,7 +2,7 @@ import {Injectable, inject} from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import _ from "lodash";
 import {Poi,Dates,Artist,Style,Event, EventType} from "./interfaces";
-import { removeAccents,getDateFromString} from './../app/utilities/functions/utlityFunctions';
+import { removeAccents} from './../app/utilities/functions/utlityFunctions';
 import data from "./data.json";
 
 @Injectable({

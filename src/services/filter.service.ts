@@ -2,9 +2,9 @@ import {Injectable, inject} from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import _ from "lodash";
 import { DataService } from './data.service';
-import { FormFilterElements,Filter,Event, Option, KeyLabel } from './interfaces';
-import { addHours,parse } from 'date-fns';
 import { enUS } from 'date-fns/locale';
+import { addHours,parse } from 'date-fns';
+import { FormFilterElements,Filter,Event, Option, KeyLabel } from './interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -118,7 +118,7 @@ export class FilterService {
     Object.values(this.service.dates)[0].split(",").map((day:string,idx:number) => {
         dates[`day${idx+1}`]=parse(`${day} ${this.service.dates.month} ${this.service.dates.year}`,"dd MMMM yyyy",new Date(),{locale:enUS});
       });
-    dates.time={min:0,max:24}; //time range with no restriction (hourss)
+    dates.time={min:0,max:24}; //time range with no restriction (hours)
     if(!this._filter.days["all" as keyof object]){ //when all:true, keep all dates
       Object.keys(this._filter.days).map((key:string) => { //dealing with "Quand ?" filter
         switch(key){
