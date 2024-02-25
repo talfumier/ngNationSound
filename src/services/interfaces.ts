@@ -30,14 +30,14 @@ export interface Event {
   performer: Artist,
   type: EventType,
   location: Poi,
-  date: string
+  date: string,
 }
 export interface ArtistEvents {
   performer:Artist,
   dates:EventDate[]
 }
 interface EventDate {
-  date:Date,
+  date:string,
   location:Poi,
   type:EventType
 }
@@ -53,6 +53,9 @@ export interface TimeOptions {
 }
 export interface Option {
   id:(string|number),name:string
+}
+export interface FormFilterElements {
+  days:KeyLabel[],types:KeyLabel[],times:KeyLabel[],timeOptions:TimeOptions,artist:KeyLabel,artistOptions:Option[]
 }
 export interface Filter {
   days:object,

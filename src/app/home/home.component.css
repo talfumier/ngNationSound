@@ -1,5 +1,6 @@
 main {
   width: 100vw;
+  min-width:350px;
   min-height: 100vh;
   background-image: url("../../assets/images/festival1.jpg");
   background-size:cover;
@@ -59,7 +60,7 @@ div.program-grid {
   column-gap: 5px;
   padding:5px 15px;
   opacity: 1;
-  transition: opacity 1.5s;
+  transition: opacity 1.5s;overflow: hidden;
 }
 div.program-grid.hidden {
   opacity:0;
@@ -127,9 +128,10 @@ div.map.hidden {
   transition: opacity 1.5s, height 1.5s;
 }
 div.map img {
-  object-fit:scale-down;
-  width:50%;
+  object-fit:cover;
+  width:80%;
   height:50%;
+  min-height:200px;
   border: 3px solid var(--orange);
 }
 

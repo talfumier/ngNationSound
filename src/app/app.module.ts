@@ -1,7 +1,5 @@
-import { NgModule,LOCALE_ID,ErrorHandler } from '@angular/core';
+import { NgModule,ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { registerLocaleData } from '@angular/common';
-import localeFr from '@angular/common/locales/fr';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,8 +21,6 @@ import { SelectComponent } from './utilities/select/select.component';
 import { EventComponent } from './program/event/event.component';
 import { MapComponent } from './map/map.component';
 
-registerLocaleData(localeFr); //register fr-FR locale, default is en-US
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,11 +41,10 @@ registerLocaleData(localeFr); //register fr-FR locale, default is en-US
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({timeOut:3000}),    
-    FormsModule
+    FormsModule,
   ],
   providers: [    
     { provide: ErrorHandler,useClass: GenericErrorHandler },
-    { provide: LOCALE_ID, useValue: 'fr-FR'},  //reset default locale to fr-FR
     { provide: Window, useValue: window },    
     { provide: Document, useValue: document }
   ],

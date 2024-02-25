@@ -12,5 +12,5 @@ export function getDateFromString(date:any,format:string,output?:string):Date|nu
         result=result.join();
         break;
     } 
-    return output==="ms"?Date.parse(result):new Date(result);
+    return output==="ms"?Date.parse(result) as number:new Date(result);
   }

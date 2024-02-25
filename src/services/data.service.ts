@@ -21,7 +21,7 @@ export class DataService {
     this.initData();
   }
   
-  initData(){ // called by resolver function in app-routing-module.ts
+  initData(){
     this._dates=data.dates[0];
     this._event_types=data.event_types;
     this._pois=data.pois;
@@ -33,7 +33,7 @@ export class DataService {
   initInnerHTML(){    // data formatted as html string for use in events summary (home page)
     this._innerHTML=[""];
     this._dates.days.split(",").map((day) => {
-      this._innerHTML.push(`${new Date(this._dates.month +day+","+this._dates.year).toLocaleString("fr-FR",{day: 'numeric',month:"long"})}`);
+      this._innerHTML.push(`${new Date(this._dates.month+" " +day+","+this._dates.year).toLocaleString("fr-FR",{day: 'numeric',month:"long"})}`);
     });
     this._innerHTML.map((item,idx) => {
       this._innerHTML[idx]=`<div class='column-header'>${item}</div>`
@@ -63,8 +63,9 @@ export class DataService {
     });
   }
   initEvents(){
+    const evts:Event[]=[];
     data.events.map((evt) => {
-      this._events.push(
+      evts.push(
         {
           performer:_.filter(this._artists,(artist) => {
               return artist.id===evt.performer;
@@ -75,11 +76,11 @@ export class DataService {
           location:_.filter(this._pois,(poi) => {
               return poi.id===evt.location;
             })[0],
-          date:evt.date
+          date:evt.date,
         });
     });
+    this._events=evts;
   }
-  
   getArtistById(id:number):Artist{
     return _.filter(this._artists,(artist) => {
       return artist.id===id;
@@ -111,5 +112,5 @@ export class DataService {
 
 export const dataResolver: ResolveFn<void> =  //home page resolver
   (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-    return inject(DataService).initData();
+    return inject (DataService).initData();
 };
