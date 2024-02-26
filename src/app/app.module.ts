@@ -20,6 +20,7 @@ import { InputComponent } from './utilities/input/input.component';
 import { SelectComponent } from './utilities/select/select.component';
 import { EventComponent } from './program/event/event.component';
 import { MapComponent } from './map/map.component';
+import { FaqComponent } from './faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MapComponent } from './map/map.component';
     InputComponent,
     SelectComponent,
     EventComponent,
-    MapComponent
+    MapComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,

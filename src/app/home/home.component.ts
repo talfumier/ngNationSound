@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit, OnDestroy, AfterViewInit } from '@angu
 import { Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { AccordionComponent } from './accordion/accordion.component';
-import { Infos } from '../../services/interfaces';
+import { Infos, Faq } from '../../services/interfaces';
 
 @Component({
   selector: 'app-home',
@@ -13,11 +13,15 @@ export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
 
   private _innerHTML:string[]=[];
   private _infos:Infos={} as Infos;
+  private _faqs:Faq[]=[];
+  private _partners:string[]=[];
   static scrollY:number;
 
   constructor(private service:DataService,private router: Router){
     this._innerHTML=service.innerHTML;
     this._infos=service.infos;
+    this._faqs=service.faqs;
+    this._partners=service.partners;
   }
 
   ngOnInit(): void {
@@ -40,6 +44,15 @@ export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
   }
   get infos() {
     return this._infos;
+  }
+  get faqs(){
+    return this._faqs;
+  }
+  get partners(){
+    return this._partners;
+  }
+  getPath(idx:number){
+    return `assets/images/partners/${this._partners[idx]}`
   }
 
   @HostListener("click", ['$event']) // prevent page reload when launching an anchor link

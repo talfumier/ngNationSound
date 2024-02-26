@@ -72,3 +72,6 @@ export interface Infos {
 export interface Transport {
   car:string[],train:string[],plane:string[]
 }
+export interface Faq {
+  question:string,answer:string
+}

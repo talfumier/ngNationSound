@@ -115,7 +115,9 @@
           hidden:
             form.value.faq !== undefined ? !form.value.faq.accordion : true
         }"
-      ></div>
+      >
+        <app-faq [data]="faq" *ngFor="let faq of faqs"></app-faq>
+      </div>
     </section>
     <section class="partners" ngModelGroup="partners">
       <div class="section-header">
@@ -129,7 +131,13 @@
               ? !form.value.partners.accordion
               : true
         }"
-      ></div>
+      >
+        <img
+          *ngFor="let partner of partners; let idx = index"
+          src="{{ getPath(idx) }}"
+          alt="partenaire du festival"
+        />
+      </div>
     </section>
   </form>
 </main>
