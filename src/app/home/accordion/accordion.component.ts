@@ -12,7 +12,7 @@ export class AccordionComponent implements OnInit {
   @Input() index:string="";     
 
   private _value:boolean=false; // value binded to NgForm in home page
-  static status:Status={"0":false,"1":false};
+  static status:Status={"0":false,"1":false,"2":false,"3":false,"4":false};
 
   ngOnInit(): void {
     this._value=AccordionComponent.status[this.index as keyof object] ;
@@ -32,5 +32,8 @@ export class AccordionComponent implements OnInit {
 }
 interface Status { //rotated status of each accordion
   "0":boolean,
-  "1":boolean
+  "1":boolean,
+  "2":boolean
+  "3":boolean
+  "4":boolean
 }

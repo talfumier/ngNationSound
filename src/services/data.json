@@ -4,7 +4,9 @@
       "days": "14,15,16",
       "month": "June",
       "year": 2024,
-      "opening": "11-24"
+      "opening": "11h00 à 24h00",
+      "address": "Avenue des Aigles - 60500 Chantilly",
+      "gps": "GPS: N 49.187°, E 2.475°"
     }
   ],
   "artists": [
@@ -627,6 +629,68 @@
       "date": "15.06.2024 12:30"
     }
   ],
+  "transport": [
+    {
+      "car": "RN 16 (accès par autoroute A1 > Porte de la Chapelle > Direction Saint Denis > Sortie 3 Pierrefite > N1 sur 3 km puis RN16) ",
+      "train": "TER ou RER D au départ de la Gare du Nord\n\n\n",
+      "plane": "Roissy Charles de Gaulle - 30 kms"
+    },
+    {
+      "car": "Autoroute A1, sortie 7 Survilliers ou sortie 8 Senlis-Chamant",
+      "train": "RER D au départ de Châtelet Les halles",
+      "plane": "Paris Orly - 63 kms"
+    },
+    {
+      "train": "Vous avez ensuite 10 minutes de marche jusqu'à l'hippodrome.",
+      "plane": "Beauvais Tilly - 50 kms"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Est-ce que les enfants sont autorisés au festival ?",
+      "answer": "Oui, le Paris Harmony Haven 2024 est ouvert à tous les âges. Des activités spéciales pour les enfants seront également disponibles."
+    },
+    {
+      "question": "Y aura-t-il des options d'hébergement disponibles près du site du festival ?",
+      "answer": "Oui, nous avons des partenariats avec des hôtels locaux et des campings pour vous offrir une variété d'options d'hébergement à proximité."
+    },
+    {
+      "question": "Comment puis-je échanger ou revendre mes billets si je ne peux plus assister au festival ?",
+      "answer": "Vous pouvez contacter notre service client pour obtenir de l'aide sur l'échange ou la revente de billets. Des options de transfert de billets seront également disponibles sur notre plateforme en ligne."
+    },
+    {
+      "question": "Y aura-t-il des options de restauration sur le site du festival ?",
+      "answer": "Oui, nous aurons une sélection de stands de nourriture et de boissons proposant une variété de cuisines et de boissons pour répondre à tous les goûts."
+    },
+    {
+      "question": "Les animaux de compagnie sont-ils autorisés sur le site du festival ?",
+      "answer": "Les animaux de compagnie ne sont généralement pas autorisés sur le site du festival pour des raisons de sécurité et de confort des autres festivaliers."
+    },
+    {
+      "question": "Comment puis-je accéder au site du festival en transports en commun ?",
+      "answer": "Des informations détaillées sur les options de transports en commun seront disponibles sur notre site web, y compris les horaires de bus et les liaisons ferroviaires."
+    },
+    {
+      "question": "Est-ce que le festival est accessible aux personnes à mobilité réduite ?",
+      "answer": "Oui, nous nous efforçons de rendre le festival accessible au plus grand nombre. Des installations adaptées seront disponibles sur le site et notre personnel sera là pour vous aider."
+    },
+    {
+      "question": "Y aura-t-il des casiers disponibles pour stocker mes effets personnels sur le site du festival ?",
+      "answer": "Oui, des casiers seront mis à votre disposition pour stocker en toute sécurité vos effets personnels pendant le festival."
+    },
+    {
+      "question": "Quels sont les modes de paiement acceptés sur le site du festival ?",
+      "answer": "Les principales cartes de crédit et de débit seront acceptées sur le site du festival. Des distributeurs automatiques de billets seront également disponibles."
+    },
+    {
+      "question": "Y aura-t-il un service de premiers secours sur le site du festival ?",
+      "answer": "Oui, nous aurons une équipe de secouristes professionnels sur place pour répondre à tout besoin médical d'urgence."
+    },
+    {
+      "question": "Est-ce que le festival est respectueux de l'environnement ?",
+      "answer": "Oui, nous nous engageons à réduire notre empreinte environnementale en mettant en place des pratiques durables telles que le recyclage, l'utilisation de matériaux biodégradables et la sensibilisation à la protection de l'environnement."
+    }
+  ],
   "various": [
     null,
     {
@@ -726,19 +790,6 @@
     },
     {
       "Column1": "Mettant en vedette 15 groupes de premier plan répartis sur 5 scènes, une variété d'activités annexes, et des collaborations exclusives avec nos partenaires fictifs."
-    },
-    null,
-    {
-      "Column1": "Accès et infos pratiques"
-    },
-    {
-      "Column1": "Adresse : Avenue des Aigles - 60500 Chantilly"
-    },
-    {
-      "Column1": "Vous pouvez y accéder via un TER au départ de la Gare du Nord et également avec le RER D au départ de cette même gare ou de Châtelet. Vous avez ensuite 10 minutes de marche jusqu'à l'hippodrome. "
-    },
-    {
-      "Column1": "En voiture : RN 16 (accès par A1 – Porte de la Chapelle – Direction Saint Denis – Sortie 3 Pierrefite – N1 sur 3 km puis RN16) Autoroute A1, sortie 7 Survilliers ou sortie 8 Senlis-Chamant"
     }
   ]
 }

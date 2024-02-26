@@ -53,5 +53,83 @@
         />
       </div>
     </section>
+    <section class="infos" ngModelGroup="infos">
+      <div class="section-header">
+        <app-accordion index="2" title="infos pratiques"></app-accordion>
+      </div>
+      <div
+        class="section-content infos"
+        [ngClass]="{
+          hidden:
+            form.value.infos !== undefined ? !form.value.infos.accordion : true
+        }"
+      >
+        <h3>Lieu - Horaires</h3>
+        <div>
+          Le NationSound festival vous accueille de
+          {{ infos.opening }} sur l'hippodrome de Chantilly :
+          <address>
+            <span>{{ infos.address }}</span
+            ><span>{{ infos.gps }}</span>
+          </address>
+        </div>
+        <h3>Moyens de transport</h3>
+        <ul class="transport-means">
+          <li>
+            <ul class="transport train">
+              <img src="../../assets/icons/train.svg" alt="accès en train" />
+              <li class="option" *ngFor="let option of infos.transport.train">
+                {{ option }}
+              </li>
+            </ul>
+          </li>
+          <li>
+            <ul class="transport car">
+              <img src="../../assets/icons/car.svg" alt="accès en voiture" />
+              <li class="option" *ngFor="let option of infos.transport.car">
+                {{ option }}
+              </li>
+            </ul>
+          </li>
+          <li>
+            <ul class="transport plane">
+              <img
+                src="../../assets/icons/plane.svg"
+                alt="aéroports les plus proches"
+              />
+              <li class="option" *ngFor="let option of infos.transport.plane">
+                {{ option }}
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="faq" ngModelGroup="faq">
+      <div class="section-header">
+        <app-accordion index="3" title="foire aux questions"></app-accordion>
+      </div>
+      <div
+        class="section-content faq"
+        [ngClass]="{
+          hidden:
+            form.value.faq !== undefined ? !form.value.faq.accordion : true
+        }"
+      ></div>
+    </section>
+    <section class="partners" ngModelGroup="partners">
+      <div class="section-header">
+        <app-accordion index="3" title="partenaires"></app-accordion>
+      </div>
+      <div
+        class="section-content partners"
+        [ngClass]="{
+          hidden:
+            form.value.partners !== undefined
+              ? !form.value.partners.accordion
+              : true
+        }"
+      ></div>
+    </section>
   </form>
 </main>

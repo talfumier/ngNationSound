@@ -64,7 +64,7 @@ fieldset.hidden {
 form {
   display:grid;
   grid-template-rows: repeat(2,auto);
-  grid-template-columns: 100px 150px 100px;
+  grid-template-columns: 100px 150px 110px;
   column-gap: 0px;
   padding: 5px;
 }
