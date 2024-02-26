@@ -647,8 +647,8 @@
   ],
   "faq": [
     {
-      "question": "Est-ce que les enfants sont autorisés au festival ?",
-      "answer": "Oui, le Paris Harmony Haven 2024 est ouvert à tous les âges. Des activités spéciales pour les enfants seront également disponibles."
+      "question": "Est-ce que les enfants sont acceptés au festival ?",
+      "answer": "Oui, le NationSound festival est ouvert à tous les âges. Des activités spéciales pour les enfants seront également disponibles."
     },
     {
       "question": "Y aura-t-il des options d'hébergement disponibles près du site du festival ?",
@@ -689,6 +689,23 @@
     {
       "question": "Est-ce que le festival est respectueux de l'environnement ?",
       "answer": "Oui, nous nous engageons à réduire notre empreinte environnementale en mettant en place des pratiques durables telles que le recyclage, l'utilisation de matériaux biodégradables et la sensibilisation à la protection de l'environnement."
+    }
+  ],
+  "partners": [
+    {
+      "file": "partner1.jpg"
+    },
+    {
+      "file": "partner2.png"
+    },
+    {
+      "file": "partner3.png"
+    },
+    {
+      "file": "partner4.jpg"
+    },
+    {
+      "file": "partner5.png"
     }
   ],
   "various": [

@@ -134,23 +134,43 @@ div.map img {
   min-height:200px;
   border: 3px solid var(--orange);
 }
-div.section-content.infos {
+div.section-content.infos,
+div.section-content.faq,
+div.section-content.partners {
   font-size: 1.5rem;
   background-color: var(--beige);
   border:3px solid var(--orange);
-  border-radius: 5px;
-  width:90%;
-  max-width: 650px;
+  border-radius: 5px;  
   margin:5px 0;
+  width: 90%;
   opacity: 1;
   transition: opacity 1.5s;
 }
-div.section-content.infos.hidden {
+div.section-content.infos,
+div.section-content.partners {
+  max-width: 650px;
+}
+div.section-content.partners {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content:space-evenly;
+  align-items: center;
+}
+div.section-content.faq {
+  max-width: 800px;
+  height: 300px;
+  overflow-y: scroll;
+  z-index:1000;
+}
+div.section-content.infos.hidden,
+div.section-content.faq.hidden,
+div.section-content.partners.hidden { 
   height: 0;
   margin: 0;
   border:0;
   opacity: 0;
   transition: opacity 1.5s;
+  overflow:hidden;
 }
 h3 {
   font-size: 1.7rem;
@@ -179,7 +199,6 @@ ul.transport-means {
 }
 ul.transport {
   position:relative;
-  /* list-style: circle; */
   padding:5px 20px;
 }
 ul.transport-means img {
@@ -188,6 +207,11 @@ ul.transport-means img {
   top:15px;
   height:25px;
   width:25px;
+}
+div.section-content.partners img {
+  object-fit: cover;
+  width:100px;
+  padding:5px;
 }
 
 @media screen and (min-width: 600px) {

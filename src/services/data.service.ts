@@ -1,7 +1,7 @@
 import {Injectable, inject} from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import _ from "lodash";
-import {Poi,Dates,Artist,Style,Event, EventType, Infos, Transport} from "./interfaces";
+import {Poi,Dates,Artist,Style,Event, EventType, Infos, Transport, Faq} from "./interfaces";
 import { removeAccents} from './../app/utilities/functions/utlityFunctions';
 import data from "./data.json";
 
@@ -17,6 +17,8 @@ export class DataService {
   private _styles:Style[]=[];
   private _events:Event[]=[];
   private _infos:Infos={} as Infos;
+  private _faqs:Faq[]=[];
+  private _partners:string[]=[];
 
   constructor() {
     this.initData();
@@ -39,7 +41,12 @@ export class DataService {
       address:data.dates[0].address,
       gps:data.dates[0].gps,
       transport:obj,
-    }
+    };
+    this._faqs=data.faq;
+    this._partners=[];
+    data.partners.map((partner) => {
+      this._partners.push(partner.file);
+    })
     this.initInnerHTML();
     this.initEvents();
   }
@@ -123,6 +130,12 @@ export class DataService {
   }
   get infos():Infos {
     return this._infos;
+  }
+  get faqs() {
+    return this._faqs;
+  }
+  get partners(){
+    return this._partners;
   }
 }
 
