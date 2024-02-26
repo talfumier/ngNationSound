@@ -7,7 +7,6 @@ export interface Dates{
   days:string,
   month:string,
   year:number,
-  opening:string
 }
 export interface Artist {
   id:number,
@@ -66,4 +65,10 @@ export interface Filter {
 export interface OverlayLayer {
   name:string,
   features:L.GeoJSON
+}
+export interface Infos {
+  opening:string,address:string,gps:string,transport:Transport
+}
+export interface Transport {
+  car:string[],train:string[],plane:string[]
 }

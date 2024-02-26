@@ -314,6 +314,23 @@
               ]
             ]
           }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "_umap_options": { "color": "Red", "weight": 7 },
+            "name": "Sc\u00e8ne virage"
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [2.481703, 49.192576],
+              [2.481816, 49.192614],
+              [2.481923, 49.192446],
+              [2.4818, 49.192415],
+              [2.481698, 49.192576]
+            ]
+          }
         }
       ],
       "_umap_options": {
@@ -1406,23 +1423,6 @@
                 [2.477369, 49.189512],
                 [2.477278, 49.189684]
               ]
-            ]
-          }
-        },
-        {
-          "type": "Feature",
-          "properties": {
-            "_umap_options": { "color": "Red", "weight": 7 },
-            "name": "Sc\u00e8ne virage"
-          },
-          "geometry": {
-            "type": "LineString",
-            "coordinates": [
-              [2.481703, 49.192576],
-              [2.481816, 49.192614],
-              [2.481923, 49.192446],
-              [2.4818, 49.192415],
-              [2.481698, 49.192576]
             ]
           }
         }

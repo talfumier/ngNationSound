@@ -1,7 +1,7 @@
 import {Injectable, inject} from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import _ from "lodash";
-import {Poi,Dates,Artist,Style,Event, EventType} from "./interfaces";
+import {Poi,Dates,Artist,Style,Event, EventType, Infos, Transport} from "./interfaces";
 import { removeAccents} from './../app/utilities/functions/utlityFunctions';
 import data from "./data.json";
 
@@ -16,6 +16,7 @@ export class DataService {
   private _artists:Artist[]=[];
   private _styles:Style[]=[];
   private _events:Event[]=[];
+  private _infos:Infos={} as Infos;
 
   constructor() {
     this.initData();
@@ -27,6 +28,18 @@ export class DataService {
     this._pois=data.pois;
     this._artists=data.artists;
     this._styles=data.cat;
+    const obj:Transport={car:[],train:[],plane:[]} as Transport;
+    data.transport.map((item) => {
+      Object.keys(item).map((key) => {
+        obj[key as keyof Transport].push(item[key as keyof object]);  
+      })
+    }),
+    this._infos={
+      opening:data.dates[0].opening,
+      address:data.dates[0].address,
+      gps:data.dates[0].gps,
+      transport:obj,
+    }
     this.initInnerHTML();
     this.initEvents();
   }
@@ -107,6 +120,9 @@ export class DataService {
   }
   get events():Event[]{
     return this._events;
+  }
+  get infos():Infos {
+    return this._infos;
   }
 }
 

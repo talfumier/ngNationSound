@@ -14,6 +14,7 @@ export class FilterService {
   private _defaultFilter:Filter={} as Filter; //{days:{},time:{},types:{},artist:{}};
   private _filteredEvents:Event[]=[];
   private _filter:Filter={} as Filter;
+  private _nochange:boolean=false; //flag to monitor actual change in filter settings
 
   constructor(private service:DataService) { }
 
@@ -34,6 +35,12 @@ export class FilterService {
   }
   set filter(data){
     this._filter=data;
+  }
+  get nochange() {
+    return this._nochange;
+  }
+  set nochange(status:boolean) {
+    this._nochange=status;
   }
   setFormFilterElements(){  //initialize form filter elements in program page and set default filter
     const days=[];
@@ -110,7 +117,8 @@ export class FilterService {
     if(!bl[2]) return false;
     return true;
   }
-  setFilteredEvents(fltr?:Filter):void {    
+  setFilteredEvents():void {  
+    if(this._nochange) return; //no filter settings change > no need to re-run function  
     if(Object.keys(this._filter).length===0) this.setFormFilterElements();
     // if(_.isEqual(filter,this._activeFilter)) return; //Deep comparison active vs new filter, if no difference no need to re-filter data  
     let dates:any={},x:any="";    
@@ -138,6 +146,7 @@ export class FilterService {
     this._filteredEvents=_.filter(this.service.events,(event) => {
       return this.filterEvent(dates,event); 
     })
+    this._nochange=true;
   }
 }
 

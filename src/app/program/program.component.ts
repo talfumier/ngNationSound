@@ -26,12 +26,11 @@ export class ProgramComponent implements OnInit {
   }
 
   ngOnInit(): void {    
-    this.activatedRoute.data.subscribe(({}) => { //resolved raw events initialized by eventsResolver in filter.service.ts    
+    this.activatedRoute.data.subscribe(({}) => { //resolved raw events initialized by eventsResolver in filter.service.ts  
       this._formFilterElements=this.filterService.formFilterElements;  //initialize form filter elements
       this._filter=this.filterService.filter;  //initialize filter
       this._events=this.getFormattedData(this.filterService.filteredEvents);  //format raw events data
     });
-    
   }
   getFormattedData(evts:any[]){
     const AllArtistEvents:ArtistEvents[]=[];
@@ -63,7 +62,7 @@ export class ProgramComponent implements OnInit {
   get events():ArtistEvents[]{
     return this._events;
   }
-  handleFilterChange(form:NgForm){
+  handleFilterChange(form:NgForm){   
     let cats:object={};
     ["days","types"].map((it:string) => {
       cats={...form.value[it]};
@@ -83,8 +82,9 @@ export class ProgramComponent implements OnInit {
     this._filter.artist=form.value.artist;
     
     this.filterService.filter=this._filter;
+    this.filterService.nochange=false;
     this.filterService.setFilteredEvents();
-    this._events=this.getFormattedData(this.filterService.filteredEvents);
+    this._events=this.getFormattedData(this.filterService.filteredEvents);    
   }
   filterReset (form?:NgForm) {
     if(form) form.setValue(this.filterService.defaultFilter);
