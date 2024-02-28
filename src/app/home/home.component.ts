@@ -1,8 +1,7 @@
 import { Component, HostListener, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
-import { AccordionComponent } from './accordion/accordion.component';
-import { Infos, Faq } from '../../services/interfaces';
+import { Infos, Faq, Message } from '../../services/interfaces';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +9,7 @@ import { Infos, Faq } from '../../services/interfaces';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {  
-
+  private _message:Message={} as Message;
   private _innerHTML:string[]=[];
   private _infos:Infos={} as Infos;
   private _faqs:Faq[]=[];
@@ -18,6 +17,7 @@ export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
   static scrollY:number;
 
   constructor(private service:DataService,private router: Router){
+    this._message=service.message;
     this._innerHTML=service.innerHTML;
     this._infos=service.infos;
     this._faqs=service.faqs;
@@ -28,16 +28,13 @@ export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
     document.getElementById("home-link")?.classList.add("active");
   }
   ngAfterViewInit(): void {   
-    setTimeout(() => {    
-    if(JSON.stringify(AccordionComponent.status).indexOf("true")===-1){
-      window.scrollTo(0,0);
-      HomeComponent.scrollY=0;
-    }
-    else window.scrollTo(0,HomeComponent.scrollY);   
-    },100);
+    window.scrollTo(0,HomeComponent.scrollY);  
   }
   ngOnDestroy(): void {
     document.getElementById("home-link")?.classList.remove("active");
+  }
+  get message(){
+    return this._message;
   }
   get innerHTML():string[]{
     return this._innerHTML;

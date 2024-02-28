@@ -2,12 +2,8 @@ main {
   width: 100vw;
   min-width:350px;
   min-height: 100vh;
-  background-image: url("../../assets/images/festival1.jpg");
-  background-size:cover;
-  background-position:center;
-  opacity:0.8;
 }
-main section {
+main section:not(.container-infos-faq) {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,17 +20,22 @@ div.fixed-container {
   box-shadow: 0 .5rem .9rem #CCC, inset 0 0 1.7rem .5rem #CCC;
 }
 h2 {
-  font-size: 1.7rem;
+  font-size: 2rem;
   vertical-align: middle;
   margin: 0;
   white-space: nowrap;
 }
 h2.moving-text{
   display: inline-block;
-  color: var(--blue);
   padding-right: 2rem;/* space for transition */
   padding-left: 100%;/* start at right most position */
   animation: defilement-rtl 20s infinite linear;
+}
+h2.moving-text.info {
+  color: var(--blue);
+}
+h2.moving-text.warning {
+  color: var(--red);
 }
 @keyframes defilement-rtl {
   0% {
@@ -50,7 +51,21 @@ div.section-header {
   display:flex;
   justify-content: center;
   width:100%;
-  z-index:1000;
+  z-index: 500;
+}
+h2.title {
+  padding: 5px 0;
+  margin: 0;
+  color: var(--red);
+  text-shadow: 2px 2px 2px white;
+  border: 1px solid;
+  border-radius: 10px;
+  background-color: var(--beige);
+  width: 14em;
+  text-align: center;
+}
+div.section-content {
+  margin:10px 0 15px;
 }
 div.program-grid {
   display:grid;
@@ -58,16 +73,7 @@ div.program-grid {
   grid-template-rows: 30px auto;
   row-gap: 10px;
   column-gap: 5px;
-  padding:5px 15px;
-  opacity: 1;
-  transition: opacity 1.5s;overflow: hidden;
-}
-div.program-grid.hidden {
-  opacity:0;
-  height:0;
-  padding:0 15px 0;
-  transition: opacity 1.5s,height 1.5s;
-  z-index: -1000;
+  padding:0 15px;
 }
 
 :host ::ng-deep div.grid-item {/* : host::ng-deep required for html content rendered via [innerHtml]*/
@@ -116,16 +122,8 @@ div.program-grid.hidden {
 div.map {
   display:flex;
   justify-content: center;
-  padding: 5px 15px;
+  padding: 0 15px;
   cursor:pointer;
-  opacity: 1;
-  transition: opacity 1.5s;
-}
-div.map.hidden {
-  opacity: 0;
-  height: 0;
-  padding: 0 15px 0;
-  transition: opacity 1.5s, height 1.5s;
 }
 div.map img {
   object-fit:cover;
@@ -133,21 +131,23 @@ div.map img {
   height:50%;
   min-height:200px;
   border: 3px solid var(--orange);
+  border-radius: 5px;
+}
+section.container-infos-faq {
+  display:grid;
+  justify-content: center;
+  grid-template-rows: repeat(2, auto);
+  grid-template-columns: auto;
 }
 div.section-content.infos,
-div.section-content.faq,
-div.section-content.partners {
+div.section-content.faq {
   font-size: 1.5rem;
   background-color: var(--beige);
   border:3px solid var(--orange);
   border-radius: 5px;  
-  margin:5px 0;
   width: 90%;
-  opacity: 1;
-  transition: opacity 1.5s;
-}
-div.section-content.infos,
-div.section-content.partners {
+  height:350px;
+  overflow-y: scroll;
   max-width: 650px;
 }
 div.section-content.partners {
@@ -155,22 +155,8 @@ div.section-content.partners {
   flex-wrap: wrap;
   justify-content:space-evenly;
   align-items: center;
-}
-div.section-content.faq {
-  max-width: 800px;
-  height: 300px;
-  overflow-y: scroll;
-  z-index:1000;
-}
-div.section-content.infos.hidden,
-div.section-content.faq.hidden,
-div.section-content.partners.hidden { 
-  height: 0;
-  margin: 0;
-  border:0;
-  opacity: 0;
-  transition: opacity 1.5s;
-  overflow:hidden;
+  width:90%;
+  max-width:900px;
 }
 h3 {
   font-size: 1.7rem;
@@ -225,6 +211,10 @@ div.section-content.partners img {
   :host ::ng-deep div.row-header {
     transform: rotate(0deg);
   }
+  section.container-infos-faq {
+    grid-template-rows: auto;
+    grid-template-columns: repeat(2, auto);
+  }
 }
 
 @media screen and (min-width: 992px) {
@@ -244,6 +234,14 @@ div.section-content.partners img {
   :host ::ng-deep div.grid-item:has(.row-header) {
     font-size: 1.5rem;
     padding: 0 10px;
+  }   
+  h2 {
+    font-size:2.2rem;
+  } 
+}
+@media screen and (min-width: 992px) {
+  div.section-content.partners img {
+    width:120px;
   }
 }
 
