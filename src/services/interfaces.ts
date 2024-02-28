@@ -1,3 +1,6 @@
+export interface Message {
+  text:string,criticality:string,active?:boolean
+}
 export interface Poi {
   id:string,
   name:string,

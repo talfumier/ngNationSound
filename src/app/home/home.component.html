@@ -1,69 +1,50 @@
 <main>
-  <form #form="ngForm">
-    <!-- <p class="debug">
-      {{ form.value | json }}
-    </p> -->
-    <section class="banner">
-      <div class="fixed-container">
-        <h2 class="moving-text">
-          Bienvenue sur l'hippodrome de Chantilly pour cette 3e édition du Music
-          Festival Paris 2024, où musique et diversité culturelle se rejoignent
-          pour créer une expérience inoubliable ... Achetez vos billets dès
-          maintenant et préparez-vous à un voyage extraordinaire !
-        </h2>
-      </div>
-    </section>
-    <section class="program-summary" ngModelGroup="program">
-      <div class="section-header">
-        <app-accordion index="0" title="concerts 2024"></app-accordion>
-      </div>
-      <div
-        class="section-content program-grid"
+  <section class="banner">
+    <div class="fixed-container">
+      <h2
+        class="moving-text"
         [ngClass]="{
-          hidden:
-            form.value.program !== undefined
-              ? !form.value.program.accordion
-              : true
+          info: message.criticality === 'info',
+          warning: message.criticality === 'warning'
         }"
       >
-        <div
-          *ngFor="let item of innerHTML"
-          class="grid-item"
-          [innerHTML]="item"
-        ></div>
-      </div>
-    </section>
-    <section class="map" ngModelGroup="map">
-      <div class="section-header">
-        <app-accordion index="1" title="carte du festival"></app-accordion>
-      </div>
+        {{ message.text }}
+      </h2>
+    </div>
+  </section>
+  <section class="program-summary">
+    <div class="section-header">
+      <h2 class="title">concerts 2024</h2>
+      <!-- <app-accordion index="0" title="concerts 2024"></app-accordion> -->
+    </div>
+    <div class="section-content program-grid">
       <div
-        class="section-content map"
-        [ngClass]="{
-          hidden:
-            form.value.map !== undefined ? !form.value.map.accordion : true
-        }"
-      >
-        <img
-          src="assets/images/map-thumbnail.jpg"
-          alt="lien vers la carte"
-          routerLink="/map/all/map"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-        />
-      </div>
-    </section>
-    <section class="infos" ngModelGroup="infos">
+        *ngFor="let item of innerHTML"
+        class="grid-item"
+        [innerHTML]="item"
+      ></div>
+    </div>
+  </section>
+  <section class="map">
+    <div class="section-header">
+      <h2 class="title">carte du festival</h2>
+    </div>
+    <div class="section-content map">
+      <img
+        src="assets/images/map-thumbnail.jpg"
+        alt="lien vers la carte"
+        routerLink="/map/all/map"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      />
+    </div>
+  </section>
+  <section class="container-infos-faq">
+    <section class="infos">
       <div class="section-header">
-        <app-accordion index="2" title="infos pratiques"></app-accordion>
+        <h2 class="title">infos pratiques</h2>
       </div>
-      <div
-        class="section-content infos"
-        [ngClass]="{
-          hidden:
-            form.value.infos !== undefined ? !form.value.infos.accordion : true
-        }"
-      >
+      <div class="section-content infos">
         <h3>Lieu - Horaires</h3>
         <div>
           Le NationSound festival vous accueille de
@@ -105,39 +86,25 @@
         </ul>
       </div>
     </section>
-    <section class="faq" ngModelGroup="faq">
+    <section class="faq">
       <div class="section-header">
-        <app-accordion index="3" title="foire aux questions"></app-accordion>
+        <h2 class="title">foire aux questions</h2>
       </div>
-      <div
-        class="section-content faq"
-        [ngClass]="{
-          hidden:
-            form.value.faq !== undefined ? !form.value.faq.accordion : true
-        }"
-      >
+      <div class="section-content faq">
         <app-faq [data]="faq" *ngFor="let faq of faqs"></app-faq>
       </div>
     </section>
-    <section class="partners" ngModelGroup="partners">
-      <div class="section-header">
-        <app-accordion index="3" title="partenaires"></app-accordion>
-      </div>
-      <div
-        class="section-content partners"
-        [ngClass]="{
-          hidden:
-            form.value.partners !== undefined
-              ? !form.value.partners.accordion
-              : true
-        }"
-      >
-        <img
-          *ngFor="let partner of partners; let idx = index"
-          src="{{ getPath(idx) }}"
-          alt="partenaire du festival"
-        />
-      </div>
-    </section>
-  </form>
+  </section>
+  <section class="partners">
+    <div class="section-header">
+      <h2 class="title">partenaires</h2>
+    </div>
+    <div class="section-content partners">
+      <img
+        *ngFor="let partner of partners; let idx = index"
+        src="{{ getPath(idx) }}"
+        alt="partenaire du festival"
+      />
+    </div>
+  </section>
 </main>
