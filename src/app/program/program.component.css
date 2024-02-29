@@ -36,6 +36,10 @@ div.header span.cat {
   border-radius: 5px;
   text-wrap: nowrap;
 }
+div.header span.cat.active {
+  color:var(--white);
+  background-color: var(--red-opaque8);
+}
 img {
   padding:0 5px 0 0;
   height:25px;
@@ -45,6 +49,7 @@ img.clear-filter {
   height: 30px;
   width: 30px;
 }
+
 svg {
   width: 15px;
   height: 15px;
@@ -115,6 +120,34 @@ button {
   margin: 15px 0 5px;
   cursor: pointer;
 }
+div.tooltip {
+  position: relative;
+  transition: opacity .5s;
+}
+
+div.tooltip .tooltiptext {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:fit-content;
+  text-wrap: nowrap;
+  font-size: 1.3rem;
+  background-color: var(--black);
+  color: var(--white);
+  border-radius: 5px;
+  padding: 5px 10px;
+  position: absolute;
+  top: 20px;
+  right: 0px;
+}
+
+div.tooltip.hidden {
+  opacity: 0;
+}
+
+div.tooltip.visible {
+  opacity: 1;
+}
 
 @media screen and (min-width: 450px) {
   div.header span.title,
@@ -131,7 +164,7 @@ button {
   }
 }
 @media screen and (min-width: 1500px) {
-  span.cat, img.cancel-filter,img.close-button {
+  span.cat, img.clear-filter,img.close-button {
     display:none;
   }
   form {

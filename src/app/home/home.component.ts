@@ -27,11 +27,14 @@ export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
   ngOnInit(): void {
     document.getElementById("home-link")?.classList.add("active");
   }
-  ngAfterViewInit(): void {   
-    window.scrollTo(0,HomeComponent.scrollY);  
+  ngAfterViewInit(): void {    
+    setTimeout(() => {
+      window.scrollTo(0,HomeComponent.scrollY);     
+    },100);     
   }
   ngOnDestroy(): void {
     document.getElementById("home-link")?.classList.remove("active");
+    HomeComponent.scrollY=window.scrollY; // record scroll position to be able to return at the same position
   }
   get message(){
     return this._message;
@@ -59,9 +62,5 @@ export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
     event.preventDefault(); // Prevent page from reloading
     const target = <HTMLAnchorElement>event.target;
     this.router.navigate([target.pathname]);
-  }
-  @HostListener('window:scroll', ['$event'])
-  onScroll() {
-    HomeComponent.scrollY=window.scrollY; // record scroll position to be able to return at the same position
   }
 }

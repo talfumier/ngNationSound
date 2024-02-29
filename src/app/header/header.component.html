@@ -33,13 +33,20 @@
       <li
         id="header-map-link"
         class="list-group-item"
-        routerLink="/map/all/header"
+        routerLink="/map/all"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
       >
         Carte
       </li>
-      <li class="list-group-item">Billetterie</li>
+      <li
+        class="list-group-item"
+        routerLink="/ticketing"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Billetterie
+      </li>
     </ul>
     <button class="menu-toggle" (click)="handleToggle()">
       <svg>

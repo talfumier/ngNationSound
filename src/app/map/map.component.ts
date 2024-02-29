@@ -16,28 +16,11 @@ export class MapComponent implements OnInit, OnDestroy {
   private map:L.Map={} as L.Map;
   private layers:OverlayLayer[]=[];
   private stage:any="";
-  private _backToText:string="accueil";
-  private _backToUrl:string="/";
 
   constructor(private route:ActivatedRoute,private umap:UmapService) {
-    this.stage = this.route.snapshot.paramMap.get("stage");
-    const from=this.route.snapshot.paramMap.get("from");    
-    if(!this.stage || !from) return;
-    switch(from){
-      case "header": 
-        this._backToText="";
-        break;
-      case "program-details":
-        this._backToText="programme";
-        this._backToUrl="/program"
-    }
+    this.stage = this.route.snapshot.paramMap.get("stage"); 
+    if(!this.stage) return;
   }  
-  get backToText():string{
-    return this._backToText;
-  }
-  get backToUrl(){
-    return this._backToUrl;
-  }
   
   ngOnInit(): void {
     window.scrollTo(0,0);

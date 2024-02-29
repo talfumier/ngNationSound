@@ -1,4 +1,4 @@
-import { Component,OnInit} from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import _ from 'lodash';
@@ -11,11 +11,15 @@ import { DataService } from '../../services/data.service';
   templateUrl: './program.component.html',
   styleUrl: './program.component.css'
 })
-export class ProgramComponent implements OnInit {  
+export class ProgramComponent implements OnInit, AfterViewInit,OnDestroy {  
   private _cats:string[]=["Quand ?","A quelle heure ?","Quoi ?","Qui ?"];
   private _activeSubform:number=-1;
   private _formFilterElements:FormFilterElements={} as FormFilterElements;
-  private _filter:Filter={} as Filter;
+  private _filter:Filter={} as Filter;  
+  private _isFiltered:boolean[]=[];
+  static scrollY:number;
+  
+  @ViewChild('tooltip') tooltip: ElementRef={} as ElementRef;
 
   private _events:ArtistEvents[]=[];  
 
@@ -30,6 +34,9 @@ export class ProgramComponent implements OnInit {
   get formFilterElements(){
     return this._formFilterElements;
   }
+  get isFiltered(){
+    return this._isFiltered;
+  }
 
   ngOnInit(): void {    
     this.activatedRoute.data.subscribe(({}) => { //resolved raw events initialized by eventsResolver in filter.service.ts  
@@ -38,6 +45,23 @@ export class ProgramComponent implements OnInit {
       this._events=this.getFormattedData(this.filterService.filteredEvents);  //format raw events data
     });
     if(window.innerWidth>=1500) this._activeSubform=100;
+    this.setIsFiltered();
+  }
+  setIsFiltered (){
+   this._isFiltered=[
+      !this._filter.days["all" as keyof object],
+      !_.isEqual(Object.values(this._filter["time" as keyof object]),[-1,-1]),
+      !this._filter.types["all" as keyof object],
+      this._filter.artist["id" as keyof object]!==-1
+    ];  
+  }
+  ngAfterViewInit(): void {    
+    setTimeout(() => {
+      window.scrollTo(0,ProgramComponent.scrollY);     
+    },100);     
+  }
+  ngOnDestroy(): void {
+    ProgramComponent.scrollY=window.scrollY; // record scroll position to be able to return at the same position
   }
   getFormattedData(evts:any[]){
     const AllArtistEvents:ArtistEvents[]=[];
@@ -96,13 +120,20 @@ export class ProgramComponent implements OnInit {
     this.filterService.filter=this._filter;
     this.filterService.nochange=false;
     this.filterService.setFilteredEvents();
-    this._events=this.getFormattedData(this.filterService.filteredEvents);    
+    this._events=this.getFormattedData(this.filterService.filteredEvents);   
+    
+    this.setIsFiltered(); 
   }
-  filterReset (form?:NgForm) {
-    if(form) form.setValue(this.filterService.defaultFilter);
+  filterReset (form:NgForm) {
+    form.setValue(this.filterService.defaultFilter);
     this._filter=this.filterService.defaultFilter;  
     this.filterService.filter=this._filter;
     this.filterService.filteredEvents=this.dataService.events;
     this._events=this.getFormattedData(this.dataService.events);
+
+    this.setIsFiltered();
+  }
+  handleMouseEvent(cs:number) {
+    this.tooltip.nativeElement.classList.replace(`${cs===1?"hidden":"visible"}`,`${cs===1?"visible":"hidden"}`);
   }
 }

@@ -7,14 +7,20 @@
         *ngFor="let cat of cats; let idx = index"
         class="cat"
         (click)="handleCatClick($event, idx)"
+        [ngClass]="{ active: isFiltered[idx] }"
         >{{ cat }}
       </span>
       <img
         class="clear-filter"
         src="assets/icons/redCross.png"
         alt="réinitialiser le filtre"
-        (click)="filterReset()"
+        (click)="filterReset(form)"
+        (mouseenter)="handleMouseEvent(1)"
+        (mouseleave)="handleMouseEvent(-1)"
       />
+      <div #tooltip class="tooltip hidden">
+        <span class="tooltiptext">Réinitialiser tous les filtres</span>
+      </div>
     </div>
     <!-- <p class="debug">
       {{ form.value | json }}

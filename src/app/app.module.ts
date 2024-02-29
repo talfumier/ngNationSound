@@ -21,6 +21,7 @@ import { SelectComponent } from './utilities/select/select.component';
 import { EventComponent } from './program/event/event.component';
 import { MapComponent } from './map/map.component';
 import { FaqComponent } from './faq/faq.component';
+import { TicketingComponent } from './ticketing/ticketing.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { FaqComponent } from './faq/faq.component';
     SelectComponent,
     EventComponent,
     MapComponent,
-    FaqComponent
+    FaqComponent,
+    TicketingComponent
   ],
   imports: [
     BrowserModule,

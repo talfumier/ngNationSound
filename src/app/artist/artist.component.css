@@ -5,28 +5,6 @@ main {
   flex-direction: column;
   height: 100%;
 }
-div.back-button {
-  position:fixed;
-  top:100px;
-  display:flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.3rem;
-  font-weight: 700;
-  white-space: nowrap;
-  padding: 5px 10px;
-  color: var(--blue);
-  vertical-align: middle;
-  cursor: pointer;
-}
-div.back-button svg {
-  width: 15px;
-  height: 15px;
-  margin-right: 15px;
-  fill: var(--blue);
-}
 
 section.artist {
   margin-top: 20px;

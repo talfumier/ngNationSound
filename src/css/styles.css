@@ -6,6 +6,7 @@
 /* GLOBAL APP STYLES */
 :root {
   --red:rgb(223, 6, 17);
+  --red-opaque8: rgb(223, 6, 17, .8);
   --red-opaque9: rgb(223, 6, 17,.9);
   --orange: #b65f28;
   --orange-opaque8: rgb(182, 95, 40, .8);

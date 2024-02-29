@@ -1,7 +1,7 @@
 import {Injectable, inject} from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import _ from "lodash";
-import {Poi,Dates,Artist,Style,Event, EventType, Infos, Transport, Faq, Message} from "./interfaces";
+import {Poi,Dates,Artist,Style,Event, EventType, Infos, Transport, Faq, Message, Pass} from "./interfaces";
 import { removeAccents} from './../app/utilities/functions/utlityFunctions';
 import data from "./data.json";
 
@@ -20,6 +20,7 @@ export class DataService {
   private _infos:Infos={} as Infos;
   private _faqs:Faq[]=[];
   private _partners:string[]=[];
+  private _passes:Pass[]=[];
 
   constructor() {
     this.initData();
@@ -50,7 +51,8 @@ export class DataService {
     this._partners=[];
     data.partners.map((partner) => {
       this._partners.push(partner.file);
-    })
+    });
+    this._passes=data.ticketing;
     this.initInnerHTML();
     this.initEvents();
   }
@@ -68,7 +70,7 @@ export class DataService {
     });   
     let day="", ul="",artist="";
     stages.map((stage) => {
-      this._innerHTML.push(`<div class=row-header><a href=/map/${removeAccents(stage.name)}/program>${stage.name}</a></div>`);
+      this._innerHTML.push(`<div class=row-header><a href=/map/${removeAccents(stage.name)}>${stage.name}</a></div>`);
       day="",ul="";
       _.filter(data.events,(evt) => {
         return evt.location===stage.id && evt.type===1;
@@ -81,7 +83,7 @@ export class DataService {
         artist=_.filter(this._artists,(item) => {
           return item.id===evt.performer
         })[0].name;
-        ul=ul+`<li class='list-group-item-program'>${evt.date.slice(-5).replace(":","h")} : <a href=/artist/${evt.performer}/program>${artist}</a></li>`
+        ul=ul+`<li class='list-group-item-program'>${evt.date.slice(-5).replace(":","h")} : <a href=/artist/${evt.performer}>${artist}</a></li>`
       });
       if(ul.length>0) this._innerHTML.push(ul+"</ul>");  
     });
@@ -142,6 +144,9 @@ export class DataService {
   }
   get partners(){
     return this._partners;
+  }
+  get passes(){
+    return this._passes;
   }
 }
 
