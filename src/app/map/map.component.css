@@ -2,34 +2,6 @@ main {
   position: absolute;
   top: 97px;  
 }
-div.back-button {
-  position: fixed;
-  top: 100px;
-  left:60px;
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.3rem;
-  font-weight: 700;
-  white-space: nowrap;
-  padding: 5px 10px;
-  background-color: var(--white);
-  border:1px solid var(--black-opaque8);
-  border-radius: 5px;
-  color: var(--blue);
-  vertical-align: middle;
-  cursor: pointer;
-  z-index:1000;
-}
-
-div.back-button svg {
-  width: 15px;
-  height: 15px;
-  margin-right: 15px;
-  fill: var(--blue);
-}
 section#map {
   height: 100vh;
   width: 100vw;

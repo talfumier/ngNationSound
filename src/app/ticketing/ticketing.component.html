@@ -1,0 +1,17 @@
+<main>
+  <div class="pass-container">
+    <div class="pass" *ngFor="let pass of formattedData; let idx = index">
+      <h2 class="title">
+        PASS
+        <div class="day">{{ idx + 1 }} Jour{{ idx > 0 ? "s" : "" }}</div>
+      </h2>
+      <ul class="conditions">
+        <li class="category-price" *ngFor="let cond of pass">
+          <span class="category">{{ cond.category }}</span>
+          <span>{{ cond.price | currency : "€" : "symbol" : "1.0-2" }}</span>
+        </li>
+      </ul>
+      <button class="book">Réserver</button>
+    </div>
+  </div>
+</main>

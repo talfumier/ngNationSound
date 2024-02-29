@@ -1,6 +1,6 @@
 label {
   display: flex;
-  justify-content:center;
+  justify-content:left;
   align-items: center;
   padding: 10px 0px 0;
 }
@@ -10,7 +10,7 @@ label.highlighted {
 }
 
 p {
-  padding: 0 10px 0 0;
+  padding: 0 5px 0 15px;
   margin: 0;
   text-wrap: nowrap;
   text-align: center;

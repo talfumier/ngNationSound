@@ -78,3 +78,13 @@ export interface Transport {
 export interface Faq {
   question:string,answer:string
 }
+export interface Pass {
+  category:string,
+  pass1:number,
+  pass2:number,
+  pass3:number,
+}
+export interface FormattedPass {
+  category:string,
+  price:number
+}

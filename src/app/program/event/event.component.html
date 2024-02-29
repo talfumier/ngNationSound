@@ -7,12 +7,9 @@
           '.jpg'
       }}"
       alt="{{ event.performer.name }}"
-      [routerLink]="['/artist', event.performer.id, 'program-details']"
+      [routerLink]="['/artist', event.performer.id]"
     />
-    <h2
-      class="artist-name"
-      [routerLink]="['/artist', event.performer.id, 'program-details']"
-    >
+    <h2 class="artist-name" [routerLink]="['/artist', event.performer.id]">
       {{ event.performer.name }}
     </h2>
   </div>
@@ -32,8 +29,7 @@
           class="location"
           [routerLink]="[
             '/map',
-            cleanup(date.type.description, date.location.name),
-            'program-details'
+            cleanup(date.type.description, date.location.name)
           ]"
           >{{ date.location.name }}</span
         >

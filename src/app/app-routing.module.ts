@@ -7,12 +7,14 @@ import { ProgramComponent } from './program/program.component';
 import { MapComponent } from './map/map.component';
 import { dataResolver } from '../services/data.service';
 import { eventsResolver } from '../services/filter.service';
+import { TicketingComponent } from './ticketing/ticketing.component';
 
 const routes:Routes=[  
   {path:'',component:HomeComponent,resolve:{data:dataResolver}},
   {path:'program',component:ProgramComponent,resolve:{events:eventsResolver}},
-  {path:'map/:stage/:from',component:MapComponent},
-  {path:'artist/:id/:from',component:ArtistComponent},
+  {path:'map/:stage',component:MapComponent},
+  {path:'artist/:id',component:ArtistComponent},
+  {path:'ticketing',component:TicketingComponent},
   {path: '**', component: NotFoundComponent}
 
 ];
