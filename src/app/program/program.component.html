@@ -1,28 +1,42 @@
-<main (click)="closeForm()">
-  <section class="header" (click)="rotateChevron($event)">
+<main>
+  <section class="header">
     <div class="header">
-      <span>RECHERCHE</span>
-      <button class="chevron" [ngClass]="{ rotated: isRotated }">
-        <svg>
-          <use href="../../assets/icons/icons.svg#chevronIcon" />
-        </svg>
-      </button>
+      <span class="title">FILTRE</span>
+      <img src="assets/icons/filter.svg" alt="filtre" />
+      <span
+        *ngFor="let cat of cats; let idx = index"
+        class="cat"
+        (click)="handleCatClick($event, idx)"
+        >{{ cat }}
+      </span>
+      <img
+        class="clear-filter"
+        src="assets/icons/redCross.png"
+        alt="réinitialiser le filtre"
+        (click)="filterReset()"
+      />
     </div>
     <!-- <p class="debug">
       {{ form.value | json }}
     </p> -->
   </section>
-  <fieldset
-    class="form-filter"
-    [ngClass]="{ hidden: !isRotated }"
-    (click)="formClick($event)"
-  >
+  <fieldset class="form-filter" [ngClass]="{ hidden: activeSubform === -1 }">
     <form
       #form="ngForm"
       (ngSubmit)="filterReset(form)"
       (change)="handleFilterChange(form)"
     >
-      <div class="days" ngModelGroup="days">
+      <img
+        class="close-button"
+        src="assets/icons/close.svg"
+        alt="fermer la fenêtre"
+        (click)="handleCatClick($event, -1)"
+      />
+      <div
+        class="subform days"
+        [ngClass]="{ hidden: activeSubform !== 0 }"
+        ngModelGroup="days"
+      >
         <h3>Quand ?</h3>
         <app-input
           *ngFor="let day of formFilterElements.days"
@@ -30,7 +44,11 @@
           [filter]="filter.days"
         ></app-input>
       </div>
-      <div class="time" ngModelGroup="time">
+      <div
+        class="subform time"
+        [ngClass]="{ hidden: activeSubform !== 1 }"
+        ngModelGroup="time"
+      >
         <h3>A quelle heure ?</h3>
         <app-select
           *ngFor="let time of formFilterElements.times"
@@ -43,7 +61,11 @@
           [filter]="filter.time"
         ></app-select>
       </div>
-      <div class="types" ngModelGroup="types">
+      <div
+        class="subform types"
+        [ngClass]="{ hidden: activeSubform !== 2 }"
+        ngModelGroup="types"
+      >
         <h3>Quoi ?</h3>
         <app-input
           *ngFor="let type of formFilterElements.types"
@@ -51,7 +73,11 @@
           [filter]="filter.types"
         ></app-input>
       </div>
-      <div class="artist" ngModelGroup="artist">
+      <div
+        class="subform artist"
+        [ngClass]="{ hidden: activeSubform !== 3 }"
+        ngModelGroup="artist"
+      >
         <h3>Qui ?</h3>
         <app-select
           [cat]="formFilterElements.artist"

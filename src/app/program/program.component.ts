@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import _ from 'lodash';
 import {FormFilterElements, Filter,ArtistEvents,Poi,EventType } from '../../services/interfaces';
-import { getDateFromString } from '../utilities/functions/utlityFunctions';
 import { FilterService } from '../../services/filter.service';
 import { DataService } from '../../services/data.service';
 
@@ -13,14 +12,21 @@ import { DataService } from '../../services/data.service';
   styleUrl: './program.component.css'
 })
 export class ProgramComponent implements OnInit {  
+  private _cats:string[]=["Quand ?","A quelle heure ?","Quoi ?","Qui ?"];
+  private _activeSubform:number=-1;
   private _formFilterElements:FormFilterElements={} as FormFilterElements;
-  isRotated:boolean=false;
   private _filter:Filter={} as Filter;
 
   private _events:ArtistEvents[]=[];  
 
   constructor(private dataService:DataService,private filterService:FilterService, private activatedRoute: ActivatedRoute){}
 
+  get cats(){
+    return this._cats;
+  }
+  get activeSubform(){
+    return this._activeSubform;
+  }
   get formFilterElements(){
     return this._formFilterElements;
   }
@@ -31,6 +37,7 @@ export class ProgramComponent implements OnInit {
       this._filter=this.filterService.filter;  //initialize filter
       this._events=this.getFormattedData(this.filterService.filteredEvents);  //format raw events data
     });
+    if(window.innerWidth>=1500) this._activeSubform=100;
   }
   getFormattedData(evts:any[]){
     const AllArtistEvents:ArtistEvents[]=[];
@@ -62,6 +69,11 @@ export class ProgramComponent implements OnInit {
   get events():ArtistEvents[]{
     return this._events;
   }
+  handleCatClick(evt:Event,idx:number) {    
+    if(window.innerWidth>=1500) return; //filter form always visible on large screen devices
+    evt.stopPropagation();
+    this._activeSubform=idx;
+  }
   handleFilterChange(form:NgForm){   
     let cats:object={};
     ["days","types"].map((it:string) => {
@@ -92,19 +104,5 @@ export class ProgramComponent implements OnInit {
     this.filterService.filter=this._filter;
     this.filterService.filteredEvents=this.dataService.events;
     this._events=this.getFormattedData(this.dataService.events);
-  }
-  rotateChevron(evt?:Event) {
-    evt?.stopPropagation();
-    this.isRotated=!this.isRotated;
-  }
-  setRotatingChevron(bl:boolean){
-    this.isRotated=bl;
-  }
-  closeForm(){
-    if(!this.isRotated) return;
-    this.rotateChevron();
-  }
-  formClick(evt:Event){    
-    evt.stopPropagation();
   }
 }
