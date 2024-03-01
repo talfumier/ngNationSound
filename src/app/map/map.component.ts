@@ -45,14 +45,14 @@ export class MapComponent implements OnInit, AfterViewInit,OnDestroy {
     this.layers=this.umap.layers;
     
     this.map = L.map("map", {
-      fullscreenControl: true,
-      fullscreenControlOptions: {
-        position: 'topleft',
-        title: 'plein écran',
-        titleCancel: 'sortir du mode plein écran',
-        content:"<img src='assets/icons/map/fullscreen.svg' style='padding:2px;' alt='plein ecran'/>",
-        forceSeparateButton: true,
-      },      
+      // fullscreenControl: true,
+      // fullscreenControlOptions: {
+      //   position: 'topleft',
+      //   title: 'plein écran',
+      //   titleCancel: 'sortir du mode plein écran',
+      //   content:"<img src='assets/icons/map/fullscreen.svg' style='padding:2px;' alt='plein ecran'/>",
+      //   forceSeparateButton: true,
+      // },      
       center: this.umap.center as L.LatLngExpression,
       zoom: this.umap.zoom,
       layers: [osm,...this.layers.map((layer) => { // base layer + overlay layers
