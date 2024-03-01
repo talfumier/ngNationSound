@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import _ from 'lodash';
 import * as L from 'leaflet';
@@ -12,7 +12,7 @@ import { removeAccents } from '../utilities/functions/utlityFunctions';
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
-export class MapComponent implements OnInit, OnDestroy {
+export class MapComponent implements OnInit, AfterViewInit,OnDestroy {
   private map:L.Map={} as L.Map;
   private layers:OverlayLayer[]=[];
   private stage:any="";
@@ -25,6 +25,8 @@ export class MapComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     window.scrollTo(0,0);
     document.getElementById("header-map-link")?.classList.add("active");
+  }
+  ngAfterViewInit(): void {    
     this.initMap();    
   }
   ngOnDestroy(): void {
