@@ -2,10 +2,42 @@ main {
   position: absolute;
   top: 97px;  
 }
+button.screen {
+  position:fixed;
+  top:180px;
+  left:11px;
+  width:32px;
+  height:32px;
+  background-color: rgb(244, 244, 244);
+  border:2px solid rgb(204,204,204);
+  border-radius: 2px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  z-index:1000;
+  cursor: pointer;
+}
+button.screen img {
+  display:block;
+  width:20px;
+  height:20px;
+}
+button.screen img.hidden {
+  display:none;
+}
+
 section#map {
   height: 100vh;
   width: 100vw;
   min-width:350px;
+}
+main.fullscreen {
+  position:fixed;
+  top:0;
+  z-index:10000;
+}
+main.fullscreen button.screen {
+  top:83px;
 }
 :host ::ng-deep .popup {
   font-size: 1.3rem;

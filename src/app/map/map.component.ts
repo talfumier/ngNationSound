@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import _ from 'lodash';
 import * as L from 'leaflet';
@@ -12,21 +12,20 @@ import { removeAccents } from '../utilities/functions/utlityFunctions';
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
-export class MapComponent implements OnInit, AfterViewInit,OnDestroy {
+export class MapComponent implements OnInit,OnDestroy {
   private map:L.Map={} as L.Map;
   private layers:OverlayLayer[]=[];
   private stage:any="";
+  private _isFullScreen:boolean=false;
 
   constructor(private route:ActivatedRoute,private umap:UmapService) {
     this.stage = this.route.snapshot.paramMap.get("stage"); 
-    if(!this.stage) return;
+    if(!this.stage) return;  
   }  
   
   ngOnInit(): void {
     window.scrollTo(0,0);
-    document.getElementById("header-map-link")?.classList.add("active");
-  }
-  ngAfterViewInit(): void {    
+    document.getElementById("header-map-link")?.classList.add("active");     
     this.initMap();    
   }
   ngOnDestroy(): void {
@@ -85,5 +84,11 @@ export class MapComponent implements OnInit, AfterViewInit,OnDestroy {
       layerControl.addOverlay(layer.features,`<span style='font-size:1.3rem'>${layer.name}</span>`)
     });   
     layerControl.addTo(this.map);
+  }
+  handleFullScreen(evt:Event){
+    this._isFullScreen=!this._isFullScreen;
+  }
+  get isFullScreen(){
+    return this._isFullScreen;
   }
 }
