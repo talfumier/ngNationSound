@@ -1,3 +1,15 @@
-<main>
+<main [ngClass]="{ fullscreen: isFullScreen }">
+  <button type="image" class="screen" (click)="handleFullScreen($event)">
+    <img
+      [ngClass]="{ hidden: isFullScreen }"
+      src="assets/icons/map/fullscreen.svg"
+      alt="bouton plein écran"
+    />
+    <img
+      [ngClass]="{ hidden: !isFullScreen }"
+      src="assets/icons/map/fullscreenexit.svg"
+      alt="bouton écran normal"
+    />
+  </button>
   <section id="map" class="map-container"></section>
 </main>
