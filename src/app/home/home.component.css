@@ -8,42 +8,11 @@ main section:not(.container-infos-faq) {
   flex-direction: column;
   align-items: center;
 }
-div.fixed-container {
-  display:flex;
-  align-items: center;
-  max-width:70%;
-  height:3rem;
-  margin: 20px auto;
-  border: 10px solid var(--beige);
-  overflow: hidden;
-  background-color: var(--white);
-  box-shadow: 0 .5rem .9rem #CCC, inset 0 0 1.7rem .5rem #CCC;
-}
 h2 {
   font-size: 2rem;
   vertical-align: middle;
   margin: 0;
   white-space: nowrap;
-}
-h2.moving-text{
-  display: inline-block;
-  padding-right: 2rem;/* space for transition */
-  padding-left: 100%;/* start at right most position */
-  animation: defilement-rtl 20s infinite linear;
-}
-h2.moving-text.info {
-  color: var(--blue);
-}
-h2.moving-text.warning {
-  color: var(--red);
-}
-@keyframes defilement-rtl {
-  0% {
-    transform: translate3d(0, 0, 0);/* initial position to the right */
-  }
-  100% {
-    transform: translate3d(-100%, 0, 0);/* final position to the left */
-  }
 }
 div.section-header {
   position:sticky;
@@ -67,6 +36,22 @@ h2.title {
 div.section-content {
   margin:10px 0 15px;
 }
+div.news {
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin:0 auto;
+  padding:10px 0;
+  width:90%;
+  max-width:900px;
+  /* border: 3px solid var(--orange);
+  border-radius: 5px; */
+}
+div.news.info {
+  color: var(--blue);
+}
+div.news.wwarning {
+  color: var(--red);
+}
 div.program-grid {
   display:grid;
   grid-template-columns: 25px repeat(3,auto);
@@ -74,6 +59,8 @@ div.program-grid {
   row-gap: 10px;
   column-gap: 5px;
   padding:0 15px;
+  /* height:400px;
+  overflow:auto; */
 }
 
 :host ::ng-deep div.grid-item {/* : host::ng-deep required for html content rendered via [innerHtml]*/
@@ -101,6 +88,7 @@ div.program-grid {
   transform: rotate(-90deg);
   text-wrap: nowrap;
 }
+
 :host ::ng-deep div.grid-item ul {
   padding:5px 5px 5px 20px;
   line-height: 1.5rem;;

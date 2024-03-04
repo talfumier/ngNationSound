@@ -17,13 +17,42 @@ button.screen {
   z-index:1000;
   cursor: pointer;
 }
-button.screen img {
+button img {
   display:block;
   width:20px;
   height:20px;
 }
-button.screen img.hidden {
+button img.hidden {
   display:none;
+}
+
+div.tooltip {
+  position: relative;
+  transition: opacity .5s;
+}
+
+div.tooltip .tooltiptext {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  text-wrap: nowrap;
+  background-color: var(--white);
+  border:1px solid;
+  color:black;
+  font-size: larger;
+  padding: 5px;
+  position: absolute;
+  top: 20px;
+  left: 0px;
+}
+
+div.tooltip.hidden {
+  opacity: 0;
+}
+
+div.tooltip.visible {
+  opacity: 1;
 }
 
 section#map {

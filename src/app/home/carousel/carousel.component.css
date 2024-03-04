@@ -1,0 +1,39 @@
+.carousel {
+  display:flex;
+  justify-content:center;
+}
+.slick-slider {
+  display:flex;
+  justify-content: center;
+  max-width:85%;
+  height:320px;
+  background: var(--beige);
+  margin: 20px auto;
+  border: 3px solid var(--orange);
+  border-radius: 5px;
+}
+img {
+  object-fit: cover;
+  width:100%;
+  height:250px;
+  border:1px solid var(--white);
+  border-radius: 5px;
+
+}
+:host ::ng-deep button.slick-prev::before,
+:host ::ng-deep button.slick-next::before {
+  color:var(--black);
+}
+div.artist-name {
+  font-family: "Mochiy Pop P One", sans-serif;
+  font-size: 1.8rem;
+  font-weight:600;
+  color:var(--black-opaque8);
+  margin:10px auto;
+  text-align: center;
+}
+@media screen and (min-width: 600px) {
+  .slick-slider {
+    width: 960px;
+  }
+}
