@@ -1,5 +1,11 @@
 <main [ngClass]="{ fullscreen: isFullScreen }">
-  <button type="image" class="screen" (click)="handleFullScreen($event)">
+  <button
+    type="image"
+    class="screen"
+    (click)="handleFullScreen($event)"
+    (mouseenter)="handleMouseEvent(1)"
+    (mouseleave)="handleMouseEvent(-1)"
+  >
     <img
       [ngClass]="{ hidden: isFullScreen }"
       src="assets/icons/map/fullscreen.svg"
@@ -10,6 +16,11 @@
       src="assets/icons/map/fullscreenexit.svg"
       alt="bouton écran normal"
     />
+    <div #screenTooltip class="tooltip hidden">
+      <span class="tooltiptext">{{
+        isFullScreen ? "Taille normale" : "Plein écran"
+      }}</span>
+    </div>
   </button>
   <section id="map" class="map-container"></section>
 </main>

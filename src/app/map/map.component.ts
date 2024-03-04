@@ -1,8 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit,ViewChild,ElementRef} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import _ from 'lodash';
 import * as L from 'leaflet';
-import '@bepo65/leaflet.fullscreen';
 import { UmapService } from '../../services/map/umap.service';
 import { OverlayLayer } from '../../services/interfaces';
 import { removeAccents } from '../utilities/functions/utlityFunctions';
@@ -12,11 +11,13 @@ import { removeAccents } from '../utilities/functions/utlityFunctions';
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
-export class MapComponent implements OnInit,OnDestroy {
+export class MapComponent implements OnInit,OnDestroy {  
   private map:L.Map={} as L.Map;
   private layers:OverlayLayer[]=[];
   private stage:any="";
   private _isFullScreen:boolean=false;
+
+  @ViewChild('screenTooltip') tooltip: ElementRef={} as ElementRef;
 
   constructor(private route:ActivatedRoute,private umap:UmapService) {
     this.stage = this.route.snapshot.paramMap.get("stage"); 
@@ -25,7 +26,7 @@ export class MapComponent implements OnInit,OnDestroy {
   
   ngOnInit(): void {
     window.scrollTo(0,0);
-    document.getElementById("header-map-link")?.classList.add("active");     
+    document.getElementById("header-map-link")?.classList.add("active");  
     this.initMap();    
   }
   ngOnDestroy(): void {
@@ -44,21 +45,13 @@ export class MapComponent implements OnInit,OnDestroy {
     this.layers=this.umap.layers;
     
     this.map = L.map("map", {
-      // fullscreenControl: true,
-      // fullscreenControlOptions: {
-      //   position: 'topleft',
-      //   title: 'plein écran',
-      //   titleCancel: 'sortir du mode plein écran',
-      //   content:"<img src='assets/icons/map/fullscreen.svg' style='padding:2px;' alt='plein ecran'/>",
-      //   forceSeparateButton: true,
-      // },      
       center: this.umap.center as L.LatLngExpression,
       zoom: this.umap.zoom,
       layers: [osm,...this.layers.map((layer) => { // base layer + overlay layers
         return layer.features;
         })]
     });
-        
+            
     if(this.stage!=="all"){  //filter the corresponding stage and highlight it
       let features:L.GeoJSON={} as L.GeoJSON,result:any[]=[],arr:any[]=[];
       this.layers.map((layer:OverlayLayer) => {
@@ -90,5 +83,8 @@ export class MapComponent implements OnInit,OnDestroy {
   }
   get isFullScreen(){
     return this._isFullScreen;
+  }
+  handleMouseEvent(cs:number) {
+    this.tooltip.nativeElement.classList.replace(`${cs===1?"hidden":"visible"}`,`${cs===1?"visible":"hidden"}`);
   }
 }

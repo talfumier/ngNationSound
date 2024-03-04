@@ -1,14 +1,15 @@
 import { Component, HostListener, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
-import { Infos, Faq, Message } from '../../services/interfaces';
+import { Infos, Faq, Message, Artist } from '../../services/interfaces';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {  
+export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {     
+  private _artists:Artist[]=[];
   private _message:Message={} as Message;
   private _innerHTML:string[]=[];
   private _infos:Infos={} as Infos;
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
   static scrollY:number;
 
   constructor(private service:DataService,private router: Router){
+    this._artists=service.artists;
     this._message=service.message;
     this._innerHTML=service.innerHTML;
     this._infos=service.infos;
@@ -35,6 +37,9 @@ export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
   ngOnDestroy(): void {
     document.getElementById("home-link")?.classList.remove("active");
     HomeComponent.scrollY=window.scrollY; // record scroll position to be able to return at the same position
+  }  
+  get artists() {
+    return this._artists;
   }
   get message(){
     return this._message;
