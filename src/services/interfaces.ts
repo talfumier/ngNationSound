@@ -70,7 +70,7 @@ export interface OverlayLayer {
   features:L.GeoJSON
 }
 export interface Infos {
-  opening:string,address:string,gps:string,transport:Transport
+  opening:string,street:string,city:string,lat:string,lng:string,transport:Transport
 }
 export interface Transport {
   car:string[],train:string[],plane:string[]

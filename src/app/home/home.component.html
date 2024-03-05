@@ -72,8 +72,13 @@
           Le NationSound festival vous accueille de
           {{ infos.opening }} sur l'hippodrome de Chantilly :
           <address>
-            <span>{{ infos.address }}</span
-            ><span>{{ infos.gps }}</span>
+            <div class="location">
+              <div class="address">
+                {{ infos.street }} <br />
+                {{ infos.city }}
+              </div>
+              <div class="gps">GPS: {{ infos.lat }}, {{ infos.lng }}</div>
+            </div>
           </address>
         </div>
         <h3>Moyens de transport</h3>

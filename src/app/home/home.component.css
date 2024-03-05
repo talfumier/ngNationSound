@@ -176,6 +176,7 @@ div.section-content.faq {
   width: 90%;
   height:350px;
   overflow-y: auto;
+  overflow-x:hidden;
   max-width: 650px;
 }
 div.section-content.partners {
@@ -194,15 +195,18 @@ h3 {
 h3~div{
   padding:0 30px
 }
-address {
+div.location {
   display:flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  padding-top: 10px;
+  flex-wrap: wrap;
+  justify-content:space-evenly;
+  width:100%;
   font-weight: 600;
 }
-address span {
-  padding:0 10px;
+div.address, div.gps {
+  text-align: center;
+  line-height: 2rem;
+  padding: 5px 10px 0;
+  
 }
 
 h3~ul {
