@@ -8,7 +8,8 @@ import { Infos, Faq, Message, Artist } from '../../services/interfaces';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {     
+export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {  
+  private _slideConfig:any;
   private _artists:Artist[]=[];
   private _message:Message={} as Message;
   private _innerHTML:string[]=[];
@@ -28,6 +29,33 @@ export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
 
   ngOnInit(): void {
     document.getElementById("home-link")?.classList.add("active");
+    this._slideConfig= {
+    "autoplay":true,
+    "autoplaySpeed":2500,
+    "pauseOnHover":true,    
+    "arrows":true,
+    "infinite":true,  
+    "slidesToShow":3,
+    "slidesToScroll":1,   
+    "responsive":[
+      {
+        "breakpoint": 600,
+        "settings":{
+          "slidesToShow":1,
+          "slidesToScroll":1,
+        }
+      },
+      {
+        "breakpoint": 968,
+        "settings":{
+          "slidesToShow":2,
+          "slidesToScroll":1,
+        }
+      },
+      
+    ],
+  
+  }; 
   }
   ngAfterViewInit(): void {    
     setTimeout(() => {
@@ -38,6 +66,9 @@ export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
     document.getElementById("home-link")?.classList.remove("active");
     HomeComponent.scrollY=window.scrollY; // record scroll position to be able to return at the same position
   }  
+  get slideConfig(){
+    return this._slideConfig;
+  }
   get artists() {
     return this._artists;
   }

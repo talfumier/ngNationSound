@@ -24,7 +24,6 @@ import { EventComponent } from './program/event/event.component';
 import { MapComponent } from './map/map.component';
 import { FaqComponent } from './faq/faq.component';
 import { TicketingComponent } from './ticketing/ticketing.component';
-import { CarouselComponent } from './home/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +41,6 @@ import { CarouselComponent } from './home/carousel/carousel.component';
     MapComponent,
     FaqComponent,
     TicketingComponent,
-    CarouselComponent,
   ],
   imports: [
     BrowserModule,
