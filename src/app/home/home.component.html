@@ -1,19 +1,23 @@
 <main>
-  <!-- <section class="banner">
-    <div class="fixed-container">
-      <h2
-        class="moving-text"
-        [ngClass]="{
-          info: message.criticality === 'info',
-          warning: message.criticality === 'warning'
-        }"
-      >
-        {{ message.text }}
-      </h2>
-    </div>
-    <img src="assets/images/home.jpg" alt="photo groupe" />
-  </section> -->
-  <app-carousel></app-carousel>
+  <section class="carousel">
+    <ngx-slick-carousel
+      class="carousel"
+      #slickModal="slick-carousel"
+      [config]="slideConfig"
+    >
+      <div ngxSlickItem *ngFor="let artist of artists" class="slide">
+        <img
+          src="{{
+            'assets/images/artists/' +
+              artist.name.replaceAll(' ', '').replaceAll('-', '') +
+              '.jpg'
+          }}"
+          alt="{{ artist.name }}"
+        />
+        <div class="artist-name">{{ artist.name }}</div>
+      </div>
+    </ngx-slick-carousel>
+  </section>
   <section class="news">
     <div class="section-header">
       <h2 class="title">actualités</h2>
