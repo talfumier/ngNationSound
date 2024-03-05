@@ -15,7 +15,6 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 import { GenericErrorHandler } from './error/errorHandler';
-import { AccordionComponent } from './home/accordion/accordion.component';
 import { ArtistComponent } from './artist/artist.component';
 import { ProgramComponent } from './program/program.component';
 import { InputComponent } from './utilities/input/input.component';
@@ -32,7 +31,6 @@ import { TicketingComponent } from './ticketing/ticketing.component';
     FooterComponent,
     HomeComponent,
     NotFoundComponent,
-    AccordionComponent,
     ArtistComponent,
     ProgramComponent,
     InputComponent,

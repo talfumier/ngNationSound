@@ -9,7 +9,7 @@ import data from "./data.json";
   providedIn: 'root'
 })
 export class DataService {
-  private _message:Message={} as Message;
+  private _messages:Message[]=[];
   private _innerHTML:string[]=[];// data formatting as html string for use in events summary (home page)
   private _dates:Dates={} as Dates;
   private _event_types:EventType[]=[];
@@ -27,9 +27,9 @@ export class DataService {
   }
   
   initData(){
-    this._message=_.filter(data.messages,(msg) => {
+    this._messages=_.filter(data.messages,(msg) => {
       return msg.active;
-    })[0];
+    });
     this._dates=data.dates[0];
     this._event_types=data.event_types;
     this._pois=data.pois;
@@ -112,8 +112,8 @@ export class DataService {
       return artist.id===id;
     })[0];
   }
-  get message (){
-    return this._message;
+  get messages (){
+    return this._messages;
   }
   get innerHTML():string[]{
     return this._innerHTML

@@ -8,6 +8,7 @@ main section:not(.container-infos-faq) {
   flex-direction: column;
   align-items: center;
 }
+/* CAROUSEL */
 .carousel {
   display: flex;
   justify-content: center;
@@ -46,7 +47,7 @@ div.artist-name {
   margin: 10px auto;
   text-align: center;
 }
-
+/* CAROUSEL */
 h2 {
   font-size: 2rem;
   vertical-align: middle;
@@ -76,17 +77,21 @@ div.section-content {
   margin:10px 0 15px;
 }
 div.news {
-  font-size: 1.7rem;
-  font-weight: 600;
   margin:0 auto;
-  padding:10px 0;
+  padding-bottom:15px;
   width:90%;
   max-width:900px;
 }
-div.news.info {
+div.message {
+  font-size: 1.7rem;
+  font-weight: 600;
+  text-align: center;
+  padding-top:10px;
+}
+div.message.info {
   color: var(--blue);
 }
-div.news.wwarning {
+div.message.warning {
   color: var(--red);
 }
 div.program-grid {
@@ -170,7 +175,7 @@ div.section-content.faq {
   border-radius: 5px;  
   width: 90%;
   height:350px;
-  overflow-y: scroll;
+  overflow-y: auto;
   max-width: 650px;
 }
 div.section-content.partners {
@@ -244,6 +249,9 @@ div.section-content.partners img {
 }
 
 @media screen and (min-width: 992px) {
+  div.message {
+    font-size: 2rem;
+  }
   :host ::ng-deep div.grid-item {
     font-size: 1.5rem;
     padding: 5px 10px;

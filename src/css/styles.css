@@ -10,7 +10,8 @@
   --red-opaque9: rgb(223, 6, 17,.9);
   --orange: #b65f28;
   --orange-opaque8: rgb(182, 95, 40, .8);
-  --black-opaque8:rgb(36, 35, 35,.8); 
+  --black-opaque8:rgb(36, 35, 35,.8);
+  --black-opaque9: rgb(36, 35, 35, .9);
   --black: rgb(36, 35, 35);
   --yellow: #FFD543;
   --yellow-opaque9: rgb(255, 213, 67,.9);
@@ -21,8 +22,6 @@
   --beige: rgb(240, 234, 200);
   --beige-opaque8: rgb(240, 234, 200,.8);
   --beige-opaque9: rgb(240, 234, 200, .9);
-  /* --brown: #2C1E1E;
-  --brown-dark:rgb(31, 22, 21); */
   --blue: #4472C4;
 }
 
