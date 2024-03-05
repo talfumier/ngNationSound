@@ -43,8 +43,10 @@ export class DataService {
     }),
     this._infos={
       opening:data.dates[0].opening,
-      address:data.dates[0].address,
-      gps:data.dates[0].gps,
+      street:data.dates[0].street,
+      city:data.dates[0].city,
+      lat:data.dates[0].lat,
+      lng:data.dates[0].lng,
       transport:obj,
     };
     this._faqs=data.faq;

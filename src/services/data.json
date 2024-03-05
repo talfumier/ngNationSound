@@ -17,8 +17,10 @@
   "month": "June",
   "year": 2024,
   "opening": "11h00 à 24h00",
-  "address": "Avenue des Aigles - 60500 Chantilly",
-  "gps": "GPS: N 49.187°, E 2.475°"
+  "street": "Avenue des Aigles",
+  "city": "60500 Chantilly",
+  "lat": "N 49.187°",
+  "lng": "E 2.475°"
  }
 ],
 "artists":[
@@ -738,107 +740,6 @@
   "pass1": 30,
   "pass2": 35,
   "pass3": 45
- }
-],
-"various":[
- null,
- {
-  "Column1": "Embarquez pour un voyage musical au Festival Paris Harmony Haven 2024 ! Rejoignez-nous pour une expérience spectaculaire mettant en vedette 10 groupes sensationnels répartis sur sept scènes, une variété d'activités annexes, et des collaborations exclusives avec nos partenaires fictifs.",
-  "Activités Annexes :": "Bazar d'Art Galactique",
-  "Partenaires Fictifs :": "Sonic Celestial Brews (Partenaire Officiel des Boissons)"
- },
- {
-  "Column1": "Évadez-vous dans un monde de musique et de magie au Paris SoundScape Festival 2024 ! Rejoignez-nous pour une expérience inoubliable mettant en vedette 10 groupes phénoménaux répartis sur six scènes, des activités annexes variées et des collaborations exclusives avec nos partenaires imaginaires.",
-  "Activités Annexes :": "Expérience Sonique en Réalité Virtuelle",
-  "Partenaires Fictifs :": "Nebula Threads & Co. (Merchandising Exclusif)"
- },
- {
-  "Activités Annexes :": "Gastronomie Galactique : Festival Culinaire",
-  "Partenaires Fictifs :": "Quantum Quest (Expérience en Réalité Virtuelle)"
- },
- {
-  "Activités Annexes :": "Promenade Artistique Céleste",
-  "Partenaires Fictifs :": "Harmony Eats (Partenaire du Festival Culinaire)"
- },
- {
-  "Activités Annexes :": "Zone Astro-Bien-être",
-  "Partenaires Fictifs :": "Starlight Studios (Installations Artistiques Interactives)"
- },
- {
-  "Column1": "Tout au long de la journée : Sessions de yoga, Sessions d'observation des étoiles, Cercles de méditation, et Expériences de bains sonores."
- },
- null,
- null,
- null,
- {
-  "Column1": "Scène principale - Coordonnées GPS fictives :"
- },
- {
-  "Column1": "Latitude : 49.1938° N"
- },
- {
-  "Column1": "Longitude : 2.4775° E La scène principale trône au cœur de l'hippodrome, offrant une vue imprenable sur le château de Chantilly en arrière-plan."
- },
- {
-  "Column1": "Scène électro en plein air - Coordonnées GPS fictives :"
- },
- {
-  "Column1": "Latitude : 49.1972° N"
- },
- {
-  "Column1": "Longitude : 2.4708° E Cette scène est nichée à l'ombre d'anciens arbres, créant une atmosphère enchanteresse pour les amateurs de musique électronique."
- },
- {
-  "Column1": "Scène acoustique près de l'étang - Coordonnées GPS fictives :"
- },
- {
-  "Column1": "Latitude : 49.1915° N"
- },
- {
-  "Column1": "Longitude : 2.4802° E Entourée par la tranquillité de l'eau, cette scène offre des performances acoustiques intimes dans un cadre naturel apaisant."
- },
- {
-  "Column1": "Scène underground dans les écuries - Coordonnées GPS fictives :"
- },
- {
-  "Column1": "Latitude : 49.1946° N"
- },
- {
-  "Column1": "Longitude : 2.4691° E Les écuries historiques de l'hippodrome abritent une scène underground, créant une expérience musicale immersive et originale."
- },
- {
-  "Column1": "Scène chill-out sur la pelouse - Coordonnées GPS fictives :"
- },
- {
-  "Column1": "Latitude : 49.1960° N"
- },
- {
-  "Column1": "Longitude : 2.4835° E Des tapis et des coussins dispersés sur la pelouse invitent les festivaliers à se détendre et à profiter de performances acoustiques décontractées."
- },
- {
-  "Column1": "Scène du monde - Coordonnées GPS fictives :"
- },
- {
-  "Column1": "Latitude : 49.1925° N"
- },
- {
-  "Column1": "Longitude : 2.4750° E Nichée entre des jardins exotiques, cette scène propose une fusion de genres musicaux du monde entier. Des rythmes envoûtants et des performances artistiques transportent les festivaliers dans un voyage musical mondial."
- },
- {
-  "Column1": "Zone multiculturelle - Coordonnées GPS fictives :"
- },
- {
-  "Column1": "Latitude : 49.1950° N"
- },
- {
-  "Column1": "Longitude : 2.4780° E Cette zone immersive met en avant la richesse culturelle à travers une variété d'activités, de stands culinaires et d'installations artistiques. Des pavillons colorés représentent différentes cultures, offrant aux visiteurs une expérience multi-sensorielle et éducative."
- },
- null,
- {
-  "Column1": "Bienvenue sur l'hippodrome de Chantilly pour cette 3e édition du Music Festival Paris 2024, où musique et diversité culturelle se rejoignent pour créer une expérience inoubliable. Achetez vos billets dès maintenant et préparez-vous à un voyage extraordinaire !"
- },
- {
-  "Column1": "Mettant en vedette 15 groupes de premier plan répartis sur 5 scènes, une variété d'activités annexes, et des collaborations exclusives avec nos partenaires fictifs."
  }
 ]
 }
