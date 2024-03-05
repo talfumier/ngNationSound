@@ -1,7 +1,42 @@
 div.faq.question {
-  padding:10px 30px 0;
+  position:relative;
+  width:80%;
+  min-height:2em;
+  padding: 10px 30px 0;
   font-weight: 600;
+  word-wrap: break-word;
+}
+
+button.chevron {
+  position: absolute;
+  top: 0px;
+  right: -20px;
+  height: 2em;
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  z-index:2000;
+}
+
+svg {
+  width: 1.5em;
+  height: 1.5em;
+  fill: var(--red);
+  transition: transform 1s;
+}
+
+button.chevron.rotated svg {
+  transform: rotate(90deg);
+}
+
+div.faq.answer.hidden {
+  display:none;
 }
 div.faq.answer {
+  display: block;
   padding: 3px 35px 0;
+  font-weight: 600;
+  color: var(--black-opaque8);
+  background-color: var(--white-opaque8);
 }

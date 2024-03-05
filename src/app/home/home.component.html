@@ -22,14 +22,17 @@
     <div class="section-header">
       <h2 class="title">actualités</h2>
     </div>
-    <div
-      class="section-content news"
-      [ngClass]="{
-        info: message.criticality === 'info',
-        warning: message.criticality === 'warning'
-      }"
-    >
-      {{ message.text }}
+    <div class="section-content news">
+      <div
+        class="message"
+        *ngFor="let message of messages"
+        [ngClass]="{
+          info: message.criticality === 'info',
+          warning: message.criticality === 'warning'
+        }"
+      >
+        {{ message.text }}
+      </div>
     </div>
   </section>
   <section class="program-summary">

@@ -11,7 +11,7 @@ import { Infos, Faq, Message, Artist } from '../../services/interfaces';
 export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {  
   private _slideConfig:any;
   private _artists:Artist[]=[];
-  private _message:Message={} as Message;
+  private _messages:Message[]=[];
   private _innerHTML:string[]=[];
   private _infos:Infos={} as Infos;
   private _faqs:Faq[]=[];
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
 
   constructor(private service:DataService,private router: Router){
     this._artists=service.artists;
-    this._message=service.message;
+    this._messages=service.messages;
     this._innerHTML=service.innerHTML;
     this._infos=service.infos;
     this._faqs=service.faqs;
@@ -72,8 +72,8 @@ export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
   get artists() {
     return this._artists;
   }
-  get message(){
-    return this._message;
+  get messages(){
+    return this._messages;
   }
   get innerHTML():string[]{
     return this._innerHTML;

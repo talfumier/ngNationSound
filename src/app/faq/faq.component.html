@@ -1,4 +1,17 @@
 <div class="faq-container">
-  <div class="faq question">{{ faq.question }}</div>
-  <div class="faq answer">{{ faq.answer }}</div>
+  <div class="faq question" (click)="rotateChevron($event)">
+    {{ faq.question }}
+    <button
+      class="chevron"
+      [ngClass]="{ rotated: isRotated }"
+      (click)="rotateChevron($event)"
+    >
+      <svg>
+        <use href="assets/icons/icons.svg#chevronIcon" />
+      </svg>
+    </button>
+  </div>
+  <div class="faq answer" [ngClass]="{ hidden: !isRotated }">
+    {{ faq.answer }}
+  </div>
 </div>
