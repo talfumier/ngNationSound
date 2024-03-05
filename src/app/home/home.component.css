@@ -46,6 +46,10 @@ div.artist-name {
   color: var(--black-opaque8);
   margin: 10px auto;
   text-align: center;
+  cursor: pointer;
+}
+div.artist-name:hover {
+  color: var(--orange-opaque8);
 }
 /* CAROUSEL */
 h2 {
