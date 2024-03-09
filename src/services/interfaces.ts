@@ -17,12 +17,7 @@ export interface Artist {
   country:string,
   description:string,
   composition:string,
-  style:string,
-  cat:string | number
-}
-export interface Style {
-  id:number,
-  description:string
+  style:string
 }
 export interface EventType {
   id:number,

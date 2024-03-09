@@ -1,12 +1,12 @@
 import {Injectable, inject} from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import _ from "lodash";
-import {Poi,Dates,Artist,Style,Event, EventType, Infos, Transport, Faq, Message, Pass} from "./interfaces";
+import {Poi,Dates,Artist,Event, EventType, Infos, Transport, Faq, Message, Pass} from "./interfaces";
 import { removeAccents} from './../app/utilities/functions/utlityFunctions';
 import data from "./data.json";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' // single instance for the entire application
 })
 export class DataService {
   private _messages:Message[]=[];
@@ -15,7 +15,6 @@ export class DataService {
   private _event_types:EventType[]=[];
   private _pois:Poi[]=[];
   private _artists:Artist[]=[];
-  private _styles:Style[]=[];
   private _events:Event[]=[];
   private _infos:Infos={} as Infos;
   private _faqs:Faq[]=[];
@@ -34,7 +33,6 @@ export class DataService {
     this._event_types=data.event_types;
     this._pois=data.pois;
     this._artists=data.artists;
-    this._styles=data.cat;
     const obj:Transport={car:[],train:[],plane:[]} as Transport;
     data.transport.map((item) => {
       Object.keys(item).map((key) => {
@@ -131,9 +129,6 @@ export class DataService {
   }
   get artists():Artist[]{
     return this._artists;
-  }
-  get styles():Style[] {
-    return this._styles
   }
   get events():Event[]{
     return this._events;

@@ -7,7 +7,7 @@ import { addHours,parse } from 'date-fns';
 import { FormFilterElements,Filter,Event, Option, KeyLabel } from './interfaces';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root'  // single instance for the entire application
 })
 export class FilterService {
   private _formFilterElements:FormFilterElements={} as FormFilterElements;

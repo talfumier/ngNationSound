@@ -5,7 +5,7 @@ import { OverlayLayer } from '../interfaces';
 import data from './umap.json';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root'  // single instance for the entire application
 })
 export class UmapService {  //retrieves data from umap.json file
   private _center:number[]=[];
