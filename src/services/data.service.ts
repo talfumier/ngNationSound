@@ -1,9 +1,10 @@
 import {Injectable, inject} from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import _ from "lodash";
-import {Poi,Dates,Artist,Event, EventType, Infos, Transport, Faq, Message, Pass} from "./interfaces";
+import {Poi,Dates,Artist,Event, Infos, Transport, Faq, Message, Pass} from "./interfaces";
 import { removeAccents} from './../app/utilities/functions/utlityFunctions';
 import data from "./data.json";
+import { getDateFromString } from '../app/utilities/functions/utlityFunctions';
 
 @Injectable({
   providedIn: 'root' // single instance for the entire application
@@ -12,7 +13,6 @@ export class DataService {
   private _messages:Message[]=[];
   private _innerHTML:string[]=[];// data formatting as html string for use in events summary (home page)
   private _dates:Dates={} as Dates;
-  private _event_types:EventType[]=[];
   private _pois:Poi[]=[];
   private _artists:Artist[]=[];
   private _events:Event[]=[];
@@ -29,8 +29,7 @@ export class DataService {
     this._messages=_.filter(data.messages,(msg) => {
       return msg.active;
     });
-    this._dates=data.dates[0];
-    this._event_types=data.event_types;
+    this._dates={start_date:new Date(data.dates[0].start_date),end_date:new Date(data.dates[0].end_date)};
     this._pois=data.pois;
     this._artists=data.artists;
     const obj:Transport={car:[],train:[],plane:[]} as Transport;
@@ -58,8 +57,8 @@ export class DataService {
   }
   initInnerHTML(){    // data formatted as html string for use in events summary (home page)
     this._innerHTML=[""];
-    this._dates.days.split(",").map((day) => {
-      this._innerHTML.push(`${new Date(this._dates.month+" " +day+","+this._dates.year).toLocaleString("fr-FR",{day: 'numeric',month:"long"})}`);
+    _.range(this._dates.start_date.getDate(),this._dates.end_date.getDate()+1).map((day) => {
+      this._innerHTML.push(`${new Date(this._dates.start_date.getMonth()+" " +day+","+this._dates.start_date.getFullYear()).toLocaleString("fr-FR",{day: 'numeric',month:"long"})}`);
     });
     this._innerHTML.map((item,idx) => {
       this._innerHTML[idx]=`<div class='column-header'>${item}</div>`
@@ -73,7 +72,7 @@ export class DataService {
       this._innerHTML.push(`<div class=row-header><a href=/map/${removeAccents(stage.name)}>${stage.name}</a></div>`);
       day="",ul="";
       _.filter(data.events,(evt) => {
-        return evt.location===stage.id && evt.type===1;
+        return evt.location===stage.id;
       }).map((evt) => {
         if(evt.date.slice(0,2)!==day){
           if(ul.length>0) this._innerHTML.push(ul+"</ul>");        
@@ -96,9 +95,7 @@ export class DataService {
           performer:_.filter(this._artists,(artist) => {
               return artist.id===evt.performer;
             })[0],
-          type:_.filter(data.event_types,(type) => {
-            return type.id===evt.type;
-          })[0],
+          type:evt.type,
           location:_.filter(this._pois,(poi) => {
               return poi.id===evt.location;
             })[0],
@@ -120,9 +117,6 @@ export class DataService {
   }  
   get dates():Dates{
     return this._dates;
-  }
-  get event_types():EventType[]{
-    return this._event_types;
   }
   get pois():Poi[]{
     return this._pois;

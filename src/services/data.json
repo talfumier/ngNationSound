@@ -1,4 +1,15 @@
 {
+"dates":[
+ {
+  "start_date": "06\/14\/2024",
+  "end_date": "06\/16\/2024",
+  "opening": "11h00 à 24h00",
+  "street": "Avenue des Aigles",
+  "city": "60500 Chantilly",
+  "lat": "N 49.187°",
+  "lng": "E 2.475°"
+ }
+],
 "messages":[
  {
   "title": "message de bienvenue",
@@ -7,22 +18,10 @@
   "active": true
  },
  {
-  "title": "achat des billets1",
+  "title": "achat des billets",
   "text": "Achetez vos billets dès maintenant et préparez-vous à un voyage extraordinaire !",
   "criticality": "info",
   "active": true
- }
-],
-"dates":[
- {
-  "days": "14,15,16",
-  "month": "June",
-  "year": 2024,
-  "opening": "11h00 à 24h00",
-  "street": "Avenue des Aigles",
-  "city": "60500 Chantilly",
-  "lat": "N 49.187°",
-  "lng": "E 2.475°"
  }
 ],
 "artists":[
@@ -162,52 +161,6 @@
   "style": "Post-rock ambient avec une ambiance rêveuse et introspective."
  }
 ],
-"poi_types":[
- {
-  "id": "cult",
-  "description": "espace d'activités multi culturelles"
- },
- {
-  "id": "water",
-  "description": "fontaines eau potable"
- },
- {
-  "id": "exit",
-  "description": "sortie"
- },
- {
-  "id": "entry",
-  "description": "entrée"
- },
- {
-  "id": "toilets",
-  "description": "toilettes\/sanitaires"
- },
- {
-  "id": "food&drinks",
-  "description": "alimentation\/boissons"
- },
- {
-  "id": "stage",
-  "description": "scène de concert"
- },
- {
-  "id": "med",
-  "description": "centre premier secours"
- },
- {
-  "id": "press",
-  "description": "espace presse\/communication"
- },
- {
-  "id": "org",
-  "description": "bureaux de l'organisation"
- },
- {
-  "id": "picnic",
-  "description": "espace détente et pique-nique"
- }
-],
 "pois":[
  {
   "id": "st1",
@@ -237,317 +190,307 @@
  {
   "id": "mc1",
   "name": "Terre-plein central",
-  "type": "multi"
- }
-],
-"event_types":[
- {
-  "id": 1,
-  "description": "concert"
- },
- {
-  "id": 2,
-  "description": "rencontre"
+  "type": "meeting"
  }
 ],
 "events":[
  {
   "performer": 1,
-  "type": 1,
+  "type": "concert",
   "location": "st1",
   "date": "14.06.2024 16:00"
  },
  {
   "performer": 7,
-  "type": 1,
+  "type": "concert",
   "location": "st1",
   "date": "14.06.2024 18:15"
  },
  {
   "performer": 4,
-  "type": 1,
+  "type": "concert",
   "location": "st1",
   "date": "14.06.2024 20:30"
  },
  {
   "performer": 3,
-  "type": 1,
+  "type": "concert",
   "location": "st2",
   "date": "14.06.2024 15:00"
  },
  {
   "performer": 2,
-  "type": 1,
+  "type": "concert",
   "location": "st2",
   "date": "14.06.2024 17:15"
  },
  {
   "performer": 14,
-  "type": 1,
+  "type": "concert",
   "location": "st2",
   "date": "14.06.2024 19:30"
  },
  {
   "performer": 12,
-  "type": 1,
+  "type": "concert",
   "location": "st3",
   "date": "14.06.2024 16:45"
  },
  {
   "performer": 8,
-  "type": 1,
+  "type": "concert",
   "location": "st3",
   "date": "14.06.2024 19:00"
  },
  {
   "performer": 15,
-  "type": 1,
+  "type": "concert",
   "location": "st3",
   "date": "14.06.2024 21:15"
  },
  {
   "performer": 6,
-  "type": 1,
+  "type": "concert",
   "location": "st4",
   "date": "14.06.2024 17:00"
  },
  {
   "performer": 13,
-  "type": 1,
+  "type": "concert",
   "location": "st4",
   "date": "14.06.2024 19:00"
  },
  {
   "performer": 10,
-  "type": 1,
+  "type": "concert",
   "location": "st4",
   "date": "14.06.2024 21:00"
  },
  {
   "performer": 11,
-  "type": 1,
+  "type": "concert",
   "location": "st5",
   "date": "14.06.2024 18:15"
  },
  {
   "performer": 9,
-  "type": 1,
+  "type": "concert",
   "location": "st5",
   "date": "14.06.2024 20:30"
  },
  {
   "performer": 5,
-  "type": 1,
+  "type": "concert",
   "location": "st5",
   "date": "14.06.2024 22:45"
  },
  {
   "performer": 12,
-  "type": 1,
+  "type": "concert",
   "location": "st1",
   "date": "15.06.2024 16:00"
  },
  {
   "performer": 13,
-  "type": 1,
+  "type": "concert",
   "location": "st1",
   "date": "15.06.2024 18:15"
  },
  {
   "performer": 8,
-  "type": 1,
+  "type": "concert",
   "location": "st1",
   "date": "15.06.2024 20:30"
  },
  {
   "performer": 7,
-  "type": 1,
+  "type": "concert",
   "location": "st2",
   "date": "15.06.2024 15:00"
  },
  {
   "performer": 9,
-  "type": 1,
+  "type": "concert",
   "location": "st2",
   "date": "15.06.2024 17:15"
  },
  {
   "performer": 11,
-  "type": 1,
+  "type": "concert",
   "location": "st2",
   "date": "15.06.2024 19:30"
  },
  {
   "performer": 14,
-  "type": 1,
+  "type": "concert",
   "location": "st3",
   "date": "15.06.2024 16:45"
  },
  {
   "performer": 15,
-  "type": 1,
+  "type": "concert",
   "location": "st3",
   "date": "15.06.2024 19:00"
  },
  {
   "performer": 4,
-  "type": 1,
+  "type": "concert",
   "location": "st3",
   "date": "15.06.2024 21:15"
  },
  {
   "performer": 6,
-  "type": 1,
+  "type": "concert",
   "location": "st4",
   "date": "15.06.2024 18:00"
  },
  {
   "performer": 5,
-  "type": 1,
+  "type": "concert",
   "location": "st4",
   "date": "15.06.2024 20:30"
  },
  {
   "performer": 1,
-  "type": 1,
+  "type": "concert",
   "location": "st4",
   "date": "15.06.2024 22:00"
  },
  {
   "performer": 2,
-  "type": 1,
+  "type": "concert",
   "location": "st5",
   "date": "15.06.2024 18:15"
  },
  {
   "performer": 10,
-  "type": 1,
+  "type": "concert",
   "location": "st5",
   "date": "15.06.2024 20:30"
  },
  {
   "performer": 3,
-  "type": 1,
+  "type": "concert",
   "location": "st5",
   "date": "15.06.2024 22:45"
  },
  {
   "performer": 3,
-  "type": 1,
+  "type": "concert",
   "location": "st1",
   "date": "16.06.2024 16:00"
  },
  {
   "performer": 5,
-  "type": 1,
+  "type": "concert",
   "location": "st1",
   "date": "16.06.2024 18:15"
  },
  {
   "performer": 13,
-  "type": 1,
+  "type": "concert",
   "location": "st1",
   "date": "16.06.2024 20:30"
  },
  {
   "performer": 10,
-  "type": 1,
+  "type": "concert",
   "location": "st2",
   "date": "16.06.2024 15:00"
  },
  {
   "performer": 14,
-  "type": 1,
+  "type": "concert",
   "location": "st2",
   "date": "16.06.2024 17:15"
  },
  {
   "performer": 9,
-  "type": 1,
+  "type": "concert",
   "location": "st2",
   "date": "16.06.2024 19:30"
  },
  {
   "performer": 12,
-  "type": 1,
+  "type": "concert",
   "location": "st3",
   "date": "16.06.2024 16:45"
  },
  {
   "performer": 8,
-  "type": 1,
+  "type": "concert",
   "location": "st3",
   "date": "16.06.2024 19:00"
  },
  {
   "performer": 15,
-  "type": 1,
+  "type": "concert",
   "location": "st3",
   "date": "16.06.2024 21:15"
  },
  {
   "performer": 7,
-  "type": 1,
+  "type": "concert",
   "location": "st4",
   "date": "16.06.2024 18:15"
  },
  {
   "performer": 1,
-  "type": 1,
+  "type": "concert",
   "location": "st4",
   "date": "16.06.2024 20:30"
  },
  {
   "performer": 11,
-  "type": 1,
+  "type": "concert",
   "location": "st4",
   "date": "16.06.2024 22:00"
  },
  {
   "performer": 6,
-  "type": 1,
+  "type": "concert",
   "location": "st5",
   "date": "16.06.2024 18:15"
  },
  {
   "performer": 2,
-  "type": 1,
+  "type": "concert",
   "location": "st5",
   "date": "16.06.2024 20:30"
  },
  {
   "performer": 4,
-  "type": 1,
+  "type": "concert",
   "location": "st5",
   "date": "16.06.2024 22:45"
  },
  {
   "performer": 1,
-  "type": 2,
+  "type": "rencontre",
   "location": "mc1",
   "date": "14.06.2024 13:00"
  },
  {
   "performer": 7,
-  "type": 2,
+  "type": "rencontre",
   "location": "mc1",
   "date": "15.06.2024 14:00"
  },
  {
   "performer": 4,
-  "type": 2,
+  "type": "rencontre",
   "location": "mc1",
   "date": "16.06.2024 11:30"
  },
  {
   "performer": 3,
-  "type": 2,
+  "type": "rencontre",
   "location": "mc1",
   "date": "14.06.2024 14:30"
  },
  {
   "performer": 2,
-  "type": 2,
+  "type": "rencontre",
   "location": "mc1",
   "date": "15.06.2024 12:30"
  }
@@ -649,6 +592,358 @@
   "pass1": 30,
   "pass2": 35,
   "pass3": 45
+ }
+],
+"events_WP":[
+ {
+  "performer": "Cosmic Jazz Odyssey",
+  "type": "concert",
+  "location": "Tribune",
+  "date": "14.06.2024 16:00",
+  "title": "Cosmic Jazz Odyssey - 14\/06\/2024 16:00"
+ },
+ {
+  "performer": "Luminary Groove Collective",
+  "type": "concert",
+  "location": "Tribune",
+  "date": "14.06.2024 18:15",
+  "title": "Luminary Groove Collective - 14\/06\/2024 18:15"
+ },
+ {
+  "performer": "Stellar Sitar Serenity",
+  "type": "concert",
+  "location": "Tribune",
+  "date": "14.06.2024 20:30",
+  "title": "Stellar Sitar Serenity - 14\/06\/2024 20:30"
+ },
+ {
+  "performer": "Quantum Electro Echoes",
+  "type": "concert",
+  "location": "Virage",
+  "date": "14.06.2024 15:00",
+  "title": "Quantum Electro Echoes - 14\/06\/2024 15:00"
+ },
+ {
+  "performer": "Galactic Funk Syndicate",
+  "type": "concert",
+  "location": "Virage",
+  "date": "14.06.2024 17:15",
+  "title": "Galactic Funk Syndicate - 14\/06\/2024 17:15"
+ },
+ {
+  "performer": "Nebula Nova Folk Ensemble",
+  "type": "concert",
+  "location": "Virage",
+  "date": "14.06.2024 19:30",
+  "title": "Nebula Nova Folk Ensemble - 14\/06\/2024 19:30"
+ },
+ {
+  "performer": "Solar Serenades Ensemble",
+  "type": "concert",
+  "location": "Château",
+  "date": "14.06.2024 16:45",
+  "title": "Solar Serenades Ensemble - 14\/06\/2024 16:45"
+ },
+ {
+  "performer": "Mystic Soundscapes Orchestra",
+  "type": "concert",
+  "location": "Château",
+  "date": "14.06.2024 19:00",
+  "title": "Mystic Soundscapes Orchestra - 14\/06\/2024 19:00"
+ },
+ {
+  "performer": "Echoing Celestials",
+  "type": "concert",
+  "location": "Château",
+  "date": "14.06.2024 21:15",
+  "title": "Echoing Celestials - 14\/06\/2024 21:15"
+ },
+ {
+  "performer": "Ephemeral Echoes",
+  "type": "concert",
+  "location": "Grandes écuries",
+  "date": "14.06.2024 17:00",
+  "title": "Ephemeral Echoes - 14\/06\/2024 17:00"
+ },
+ {
+  "performer": "Stellar Synthwave Society",
+  "type": "concert",
+  "location": "Grandes écuries",
+  "date": "14.06.2024 19:00",
+  "title": "Stellar Synthwave Society - 14\/06\/2024 19:00"
+ },
+ {
+  "performer": "Galactic Groove Experiment",
+  "type": "concert",
+  "location": "Grandes écuries",
+  "date": "14.06.2024 21:00",
+  "title": "Galactic Groove Experiment - 14\/06\/2024 21:00"
+ },
+ {
+  "performer": "Aurora Borealis Blues Collective",
+  "type": "concert",
+  "location": "Petite pelouse",
+  "date": "14.06.2024 18:15",
+  "title": "Aurora Borealis Blues Collective - 14\/06\/2024 18:15"
+ },
+ {
+  "performer": "Quantum Pulse Waves",
+  "type": "concert",
+  "location": "Petite pelouse",
+  "date": "14.06.2024 20:30",
+  "title": "Quantum Pulse Waves - 14\/06\/2024 20:30"
+ },
+ {
+  "performer": "Nebula Hip-Hop Collective",
+  "type": "concert",
+  "location": "Petite pelouse",
+  "date": "14.06.2024 22:45",
+  "title": "Nebula Hip-Hop Collective - 14\/06\/2024 22:45"
+ },
+ {
+  "performer": "Solar Serenades Ensemble",
+  "type": "concert",
+  "location": "Tribune",
+  "date": "15.06.2024 16:00",
+  "title": "Solar Serenades Ensemble - 15\/06\/2024 16:00"
+ },
+ {
+  "performer": "Stellar Synthwave Society",
+  "type": "concert",
+  "location": "Tribune",
+  "date": "15.06.2024 18:15",
+  "title": "Stellar Synthwave Society - 15\/06\/2024 18:15"
+ },
+ {
+  "performer": "Mystic Soundscapes Orchestra",
+  "type": "concert",
+  "location": "Tribune",
+  "date": "15.06.2024 20:30",
+  "title": "Mystic Soundscapes Orchestra - 15\/06\/2024 20:30"
+ },
+ {
+  "performer": "Luminary Groove Collective",
+  "type": "concert",
+  "location": "Virage",
+  "date": "15.06.2024 15:00",
+  "title": "Luminary Groove Collective - 15\/06\/2024 15:00"
+ },
+ {
+  "performer": "Quantum Pulse Waves",
+  "type": "concert",
+  "location": "Virage",
+  "date": "15.06.2024 17:15",
+  "title": "Quantum Pulse Waves - 15\/06\/2024 17:15"
+ },
+ {
+  "performer": "Aurora Borealis Blues Collective",
+  "type": "concert",
+  "location": "Virage",
+  "date": "15.06.2024 19:30",
+  "title": "Aurora Borealis Blues Collective - 15\/06\/2024 19:30"
+ },
+ {
+  "performer": "Nebula Nova Folk Ensemble",
+  "type": "concert",
+  "location": "Château",
+  "date": "15.06.2024 16:45",
+  "title": "Nebula Nova Folk Ensemble - 15\/06\/2024 16:45"
+ },
+ {
+  "performer": "Echoing Celestials",
+  "type": "concert",
+  "location": "Château",
+  "date": "15.06.2024 19:00",
+  "title": "Echoing Celestials - 15\/06\/2024 19:00"
+ },
+ {
+  "performer": "Stellar Sitar Serenity",
+  "type": "concert",
+  "location": "Château",
+  "date": "15.06.2024 21:15",
+  "title": "Stellar Sitar Serenity - 15\/06\/2024 21:15"
+ },
+ {
+  "performer": "Ephemeral Echoes",
+  "type": "concert",
+  "location": "Grandes écuries",
+  "date": "15.06.2024 18:00",
+  "title": "Ephemeral Echoes - 15\/06\/2024 18:00"
+ },
+ {
+  "performer": "Nebula Hip-Hop Collective",
+  "type": "concert",
+  "location": "Grandes écuries",
+  "date": "15.06.2024 20:30",
+  "title": "Nebula Hip-Hop Collective - 15\/06\/2024 20:30"
+ },
+ {
+  "performer": "Cosmic Jazz Odyssey",
+  "type": "concert",
+  "location": "Grandes écuries",
+  "date": "15.06.2024 22:00",
+  "title": "Cosmic Jazz Odyssey - 15\/06\/2024 22:00"
+ },
+ {
+  "performer": "Galactic Funk Syndicate",
+  "type": "concert",
+  "location": "Petite pelouse",
+  "date": "15.06.2024 18:15",
+  "title": "Galactic Funk Syndicate - 15\/06\/2024 18:15"
+ },
+ {
+  "performer": "Galactic Groove Experiment",
+  "type": "concert",
+  "location": "Petite pelouse",
+  "date": "15.06.2024 20:30",
+  "title": "Galactic Groove Experiment - 15\/06\/2024 20:30"
+ },
+ {
+  "performer": "Quantum Electro Echoes",
+  "type": "concert",
+  "location": "Petite pelouse",
+  "date": "15.06.2024 22:45",
+  "title": "Quantum Electro Echoes - 15\/06\/2024 22:45"
+ },
+ {
+  "performer": "Quantum Electro Echoes",
+  "type": "concert",
+  "location": "Tribune",
+  "date": "16.06.2024 16:00",
+  "title": "Quantum Electro Echoes - 16\/06\/2024 16:00"
+ },
+ {
+  "performer": "Nebula Hip-Hop Collective",
+  "type": "concert",
+  "location": "Tribune",
+  "date": "16.06.2024 18:15",
+  "title": "Nebula Hip-Hop Collective - 16\/06\/2024 18:15"
+ },
+ {
+  "performer": "Stellar Synthwave Society",
+  "type": "concert",
+  "location": "Tribune",
+  "date": "16.06.2024 20:30",
+  "title": "Stellar Synthwave Society - 16\/06\/2024 20:30"
+ },
+ {
+  "performer": "Galactic Groove Experiment",
+  "type": "concert",
+  "location": "Virage",
+  "date": "16.06.2024 15:00",
+  "title": "Galactic Groove Experiment - 16\/06\/2024 15:00"
+ },
+ {
+  "performer": "Nebula Nova Folk Ensemble",
+  "type": "concert",
+  "location": "Virage",
+  "date": "16.06.2024 17:15",
+  "title": "Nebula Nova Folk Ensemble - 16\/06\/2024 17:15"
+ },
+ {
+  "performer": "Quantum Pulse Waves",
+  "type": "concert",
+  "location": "Virage",
+  "date": "16.06.2024 19:30",
+  "title": "Quantum Pulse Waves - 16\/06\/2024 19:30"
+ },
+ {
+  "performer": "Solar Serenades Ensemble",
+  "type": "concert",
+  "location": "Château",
+  "date": "16.06.2024 16:45",
+  "title": "Solar Serenades Ensemble - 16\/06\/2024 16:45"
+ },
+ {
+  "performer": "Mystic Soundscapes Orchestra",
+  "type": "concert",
+  "location": "Château",
+  "date": "16.06.2024 19:00",
+  "title": "Mystic Soundscapes Orchestra - 16\/06\/2024 19:00"
+ },
+ {
+  "performer": "Echoing Celestials",
+  "type": "concert",
+  "location": "Château",
+  "date": "16.06.2024 21:15",
+  "title": "Echoing Celestials - 16\/06\/2024 21:15"
+ },
+ {
+  "performer": "Luminary Groove Collective",
+  "type": "concert",
+  "location": "Grandes écuries",
+  "date": "16.06.2024 18:15",
+  "title": "Luminary Groove Collective - 16\/06\/2024 18:15"
+ },
+ {
+  "performer": "Cosmic Jazz Odyssey",
+  "type": "concert",
+  "location": "Grandes écuries",
+  "date": "16.06.2024 20:30",
+  "title": "Cosmic Jazz Odyssey - 16\/06\/2024 20:30"
+ },
+ {
+  "performer": "Aurora Borealis Blues Collective",
+  "type": "concert",
+  "location": "Grandes écuries",
+  "date": "16.06.2024 22:00",
+  "title": "Aurora Borealis Blues Collective - 16\/06\/2024 22:00"
+ },
+ {
+  "performer": "Ephemeral Echoes",
+  "type": "concert",
+  "location": "Petite pelouse",
+  "date": "16.06.2024 18:15",
+  "title": "Ephemeral Echoes - 16\/06\/2024 18:15"
+ },
+ {
+  "performer": "Galactic Funk Syndicate",
+  "type": "concert",
+  "location": "Petite pelouse",
+  "date": "16.06.2024 20:30",
+  "title": "Galactic Funk Syndicate - 16\/06\/2024 20:30"
+ },
+ {
+  "performer": "Stellar Sitar Serenity",
+  "type": "concert",
+  "location": "Petite pelouse",
+  "date": "16.06.2024 22:45",
+  "title": "Stellar Sitar Serenity - 16\/06\/2024 22:45"
+ },
+ {
+  "performer": "Cosmic Jazz Odyssey",
+  "type": "rencontre",
+  "location": "Terre-plein central",
+  "date": "14.06.2024 13:00",
+  "title": "Cosmic Jazz Odyssey - 14\/06\/2024 13:00"
+ },
+ {
+  "performer": "Luminary Groove Collective",
+  "type": "rencontre",
+  "location": "Terre-plein central",
+  "date": "15.06.2024 14:00",
+  "title": "Luminary Groove Collective - 15\/06\/2024 14:00"
+ },
+ {
+  "performer": "Stellar Sitar Serenity",
+  "type": "rencontre",
+  "location": "Terre-plein central",
+  "date": "16.06.2024 11:30",
+  "title": "Stellar Sitar Serenity - 16\/06\/2024 11:30"
+ },
+ {
+  "performer": "Quantum Electro Echoes",
+  "type": "rencontre",
+  "location": "Terre-plein central",
+  "date": "14.06.2024 14:30",
+  "title": "Quantum Electro Echoes - 14\/06\/2024 14:30"
+ },
+ {
+  "performer": "Galactic Funk Syndicate",
+  "type": "rencontre",
+  "location": "Terre-plein central",
+  "date": "15.06.2024 12:30",
+  "title": "Galactic Funk Syndicate - 15\/06\/2024 12:30"
  }
 ]
 }

@@ -7,9 +7,8 @@ export interface Poi {
   type:string
 }
 export interface Dates{
-  days:string,
-  month:string,
-  year:number,
+  start_date:Date,
+  end_date:Date,
 }
 export interface Artist {
   id:number,
@@ -19,13 +18,9 @@ export interface Artist {
   composition:string,
   style:string
 }
-export interface EventType {
-  id:number,
-  description:string
-}
 export interface Event {
   performer: Artist,
-  type: EventType,
+  type: string,
   location: Poi,
   date: string,
 }
@@ -36,7 +31,7 @@ export interface ArtistEvents {
 interface EventDate {
   date:string,
   location:Poi,
-  type:EventType
+  type:string
 }
 
 export interface KeyLabel {

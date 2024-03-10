@@ -6,6 +6,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,7 +47,8 @@ import { TicketingComponent } from './ticketing/ticketing.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot({timeOut:3000}),    
     FormsModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    HttpClientModule
   ],
   providers: [    
     { provide: ErrorHandler,useClass: GenericErrorHandler },

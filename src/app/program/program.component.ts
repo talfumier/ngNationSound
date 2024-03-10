@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } fr
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import _ from 'lodash';
-import {FormFilterElements, Filter,ArtistEvents,Poi,EventType } from '../../services/interfaces';
+import {FormFilterElements, Filter,ArtistEvents,Poi } from '../../services/interfaces';
 import { FilterService } from '../../services/filter.service';
 import { DataService } from '../../services/data.service';
 
@@ -80,7 +80,7 @@ export class ProgramComponent implements OnInit, AfterViewInit,OnDestroy {
           performer:evt.performer,
           dates:[]
         };
-      artistEvts.dates.push({date:evt.date,location:evt.location as Poi,type:evt.type as EventType});
+      artistEvts.dates.push({date:evt.date,location:evt.location as Poi,type:evt.type});
       if(i===-1) AllArtistEvents.push(artistEvts);
       else AllArtistEvents[i]=artistEvts;  
       artistEvts.dates=_.orderBy(artistEvts.dates,"date","asc")  

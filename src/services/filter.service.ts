@@ -1,6 +1,7 @@
 import {Injectable, inject} from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import _ from "lodash";
+import { addDays } from 'date-fns';
 import { DataService } from './data.service';
 import { enUS } from 'date-fns/locale';
 import { addHours,parse } from 'date-fns';
@@ -45,16 +46,22 @@ export class FilterService {
   setFormFilterElements(){  //initialize form filter elements in program page and set default filter
     const days=[];
     days.push({key:"all",label:"tous"});
-    this.service.dates.days.split(",").map((day,idx) => {
+    _.range(this.service.dates.start_date.getDate(),this.service.dates.end_date.getDate()+1).map((day,idx) => {
       days.push({
         key:`day${idx+1}`,
-        label:`${new Date(this.service.dates.month +" "+day+","+this.service.dates.year).toLocaleDateString("fr",{day:"numeric",month: "long"})}`});
+        label:`${new Date((this.service.dates.start_date.getMonth()+1) +" "+day+","+this.service.dates.start_date.getFullYear()).toLocaleDateString("fr",{day:"numeric",month: "long"})}`});
+    });
+
+    const arr:any=new Set();
+    this.service.events.map((evt) => {
+      arr.add(evt.type);
     });
     const types=[];
     types.push({key:"all",label:"tous"});
-    this.service.event_types.map((type) => {
-      types.push({key:type.id,label:type.description});
-    });
+    arr.forEach((type:string) => {
+      types.push({key:type,label:type})
+    }) 
+    
     const times=[{key:"min",label:"de"},{key:"max",label:"à"}];
     const opts:Option[]=[],obj={id:-1,name:""}; //obj is the default option
     new Array(13).fill(11).map((item,idx) => opts.push({id:`${item+idx}h00`,name:`${item+idx}h00`}));
@@ -104,7 +111,7 @@ export class FilterService {
       bl[1]=true;
     else if(!bl[1]){
       Object.keys(this._filter.types).map((key:any) => {
-        if(key!=="all" && !bl[1] && this._filter.types[key as keyof object] && event.type.id==key )
+        if(key!=="all" && !bl[1] && this._filter.types[key as keyof object] && event.type===key )
           bl[1]=true;
       });
     }
@@ -120,11 +127,10 @@ export class FilterService {
   setFilteredEvents():void {  
     if(this._nochange) return; //no filter settings change > no need to re-run function  
     if(Object.keys(this._filter).length===0) this.setFormFilterElements();
-    // if(_.isEqual(filter,this._activeFilter)) return; //Deep comparison active vs new filter, if no difference no need to re-filter data  
-    let dates:any={},x:any="";    
-    //dates > object that initially contains event festival dates (set at 00:00:00 time)    
-    Object.values(this.service.dates)[0].split(",").map((day:string,idx:number) => {
-        dates[`day${idx+1}`]=parse(`${day} ${this.service.dates.month} ${this.service.dates.year}`,"dd MMMM yyyy",new Date(),{locale:enUS});
+    const dates:any={}; let x:any="";    
+    //dates > object that initially contains event festival dates (set at 00:00:00 time)   
+    _.range(this.service.dates.start_date.getDate(),this.service.dates.end_date.getDate()+1).map((day:number,idx:number) => {
+        dates[`day${idx+1}`]=addDays(this.service.dates.start_date,idx);
       });
     dates.time={min:0,max:24}; //time range with no restriction (hours)
     if(!this._filter.days["all" as keyof object]){ //when all:true, keep all dates

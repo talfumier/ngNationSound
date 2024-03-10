@@ -7,7 +7,7 @@ import data from './umap.json';
 @Injectable({
   providedIn: 'root'  // single instance for the entire application
 })
-export class UmapService {  //retrieves data from umap.json file
+export class UmapService {  //retrieves data from local umap.json file
   private _center:number[]=[];
   private _zoom:number=10;
   private _layers:OverlayLayer[]=[];
