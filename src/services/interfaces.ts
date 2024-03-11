@@ -16,7 +16,8 @@ export interface Artist {
   country:string,
   description:string,
   composition:string,
-  style:string
+  style:string,
+  filename:string
 }
 export interface Event {
   performer: Artist,

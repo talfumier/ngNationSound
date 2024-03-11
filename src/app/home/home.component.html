@@ -7,11 +7,7 @@
     >
       <div ngxSlickItem *ngFor="let artist of artists" class="slide">
         <img
-          src="{{
-            'assets/images/artists/' +
-              artist.name.replaceAll(' ', '').replaceAll('-', '') +
-              '.jpg'
-          }}"
+          src="{{ 'assets/images/artists/' + artist.filename }}"
           alt="{{ artist.name }}"
         />
         <div class="artist-name" [routerLink]="['/artist', artist.id]">
