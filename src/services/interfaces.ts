@@ -2,7 +2,7 @@ export interface Message {
   text:string,criticality:string,active?:boolean
 }
 export interface Poi {
-  id:string,
+  id:string|number,
   name:string,
   type:string
 }
@@ -17,12 +17,13 @@ export interface Artist {
   description:string,
   composition:string,
   style:string,
-  filename:string
+  filename?:string,
+  image?:string
 }
 export interface Event {
-  performer: Artist,
+  performer: number,
   type: string,
-  location: Poi,
+  location:string|number,
   date: string,
 }
 export interface ArtistEvents {
@@ -74,6 +75,17 @@ export interface Pass {
   pass1:number,
   pass2:number,
   pass3:number,
+}
+export interface Model {
+  messages:Message[],
+  dates:Dates,
+  pois:Poi[],
+  artists:Artist[],
+  infos:Infos,
+  faqs:Faq[],
+  partners:string[],
+  passes:Pass[],
+  events:Event[]
 }
 export interface FormattedPass {
   category:string,

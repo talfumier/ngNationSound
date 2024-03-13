@@ -24,8 +24,9 @@ export class GenericErrorHandler implements ErrorHandler {
                 break;
             default:
                 msg="Unexpected";
+                if(error.name.includes("TypeError")) return; //transient errors triggered during api data loading
         }
         this.injector.get(ToastService).toastError(`${msg} error ${error.status!==undefined?error.status:""} has occured : ${error.message} !`);   
-        console.error(new Date()+" : ",error);
+        console.error(new Date()+" : ","status : "+error.status, error.name,error.message);
     }
 }

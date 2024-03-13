@@ -1,27 +1,27 @@
-import { Component,HostListener } from '@angular/core';
+import { Component,HostListener} from '@angular/core';
 import _ from 'lodash';
-import { DataService } from '../../services/data.service';
-import { Dates } from '../../services/interfaces';
+import { DataService,} from '../../services/data/data.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {  
+export class HeaderComponent{   
   private _isToggled:boolean=false;
-  private _dates:Dates={} as Dates;
+  private _dates:any={days:[],monthYear:""};
 
-  constructor(private service:DataService, private window:Window) {
-    this._dates=service.dates;
+  constructor(private dataService:DataService, private window:Window) {
+    const days=_.range(this.dataService.dates.start_date.getDate(),this.dataService.dates.end_date.getDate()+1);
+    const monthYear=`${new Date((this.dataService.dates.start_date.getMonth()+1)+" "+days[0]+","+this.dataService.dates.start_date.getFullYear()).toLocaleString("fr-FR",{year:"numeric",month:"long"})}`;    
+    this._dates={days,monthYear};
   }
 
   get isToggled():boolean {
     return this._isToggled
   }
-  get dates():any{
-    const days=_.range(this._dates.start_date.getDate(),this._dates.end_date.getDate()+1);
-    return {days,monthYear:`${new Date((this._dates.start_date.getMonth()+1)+" "+days[0]+","+this._dates.start_date.getFullYear()).toLocaleString("fr-FR",{year:"numeric",month:"long"})}`};
+  get dates(){
+    return this._dates;
   }
   handleToggle(){
     this._isToggled=!this._isToggled;

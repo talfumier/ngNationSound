@@ -2,10 +2,10 @@ import {Injectable, inject} from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import _ from "lodash";
 import { addDays } from 'date-fns';
-import { DataService } from './data.service';
-import { enUS } from 'date-fns/locale';
+import { DataService } from './data/data.service';
 import { addHours,parse } from 'date-fns';
 import { FormFilterElements,Filter,Event, Option, KeyLabel } from './interfaces';
+import { environment } from '../config/environment';
 
 @Injectable({
   providedIn: 'root'  // single instance for the entire application
@@ -100,8 +100,9 @@ export class FilterService {
     const bl=new Array(3);
     bl.fill(false);
     // dealing with 'Quand ? A quelle heure ?' filter
-   const evtDate=parse(event.date,"dd.MM.yyyy HH:mm",new Date());
-   Object.keys(dates).map((key:string) => {
+    const fmt=environment.apiMode==="local"?"dd.MM.yyyy HH:mm":"yyyy-MM-dd HH:mm:ss";//date parameter format
+    const evtDate=parse(event.date,fmt,new Date());
+    Object.keys(dates).map((key:string) => {
       if(key!=="time" && !bl[0] && evtDate>=addHours(dates[key],dates.time.min) && evtDate<=addHours(dates[key],dates.time.max))
         bl[0]=true;
     });
@@ -119,7 +120,7 @@ export class FilterService {
     // dealing with 'Qui ?' filter
     if(this._filter.artist["id" as keyof object]===-1)        
       bl[2]=true;
-    if(!bl[2] && this._filter.artist["id" as keyof object]==event.performer.id)
+    if(!bl[2] && this._filter.artist["id" as keyof object]==event.performer)
       bl[2]=true; 
     if(!bl[2]) return false;
     return true;

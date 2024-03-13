@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import _ from 'lodash';
 import {FormFilterElements, Filter,ArtistEvents,Poi } from '../../services/interfaces';
 import { FilterService } from '../../services/filter.service';
-import { DataService } from '../../services/data.service';
+import { DataService } from '../../services/data/data.service';
 
 @Component({
   selector: 'app-program',
@@ -23,7 +22,7 @@ export class ProgramComponent implements OnInit, AfterViewInit,OnDestroy {
 
   private _events:ArtistEvents[]=[];  
 
-  constructor(private dataService:DataService,private filterService:FilterService, private activatedRoute: ActivatedRoute){}
+  constructor(private dataService:DataService,private filterService:FilterService){}
 
   get cats(){
     return this._cats;
@@ -39,11 +38,9 @@ export class ProgramComponent implements OnInit, AfterViewInit,OnDestroy {
   }
 
   ngOnInit(): void {    
-    this.activatedRoute.data.subscribe(({}) => { //resolved raw events initialized by eventsResolver in filter.service.ts  
-      this._formFilterElements=this.filterService.formFilterElements;  //initialize form filter elements
-      this._filter=this.filterService.filter;  //initialize filter
-      this._events=this.getFormattedData(this.filterService.filteredEvents);  //format raw events data
-    });
+    this._formFilterElements=this.filterService.formFilterElements;  //initialize form filter elements
+    this._filter=this.filterService.filter;  //initialize filter
+    this._events=this.getFormattedData(this.filterService.filteredEvents);  //format raw events data
     if(window.innerWidth>=1500) this._activeSubform=100;
     this.setIsFiltered();
   }
@@ -64,6 +61,19 @@ export class ProgramComponent implements OnInit, AfterViewInit,OnDestroy {
     ProgramComponent.scrollY=window.scrollY; // record scroll position to be able to return at the same position
   }
   getFormattedData(evts:any[]){
+    evts=evts.map((evt:any) => { //populate events with artist and location data
+      return(
+        {
+          performer:_.filter(this.dataService.artists,(artist) => {
+              return artist.id===evt.performer;
+            })[0],
+          type:evt.type,
+          location:_.filter(this.dataService.pois,(poi) => {
+              return poi.id===evt.location;
+            })[0],
+          date:evt.date,
+        });
+    });
     const AllArtistEvents:ArtistEvents[]=[];
     let artistEvts:ArtistEvents={} as ArtistEvents,i=null;
     evts.map((evt:any) => {

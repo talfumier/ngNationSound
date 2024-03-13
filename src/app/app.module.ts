@@ -1,4 +1,5 @@
-import { NgModule,ErrorHandler } from '@angular/core';
+import { NgModule,APP_INITIALIZER,ErrorHandler } from '@angular/core';
+import {combineLatest, tap } from 'rxjs'; 
 import { FormsModule } from '@angular/forms';
 
 import { SlickCarouselModule } from 'ngx-slick-carousel';
@@ -24,6 +25,9 @@ import { EventComponent } from './program/event/event.component';
 import { MapComponent } from './map/map.component';
 import { FaqComponent } from './faq/faq.component';
 import { TicketingComponent } from './ticketing/ticketing.component';
+import { ApiService } from '../services/data/init/api.service';
+import { environment } from '../config/environment';
+import { DataService } from '../services/data/data.service';
 
 @NgModule({
   declarations: [
@@ -51,6 +55,12 @@ import { TicketingComponent } from './ticketing/ticketing.component';
     HttpClientModule
   ],
   providers: [    
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeApp, 
+      multi: true, 
+      deps:[ApiService,DataService]
+    },
     { provide: ErrorHandler,useClass: GenericErrorHandler },
     { provide: Window, useValue: window },    
     { provide: Document, useValue: document }
@@ -58,3 +68,19 @@ import { TicketingComponent } from './ticketing/ticketing.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+function initializeApp(apiService:ApiService,dataService:DataService){ //api data loading done before page loading
+  if(environment.apiMode!=="local"){
+    const cols=["dates","artists","messages","transports","faqs","partners","pois","events"];
+    return () => combineLatest(cols.map((col:string) => {
+      return apiService.getApiObs(col);
+    })).pipe(tap((data) => {
+          data.map((item,idx) => {
+            dataService.formatApiData(cols[idx],item);
+          });
+        }));
+  }
+  else return () => {}; //function that does nothing (function to be returned anyway)
+}
+
+
