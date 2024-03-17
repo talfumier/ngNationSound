@@ -1,8 +1,10 @@
 import { Component, HostListener, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import {Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { environment } from '../../config/environment';
 import { DataService } from '../../services/data/data.service';
 import { Infos, Faq, Message, Artist} from '../../services/interfaces';
-import { environment } from '../../config/environment';
+import { ApiService } from '../../services/data/init/api.service';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +12,7 @@ import { environment } from '../../config/environment';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {  
+  private sub:Subscription={} as Subscription;
   private _slideConfig:any;
   private _artists:Artist[]=[];
   private _messages:Message[]=[];
@@ -19,7 +22,7 @@ export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
   private _partners:any[]=[];
   static scrollY:number;
   
-  constructor(private dataService:DataService,private router: Router) {
+  constructor(private dataService:DataService,private apiService:ApiService,private router: Router) {
     this._artists=dataService.artists;
     this._messages=dataService.messages;
     dataService.initInnerHTML();
@@ -29,7 +32,7 @@ export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
     this._partners=dataService.partners;
   }
 
-  ngOnInit(): void {  
+  ngOnInit(): void { 
     document.getElementById("home-link")?.classList.add("active");
 
     this._slideConfig= {
@@ -60,6 +63,11 @@ export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
     };       
   }
   ngAfterViewInit(): void {    
+    if(environment.apiMode!=="local" && !this.dataService.data.umap_pois["ready" as keyof object]) //retrieve umap_pois data from API back end
+      this.sub=this.apiService.getApiObs("umap_pois",this.dataService.data.umap_pois["url" as keyof object]).subscribe((data) => {
+          this.dataService.data.umap_pois={...this.dataService.data.umap_pois,data,ready:true};
+        })
+
     setTimeout(() => {
       window.scrollTo(0,HomeComponent.scrollY);     
     },100);     
@@ -67,6 +75,8 @@ export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
   ngOnDestroy(): void {      
     document.getElementById("home-link")?.classList.remove("active");
     HomeComponent.scrollY=window.scrollY; // record scroll position to be able to return at the same position
+    
+    if(Object.keys(this.sub).length>0) this.sub.unsubscribe();
   }  
   get slideConfig(){
     return this._slideConfig;

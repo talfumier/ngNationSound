@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import _ from "lodash";
-import { Poi, Dates, Artist, Event, Infos, Model, Transport } from '../interfaces';
+import { Poi, Dates, Artist, Event, Infos, Model } from '../interfaces';
 import { environment } from '../../config/environment';
 import { getLocalData } from './init/local';
 import { removeAccents} from '../../app/utilities/functions/utlityFunctions';
@@ -19,7 +19,8 @@ export class DataService {
     faqs:[],
     partners:[],
     passes:[],
-    events:[]
+    events:[],
+    umap_pois:{}
   }
 
   constructor() {
@@ -29,56 +30,6 @@ export class DataService {
   loadLocalData(){   
     this._data=getLocalData();
     this.initInnerHTML();
-  }
-  formatApiData(col:string,data:any){
-    switch(col){
-      case "messages":
-        this._data.messages=data.map((msg:any) => {
-          return msg.acf;
-        });
-        break;
-      case "dates":
-        this._data.dates={start_date:new Date(data[0].acf.start_date),end_date:new Date(data[0].acf.end_date)};
-        this._data.infos={
-          opening:data[0].acf.opening_hours,street:data[0].acf.street,city:data[0].acf.city,
-          lat:data[0].acf.lat,lng:data[0].acf.lng,transport:this._data.infos.transport
-        }
-        break;
-      case "pois":
-      case "artists":
-      case "partners":
-        this._data[col]=data.map((item:any) => {
-          if(item.acf.image) item.acf.image=item.acf.image.url;
-          return {id:item.id,...item.acf};
-        });
-        break;
-      case "transports":
-        this._data.infos.transport={car:[],train:[],plane:[]};
-        _.sortBy(data,"title.rendered","asc").map((item:any) => {
-          this._data.infos.transport[item.acf.transport_mean as keyof Transport].push(item.acf.description);
-        });
-        break;
-      case "faqs":
-        this._data[col]=data.map((item:any) => {
-          return {...item.acf};
-        })
-        break;
-      case "tickets":
-        this._data.passes=data.map((item:any) => {
-          return {
-            category:item.acf.category,
-            pass1:item.acf.price_1day,
-            pass2:item.acf.price_2days,                
-            pass3:item.acf.price_3days
-          };
-        });
-        break; 
-      case "events":       
-        this._data[col]=data.map((item:any) => {
-          if(item.acf.image) item.acf.image=item.acf.image.url;
-          return {...item.acf,performer:item.acf.performer[0],location:item.acf.location[0]};
-        });    
-    }
   }
   initInnerHTML(){    // data formatted as html string for use in events summary (home page)
     this._innerHTML=[""];
@@ -121,6 +72,9 @@ export class DataService {
   get data(){
     return this._data;
   }
+  set data(dta) {
+    this._data=dta;
+  }
   get messages (){
     return this._data.messages;
   }
@@ -150,5 +104,8 @@ export class DataService {
   }
   get passes(){
     return this._data.passes;
+  }
+  get umap_pois(){
+    return this._data.umap_pois;
   }
 }

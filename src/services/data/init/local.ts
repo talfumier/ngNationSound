@@ -1,5 +1,6 @@
 import _ from "lodash";
 import data from './data.json';
+import umap_data from '../../map/umap.json'
 import {Transport, Model } from '../../interfaces';
 
 export function getLocalData():Model{
@@ -30,6 +31,8 @@ export function getLocalData():Model{
   });
   const passes=data.ticketing;
   const events=data.events;
+
+  const umap_pois={url:"",data:umap_data,ready:true};
   
-  return {messages,dates,pois,artists,infos,faqs,partners,passes,events};
+  return {messages,dates,pois,artists,infos,faqs,partners,passes,events,umap_pois};
 }

@@ -42,7 +42,8 @@
               "src/css/styles.css",
               "./node_modules/leaflet/dist/leaflet.css",
               "node_modules/slick-carousel/slick/slick.scss",
-              "node_modules/slick-carousel/slick/slick-theme.scss"
+              "node_modules/slick-carousel/slick/slick-theme.scss",
+              "node_modules/ngx-spinner/animations/pacman.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

@@ -85,7 +85,8 @@ export interface Model {
   faqs:Faq[],
   partners:string[],
   passes:Pass[],
-  events:Event[]
+  events:Event[],
+  umap_pois:object
 }
 export interface FormattedPass {
   category:string,

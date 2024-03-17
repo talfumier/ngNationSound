@@ -1,0 +1,14 @@
+div.loading {
+  position:absolute;
+  background-color: transparent;
+  /* border:2px solid; */
+  top:30%;
+  left:45%; 
+}
+img {
+  width:70px;
+  height:70px;
+}
+div.loading.hidden {
+  display:none;
+}

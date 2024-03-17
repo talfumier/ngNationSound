@@ -1,5 +1,5 @@
-import { NgModule,APP_INITIALIZER,ErrorHandler } from '@angular/core';
-import {combineLatest, tap } from 'rxjs'; 
+import { NgModule,APP_INITIALIZER,ErrorHandler} from '@angular/core';
+import {forkJoin, tap} from 'rxjs'; 
 import { FormsModule } from '@angular/forms';
 
 import { SlickCarouselModule } from 'ngx-slick-carousel';
@@ -16,7 +16,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
-import { GenericErrorHandler } from './error/errorHandler';
+import { GenericErrorHandler } from '../error/errorHandler';
 import { ArtistComponent } from './artist/artist.component';
 import { ProgramComponent } from './program/program.component';
 import { InputComponent } from './utilities/input/input.component';
@@ -27,7 +27,7 @@ import { FaqComponent } from './faq/faq.component';
 import { TicketingComponent } from './ticketing/ticketing.component';
 import { ApiService } from '../services/data/init/api.service';
 import { environment } from '../config/environment';
-import { DataService } from '../services/data/data.service';
+import { LoadingService } from '../services/loading.service';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,7 @@ import { DataService } from '../services/data/data.service';
       provide: APP_INITIALIZER,
       useFactory: initializeApp, 
       multi: true, 
-      deps:[ApiService,DataService]
+      deps:[ApiService,LoadingService]
     },
     { provide: ErrorHandler,useClass: GenericErrorHandler },
     { provide: Window, useValue: window },    
@@ -67,18 +67,23 @@ import { DataService } from '../services/data/data.service';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+}
 
-function initializeApp(apiService:ApiService,dataService:DataService){ //api data loading done before page loading
+function initializeApp(apiService:ApiService,loadingService:LoadingService){ //api data loading done before page starts loading
   if(environment.apiMode!=="local"){
-    const cols=["dates","artists","messages","transports","faqs","partners","pois","events"];
-    return () => combineLatest(cols.map((col:string) => {
+    // loadingService.setLoadingStatus(true);    
+    const cols=["dates","artists","messages","transports","faqs","partners","pois","events","umap_pois"]; //umap_pois returns only the url to the map data that are then loaded in the home page
+    return () => forkJoin(cols.map((col:string) => {
       return apiService.getApiObs(col);
-    })).pipe(tap((data) => {
+    })).pipe(
+      tap((data) => {
           data.map((item,idx) => {
-            dataService.formatApiData(cols[idx],item);
+            apiService.formatApiData(cols[idx],item);            
+            if(idx===cols.length-1)loadingService.setLoadingStatus(false);
           });
-        }));
+      })
+    );
   }
   else return () => {}; //function that does nothing (function to be returned anyway)
 }

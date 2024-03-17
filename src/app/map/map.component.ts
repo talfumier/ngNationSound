@@ -11,7 +11,7 @@ import { removeAccents } from '../utilities/functions/utlityFunctions';
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
-export class MapComponent implements OnInit,OnDestroy {  
+export class MapComponent implements OnInit,OnDestroy { 
   private map:L.Map={} as L.Map;
   private layers:OverlayLayer[]=[];
   private stage:any="";
@@ -27,7 +27,7 @@ export class MapComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     window.scrollTo(0,0);
     document.getElementById("header-map-link")?.classList.add("active");  
-    this.initMap();    
+    this.initMap();       
   }
   ngOnDestroy(): void {
     document.getElementById("header-map-link")?.classList.remove("active");

@@ -9,7 +9,7 @@ import { eventsResolver } from '../services/filter.service';
 import { TicketingComponent } from './ticketing/ticketing.component';
 
 const routes:Routes=[  
-  {path:'',component:HomeComponent},//,resolve:{data:dataResolver}},
+  {path:'',component:HomeComponent},
   {path:'program',component:ProgramComponent,resolve:{events:eventsResolver}},
   {path:'map/:stage',component:MapComponent},
   {path:'artist/:id',component:ArtistComponent},

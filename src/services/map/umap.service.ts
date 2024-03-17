@@ -2,30 +2,32 @@ import { Injectable } from '@angular/core';
 import * as L from 'leaflet';
 import { Feature } from 'geojson';
 import { OverlayLayer } from '../interfaces';
-import data from './umap.json';
+import { DataService } from '../data/data.service';
 
 @Injectable({
   providedIn: 'root'  // single instance for the entire application
 })
 export class UmapService {  //retrieves data from local umap.json file
+  private data:object={};
   private _center:number[]=[];
   private _zoom:number=10;
   private _layers:OverlayLayer[]=[];
 
-  constructor() {
+  constructor(dataService:DataService) {
+    this.data=dataService.umap_pois["data" as keyof object];
     this.initData();
     this.initLayers();
   }
 
   initData(){
-    this._center=data.geometry.coordinates.reverse(); // map center point [lat, lng]
-    this._zoom=data.properties.zoom; //default map zoom level
+    this._center=(this.data["geometry" as keyof object]["coordinates" as keyof object] as Array<any>).reverse(); // map center point [lat, lng]
+    this._zoom=this.data["properties" as keyof object]["zoom" as keyof object]; //default map zoom level
   }
 
   initLayers() {
     // layers and features
     this._layers=[];
-    data.layers.map((layer) => {
+    (this.data["layers" as keyof object] as Array<any>).map((layer) => {
       this._layers.push({name:layer._umap_options.name,features:L.geoJSON(layer.features as Feature[],
         {
           style:function(feature) { //applies to polygon shapes
