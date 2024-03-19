@@ -1,9 +1,12 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { forkJoin } from 'rxjs';
 import _ from 'lodash';
 import {FormFilterElements, Filter,ArtistEvents,Poi } from '../../services/interfaces';
 import { FilterService } from '../../services/filter.service';
 import { DataService } from '../../services/data/data.service';
+import { environment } from '../../config/environment';
+import { ApiService } from '../../services/data/init/api.service';
 
 @Component({
   selector: 'app-program',
@@ -22,7 +25,8 @@ export class ProgramComponent implements OnInit, AfterViewInit,OnDestroy {
 
   private _events:ArtistEvents[]=[];  
 
-  constructor(private dataService:DataService,private filterService:FilterService){}
+  constructor(private dataService:DataService,private apiService:ApiService,private filterService:FilterService){
+  }
 
   get cats(){
     return this._cats;
@@ -37,10 +41,27 @@ export class ProgramComponent implements OnInit, AfterViewInit,OnDestroy {
     return this._isFiltered;
   }
 
-  ngOnInit(): void {    
+  ngOnInit(): void { 
+    
+    if(environment.apiMode!=="local" && (!this.dataService.data.artists.ready ||  //retrieve data from API back end
+      !this.dataService.data.pois.ready || !this.dataService.data.events.ready)) { //artists, pois and events are required in program page (should already be available from the home page api data loading)
+        const cols=["dates","artists","messages","transports","faqs","partners","pois","events"]; //page reload case > full api data reload required
+        forkJoin(cols.map((col:string) => {
+          return this.apiService.getApiObs(col);
+        })).subscribe((data) => {
+          data.map((item,idx) => {
+            this.apiService.formatApiData(cols[idx],item);
+          }); 
+          this.initFilter();
+        });
+    }
+    else this.initFilter(); //api data already initialized or local data      
+  }
+  initFilter(){
+    this.filterService.setFilteredEvents();
+    this._events=this.getFormattedData(this.filterService.filteredEvents);  //format raw events data
     this._formFilterElements=this.filterService.formFilterElements;  //initialize form filter elements
     this._filter=this.filterService.filter;  //initialize filter
-    this._events=this.getFormattedData(this.filterService.filteredEvents);  //format raw events data
     if(window.innerWidth>=1500) this._activeSubform=100;
     this.setIsFiltered();
   }
@@ -49,7 +70,7 @@ export class ProgramComponent implements OnInit, AfterViewInit,OnDestroy {
       !this._filter.days["all" as keyof object],
       !_.isEqual(Object.values(this._filter["time" as keyof object]),[-1,-1]),
       !this._filter.types["all" as keyof object],
-      this._filter.artist["id" as keyof object]!==-1
+      this._filter.artist["id" as keyof object]!=-1 && this._filter.artist["id" as keyof object]!==""
     ];  
   }
   ngAfterViewInit(): void {    

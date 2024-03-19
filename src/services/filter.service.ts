@@ -1,5 +1,4 @@
-import {Injectable, inject} from '@angular/core';
-import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import {Injectable} from '@angular/core';
 import _ from "lodash";
 import { addDays } from 'date-fns';
 import { DataService } from './data/data.service';
@@ -17,7 +16,7 @@ export class FilterService {
   private _filter:Filter={} as Filter;
   private _nochange:boolean=false; //flag to monitor actual change in filter settings
 
-  constructor(private service:DataService) { }
+  constructor(private dataService:DataService) { }
 
   get filteredEvents(){
     return this._filteredEvents;
@@ -45,15 +44,15 @@ export class FilterService {
   }
   setFormFilterElements(){  //initialize form filter elements in program page and set default filter
     const days=[];
-    days.push({key:"all",label:"tous"});
-    _.range(this.service.dates.start_date.getDate(),this.service.dates.end_date.getDate()+1).map((day,idx) => {
+    days.push({key:"all",label:"tous"}); 
+    _.range(this.dataService.dates.start_date.getDate(),this.dataService.dates.end_date.getDate()+1).map((day,idx) => {
       days.push({
         key:`day${idx+1}`,
-        label:`${new Date((this.service.dates.start_date.getMonth()+1) +" "+day+","+this.service.dates.start_date.getFullYear()).toLocaleDateString("fr",{day:"numeric",month: "long"})}`});
+        label:`${new Date((this.dataService.dates.start_date.getMonth()+1) +" "+day+","+this.dataService.dates.start_date.getFullYear()).toLocaleDateString("fr",{day:"numeric",month: "long"})}`});
     });
 
     const arr:any=new Set();
-    this.service.events.map((evt) => {
+    this.dataService.events.map((evt) => {
       arr.add(evt.type);
     });
     const types=[];
@@ -70,7 +69,7 @@ export class FilterService {
     const artist={key:"id",label:""};
     const artistOptions=[];
     artistOptions.push(obj);
-    this.service.artists.map((artist) => {
+    this.dataService.artists.map((artist) => {
       artistOptions.push({id:artist.id,name:artist.name});
     });
     this._formFilterElements={days,types,times,timeOptions,artist,artistOptions};
@@ -93,6 +92,7 @@ export class FilterService {
     times.map((tm) => {
       ob[tm.key]=-1;
     });
+    
     this._defaultFilter={...this._defaultFilter,time:ob,artist:{id:-1}};
     this._filter=this._defaultFilter;
   }
@@ -118,7 +118,7 @@ export class FilterService {
     }
     if(!bl[1]) return false;
     // dealing with 'Qui ?' filter
-    if(this._filter.artist["id" as keyof object]===-1)        
+    if(this._filter.artist["id" as keyof object]==-1 || this._filter.artist["id" as keyof object]==="")        
       bl[2]=true;
     if(!bl[2] && this._filter.artist["id" as keyof object]==event.performer)
       bl[2]=true; 
@@ -126,12 +126,13 @@ export class FilterService {
     return true;
   }
   setFilteredEvents():void {  
-    if(this._nochange) return; //no filter settings change > no need to re-run function  
-    if(Object.keys(this._filter).length===0) this.setFormFilterElements();
+    if(this._nochange) return; //no filter settings change > no need to re-run function      
+    if(Object.keys(this._filter).length===0) this.setFormFilterElements();   
     const dates:any={}; let x:any="";    
-    //dates > object that initially contains event festival dates (set at 00:00:00 time)   
-    _.range(this.service.dates.start_date.getDate(),this.service.dates.end_date.getDate()+1).map((day:number,idx:number) => {
-        dates[`day${idx+1}`]=addDays(this.service.dates.start_date,idx);
+    //dates > object that initially contains event festival dates (set at 00:00:00 time) 
+    dates.time={min:0,max:24}; //time range with no restric  
+    _.range(this.dataService.dates.start_date.getDate(),this.dataService.dates.end_date.getDate()+1).map((day:number,idx:number) => {
+        dates[`day${idx+1}`]=addDays(this.dataService.dates.start_date,idx);
       });
     dates.time={min:0,max:24}; //time range with no restriction (hours)
     if(!this._filter.days["all" as keyof object]){ //when all:true, keep all dates
@@ -150,17 +151,12 @@ export class FilterService {
       if(x!==-1) //-1 is default value
         dates.time[key]=parseInt(x.split("h")[0]); //time in hours
     });    
-    this._filteredEvents=_.filter(this.service.events,(event) => {
+    this._filteredEvents=_.filter(this.dataService.events,(event) => {
       return this.filterEvent(dates,event); 
-    })
+    });
     this._nochange=true;
   }
 }
-
-export const eventsResolver: ResolveFn<void> =  //program page resolver
-  (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-    return inject (FilterService).setFilteredEvents();
-};
 
 
 

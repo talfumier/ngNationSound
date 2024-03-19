@@ -77,16 +77,16 @@ export interface Pass {
   pass3:number,
 }
 export interface Model {
-  messages:Message[],
-  dates:Dates,
-  pois:Poi[],
-  artists:Artist[],
-  infos:Infos,
-  faqs:Faq[],
-  partners:string[],
-  passes:Pass[],
-  events:Event[],
-  umap_pois:object
+  messages:{data:Message[],ready:boolean},
+  dates:{data:Dates,ready:boolean},
+  pois:{data:Poi[],ready:boolean},
+  artists:{data:Artist[],ready:boolean},
+  infos:{data:Infos,ready:boolean},
+  faqs:{data:Faq[],ready:boolean},
+  partners:{data:string[],ready:boolean},
+  passes:{data:Pass[],ready:boolean},
+  events:{data:Event[],ready:boolean},
+  umap_pois:{url:string,data:object,ready:boolean}
 }
 export interface FormattedPass {
   category:string,

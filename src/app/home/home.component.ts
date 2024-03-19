@@ -1,9 +1,11 @@
 import { Component, HostListener, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
-import {Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import {Router} from '@angular/router';
+import { forkJoin} from 'rxjs';
+import _ from 'lodash';
 import { environment } from '../../config/environment';
+import config from '../../config/config.json';
 import { DataService } from '../../services/data/data.service';
-import { Infos, Faq, Message, Artist} from '../../services/interfaces';
+import { Infos, Faq, Message, Artist, Model } from '../../services/interfaces';
 import { ApiService } from '../../services/data/init/api.service';
 
 @Component({
@@ -11,9 +13,7 @@ import { ApiService } from '../../services/data/init/api.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {  
-  private sub:Subscription={} as Subscription;
-  private _slideConfig:any;
+export class HomeComponent implements OnInit,OnDestroy {
   private _artists:Artist[]=[];
   private _messages:Message[]=[];
   private _innerHTML:string[]=[];
@@ -22,64 +22,42 @@ export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
   private _partners:any[]=[];
   static scrollY:number;
   
-  constructor(private dataService:DataService,private apiService:ApiService,private router: Router) {
-    this._artists=dataService.artists;
-    this._messages=dataService.messages;
-    dataService.initInnerHTML();
-    this._innerHTML=dataService.innerHTML;
-    this._infos=dataService.infos;
-    this._faqs=dataService.faqs;
-    this._partners=dataService.partners;
+  constructor(private dataService:DataService,private apiService:ApiService,private router: Router) {    
   }
 
   ngOnInit(): void { 
     document.getElementById("home-link")?.classList.add("active");
-
-    this._slideConfig= {
-      "autoplay":true,
-      "autoplaySpeed":2500,
-      "pauseOnHover":true,    
-      "arrows":true,
-      "infinite":true,  
-      "slidesToShow":3,
-      "slidesToScroll":1,   
-      "responsive":[
-        {
-          "breakpoint": 600,
-          "settings":{
-            "slidesToShow":1,
-            "slidesToScroll":1,
-          }
-        },
-        {
-          "breakpoint": 968,
-          "settings":{
-            "slidesToShow":2,
-            "slidesToScroll":1,
-          }
-        },
-        
-      ],    
-    };       
+    
+    const cols=["artists","messages","transports","faqs","partners","pois","events"];   //dates api data uploaded in the header component    
+    const ready=cols.map((key:string) => {
+      return this.dataService.data[(key!=="transports"?key:"infos") as keyof Model].ready
+    });
+    if(environment.apiMode!=="local" && ready.indexOf(false)!==-1)
+      forkJoin(cols.map((col:string) => {
+        return this.apiService.getApiObs(col);
+      })).subscribe((data) => {
+        data.map((item,idx) => {
+          this.apiService.formatApiData(cols[idx],item);
+        });
+        this.initData();
+      });
+    else this.initData();  //api data already initialized or local data      
   }
-  ngAfterViewInit(): void {    
-    if(environment.apiMode!=="local" && !this.dataService.data.umap_pois["ready" as keyof object]) //retrieve umap_pois data from API back end
-      this.sub=this.apiService.getApiObs("umap_pois",this.dataService.data.umap_pois["url" as keyof object]).subscribe((data) => {
-          this.dataService.data.umap_pois={...this.dataService.data.umap_pois,data,ready:true};
-        })
-
-    setTimeout(() => {
-      window.scrollTo(0,HomeComponent.scrollY);     
-    },100);     
+  initData(){
+    this._artists=this.dataService.artists;
+    this._messages=this.dataService.messages;
+    this.dataService.initInnerHTML();
+    this._innerHTML=this.dataService.innerHTML;
+    this._infos=this.dataService.infos;
+    this._faqs=this.dataService.faqs;
+    this._partners=this.dataService.partners;
   }
   ngOnDestroy(): void {      
     document.getElementById("home-link")?.classList.remove("active");
     HomeComponent.scrollY=window.scrollY; // record scroll position to be able to return at the same position
-    
-    if(Object.keys(this.sub).length>0) this.sub.unsubscribe();
   }  
   get slideConfig(){
-    return this._slideConfig;
+    return config.carouselConfig;
   }
   get artists() {
     return this._artists;

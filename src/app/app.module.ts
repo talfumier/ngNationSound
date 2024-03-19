@@ -1,5 +1,4 @@
-import { NgModule,APP_INITIALIZER,ErrorHandler} from '@angular/core';
-import {forkJoin, tap} from 'rxjs'; 
+import { NgModule,ErrorHandler} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { SlickCarouselModule } from 'ngx-slick-carousel';
@@ -25,9 +24,6 @@ import { EventComponent } from './program/event/event.component';
 import { MapComponent } from './map/map.component';
 import { FaqComponent } from './faq/faq.component';
 import { TicketingComponent } from './ticketing/ticketing.component';
-import { ApiService } from '../services/data/init/api.service';
-import { environment } from '../config/environment';
-import { LoadingService } from '../services/loading.service';
 
 @NgModule({
   declarations: [
@@ -54,13 +50,7 @@ import { LoadingService } from '../services/loading.service';
     SlickCarouselModule,
     HttpClientModule
   ],
-  providers: [    
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeApp, 
-      multi: true, 
-      deps:[ApiService,LoadingService]
-    },
+  providers: [ 
     { provide: ErrorHandler,useClass: GenericErrorHandler },
     { provide: Window, useValue: window },    
     { provide: Document, useValue: document }
@@ -70,22 +60,6 @@ import { LoadingService } from '../services/loading.service';
 export class AppModule { 
 }
 
-function initializeApp(apiService:ApiService,loadingService:LoadingService){ //api data loading done before page starts loading
-  if(environment.apiMode!=="local"){
-    // loadingService.setLoadingStatus(true);    
-    const cols=["dates","artists","messages","transports","faqs","partners","pois","events","umap_pois"]; //umap_pois returns only the url to the map data that are then loaded in the home page
-    return () => forkJoin(cols.map((col:string) => {
-      return apiService.getApiObs(col);
-    })).pipe(
-      tap((data) => {
-          data.map((item,idx) => {
-            apiService.formatApiData(cols[idx],item);            
-            if(idx===cols.length-1)loadingService.setLoadingStatus(false);
-          });
-      })
-    );
-  }
-  else return () => {}; //function that does nothing (function to be returned anyway)
-}
+
 
 

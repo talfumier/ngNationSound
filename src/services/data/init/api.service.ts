@@ -30,57 +30,76 @@ export class ApiService {
       })
     );
   }
-  formatApiData(col:string,data:any){
+  formatApiData(col:string,data:any,umap_pois_url?:boolean){
     switch(col){
       case "messages":
-        this.service.data.messages=data.map((msg:any) => {
-          return msg.acf;
-        });
+        this.service.data.messages={
+          data:data.map((msg:any) => {
+            return msg.acf;
+          }),
+          ready:true
+      };
         break;
       case "dates":
-        this.service.data.dates={start_date:new Date(data[0].acf.start_date),end_date:new Date(data[0].acf.end_date)};
+        this.service.data.dates={data:{start_date:new Date(data[0].acf.start_date),end_date:new Date(data[0].acf.end_date)},ready:true};
         this.service.data.infos={
-          opening:data[0].acf.opening_hours,street:data[0].acf.street,city:data[0].acf.city,
-          lat:data[0].acf.lat,lng:data[0].acf.lng,transport:this.service.data.infos.transport
+          data:{
+            opening:data[0].acf.opening_hours,street:data[0].acf.street,city:data[0].acf.city,
+            lat:data[0].acf.lat,lng:data[0].acf.lng,transport:this.service.data.infos.data.transport
+          },
+          ready:true
         }
         break;
       case "pois":
       case "artists":
       case "partners":
-        this.service.data[col]=data.map((item:any) => {
-          if(item.acf.image) item.acf.image=item.acf.image.url;
-          return {id:item.id,...item.acf};
-        });
+        this.service.data[col]={
+          data:data.map((item:any) => {
+            if(item.acf.image) item.acf.image=item.acf.image.url;
+            return {id:item.id,...item.acf};
+          }),
+          ready:true
+        };
         break;
       case "transports":
-        this.service.data.infos.transport={car:[],train:[],plane:[]};
+        this.service.data.infos.data.transport={car:[],train:[],plane:[]};
         _.sortBy(data,"title.rendered","asc").map((item:any) => {
-          this.service.data.infos.transport[item.acf.transport_mean as keyof Transport].push(item.acf.description);
+          this.service.data.infos.data.transport[item.acf.transport_mean as keyof Transport].push(item.acf.description);
         });
         break;
       case "faqs":
-        this.service.data[col]=data.map((item:any) => {
-          return {...item.acf};
-        })
+        this.service.data[col]={
+          data:data.map((item:any) => {
+            return {...item.acf};
+          }),
+        ready:true
+        };
         break;
       case "tickets":
-        this.service.data.passes=data.map((item:any) => {
-          return {
-            category:item.acf.category,
-            pass1:item.acf.price_1day,
-            pass2:item.acf.price_2days,                
-            pass3:item.acf.price_3days
-          };
-        });
+        this.service.data.passes={
+          data:data.map((item:any) => {
+            return {
+              category:item.acf.category,
+              pass1:item.acf.price_1day,
+              pass2:item.acf.price_2days,                
+              pass3:item.acf.price_3days
+            };
+          }),
+        ready:true
+        };
         break; 
       case "events":       
-        this.service.data[col]=data.map((item:any) => {
-          if(item.acf.image) item.acf.image=item.acf.image.url;
-          return {...item.acf,performer:item.acf.performer[0],location:item.acf.location[0]};
-        });  
+        this.service.data[col]={
+          data:data.map((item:any) => {
+            if(item.acf.image) item.acf.image=item.acf.image.url;
+            return {...item.acf,performer:item.acf.performer[0],location:item.acf.location[0]};
+          }),
+          ready:true
+        };  
         break;      
       case "umap_pois": 
-        this.service.data[col]={url:data[0].acf.umap_json.url,data:{},ready:false};
+        if(umap_pois_url) this.service.data[col]={url:data[0].acf.umap_json.url,data:{},ready:false};
+        else this.service.data[col]={...this.service.data[col],data,ready:true};
     }
   } 
 }
