@@ -8,7 +8,7 @@ import { removeAccents} from '../../app/utilities/functions/utlityFunctions';
 @Injectable({
   providedIn: 'root' // single instance for the entire application
 })
-export class DataService {
+export class DataService { 
   private _innerHTML:string[]=[];// data formatting as html string for use in events summary (home page)
   private _data:Model={
     messages:{data:[],ready:false},
@@ -67,6 +67,11 @@ export class DataService {
     return _.filter(this._data.artists.data,(artist) => {
       return artist.id===id;
     })[0];
+  }
+  displayLoading(cs:boolean){
+    const elt=document.getElementById("splashScreen");
+    if(cs) elt?.classList.remove("hidden");
+    else elt?.classList.add("hidden");
   }
   get data(){
     return this._data;

@@ -11,17 +11,19 @@ import { ApiService } from '../../services/data/init/api.service';
   styleUrl: './ticketing.component.css'
 })
 export class TicketingComponent implements OnInit, OnDestroy {  
-  private sub:Subscription={} as Subscription;
+  private subs:Subscription[]=[];
   private _formattedData:{pass1:FormattedPass[],pass2:FormattedPass[],pass3:FormattedPass[]}={pass1:[],pass2:[],pass3:[]};
 
   constructor(private dataService:DataService,private apiService:ApiService) {
   }
 
   ngOnInit(): void {    
-    if(environment.apiMode!=="local" && !this.dataService.data.passes.ready) { //retrieve data from API back end
+    if(environment.apiMode!=="local" && !this.dataService.data.passes.ready) { //retrieve data from API back end  
+      this.dataService.displayLoading(true);
+      document.getElementById("splashScreen")?.classList.remove("hidden");
       if(!this.dataService.data.events.ready) { //page reload case > full api data reload required
         const cols=["artists","messages","transports","faqs","partners","pois","events"];
-        forkJoin(cols.map((col:string) => {
+        this.subs[0]=forkJoin(cols.map((col:string) => {
           return this.apiService.getApiObs(col);
         })).subscribe((data) => {
           data.map((item,idx) => {
@@ -29,10 +31,11 @@ export class TicketingComponent implements OnInit, OnDestroy {
           }); 
         });
       }
-      this.sub=this.apiService.getApiObs("tickets").subscribe((data) => {
+      this.subs[1]=this.apiService.getApiObs("tickets").subscribe((data) => {
         this.apiService.formatApiData("tickets",data);
         this.formatData();
-      });
+        this.dataService.displayLoading(false);
+      }); 
     }
     else this.formatData(); //api data already initialized or local data    
   }
@@ -45,7 +48,10 @@ export class TicketingComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(): void {
-    if(Object.keys(this.sub).length>0) this.sub.unsubscribe();    
+    this.subs.map((sub) => {
+      if(Object.keys(sub).length>0) sub.unsubscribe(); //unsubscribe to prevent memory leaks
+    })
+       
   }
   get formattedData(){
     return Object.values(this._formattedData);

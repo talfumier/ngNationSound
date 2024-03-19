@@ -24,10 +24,12 @@ import { EventComponent } from './program/event/event.component';
 import { MapComponent } from './map/map.component';
 import { FaqComponent } from './faq/faq.component';
 import { TicketingComponent } from './ticketing/ticketing.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoadingComponent,
     HeaderComponent,
     FooterComponent,
     HomeComponent,

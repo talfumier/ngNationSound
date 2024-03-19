@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import {Router} from '@angular/router';
-import { forkJoin} from 'rxjs';
+import { Subscription, forkJoin} from 'rxjs';
 import _ from 'lodash';
 import { environment } from '../../config/environment';
 import config from '../../config/config.json';
@@ -14,6 +14,7 @@ import { ApiService } from '../../services/data/init/api.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit,OnDestroy {
+  private sub:Subscription={} as Subscription;
   private _artists:Artist[]=[];
   private _messages:Message[]=[];
   private _innerHTML:string[]=[];
@@ -32,15 +33,18 @@ export class HomeComponent implements OnInit,OnDestroy {
     const ready=cols.map((key:string) => {
       return this.dataService.data[(key!=="transports"?key:"infos") as keyof Model].ready
     });
-    if(environment.apiMode!=="local" && ready.indexOf(false)!==-1)
-      forkJoin(cols.map((col:string) => {
+    if(environment.apiMode!=="local" && ready.indexOf(false)!==-1) { //page reload case > full api data reload required
+      this.dataService.displayLoading(true);
+      this.sub=forkJoin(cols.map((col:string) => {
         return this.apiService.getApiObs(col);
       })).subscribe((data) => {
         data.map((item,idx) => {
           this.apiService.formatApiData(cols[idx],item);
         });
         this.initData();
+        this.dataService.displayLoading(false);
       });
+    }
     else this.initData();  //api data already initialized or local data      
   }
   initData(){
@@ -55,6 +59,8 @@ export class HomeComponent implements OnInit,OnDestroy {
   ngOnDestroy(): void {      
     document.getElementById("home-link")?.classList.remove("active");
     HomeComponent.scrollY=window.scrollY; // record scroll position to be able to return at the same position
+
+    if(Object.keys(this.sub).length>0) this.sub.unsubscribe(); //unsubscribe to prevent memory leaks
   }  
   get slideConfig(){
     return config.carouselConfig;

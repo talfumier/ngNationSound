@@ -29,7 +29,8 @@ export class MapComponent implements OnInit,OnDestroy {
     window.scrollTo(0,0);
     document.getElementById("header-map-link")?.classList.add("active"); 
     
-    if(environment.apiMode!=="local" && !this.dataService.data.umap_pois.ready) {//retrieve data from API back end
+    if(environment.apiMode!=="local" && !this.dataService.data.umap_pois.ready) {//retrieve data from API back end  
+      this.dataService.displayLoading(true);
       if(!this.dataService.data.events.ready) { //page reload case > full api data reload required
         const cols=["artists","messages","transports","faqs","partners","pois","events"];
         forkJoin(cols.map((col:string) => {
@@ -40,12 +41,15 @@ export class MapComponent implements OnInit,OnDestroy {
           }); 
         });
       }
-      this.apiService.getApiObs("umap_pois").subscribe((data) => {
-        this.apiService.formatApiData("umap_pois",data,true);
-        this.apiService.getApiObs("umap_pois",this.dataService.data.umap_pois.url).subscribe((data) => {
-          this.apiService.formatApiData("umap_pois",data,false);
-          this.map=this.umap.initMap(this.dataService.data.umap_pois.data,this.stage); 
-        });
+      this.sub=this.apiService.getApiObs("umap_pois").pipe(
+        switchMap((value) => {  //1st observable to retrieve map pois json file url, format it and store it in dataservice
+          this.apiService.formatApiData("umap_pois",value,true);
+          return this.apiService.getApiObs("umap_pois",this.dataService.data.umap_pois.url); //set the 2nd observable using the url from 1st observable
+        })
+      ).subscribe((data) => { //retrieves map pois, format them and initialize the map.
+        this.apiService.formatApiData("umap_pois",data,false);
+        this.map=this.umap.initMap(this.dataService.data.umap_pois.data,this.stage);           
+        this.dataService.displayLoading(false);
       });
     }
     else this.map=this.umap.initMap(this.dataService.data.umap_pois.data,this.stage); //api data already initialized or local data
@@ -53,7 +57,7 @@ export class MapComponent implements OnInit,OnDestroy {
   ngOnDestroy(): void {
     document.getElementById("header-map-link")?.classList.remove("active");
 
-    if(Object.keys(this.sub).length>0) this.sub.unsubscribe();
+    if(Object.keys(this.sub).length>0) this.sub.unsubscribe(); //unsubscribe to prevent memory leaks
   }
   handleFullScreen(evt:Event){
     this._isFullScreen=!this._isFullScreen;

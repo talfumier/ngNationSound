@@ -1,0 +1,26 @@
+div.loading {
+  position:fixed;
+  top:45%;
+  left:45%; 
+  z-index:10000;
+}
+img {
+  width:40px;
+  height:40px;
+}
+div.loading.hidden {
+  display:none;
+}
+
+@media screen and (min-width: 768px){
+  img {
+    width: 60px;
+    height: 60px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  img {
+    width: 70px;
+    height: 70px;
+  }
+}

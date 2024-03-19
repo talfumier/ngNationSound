@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { forkJoin } from 'rxjs';
+import { Subscription, forkJoin } from 'rxjs';
 import _ from 'lodash';
 import {FormFilterElements, Filter,ArtistEvents,Poi } from '../../services/interfaces';
 import { FilterService } from '../../services/filter.service';
@@ -14,6 +14,7 @@ import { ApiService } from '../../services/data/init/api.service';
   styleUrl: './program.component.css'
 })
 export class ProgramComponent implements OnInit, AfterViewInit,OnDestroy {  
+  private sub:Subscription={} as Subscription;
   private _cats:string[]=["Quand ?","A quelle heure ?","Quoi ?","Qui ?"];
   private _activeSubform:number=-1;
   private _formFilterElements:FormFilterElements={} as FormFilterElements;
@@ -41,18 +42,19 @@ export class ProgramComponent implements OnInit, AfterViewInit,OnDestroy {
     return this._isFiltered;
   }
 
-  ngOnInit(): void { 
-    
+  ngOnInit(): void {     
     if(environment.apiMode!=="local" && (!this.dataService.data.artists.ready ||  //retrieve data from API back end
       !this.dataService.data.pois.ready || !this.dataService.data.events.ready)) { //artists, pois and events are required in program page (should already be available from the home page api data loading)
+      document.getElementById("splashScreen")?.classList.remove("hidden");
         const cols=["dates","artists","messages","transports","faqs","partners","pois","events"]; //page reload case > full api data reload required
-        forkJoin(cols.map((col:string) => {
+        this.sub=forkJoin(cols.map((col:string) => {
           return this.apiService.getApiObs(col);
         })).subscribe((data) => {
           data.map((item,idx) => {
             this.apiService.formatApiData(cols[idx],item);
           }); 
           this.initFilter();
+          document.getElementById("splashScreen")?.classList.add("hidden");
         });
     }
     else this.initFilter(); //api data already initialized or local data      
@@ -80,6 +82,8 @@ export class ProgramComponent implements OnInit, AfterViewInit,OnDestroy {
   }
   ngOnDestroy(): void {
     ProgramComponent.scrollY=window.scrollY; // record scroll position to be able to return at the same position
+    
+    if(Object.keys(this.sub).length>0) this.sub.unsubscribe(); //unsubscribe to prevent memory leaks
   }
   getFormattedData(evts:any[]){
     evts=evts.map((evt:any) => { //populate events with artist and location data
