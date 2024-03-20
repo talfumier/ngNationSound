@@ -1,7 +1,6 @@
 import { Component,Input, OnInit } from '@angular/core';
-import {format,parse} from 'date-fns';
-import { ArtistEvents,Event } from '../../../services/interfaces';
-import { removeAccents } from '../../utilities/functions/utlityFunctions';
+import { ArtistEvents} from '../../../services/interfaces';
+import { removeAccents,getFormattedDate } from '../../utilities/functions/utlityFunctions';
 import { environment } from '../../../config/environment';
 
 @Component({
@@ -22,8 +21,7 @@ export class EventComponent implements OnInit {
     return this._event;
   }  
   formattedDate(date:string) { //work-around to avoid 'invalid date' warning on ios devices
-    const fmt=environment.apiMode==="local"?"dd.MM.yyyy HH:mm":"yyyy-MM-dd HH:mm:ss";//date parameter format
-    return format(parse(date,fmt,new Date()),"dd MMMM '-' HH'h'mm");
+    return getFormattedDate(date,environment.apiMode==="local"?"dd.MM.yyyy HH:mm":"yyyy-MM-dd HH:mm:ss");
   }
   cleanup(type:string,location:string){
     if(type.includes("rencontre")) return "rencontre";

@@ -34,9 +34,9 @@ export class ApiService {
     switch(col){
       case "messages":
         this.service.data.messages={
-          data:_.sortBy(data.map((msg:any) => {
+          data:data.map((msg:any) => {
             return msg.acf;
-          }),"acf.order","asc"),
+          }),
           ready:true
       };
         break;

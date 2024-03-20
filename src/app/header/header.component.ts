@@ -1,9 +1,10 @@
 import { Component,HostListener, OnDestroy, OnInit} from '@angular/core';
-import { Subscription, forkJoin } from 'rxjs';
+import { Subscription } from 'rxjs';
 import _ from 'lodash';
 import { DataService,} from '../../services/data/data.service';
 import { ApiService } from '../../services/data/init/api.service';
 import { environment } from '../../config/environment';
+import { getFormattedDate } from '../utilities/functions/utlityFunctions';
 
 @Component({
   selector: 'app-header',
@@ -29,7 +30,8 @@ export class HeaderComponent implements OnInit,OnDestroy{
   }
   getDaysMonthYear(){
     const days=_.range(this.dataService.dates.start_date.getDate(),this.dataService.dates.end_date.getDate()+1);
-    const monthYear=`${new Date((this.dataService.dates.start_date.getMonth()+1)+" "+days[0]+","+this.dataService.dates.start_date.getFullYear()).toLocaleString("fr-FR",{year:"numeric",month:"long"})}`;    
+    let monthYear=`${new Date((this.dataService.dates.start_date.getMonth()+1)+" "+days[0]+","+this.dataService.dates.start_date.getFullYear()).toLocaleString("fr-FR",{year:"numeric",month:"long"})}`;    
+    monthYear=getFormattedDate(monthYear,"MMMM yyyy","MMMM yyyy"); //work-around to avoid 'invalid date' warning on ios devices
     return {days,monthYear};
   }
   ngOnDestroy(): void {
