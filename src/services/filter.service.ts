@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import _ from "lodash";
-import { addDays } from 'date-fns';
+import { addDays, format } from 'date-fns';
 import { DataService } from './data/data.service';
 import { addHours,parse } from 'date-fns';
 import { FormFilterElements,Filter,Event, Option, KeyLabel } from './interfaces';
@@ -48,8 +48,13 @@ export class FilterService {
     _.range(this.dataService.dates.start_date.getDate(),this.dataService.dates.end_date.getDate()+1).map((day,idx) => {
       days.push({
         key:`day${idx+1}`,
-        label:`${new Date((this.dataService.dates.start_date.getMonth()+1) +" "+day+","+this.dataService.dates.start_date.getFullYear()).toLocaleDateString("fr",{day:"numeric",month: "long"})}`});
-    });
+        // label:`${new Date((this.dataService.dates.start_date.getMonth()+1) +" "+day+","+this.dataService.dates.start_date.getFullYear())
+        // .toLocaleDateString("fr",{day:"numeric",month: "long"})}`
+         label:format(new Date(this.dataService.dates.start_date.getFullYear(), //work-around to avoid 'invalid date' warning on ios devices
+      this.dataService.dates.start_date.getMonth(),day),"dd MMMM"),
+      });
+        
+      });
 
     const arr:any=new Set();
     this.dataService.events.map((evt) => {
