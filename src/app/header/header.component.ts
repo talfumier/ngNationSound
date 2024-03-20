@@ -5,6 +5,7 @@ import { DataService,} from '../../services/data/data.service';
 import { ApiService } from '../../services/data/init/api.service';
 import { environment } from '../../config/environment';
 import { getFormattedDate } from '../utilities/functions/utlityFunctions';
+import { format, parse, parseISO } from 'date-fns';
 
 @Component({
   selector: 'app-header',
@@ -34,7 +35,8 @@ export class HeaderComponent implements OnInit,OnDestroy{
     return {days,monthYear};
   }
   formattedMonthYear():string{  //work-around to avoid 'invalid date' warning on ios devices
-    return getFormattedDate(this._dates.monthYear,"MMMM yyyy","MMMM yyyy");
+    return format(new Date(this.dataService.dates.start_date.getFullYear(),this.dataService.dates.start_date.getMonth(),
+      this.dataService.dates.start_date.getDate()),"MMMM yyyy");
   }
   ngOnDestroy(): void {
     if(Object.keys(this.sub).length>0) this.sub.unsubscribe();
