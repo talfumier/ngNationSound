@@ -120,6 +120,9 @@ div.program-grid {
   border: none;
   background-color: transparent;
 }
+:host ::ng-deep div.grid-item:has(.row-header) {
+  grid-column: 1;
+}
 :host ::ng-deep div.grid-item:has(.column-header),
 :host ::ng-deep div.grid-item:has(.row-header) {
   justify-content: center;

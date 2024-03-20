@@ -1,5 +1,4 @@
 import {format,parse} from 'date-fns';
-import { environment } from '../../../config/environment';
 
 export function removeAccents(str:string):string {
   return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(' ','%20').toLowerCase();
@@ -18,6 +17,5 @@ export function getDateFromString(date:any,format:string,output?:string):Date|nu
   return output==="ms"?Date.parse(result) as number:new Date(result);
 }
 export function getFormattedDate(date:string,fmt:string,output_fmt?:string):string { //fmt > date parameter format
-    // const fmt=environment.apiMode==="local"?"dd.MM.yyyy HH:mm":"yyyy-MM-dd HH:mm:ss";
-    return format(parse(date,fmt,new Date()),output_fmt===undefined?"dd MMMM '-' HH'h'mm":output_fmt);
-  }
+  return format(parse(date,fmt,new Date()),output_fmt===undefined?"dd MMMM '-' HH'h'mm":output_fmt);
+}

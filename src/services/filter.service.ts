@@ -48,10 +48,8 @@ export class FilterService {
     _.range(this.dataService.dates.start_date.getDate(),this.dataService.dates.end_date.getDate()+1).map((day,idx) => {
       days.push({
         key:`day${idx+1}`,
-        // label:`${new Date((this.dataService.dates.start_date.getMonth()+1) +" "+day+","+this.dataService.dates.start_date.getFullYear())
-        // .toLocaleDateString("fr",{day:"numeric",month: "long"})}`
-         label:format(new Date(this.dataService.dates.start_date.getFullYear(), //work-around to avoid 'invalid date' warning on ios devices
-      this.dataService.dates.start_date.getMonth(),day),"dd MMMM"),
+        label:format(new Date(this.dataService.dates.start_date.getFullYear(), //work-around to avoid 'invalid date' warning on ios devices
+          this.dataService.dates.start_date.getMonth(),day),"dd MMMM"),
       });
         
       });
