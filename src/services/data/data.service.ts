@@ -4,6 +4,7 @@ import { Poi, Dates, Artist, Event, Infos, Model } from '../interfaces';
 import { environment } from '../../config/environment';
 import { getLocalData } from './init/local';
 import { removeAccents} from '../../app/utilities/functions/utlityFunctions';
+import { format } from 'date-fns';
 
 @Injectable({
   providedIn: 'root' // single instance for the entire application
@@ -35,8 +36,8 @@ export class DataService {
     this._innerHTML=[""];
     _.range(this._data.dates.data.start_date.getDate(),this._data.dates.data.end_date.getDate()+1).map((day) => {
       //(this._data.dates.data.start_date.getMonth()+1)+" " +day+","+this._data.dates.data.start_date.getFullYear()
-      this._innerHTML.push(`${new Date(this._data.dates.data.start_date.getFullYear(),
-        this._data.dates.data.start_date.getMonth(),day).toLocaleString("fr-FR",{day: 'numeric',month:"long"})}`);
+      this._innerHTML.push(format(new Date(this._data.dates.data.start_date.getFullYear(), //work-around to avoid 'invalid date' warning on ios devices
+      this._data.dates.data.start_date.getMonth(),day),"dd MMMM"));
     });
     this._innerHTML.map((item,idx) => {
       this._innerHTML[idx]=`<div class='column-header'>${item}</div>`
