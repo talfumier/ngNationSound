@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { Subscription, forkJoin } from 'rxjs';
 import _ from 'lodash';
-import {FormFilterElements, Filter,ArtistEvents,Poi,EventType } from '../../services/interfaces';
+import {FormFilterElements, Filter,ArtistEvents,Poi } from '../../services/interfaces';
 import { FilterService } from '../../services/filter.service';
-import { DataService } from '../../services/data.service';
+import { DataService } from '../../services/data/data.service';
+import { environment } from '../../config/environment';
+import { ApiService } from '../../services/data/init/api.service';
 
 @Component({
   selector: 'app-program',
@@ -12,6 +14,7 @@ import { DataService } from '../../services/data.service';
   styleUrl: './program.component.css'
 })
 export class ProgramComponent implements OnInit, AfterViewInit,OnDestroy {  
+  private sub:Subscription={} as Subscription;
   private _cats:string[]=["Quand ?","A quelle heure ?","Quoi ?","Qui ?"];
   private _activeSubform:number=-1;
   private _formFilterElements:FormFilterElements={} as FormFilterElements;
@@ -23,7 +26,8 @@ export class ProgramComponent implements OnInit, AfterViewInit,OnDestroy {
 
   private _events:ArtistEvents[]=[];  
 
-  constructor(private dataService:DataService,private filterService:FilterService, private activatedRoute: ActivatedRoute){}
+  constructor(private dataService:DataService,private apiService:ApiService,private filterService:FilterService){
+  }
 
   get cats(){
     return this._cats;
@@ -38,12 +42,28 @@ export class ProgramComponent implements OnInit, AfterViewInit,OnDestroy {
     return this._isFiltered;
   }
 
-  ngOnInit(): void {    
-    this.activatedRoute.data.subscribe(({}) => { //resolved raw events initialized by eventsResolver in filter.service.ts  
-      this._formFilterElements=this.filterService.formFilterElements;  //initialize form filter elements
-      this._filter=this.filterService.filter;  //initialize filter
-      this._events=this.getFormattedData(this.filterService.filteredEvents);  //format raw events data
-    });
+  ngOnInit(): void {     
+    if(environment.apiMode!=="local" && (!this.dataService.data.artists.ready ||  //retrieve data from API back end
+      !this.dataService.data.pois.ready || !this.dataService.data.events.ready)) { //artists, pois and events are required in program page (should already be available from the home page api data loading)
+      document.getElementById("splashScreen")?.classList.remove("hidden");
+        const cols=["dates","artists","messages","transports","faqs","partners","pois","events"]; //page reload case > full api data reload required
+        this.sub=forkJoin(cols.map((col:string) => {
+          return this.apiService.getApiObs(col);
+        })).subscribe((data) => {
+          data.map((item,idx) => {
+            this.apiService.formatApiData(cols[idx],item);
+          }); 
+          this.initFilter();
+          document.getElementById("splashScreen")?.classList.add("hidden");
+        });
+    }
+    else this.initFilter(); //api data already initialized or local data      
+  }
+  initFilter(){
+    this.filterService.setFilteredEvents();
+    this._events=this.getFormattedData(this.filterService.filteredEvents);  //format raw events data
+    this._formFilterElements=this.filterService.formFilterElements;  //initialize form filter elements
+    this._filter=this.filterService.filter;  //initialize filter
     if(window.innerWidth>=1500) this._activeSubform=100;
     this.setIsFiltered();
   }
@@ -52,7 +72,7 @@ export class ProgramComponent implements OnInit, AfterViewInit,OnDestroy {
       !this._filter.days["all" as keyof object],
       !_.isEqual(Object.values(this._filter["time" as keyof object]),[-1,-1]),
       !this._filter.types["all" as keyof object],
-      this._filter.artist["id" as keyof object]!==-1
+      this._filter.artist["id" as keyof object]!=-1 && this._filter.artist["id" as keyof object]!==""
     ];  
   }
   ngAfterViewInit(): void {    
@@ -62,8 +82,23 @@ export class ProgramComponent implements OnInit, AfterViewInit,OnDestroy {
   }
   ngOnDestroy(): void {
     ProgramComponent.scrollY=window.scrollY; // record scroll position to be able to return at the same position
+    
+    if(Object.keys(this.sub).length>0) this.sub.unsubscribe(); //unsubscribe to prevent memory leaks
   }
   getFormattedData(evts:any[]){
+    evts=evts.map((evt:any) => { //populate events with artist and location data
+      return(
+        {
+          performer:_.filter(this.dataService.artists,(artist) => {
+              return artist.id===evt.performer;
+            })[0],
+          type:evt.type,
+          location:_.filter(this.dataService.pois,(poi) => {
+              return poi.id===evt.location;
+            })[0],
+          date:evt.date,
+        });
+    });
     const AllArtistEvents:ArtistEvents[]=[];
     let artistEvts:ArtistEvents={} as ArtistEvents,i=null;
     evts.map((evt:any) => {
@@ -80,7 +115,7 @@ export class ProgramComponent implements OnInit, AfterViewInit,OnDestroy {
           performer:evt.performer,
           dates:[]
         };
-      artistEvts.dates.push({date:evt.date,location:evt.location as Poi,type:evt.type as EventType});
+      artistEvts.dates.push({date:evt.date,location:evt.location as Poi,type:evt.type});
       if(i===-1) AllArtistEvents.push(artistEvts);
       else AllArtistEvents[i]=artistEvts;  
       artistEvts.dates=_.orderBy(artistEvts.dates,"date","asc")  

@@ -5,15 +5,12 @@
       #slickModal="slick-carousel"
       [config]="slideConfig"
     >
-      <div ngxSlickItem *ngFor="let artist of artists" class="slide">
-        <img
-          src="{{
-            'assets/images/artists/' +
-              artist.name.replaceAll(' ', '').replaceAll('-', '') +
-              '.jpg'
-          }}"
-          alt="{{ artist.name }}"
-        />
+      <div
+        ngxSlickItem
+        *ngFor="let artist of artists; let idx = index"
+        class="slide"
+      >
+        <img src="{{ getArtistPath(idx) }}" alt="{{ artist.name }}" />
         <div class="artist-name" [routerLink]="['/artist', artist.id]">
           {{ artist.name }}
         </div>
@@ -131,7 +128,7 @@
     <div class="section-content partners">
       <img
         *ngFor="let partner of partners; let idx = index"
-        src="{{ getPath(idx) }}"
+        src="{{ getPartnerPath(idx) }}"
         alt="partenaire du festival"
       />
     </div>

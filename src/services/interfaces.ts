@@ -2,14 +2,13 @@ export interface Message {
   text:string,criticality:string,active?:boolean
 }
 export interface Poi {
-  id:string,
+  id:string|number,
   name:string,
   type:string
 }
 export interface Dates{
-  days:string,
-  month:string,
-  year:number,
+  start_date:Date,
+  end_date:Date,
 }
 export interface Artist {
   id:number,
@@ -18,20 +17,13 @@ export interface Artist {
   description:string,
   composition:string,
   style:string,
-  cat:string | number
-}
-export interface Style {
-  id:number,
-  description:string
-}
-export interface EventType {
-  id:number,
-  description:string
+  filename?:string,
+  image?:string
 }
 export interface Event {
-  performer: Artist,
-  type: EventType,
-  location: Poi,
+  performer: number,
+  type: string,
+  location:string|number,
   date: string,
 }
 export interface ArtistEvents {
@@ -41,7 +33,7 @@ export interface ArtistEvents {
 interface EventDate {
   date:string,
   location:Poi,
-  type:EventType
+  type:string
 }
 
 export interface KeyLabel {
@@ -83,6 +75,18 @@ export interface Pass {
   pass1:number,
   pass2:number,
   pass3:number,
+}
+export interface Model {
+  messages:{data:Message[],ready:boolean},
+  dates:{data:Dates,ready:boolean},
+  pois:{data:Poi[],ready:boolean},
+  artists:{data:Artist[],ready:boolean},
+  infos:{data:Infos,ready:boolean},
+  faqs:{data:Faq[],ready:boolean},
+  partners:{data:string[],ready:boolean},
+  passes:{data:Pass[],ready:boolean},
+  events:{data:Event[],ready:boolean},
+  umap_pois:{url:string,data:object,ready:boolean}
 }
 export interface FormattedPass {
   category:string,

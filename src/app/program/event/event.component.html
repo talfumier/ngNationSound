@@ -1,11 +1,7 @@
 <div class="artist-events">
   <div class="artist">
     <img
-      src="{{
-        'assets/images/artists/' +
-          event.performer.name.replaceAll(' ', '').replaceAll('-', '') +
-          '.jpg'
-      }}"
+      src="{{ getArtistPath(event) }}"
       alt="{{ event.performer.name }}"
       [routerLink]="['/artist', event.performer.id]"
     />
@@ -19,18 +15,15 @@
         *ngFor="let date of event.dates"
         class="date"
         [ngClass]="{
-          concert: date.type.description === 'concert',
-          rencontre: date.type.description === 'rencontre'
+          concert: date.type === 'concert',
+          rencontre: date.type === 'rencontre'
         }"
       >
         <span class="date-time">{{ formattedDate(date.date) }} </span>
-        <span class="type">{{ date.type.description }}</span>
+        <span class="type">{{ date.type }}</span>
         <span
           class="location"
-          [routerLink]="[
-            '/map',
-            cleanup(date.type.description, date.location.name)
-          ]"
+          [routerLink]="['/map', cleanup(date.type, date.location.name)]"
           >{{ date.location.name }}</span
         >
       </li>

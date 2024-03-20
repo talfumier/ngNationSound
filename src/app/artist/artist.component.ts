@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {DataService } from '../../services/data.service';
+import {DataService } from '../../services/data/data.service';
 import { Artist } from '../../services/interfaces';
+import { environment } from '../../config/environment';
 
 @Component({
   selector: 'app-artist',
@@ -21,6 +22,8 @@ export class ArtistComponent implements OnInit{
   }
   get artist():Artist{
     return this._artist;
-  }
-  
+  }  
+  getArtistPath(artist:Artist){
+    return environment.apiMode==="local"?('assets/images/artists/' + artist.filename):artist.image;
+  }  
 }

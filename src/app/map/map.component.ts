@@ -1,82 +1,63 @@
 import { Component, OnDestroy, OnInit,ViewChild,ElementRef} from '@angular/core';
+import { Subscription, concatMap, forkJoin, switchMap,map ,tap, of} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import _ from 'lodash';
 import * as L from 'leaflet';
 import { UmapService } from '../../services/map/umap.service';
-import { OverlayLayer } from '../../services/interfaces';
-import { removeAccents } from '../utilities/functions/utlityFunctions';
+import { DataService } from './../../services/data/data.service';
+import { environment } from '../../config/environment';
+import { ApiService } from '../../services/data/init/api.service';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
-export class MapComponent implements OnInit,OnDestroy {  
+export class MapComponent implements OnInit,OnDestroy { 
+  private sub:Subscription={} as Subscription;
   private map:L.Map={} as L.Map;
-  private layers:OverlayLayer[]=[];
   private stage:any="";
   private _isFullScreen:boolean=false;
 
   @ViewChild('screenTooltip') tooltip: ElementRef={} as ElementRef;
 
-  constructor(private route:ActivatedRoute,private umap:UmapService) {
+  constructor(private route:ActivatedRoute,private dataService:DataService,private apiService:ApiService,private umap:UmapService) {
     this.stage = this.route.snapshot.paramMap.get("stage"); 
     if(!this.stage) return;  
   }  
   
   ngOnInit(): void {
     window.scrollTo(0,0);
-    document.getElementById("header-map-link")?.classList.add("active");  
-    this.initMap();    
+    document.getElementById("header-map-link")?.classList.add("active"); 
+    
+    if(environment.apiMode!=="local" && !this.dataService.data.umap_pois.ready) {//retrieve data from API back end  
+      this.dataService.displayLoading(true);
+      if(!this.dataService.data.events.ready) { //page reload case > full api data reload required
+        const cols=["artists","messages","transports","faqs","partners","pois","events"];
+        forkJoin(cols.map((col:string) => {
+          return this.apiService.getApiObs(col);
+        })).subscribe((data) => {
+          data.map((item,idx) => {
+            this.apiService.formatApiData(cols[idx],item);
+          }); 
+        });
+      }
+      this.sub=this.apiService.getApiObs("umap_pois").pipe(
+        switchMap((value) => {  //1st observable to retrieve map pois json file url, format it and store it in dataservice
+          this.apiService.formatApiData("umap_pois",value,true);
+          return this.apiService.getApiObs("umap_pois",this.dataService.data.umap_pois.url); //set the 2nd observable using the url from 1st observable
+        })
+      ).subscribe((data) => { //retrieves map pois, format them and initialize the map.
+        this.apiService.formatApiData("umap_pois",data,false);
+        this.map=this.umap.initMap(this.dataService.data.umap_pois.data,this.stage);           
+        this.dataService.displayLoading(false);
+      });
+    }
+    else this.map=this.umap.initMap(this.dataService.data.umap_pois.data,this.stage); //api data already initialized or local data
   }
   ngOnDestroy(): void {
     document.getElementById("header-map-link")?.classList.remove("active");
-  }
 
-  private initMap(): void {
-    //base layer
-    const osm=L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-      maxZoom: this.umap.zoom+2,
-      minZoom: this.umap.zoom-4,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    });
-    
-    this.umap.initLayers();
-    this.layers=this.umap.layers;
-    
-    this.map = L.map("map", {
-      center: this.umap.center as L.LatLngExpression,
-      zoom: this.umap.zoom,
-      layers: [osm,...this.layers.map((layer) => { // base layer + overlay layers
-        return layer.features;
-        })]
-    });
-            
-    if(this.stage!=="all"){  //filter the corresponding stage and highlight it
-      let features:L.GeoJSON={} as L.GeoJSON,result:any[]=[],arr:any[]=[];
-      this.layers.map((layer:OverlayLayer) => {
-        arr=[];
-        features=layer.features["_layers" as keyof object];
-        Object.keys(features).map((key:string) => {  
-          if(removeAccents(features[key as keyof object]["feature"]["properties"]["name"] as string).includes(this.stage)) 
-            arr.push(features[key as keyof object]);
-        }) 
-        if(arr.length>0) result.push({layer:layer.name,features:arr});    
-      });
-
-      result[0]?.features.map((feature:L.GeoJSON) => {
-        let str:string=feature["feature" as keyof object]["properties" as keyof object]["name" as keyof object];
-        feature.bindPopup(`<span class="popup highlight">${str}</span>`
-        );
-        feature.openPopup();
-      });
-    }
-    
-    const layerControl = L.control.layers({"<span style='font-size:1.3rem'>OpenStreetMap</span>": osm});  
-    this.layers.map((layer) => {
-      layerControl.addOverlay(layer.features,`<span style='font-size:1.3rem'>${layer.name}</span>`)
-    });   
-    layerControl.addTo(this.map);
+    if(Object.keys(this.sub).length>0) this.sub.unsubscribe(); //unsubscribe to prevent memory leaks
   }
   handleFullScreen(evt:Event){
     this._isFullScreen=!this._isFullScreen;
