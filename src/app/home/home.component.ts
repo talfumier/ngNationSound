@@ -69,9 +69,9 @@ export class HomeComponent implements OnInit,OnDestroy {
       this._faqs=this.dataService.faqs;
       this._partners=this.dataService.partners;
     }
-    this._messages=_.filter(this.dataService.messages,(msg) => {
+    this._messages=_.sortBy(_.filter(this.dataService.messages,(msg) => {
       return msg.active;
-    }) as Message[];
+    }) as Message[],"order","asc");
     this.dataService.initInnerHTML();
     this._innerHTML=this.dataService.innerHTML;
   }
