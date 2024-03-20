@@ -53,10 +53,10 @@ export class DataService {
       _.sortBy(_.filter(this._data.events.data,(evt) => {
         return evt.location===stage.id;
       }),"date","asc").map((evt) => {
-        if((environment.apiMode==="local"?evt.date.slice(0,2):new Date(evt.date).getDate().toString())!==day){
+        if(environment.apiMode==="local"?evt.date.slice(0,2):evt.date.slice(-11,-9)!==day){
           if(ul.length>0) this._innerHTML.push(ul+"</ul>");        
           ul="<ul class='list-group-program'>";
-          day=environment.apiMode==="local"?evt.date.slice(0,2):new Date(evt.date).getDate().toString();
+          day=environment.apiMode==="local"?evt.date.slice(0,2):evt.date.slice(-11,-9);
         }
         artist=_.filter(this._data.artists.data,(item) => {
           return item.id===evt.performer;
