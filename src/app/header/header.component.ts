@@ -30,9 +30,11 @@ export class HeaderComponent implements OnInit,OnDestroy{
   }
   getDaysMonthYear(){
     const days=_.range(this.dataService.dates.start_date.getDate(),this.dataService.dates.end_date.getDate()+1);
-    let monthYear=`${new Date((this.dataService.dates.start_date.getMonth()+1)+" "+days[0]+","+this.dataService.dates.start_date.getFullYear()).toLocaleString("fr-FR",{year:"numeric",month:"long"})}`;    
-    monthYear=getFormattedDate(monthYear,"MMMM yyyy","MMMM yyyy"); //work-around to avoid 'invalid date' warning on ios devices
+    const monthYear=`${new Date((this.dataService.dates.start_date.getMonth()+1)+" "+days[0]+","+this.dataService.dates.start_date.getFullYear()).toLocaleString("fr-FR",{year:"numeric",month:"long"})}`;    
     return {days,monthYear};
+  }
+  formattedMonthYear():string{  //work-around to avoid 'invalid date' warning on ios devices
+    return getFormattedDate(this._dates.monthYear,"MMMM yyyy","MMMM yyyy");
   }
   ngOnDestroy(): void {
     if(Object.keys(this.sub).length>0) this.sub.unsubscribe();
