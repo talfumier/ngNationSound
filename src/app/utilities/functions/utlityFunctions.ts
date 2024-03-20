@@ -19,5 +19,5 @@ export function getDateFromString(date:any,format:string,output?:string):Date|nu
 }
 export function getFormattedDate(date:string,fmt:string,output_fmt?:string):string { //fmt > date parameter format
     // const fmt=environment.apiMode==="local"?"dd.MM.yyyy HH:mm":"yyyy-MM-dd HH:mm:ss";
-    return format(parse(date,fmt,new Date()),!output_fmt?"dd MMMM '-' HH'h'mm":output_fmt);
+    return format(parse(date,fmt,new Date()),output_fmt===undefined?"dd MMMM '-' HH'h'mm":output_fmt);
   }
