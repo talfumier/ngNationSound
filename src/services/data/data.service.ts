@@ -35,8 +35,8 @@ export class DataService {
     this._innerHTML=[""];
     _.range(this._data.dates.data.start_date.getDate(),this._data.dates.data.end_date.getDate()+1).map((day) => {
       //(this._data.dates.data.start_date.getMonth()+1)+" " +day+","+this._data.dates.data.start_date.getFullYear()
-      this._innerHTML.push(`${new Date((this._data.dates.data.start_date.getFullYear(),
-        this._data.dates.data.start_date.getMonth(),day)).toLocaleString("fr-FR",{day: 'numeric',month:"long"})}`);
+      this._innerHTML.push(`${new Date(this._data.dates.data.start_date.getFullYear(),
+        this._data.dates.data.start_date.getMonth(),day).toLocaleString("fr-FR",{day: 'numeric',month:"long"})}`);
     });
     this._innerHTML.map((item,idx) => {
       this._innerHTML[idx]=`<div class='column-header'>${item}</div>`
