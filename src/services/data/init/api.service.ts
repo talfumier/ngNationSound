@@ -34,9 +34,9 @@ export class ApiService {
     switch(col){
       case "messages":
         this.service.data.messages={
-          data:data.map((msg:any) => {
+          data:_.sortBy(data.map((msg:any) => {
             return msg.acf;
-          }),
+          }),"acf.order","asc"),
           ready:true
       };
         break;
@@ -91,7 +91,6 @@ export class ApiService {
       case "events":       
         this.service.data[col]={
           data:data.map((item:any) => {
-            if(item.acf.image) item.acf.image=item.acf.image.url;
             return {...item.acf,performer:item.acf.performer[0],location:item.acf.location[0]};
           }),
           ready:true

@@ -1,6 +1,6 @@
-import { Component, HostListener, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import {Router} from '@angular/router';
-import { Subscription, forkJoin} from 'rxjs';
+import { Subscription, forkJoin, switchMap, timer} from 'rxjs';
 import _ from 'lodash';
 import { environment } from '../../config/environment';
 import config from '../../config/config.json';
@@ -14,7 +14,7 @@ import { ApiService } from '../../services/data/init/api.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit,OnDestroy {
-  private sub:Subscription={} as Subscription;
+  private subs:Subscription[]=[];
   private _artists:Artist[]=[];
   private _messages:Message[]=[];
   private _innerHTML:string[]=[];
@@ -35,32 +35,53 @@ export class HomeComponent implements OnInit,OnDestroy {
     });
     if(environment.apiMode!=="local" && ready.indexOf(false)!==-1) { //page reload case > full api data reload required
       this.dataService.displayLoading(true);
-      this.sub=forkJoin(cols.map((col:string) => {
+      this.subs[0]=forkJoin(cols.map((col:string) => {
         return this.apiService.getApiObs(col);
       })).subscribe((data) => {
         data.map((item,idx) => {
           this.apiService.formatApiData(cols[idx],item);
         });
-        this.initData();
+        this.initData(true);
         this.dataService.displayLoading(false);
       });
     }
-    else this.initData();  //api data already initialized or local data      
+    else this.initData(true);  //api data already initialized or local data      
+
+    if(environment.apiMode!=="local") { //api data refresh without page reload
+      const cls=["messages","events"]; //only messages and events data likely to change ["messages","events"]
+      this.subs[1]=timer(config.refresh_interval,config.refresh_interval).pipe(
+        switchMap(() => {
+          return forkJoin(cls.map((col:string) => { 
+            return this.apiService.getApiObs(col);
+          }))
+      })).subscribe((data) => {
+        data.map((item,idx) => {
+          this.apiService.formatApiData(cls[idx],item);
+        });
+        this.initData(false);
+      });
+    }
   }
-  initData(){
-    this._artists=this.dataService.artists;
-    this._messages=this.dataService.messages;
+  initData(full:boolean){
+    if(full) {
+      this._artists=this.dataService.artists;
+      this._infos=this.dataService.infos;
+      this._faqs=this.dataService.faqs;
+      this._partners=this.dataService.partners;
+    }
+    this._messages=_.filter(this.dataService.messages,(msg) => {
+      return msg.active;
+    }) as Message[];
     this.dataService.initInnerHTML();
     this._innerHTML=this.dataService.innerHTML;
-    this._infos=this.dataService.infos;
-    this._faqs=this.dataService.faqs;
-    this._partners=this.dataService.partners;
   }
   ngOnDestroy(): void {      
     document.getElementById("home-link")?.classList.remove("active");
     HomeComponent.scrollY=window.scrollY; // record scroll position to be able to return at the same position
 
-    if(Object.keys(this.sub).length>0) this.sub.unsubscribe(); //unsubscribe to prevent memory leaks
+    this.subs.map((sub) => {
+      if(Object.keys(sub).length>0) sub.unsubscribe(); //unsubscribe to prevent memory leaks
+    })
   }  
   get slideConfig(){
     return config.carouselConfig;
@@ -83,8 +104,8 @@ export class HomeComponent implements OnInit,OnDestroy {
   get partners(){
     return this._partners;
   }
-  getArtistPath(artist:Artist){
-    return environment.apiMode==="local"?('assets/images/artists/' + artist.filename):artist.image;
+  getArtistPath(idx:number){
+    return environment.apiMode==="local"?('assets/images/artists/' + this._artists[idx].filename):this._artists[idx].image;
   }
   getPartnerPath(idx:number){
     return environment.apiMode==="local"?`assets/images/partners/${this._partners[idx]}`:this._partners[idx].image;    

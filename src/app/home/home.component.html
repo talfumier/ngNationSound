@@ -5,8 +5,12 @@
       #slickModal="slick-carousel"
       [config]="slideConfig"
     >
-      <div ngxSlickItem *ngFor="let artist of artists" class="slide">
-        <img src="{{ getArtistPath(artist) }}" alt="{{ artist.name }}" />
+      <div
+        ngxSlickItem
+        *ngFor="let artist of artists; let idx = index"
+        class="slide"
+      >
+        <img src="{{ getArtistPath(idx) }}" alt="{{ artist.name }}" />
         <div class="artist-name" [routerLink]="['/artist', artist.id]">
           {{ artist.name }}
         </div>

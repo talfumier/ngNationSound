@@ -34,7 +34,7 @@ export class DataService {
   initInnerHTML(){    // data formatted as html string for use in events summary (home page)
     this._innerHTML=[""];
     _.range(this._data.dates.data.start_date.getDate(),this._data.dates.data.end_date.getDate()+1).map((day) => {
-      this._innerHTML.push(`${new Date(this._data.dates.data.start_date.getMonth()+" " +day+","+this._data.dates.data.start_date.getFullYear()).toLocaleString("fr-FR",{day: 'numeric',month:"long"})}`);
+      this._innerHTML.push(`${new Date((this._data.dates.data.start_date.getMonth()+1)+" " +day+","+this._data.dates.data.start_date.getFullYear()).toLocaleString("fr-FR",{day: 'numeric',month:"long"})}`);
     });
     this._innerHTML.map((item,idx) => {
       this._innerHTML[idx]=`<div class='column-header'>${item}</div>`
@@ -47,16 +47,16 @@ export class DataService {
     stages.map((stage) => {
       this._innerHTML.push(`<div class=row-header><a href=/map/${removeAccents(stage.name)}>${stage.name}</a></div>`);
       day="",ul="";
-      _.filter(this._data.events.data,(evt) => {
+      _.sortBy(_.filter(this._data.events.data,(evt) => {
         return evt.location===stage.id;
-      }).map((evt) => {
+      }),"date","asc").map((evt) => {
         if((environment.apiMode==="local"?evt.date.slice(0,2):new Date(evt.date).getDate().toString())!==day){
           if(ul.length>0) this._innerHTML.push(ul+"</ul>");        
           ul="<ul class='list-group-program'>";
           day=environment.apiMode==="local"?evt.date.slice(0,2):new Date(evt.date).getDate().toString();
         }
         artist=_.filter(this._data.artists.data,(item) => {
-          return item.id===evt.performer
+          return item.id===evt.performer;
         })[0].name;
         ul=ul+`<li class='list-group-item-program'>${(environment.apiMode==="local"?evt.date.slice(-5):evt.date.slice(-8,-3)).replace(":","h")} : <a href=/artist/${evt.performer}>${artist}</a></li>`
       });

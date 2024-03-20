@@ -15,13 +15,15 @@
       "title": "message de bienvenue",
       "text": "Bienvenue sur l'hippodrome de Chantilly pour cette 3e édition du NationSound Festival Paris 2024.",
       "criticality": "info",
+      "order": 0,
       "active": true
     },
     {
       "title": "achat des billets",
       "text": "Achetez vos billets dès maintenant et préparez-vous à un voyage extraordinaire !",
       "criticality": "info",
-      "active": true
+      "active": true,
+      "order": 1
     }
   ],
   "artists": [

@@ -1,5 +1,6 @@
 {
   "api_url": "https://henri.mspr.dev/wp-json/wp/v2",
+  "refresh_interval": 6e4,
   "carouselConfig": {
     "autoplay": true,
     "autoplaySpeed": 2500,
