@@ -5,7 +5,7 @@ import _ from 'lodash';
 import { environment } from '../../config/environment';
 import config from '../../config/config.json';
 import { DataService } from '../../services/data/data.service';
-import { Infos, Faq, Message, Artist, Model } from '../../services/interfaces';
+import { Infos, Faq, Message, Artist, Model, Newsletter } from '../../services/interfaces';
 import { ApiService } from '../../services/data/init/api.service';
 
 @Component({
@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit,OnDestroy {
   private _infos:Infos={} as Infos;
   private _faqs:Faq[]=[];
   private _partners:any[]=[];
+  private _newsletters:Newsletter[]=[];
   static scrollY:number;
   
   constructor(private dataService:DataService,private apiService:ApiService,private router: Router) {    
@@ -29,7 +30,7 @@ export class HomeComponent implements OnInit,OnDestroy {
   ngOnInit(): void { 
     document.getElementById("home-link")?.classList.add("active");
     
-    const cols=["artists","messages","transports","faqs","partners","pois","events"];   //dates api data uploaded in the header component    
+    const cols=["artists","messages","transports","faqs","partners","pois","events","newsletters"];   //dates api data uploaded in the header component    
     const ready=cols.map((key:string) => {
       return this.dataService.data[(key!=="transports"?key:"infos") as keyof Model].ready
     });
@@ -103,6 +104,9 @@ export class HomeComponent implements OnInit,OnDestroy {
   }
   get partners(){
     return this._partners;
+  }
+  get newsletters() {
+    return this._newsletters;
   }
   getArtistPath(idx:number){
     return environment.apiMode==="local"?('assets/images/artists/' + this._artists[idx].filename):this._artists[idx].image;

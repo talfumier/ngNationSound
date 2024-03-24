@@ -46,7 +46,7 @@ export class ProgramComponent implements OnInit, AfterViewInit,OnDestroy {
     if(environment.apiMode!=="local" && (!this.dataService.data.artists.ready ||  //retrieve data from API back end
       !this.dataService.data.pois.ready || !this.dataService.data.events.ready)) { //artists, pois and events are required in program page (should already be available from the home page api data loading)
       document.getElementById("splashScreen")?.classList.remove("hidden");
-        const cols=["dates","artists","messages","transports","faqs","partners","pois","events"]; //page reload case > full api data reload required
+        const cols=["dates","artists","messages","transports","faqs","partners","pois","events","newsletters"]; //page reload case > full api data reload required
         this.sub=forkJoin(cols.map((col:string) => {
           return this.apiService.getApiObs(col);
         })).subscribe((data) => {

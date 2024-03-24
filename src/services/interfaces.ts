@@ -76,6 +76,9 @@ export interface Pass {
   pass2:number,
   pass3:number,
 }
+export interface Newsletter {
+  email:string
+}
 export interface Model {
   messages:{data:Message[],ready:boolean},
   dates:{data:Dates,ready:boolean},
@@ -86,6 +89,7 @@ export interface Model {
   partners:{data:string[],ready:boolean},
   passes:{data:Pass[],ready:boolean},
   events:{data:Event[],ready:boolean},
+  newsletters:{data:Newsletter[],ready:boolean},
   umap_pois:{url:string,data:object,ready:boolean}
 }
 export interface FormattedPass {

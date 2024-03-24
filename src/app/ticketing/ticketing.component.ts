@@ -22,7 +22,7 @@ export class TicketingComponent implements OnInit, OnDestroy {
       this.dataService.displayLoading(true);
       document.getElementById("splashScreen")?.classList.remove("hidden");
       if(!this.dataService.data.events.ready) { //page reload case > full api data reload required
-        const cols=["artists","messages","transports","faqs","partners","pois","events"];
+        const cols=["artists","messages","transports","faqs","partners","pois","events","newsletters"];
         this.subs[0]=forkJoin(cols.map((col:string) => {
           return this.apiService.getApiObs(col);
         })).subscribe((data) => {

@@ -26,12 +26,26 @@
     <ul class="list-group newsletter">
       <li class="list-group-item title">Newsletter</li>
       <li class="list-group-item input">
-        <p>
-          <input type="text" placeholder="Entrez votre email" />
-          <svg id="rss">
-            <use href="../../assets/icons/icons.svg#rssIcon" />
-          </svg>
-        </p>
+        <form #form="ngForm" (ngSubmit)="submit(form)">
+          <p ngModelGroup="newsletter">
+            <input
+              name="email"
+              required
+              email
+              type="email"
+              placeholder="Entrez votre email"
+              [(ngModel)]="value"
+            />
+            <button>
+              <svg id="rss">
+                <use href="../../assets/icons/icons.svg#rssIcon" />
+              </svg>
+            </button>
+          </p>
+          <!-- <p class="debug">
+            {{ form.value | json }}
+          </p> -->
+        </form>
       </li>
       <li class="list-group-item">
         <p class="newsletter-text">

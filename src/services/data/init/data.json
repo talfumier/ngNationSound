@@ -22,8 +22,8 @@
       "title": "achat des billets",
       "text": "Achetez vos billets dès maintenant et préparez-vous à un voyage extraordinaire !",
       "criticality": "info",
-      "active": true,
-      "order": 1
+      "order": 1,
+      "active": true
     }
   ],
   "artists": [
@@ -609,6 +609,11 @@
       "pass1": 30,
       "pass2": 35,
       "pass3": 45
+    }
+  ],
+  "newsletters": [
+    {
+      "email": "henri.talfumier@wanadoo.fr"
     }
   ]
 }
