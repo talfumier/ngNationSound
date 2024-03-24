@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient,HttpHeaders} from '@angular/common/http';
 import { Observable, catchError} from 'rxjs';
 import _ from 'lodash';
 import config from '../../../config/config.json';
 import { DataService } from '../data.service';
 import { Transport } from '../../interfaces';
 import { ToastService } from '../../toast.service';
+import { environment } from '../../../config/environment';
 
 @Injectable({
   providedIn: 'root' // single instance for the entire application
@@ -15,8 +16,9 @@ export class ApiService {
   constructor(private http: HttpClient,private service:DataService,private toastService:ToastService) { }
   
   getApiObs(col:string,url?:string):Observable<any>{
-    if(!url) url=`${config.api_url}/${col}?acf_format=standard&_fields=id,title,acf&per_page=100`;
-    return this.http.get(url).pipe(
+    if(!url) 
+      url=`${environment.production?config.api_std_url:"/api"}/${col}?acf_format=standard&_fields=id,title,acf&per_page=100`;
+    return this.http.get(url,{headers:new HttpHeaders({ Authorization: environment.apiKey})}).pipe(
       catchError((error) => {
         let msg="";
         if (error.status === 0) {
@@ -30,6 +32,23 @@ export class ApiService {
       })
     );
   }
+  postApiObs(col:string,data:any) {
+    const url=`${environment.production?config.api_std_url:"/api"}/${col}`;
+    return this.http.post(url,data,{headers:new HttpHeaders({ Authorization: environment.apiKey})}).pipe(
+      catchError((error) => {
+        let msg="";
+        if (error.status === 0) {
+          msg="A client-side or network error occurred !";
+          console.log("Client side error occurred :", error.error);
+        } else {
+          msg="API backend returned an unsuccessful response code "+error.status+" ! Please retry later."
+          console.log(new Date,error.status,error.error);
+        }
+        throw this.toastService.toastError(msg);
+      })
+    );
+  }
+
   formatApiData(col:string,data:any,umap_pois_url?:boolean){
     switch(col){
       case "messages":
@@ -53,6 +72,7 @@ export class ApiService {
       case "pois":
       case "artists":
       case "partners":
+      case "newsletters":
         this.service.data[col]={
           data:data.map((item:any) => {
             if(item.acf.image) item.acf.image=item.acf.image.url;
@@ -97,7 +117,11 @@ export class ApiService {
         };  
         break;      
       case "umap_pois": 
-        if(umap_pois_url) this.service.data[col]={url:data[0].acf.umap_json.url,data:{},ready:false};
+        if(umap_pois_url) {
+          let url=data[0].acf.umap_json.url;
+          url=environment.production?config.api_upload_url:"/api_uploads"+"/"+url.slice(url.indexOf("uploads")+8-url.length);
+          this.service.data[col]={url,data:{},ready:false};
+        }
         else this.service.data[col]={...this.service.data[col],data,ready:true};
     }
   } 

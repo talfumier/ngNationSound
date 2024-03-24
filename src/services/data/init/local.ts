@@ -56,11 +56,14 @@ export function getLocalData():Model{
     data:data.events,  
     ready:true
   };
-
+  const newsletters={
+    data:data.newsletters,  
+    ready:true
+  };
   const umap_pois={
     url:"",
     data:umap_data,
     ready:true};
   
-  return {messages,dates,pois,artists,infos,faqs,partners,passes,events,umap_pois};
+  return {messages,dates,pois,artists,infos,faqs,partners,passes,events,newsletters,umap_pois};
 }

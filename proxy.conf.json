@@ -1,0 +1,18 @@
+[
+  {
+    "context": ["/api/"],
+    "target": "https://henri.mspr.dev",
+    "secure": true,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": { "^/api": "wp-json/wp/v2" }
+  },
+  {
+    "context": ["/api_uploads/"],
+    "target": "https://henri.mspr.dev",
+    "secure": true,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": { "^/api_uploads": "wp-content/uploads" }
+  }
+]

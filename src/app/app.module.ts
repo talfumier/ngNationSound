@@ -42,6 +42,7 @@ import { LoadingComponent } from './loading/loading.component';
     MapComponent,
     FaqComponent,
     TicketingComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -55,7 +56,7 @@ import { LoadingComponent } from './loading/loading.component';
   providers: [ 
     { provide: ErrorHandler,useClass: GenericErrorHandler },
     { provide: Window, useValue: window },    
-    { provide: Document, useValue: document }
+    { provide: Document, useValue: document },
   ],
   bootstrap: [AppComponent]
 })

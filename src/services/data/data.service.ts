@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import _ from "lodash";
+import { format } from 'date-fns';
 import { Poi, Dates, Artist, Event, Infos, Model } from '../interfaces';
 import { environment } from '../../config/environment';
 import { getLocalData } from './init/local';
 import { removeAccents} from '../../app/utilities/functions/utlityFunctions';
-import { format } from 'date-fns';
 
 @Injectable({
   providedIn: 'root' // single instance for the entire application
@@ -21,6 +21,7 @@ export class DataService {
     partners:{data:[],ready:false},
     passes:{data:[],ready:false},
     events:{data:[],ready:false},
+    newsletters:{data:[],ready:false},
     umap_pois:{url:"",data:{},ready:false}
   }
 
@@ -35,7 +36,6 @@ export class DataService {
   initInnerHTML(){    // data formatted as html string for use in events summary (home page)
     this._innerHTML=[""];
     _.range(this._data.dates.data.start_date.getDate(),this._data.dates.data.end_date.getDate()+1).map((day) => {
-      //(this._data.dates.data.start_date.getMonth()+1)+" " +day+","+this._data.dates.data.start_date.getFullYear()
       this._innerHTML.push(format(new Date(this._data.dates.data.start_date.getFullYear(), //work-around to avoid 'invalid date' warning on ios devices
       this._data.dates.data.start_date.getMonth(),day),"dd MMMM"));
     });
@@ -53,13 +53,13 @@ export class DataService {
       _.sortBy(_.filter(this._data.events.data,(evt) => {
         return evt.location===stage.id;
       }),"date","asc").map((evt) => {
-        if(environment.apiMode==="local"?evt.date.slice(0,2):evt.date.slice(-11,-9)!==day){
+        if((environment.apiMode==="local"?evt.date.slice(0,2):evt.date.slice(-11,-9))!==day){
           if(ul.length>0) this._innerHTML.push(ul+"</ul>");        
           ul="<ul class='list-group-program'>";
           day=environment.apiMode==="local"?evt.date.slice(0,2):evt.date.slice(-11,-9);
         }
         artist=_.filter(this._data.artists.data,(item) => {
-          return item.id===evt.performer;
+          return item.id==evt.performer;
         })[0].name;
         ul=ul+`<li class='list-group-item-program'>${(environment.apiMode==="local"?evt.date.slice(-5):evt.date.slice(-8,-3)).replace(":","h")} : <a href=/artist/${evt.performer}>${artist}</a></li>`
       });
@@ -111,6 +111,9 @@ export class DataService {
   }
   get passes(){
     return this._data.passes.data;
+  }
+  get newsLetters(){
+    return this._data.newsletters;
   }
   get umap_pois(){
     return this._data.umap_pois.data;

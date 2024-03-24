@@ -32,7 +32,7 @@ export class MapComponent implements OnInit,OnDestroy {
     if(environment.apiMode!=="local" && !this.dataService.data.umap_pois.ready) {//retrieve data from API back end  
       this.dataService.displayLoading(true);
       if(!this.dataService.data.events.ready) { //page reload case > full api data reload required
-        const cols=["artists","messages","transports","faqs","partners","pois","events"];
+        const cols=["artists","messages","transports","faqs","partners","pois","events","newsletters"];
         forkJoin(cols.map((col:string) => {
           return this.apiService.getApiObs(col);
         })).subscribe((data) => {
