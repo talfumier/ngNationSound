@@ -22,7 +22,7 @@ export class ApiService {
       catchError((error) => {
         let msg="";
         if (error.status === 0) {
-          msg="A client-side or network error occurred !"+error.error;
+          msg="A client-side or network error occurred !"+`${environment.production?config.api_std_url:"/api"}/${col}?acf_format=standard&_fields=id,title,acf&per_page=100`;
           console.log("Client side error occurred :", error.error);
         } else {
           msg="API backend returned an unsuccessful response code "+error.status+" ! Please retry later."
