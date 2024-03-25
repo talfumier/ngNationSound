@@ -21,7 +21,7 @@ export class ApiService {
     return this.http.get(url,{headers:new HttpHeaders({ 
       Authorization: environment.apiKey,
       "Access-Control-Allow-Origin":"https://ng-nation-sound.vercel.app",
-      'Access-Control-Allow-Headers': 'Access-control-allow-origin, Content-Type, Authorization'
+      'Access-Control-Allow-Headers': 'access-control-allow-origin, Content-Type, Authorization'
     })}).pipe(
       catchError((error) => {
         let msg="";
