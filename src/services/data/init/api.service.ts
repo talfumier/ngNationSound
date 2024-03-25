@@ -124,8 +124,7 @@ export class ApiService {
         break;      
       case "umap_pois": 
         if(umap_pois_url) {
-          let url=data[0].acf.umap_json.url;
-          // url=environment.production?config.api_upload_url:"/api_uploads"+"/"+url.slice(url.indexOf("uploads")+8-url.length);
+          let url=data[0].acf.umap_json.url;  
           url=`${environment.production?config.api_upload_url:"/api_uploads"}/${url.slice(url.indexOf("uploads")+8-url.length)}`;
           this.service.data[col]={url,data:{},ready:false};
         }
