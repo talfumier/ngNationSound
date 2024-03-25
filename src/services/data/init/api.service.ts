@@ -120,8 +120,9 @@ export class ApiService {
       case "umap_pois": 
         if(umap_pois_url) {
           let url=data[0].acf.umap_json.url;
-          // url=environment.production?config.api_upload_url:"/api_uploads"+"/"+url.slice(url.indexOf("uploads")+8-url.length);
-          url="https://henri.mspr.dev/wp-content/uploads/2024/03/umap.json"
+          url=environment.production?config.api_upload_url:"/api_uploads"+"/"+url.slice(url.indexOf("uploads")+8-url.length);
+          alert(url);
+          // url="https://henri.mspr.dev/wp-content/uploads/2024/03/umap.json"
           this.service.data[col]={url,data:{},ready:false};
         }
         else this.service.data[col]={...this.service.data[col],data,ready:true};
