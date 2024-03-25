@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders} from '@angular/common/http';
+import { Buffer } from 'buffer';
 import { Observable, catchError} from 'rxjs';
 import _ from 'lodash';
 import config from '../../../config/config.json';
@@ -12,17 +13,16 @@ import { environment } from '../../../config/environment';
   providedIn: 'root' // single instance for the entire application
 })
 export class ApiService {
+  private headers:any={};
 
-  constructor(private http: HttpClient,private service:DataService,private toastService:ToastService) { }
+  constructor(private http: HttpClient,private service:DataService,private toastService:ToastService) { 
+    this.headers=new HttpHeaders({ Authorization: "Basic "+Buffer.from(`${environment.appUser}:${environment.appPwd}`).toString("base64")});
+  }
   
   getApiObs(col:string,url?:string):Observable<any>{
     if(!url) 
       url=`${environment.production?config.api_std_url:"/api"}/${col}?acf_format=standard&_fields=id,title,acf&per_page=100`;
-    return this.http.get(url,{headers:new HttpHeaders({ 
-      Authorization: environment.apiKey,
-      // "Access-Control-Allow-Origin":"https://ng-nation-sound.vercel.app",
-      // 'Access-Control-Allow-Headers': 'access-control-allow-origin, Content-Type, Authorization'
-    })}).pipe(
+    return this.http.get(url,{headers:this.headers}).pipe(
       catchError((error) => {
         let msg="";
         if (error.status === 0) {
@@ -38,7 +38,7 @@ export class ApiService {
   }
   postApiObs(col:string,data:any) {
     const url=`${environment.production?config.api_std_url:"/api"}/${col}`;
-    return this.http.post(url,data,{headers:new HttpHeaders({ Authorization: environment.apiKey})}).pipe(
+    return this.http.post(url,data,{headers:this.headers}).pipe(
       catchError((error) => {
         let msg="";
         if (error.status === 0) {
