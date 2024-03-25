@@ -6,7 +6,8 @@ const setEnv = () => {
 
   const configFile = `export const environment = {
     apiMode: '${process.env.NATIONSOUND_API_MODE}',
-    apiKey: '${process.env.NATIONSOUND_API_KEY}',
+    appUser: '${process.env.NATIONSOUND_APP_USER}',
+    appPwd: '${process.env.NATIONSOUND_APP_PWD}',
     production: true,
   };`;
   writeFile(targetPath, configFile, (err) => {
