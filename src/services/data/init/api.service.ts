@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders} from '@angular/common/http';
+import { Buffer } from 'buffer';
 import { Observable, catchError} from 'rxjs';
 import { Buffer } from 'buffer';
 import _ from 'lodash';
@@ -14,7 +15,7 @@ import { environment } from '../../../config/environment';
 })
 export class ApiService {
   private headers:any={};
-
+  
   constructor(private http: HttpClient,private service:DataService,private toastService:ToastService) {
     this.headers=new HttpHeaders({ Authorization: "Basic "+Buffer.from(`${environment.appUser}:${environment.appPwd}`).toString("base64")});
    }
@@ -22,7 +23,7 @@ export class ApiService {
   getApiObs(col:string,url?:string):Observable<any>{
     if(!url) 
       url=`${environment.production?config.api_std_url:"/api"}/${col}?acf_format=standard&_fields=id,title,acf&per_page=100`;
-      return this.http.get(url,{headers:this.headers}).pipe(
+    return this.http.get(url,{headers:this.headers}).pipe(
       catchError((error) => {
         let msg="";
         if (error.status === 0) {
@@ -38,7 +39,7 @@ export class ApiService {
   }
   postApiObs(col:string,data:any) {
     const url=`${environment.production?config.api_std_url:"/api"}/${col}`;
-      return this.http.post(url,data,{headers:this.headers}).pipe(
+    return this.http.post(url,data,{headers:this.headers}).pipe(
       catchError((error) => {
         let msg="";
         if (error.status === 0) {
