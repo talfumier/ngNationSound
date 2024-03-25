@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders} from '@angular/common/http';
 import { Buffer } from 'buffer';
 import { Observable, catchError} from 'rxjs';
-import { Buffer } from 'buffer';
 import _ from 'lodash';
 import config from '../../../config/config.json';
 import { DataService } from '../data.service';
