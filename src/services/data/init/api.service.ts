@@ -20,8 +20,8 @@ export class ApiService {
       url=`${environment.production?config.api_std_url:"/api"}/${col}?acf_format=standard&_fields=id,title,acf&per_page=100`;
     return this.http.get(url,{headers:new HttpHeaders({ 
       Authorization: environment.apiKey,
-      "Access-Control-Allow-Origin":"https://ng-nation-sound.vercel.app",
-      'Access-Control-Allow-Headers': 'access-control-allow-origin, Content-Type, Authorization'
+      // "Access-Control-Allow-Origin":"https://ng-nation-sound.vercel.app",
+      // 'Access-Control-Allow-Headers': 'access-control-allow-origin, Content-Type, Authorization'
     })}).pipe(
       catchError((error) => {
         let msg="";
