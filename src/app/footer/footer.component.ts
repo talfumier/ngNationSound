@@ -34,7 +34,8 @@ export class FooterComponent {
       return;
     }
     this.apiService.postApiObs("newsletters",{title:email,status:"publish",acf:{email}}).subscribe((res) => {
-      this.toastService.toastSuccess("Votre formulaire de contact a été transmis avec succès !");  
+      this.toastService.toastSuccess("Votre formulaire de contact a été transmis avec succès !");        
+      this.dataService.data.newsletters.data.push({email});
     })
     
   }
