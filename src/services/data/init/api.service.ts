@@ -18,7 +18,7 @@ export class ApiService {
   getApiObs(col:string,url?:string):Observable<any>{
     if(!url) 
       url=`${environment.production?config.api_std_url:"/api"}/${col}?acf_format=standard&_fields=id,title,acf&per_page=100`;
-    return this.http.get(url,{headers:new HttpHeaders({ Authorization: environment.apiKey})}).pipe(
+    return this.http.get(url,{headers:new HttpHeaders({ Authorization: environment.apiKey,"Access-Control-Allow-Origin":"https://ng-nation-sound.vercel.app"})}).pipe(
       catchError((error) => {
         let msg="";
         if (error.status === 0) {
