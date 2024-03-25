@@ -14,10 +14,10 @@ import { environment } from '../../../config/environment';
 })
 export class ApiService {
   private headers:any={};
-
-  constructor(private http: HttpClient,private service:DataService,private toastService:ToastService) { 
+  
+  constructor(private http: HttpClient,private service:DataService,private toastService:ToastService) {
     this.headers=new HttpHeaders({ Authorization: "Basic "+Buffer.from(`${environment.appUser}:${environment.appPwd}`).toString("base64")});
-  }
+   }
   
   getApiObs(col:string,url?:string):Observable<any>{
     if(!url) 
@@ -122,7 +122,8 @@ export class ApiService {
         break;      
       case "umap_pois": 
         if(umap_pois_url) {
-          let url=data[0].acf.umap_json.url;  
+          let url=data[0].acf.umap_json.url;
+          // url=environment.production?config.api_upload_url:"/api_uploads"+"/"+url.slice(url.indexOf("uploads")+8-url.length);
           url=`${environment.production?config.api_upload_url:"/api_uploads"}/${url.slice(url.indexOf("uploads")+8-url.length)}`;
           this.service.data[col]={url,data:{},ready:false};
         }
