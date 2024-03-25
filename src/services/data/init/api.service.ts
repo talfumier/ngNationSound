@@ -21,7 +21,6 @@ export class ApiService {
     return this.http.get(url,{headers:new HttpHeaders({ Authorization: environment.apiKey})}).pipe(
       catchError((error) => {
         let msg="";
-        alert(JSON.stringify(error))
         if (error.status === 0) {
           msg="A client-side or network error occurred !";
           console.log("Client side error occurred :", error.error);
