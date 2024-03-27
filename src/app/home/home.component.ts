@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
+import { Component, HostListener, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { Subscription, forkJoin, switchMap, timer} from 'rxjs';
 import _ from 'lodash';
@@ -13,7 +13,7 @@ import { ApiService } from '../../services/data/init/api.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit,OnDestroy {
+export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
   private subs:Subscription[]=[];
   private _artists:Artist[]=[];
   private _messages:Message[]=[];
@@ -76,9 +76,14 @@ export class HomeComponent implements OnInit,OnDestroy {
     this.dataService.initInnerHTML();
     this._innerHTML=this.dataService.innerHTML;
   }
-  ngOnDestroy(): void {      
+  ngAfterViewInit(): void {    
+    setTimeout(() => {
+      window.scrollTo(0,HomeComponent.scrollY);     
+    },100);     
+  }
+  ngOnDestroy(): void {     
+    HomeComponent.scrollY=window.scrollY; // record scroll position to be able to return at the same position 
     document.getElementById("home-link")?.classList.remove("active");
-    HomeComponent.scrollY=window.scrollY; // record scroll position to be able to return at the same position
 
     this.subs.map((sub) => {
       if(Object.keys(sub).length>0) sub.unsubscribe(); //unsubscribe to prevent memory leaks
