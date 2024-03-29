@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, forkJoin } from 'rxjs';
 import { DataService } from '../../services/data/data.service';
 import { FormattedPass } from '../../services/interfaces';
-import { environment } from '../../config/environment';
 import { ApiService } from '../../services/data/init/api.service';
+import { environment } from '../../config/environment';
+import config from '../../config/config.json'
 
 @Component({
   selector: 'app-ticketing',
@@ -13,8 +14,13 @@ import { ApiService } from '../../services/data/init/api.service';
 export class TicketingComponent implements OnInit, OnDestroy {  
   private subs:Subscription[]=[];
   private _formattedData:{pass1:FormattedPass[],pass2:FormattedPass[],pass3:FormattedPass[]}={pass1:[],pass2:[],pass3:[]};
+  private _url:string="";
 
   constructor(private dataService:DataService,private apiService:ApiService) {
+    this._url=`${environment.production?config.ticketing_url:"/tickets/"}`;
+  }
+  get url(){
+    return this._url;
   }
 
   ngOnInit(): void {    

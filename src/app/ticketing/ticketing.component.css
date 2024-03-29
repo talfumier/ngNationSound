@@ -47,10 +47,13 @@ li {
 button {
   font-size:2.4rem;
   background-color: var(--blue);
-  color:var(--white);
-  font-weight: 600;
   border:2px solid var(--orange);
   width:100%;
   padding:10px 0;
+}
+button a {
+  color: var(--white);
+  font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
 }

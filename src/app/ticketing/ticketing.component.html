@@ -11,7 +11,9 @@
           <span>{{ cond.price | currency : "€" : "symbol" : "1.0-2" }}</span>
         </li>
       </ul>
-      <button class="book">Réserver</button>
+      <button class="book">
+        <a href="{{ url }}" target="_blank">Réserver</a>
+      </button>
     </div>
   </div>
 </main>
