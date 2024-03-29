@@ -33,6 +33,7 @@ export class ApiService {
           console.log(new Date,error.status,error.error);
         }
         throw this.toastService.toastError(msg);
+        this.service.displayLoading(false);
       })
     );
   }

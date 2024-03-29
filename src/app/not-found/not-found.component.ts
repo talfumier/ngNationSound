@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataService } from '../../services/data/data.service';
 
 @Component({
   selector: 'app-not-found',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './not-found.component.css'
 })
 export class NotFoundComponent {
+  constructor(dataService:DataService){    
+      dataService.displayLoading(false);
+  }
 
 }
