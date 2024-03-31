@@ -1,3 +1,5 @@
+import * as L from 'leaflet';
+
 export interface Message {
   text:string,criticality:string,active?:boolean
 }
