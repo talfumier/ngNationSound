@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit,ViewChild,ElementRef} from '@angular/core';
-import { Subscription, concatMap, forkJoin, switchMap,map ,tap, of} from 'rxjs';
+import { Subscription, forkJoin, switchMap} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import * as L from 'leaflet';
 import { UmapService } from '../../services/map/umap.service';

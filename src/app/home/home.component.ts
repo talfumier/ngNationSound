@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit,AfterViewInit,OnDestroy {
     else this.initData(true);  //api data already initialized or local data      
 
     if(environment.apiMode!=="local") { //api data refresh without page reload
-      const cls=["messages","events"]; //only messages and events data likely to change ["messages","events"]
+      const cls=["messages","events"]; //only messages and events data likely to change
       this.subs[1]=timer(config.refresh_interval,config.refresh_interval).pipe(
         switchMap(() => {
           return forkJoin(cls.map((col:string) => { 
