@@ -5,7 +5,7 @@ import { DataService } from '../../services/data/data.service';
 import { Artist } from '../../services/interfaces';
 import { environment } from '../../config/environment';
 import { ApiService } from '../../services/data/init/api.service';
-/////ccccc
+
 @Component({
   selector: 'app-artist',
   templateUrl: './artist.component.html',
