@@ -6,8 +6,8 @@ const setEnv = () => {
 
   const configFile = `export const environment = {
     apiMode: '${process.env.NATIONSOUND_API_MODE}',
-    appUser: '${process.env.NATIONSOUND_APP_USER}',
-    appPwd: '${process.env.NATIONSOUND_APP_PWD}',
+    wp_appUser: '${process.env.NATIONSOUND_WP_APP_USER}',
+    wp_appPwd: '${process.env.NATIONSOUND_WP_APP_PWD}',
     production: true,
   };`;
   writeFile(targetPath, configFile, (err) => {

@@ -1,58 +1,92 @@
-import { Component,HostListener, OnDestroy, OnInit} from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Subscription, forkJoin } from 'rxjs';
 import { format } from 'date-fns';
 import _ from 'lodash';
-import { DataService,} from '../../services/data/data.service';
+import { DataService } from '../../services/data/data.service';
 import { ApiService } from '../../services/data/init/api.service';
-import { environment } from '../../config/environment';
+import { FilesService } from '../../services/data/files.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.css',
 })
-export class HeaderComponent implements OnInit,OnDestroy{   
-  private sub:Subscription={} as Subscription;
-  private _isToggled:boolean=false;
-  private _dates:any={days:[],monthYear:""};
+export class HeaderComponent implements OnInit, OnDestroy {
+  private subs: Subscription[] = [];
+  private _isToggled: boolean = false;
+  private _dates: any = { days: [], monthYear: '' };
 
-  constructor(private dataService:DataService, private apiService:ApiService,private window:Window) {  
-  }
+  constructor(
+    private dataService: DataService,
+    private fileService: FilesService,
+    private apiService: ApiService,
+    private window: Window
+  ) {}
 
   ngOnInit(): void {
-    if(environment.apiMode!=="local" && !this.dataService.data.dates.ready) //retrieve data from API back end
-      this.sub=this.apiService.getApiObs("dates").subscribe((data) => {
-        this.apiService.formatApiData("dates",data);
-        this._dates=this.getDaysMonthYear();
+    const cols = ['dates', 'logos'];
+    if (
+      !this.dataService.data.dates.ready ||
+      !this.dataService.data.logos.ready
+    ) {
+      //retrieve data from API back end
+      this.subs[0] = forkJoin(
+        cols.map((col: string) => {
+          return this.apiService.getApiObs('node', col); //standard data retrieval (i.e no image, no file)
+        })
+      ).subscribe((data) => {
+        data.map((item, idx) => {
+          this.apiService.formatApiData(cols[idx], item.data);
+        });
+        this._dates = this.getDaysMonthYear();
+        this.subs[1] = this.apiService //file and image data
+          .getApiObs('node', 'logos', data[1].data[0].files_id)
+          .subscribe((dta) => {
+            this.apiService.formatApiFiles('logos', dta.data);
+            this.dataService.displayLoading(false);
+          });
       });
-    else 
-      this._dates=this.getDaysMonthYear(); //api data already initialized or local data
+    } else this._dates = this.getDaysMonthYear(); //api data already initialized
   }
-  getDaysMonthYear(){
-    const days=_.range(this.dataService.dates.start_date.getDate(),this.dataService.dates.end_date.getDate()+1);
-    const monthYear=format(new Date(this.dataService.dates.start_date.getFullYear(), //work-around to avoid 'invalid date' warning on ios devices
-      this.dataService.dates.start_date.getMonth(),days[0]),"MMMM yyyy");  
-    return {days,monthYear};
+  getDaysMonthYear() {
+    const days = _.range(
+      this.dataService.dates.start_date.getDate(),
+      this.dataService.dates.end_date.getDate() + 1
+    );
+    const monthYear = format(
+      new Date(
+        this.dataService.dates.start_date.getFullYear(), //work-around to avoid 'invalid date' warning on ios devices
+        this.dataService.dates.start_date.getMonth(),
+        days[0]
+      ),
+      'MMMM yyyy'
+    );
+    return { days, monthYear };
   }
   ngOnDestroy(): void {
-    if(Object.keys(this.sub).length>0) this.sub.unsubscribe();
+    if (this.subs.length > 0)
+      this.subs.map((sub) => {
+        sub.unsubscribe();
+      });
   }
 
-  get isToggled():boolean {
-    return this._isToggled
+  get isToggled(): boolean {
+    return this._isToggled;
   }
-  get dates(){
+  get dates() {
     return this._dates;
   }
-  handleToggle(){
-    this._isToggled=!this._isToggled;
+  get logo() {
+    return this.fileService.data.logos.data.data['data' as keyof object];
   }
-  handleClick(event?:Event) {  
-    this.window.scrollTo(0,0);
+  handleToggle() {
+    this._isToggled = !this._isToggled;
+  }
+  handleClick(event?: Event) {
+    this.window.scrollTo(0, 0);
   }
   @HostListener('window:resize', ['$event'])
-    onWindowResize() {
-      if(window.outerWidth>=450) this._isToggled=false;
+  onWindowResize() {
+    if (window.outerWidth >= 450) this._isToggled = false;
   }
-
 }

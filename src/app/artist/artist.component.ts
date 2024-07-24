@@ -46,7 +46,7 @@ export class ArtistComponent implements OnInit, OnDestroy {
       ]; //page reload case > full api data reload required
       this.sub = forkJoin(
         cols.map((col: string) => {
-          return this.apiService.getApiObs(col);
+          return this.apiService.getApiObs('node', col);
         })
       ).subscribe((data) => {
         data.map((item, idx) => {
@@ -67,8 +67,8 @@ export class ArtistComponent implements OnInit, OnDestroy {
     return this._artist;
   }
   getArtistPath(artist: Artist) {
-    return environment.apiMode === 'local'
-      ? 'assets/images/artists/' + artist.filename
-      : artist.image;
+    // return environment.apiMode === 'local'
+    //   ? 'assets/images/artists/' + artist.filename
+    //   : artist.image;
   }
 }

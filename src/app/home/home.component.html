@@ -10,7 +10,10 @@
         *ngFor="let artist of artists; let idx = index"
         class="slide"
       >
-        <img src="{{ getArtistPath(idx) }}" alt="{{ artist.name }}" />
+        <img
+          src="{{ getFileData('artists', artist.files_id) }}"
+          alt="{{ artist.name }}"
+        />
         <div class="artist-name" [routerLink]="['/artist', artist.id]">
           {{ artist.name }}
         </div>
@@ -128,7 +131,7 @@
     <div class="section-content partners">
       <img
         *ngFor="let partner of partners; let idx = index"
-        src="{{ getPartnerPath(idx) }}"
+        src="{{ getFileData('partners', partner.files_id) }}"
         alt="partenaire du festival"
       />
     </div>

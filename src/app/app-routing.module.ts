@@ -7,18 +7,17 @@ import { ProgramComponent } from './program/program.component';
 import { MapComponent } from './map/map.component';
 import { TicketingComponent } from './ticketing/ticketing.component';
 
-const routes:Routes=[  
-  {path:'',component:HomeComponent},
-  {path:'program',component:ProgramComponent},
-  {path:'map/:stage',component:MapComponent},
-  {path:'artist/:id',component:ArtistComponent},
-  {path:'ticketing',component:TicketingComponent},
-  {path: '**', component: NotFoundComponent}
-
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'program', component: ProgramComponent },
+  // {path:'map/:stage',component:MapComponent},
+  // { path: 'artist/:id', component: ArtistComponent },
+  { path: 'ticketing', component: TicketingComponent },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
