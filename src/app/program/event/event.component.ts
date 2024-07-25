@@ -1,12 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { format } from 'date-fns';
+import { fr } from 'date-fns/locale';
 import { DataService } from '../../../services/data/data.service';
 import { FilesService } from './../../../services/data/files.service';
 import { ArtistEvents } from '../../../services/interfaces';
-import {
-  removeAccents,
-  getFormattedDate,
-} from '../../utilities/functions/utlityFunctions';
-import { environment } from '../../../config/environment';
+import { removeAccents } from '../../utilities/functions/utlityFunctions';
 
 @Component({
   selector: 'app-event',
@@ -30,14 +28,11 @@ export class EventComponent implements OnInit {
   get event(): ArtistEvents {
     return this._event;
   }
-  formattedDate(date: string) {
+  formattedDate(date: any) {
     //work-around to avoid 'invalid date' warning on ios devices
-    return getFormattedDate(
-      date,
-      environment.apiMode === 'local'
-        ? 'dd.MM.yyyy HH:mm'
-        : 'yyyy-MM-dd HH:mm:ss'
-    );
+    return format(date, 'dd MMMM - HH:mm', {
+      locale: fr,
+    }).replace(':', 'h');
   }
   cleanup(type: string, location: string) {
     if (type.includes('rencontre')) return 'rencontre';
@@ -47,7 +42,7 @@ export class EventComponent implements OnInit {
     // return environment.apiMode==="local"?('assets/images/artists/' + event.performer.filename):event.performer.image;
   }
   getFileData(event: ArtistEvents) {
-    console.log(event);
+    return '';
     // return this.fileService.getFileData(col, _id);
   }
 }

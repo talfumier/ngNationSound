@@ -40,10 +40,7 @@ export class MapComponent implements OnInit, OnDestroy {
     window.scrollTo(0, 0);
     document.getElementById('header-map-link')?.classList.add('active');
 
-    if (
-      environment.apiMode !== 'local' &&
-      !this.dataService.data.umap_pois.ready
-    ) {
+    if (!this.dataService.data.umap_pois.ready) {
       //retrieve data from API back end
       this.dataService.displayLoading(true);
       if (!this.dataService.data.events.ready) {

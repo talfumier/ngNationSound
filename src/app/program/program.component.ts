@@ -17,7 +17,6 @@ import {
 } from '../../services/interfaces';
 import { FilterService } from '../../services/filter.service';
 import { DataService } from '../../services/data/data.service';
-import { environment } from '../../config/environment';
 import { ApiService } from '../../services/data/init/api.service';
 
 @Component({
@@ -59,15 +58,13 @@ export class ProgramComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     if (
-      environment.apiMode !== 'local' &&
-      (!this.dataService.data.artists.ready || //retrieve data from API back end
-        !this.dataService.data.pois.ready ||
-        !this.dataService.data.events.ready)
+      !this.dataService.data.artists.ready || //retrieve data from API back end
+      !this.dataService.data.pois.ready ||
+      !this.dataService.data.events.ready
     ) {
       //artists, pois and events are required in program page (should already be available from the home page api data loading)
-      document.getElementById('splashScreen')?.classList.remove('hidden');
+      this.dataService.displayLoading(true);
       const cols = [
-        'dates',
         'artists',
         'messages',
         'transports',
@@ -83,10 +80,10 @@ export class ProgramComponent implements OnInit, AfterViewInit, OnDestroy {
         })
       ).subscribe((data) => {
         data.map((item, idx) => {
-          this.apiService.formatApiData(cols[idx], item);
+          this.apiService.formatApiData(cols[idx], item.data);
         });
         this.initFilter();
-        document.getElementById('splashScreen')?.classList.add('hidden');
+        this.dataService.displayLoading(false);
       });
     } else this.initFilter(); //api data already initialized or local data
   }

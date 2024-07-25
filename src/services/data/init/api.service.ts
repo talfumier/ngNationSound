@@ -20,7 +20,7 @@ export class ApiService implements OnDestroy {
   constructor(
     private http: HttpClient,
     private dataService: DataService,
-    private fileService: FilesService,
+    // private fileService: FilesService,
     private toastService: ToastService
   ) {
     this.headers = new HttpHeaders({
@@ -32,7 +32,7 @@ export class ApiService implements OnDestroy {
     });
   }
   ngOnDestroy(): void {
-    // this.sub.unsubscribe();
+    // if (Object.keys(this.sub).length > 0) this.sub.unsubscribe();
   }
 
   getApiObs(api: string, col: string, files_id?: string): Observable<any> {
@@ -94,17 +94,6 @@ export class ApiService implements OnDestroy {
         throw this.toastService.toastError(msg);
       })
     );
-  }
-  formatApiFiles(col: string, data: any, umap_pois_url?: boolean) {
-    switch (col) {
-      case 'logos':
-      case 'artists':
-      case 'partners':
-        this.fileService.data[col] = {
-          data,
-          ready: true,
-        };
-    }
   }
   formatApiData(col: string, data: any, umap_pois_url?: boolean) {
     switch (col) {

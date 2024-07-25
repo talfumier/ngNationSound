@@ -10,8 +10,8 @@ import { TicketingComponent } from './ticketing/ticketing.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'program', component: ProgramComponent },
-  // {path:'map/:stage',component:MapComponent},
-  // { path: 'artist/:id', component: ArtistComponent },
+  { path: 'map/:stage', component: MapComponent },
+  { path: 'artist/:id', component: ArtistComponent },
   { path: 'ticketing', component: TicketingComponent },
   { path: '**', component: NotFoundComponent },
 ];

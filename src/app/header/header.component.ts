@@ -12,9 +12,10 @@ import { FilesService } from '../../services/data/files.service';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  private subs: Subscription[] = [];
+  private sub: Subscription = {} as Subscription;
   private _isToggled: boolean = false;
   private _dates: any = { days: [], monthYear: '' };
+  private _logoId: string = '';
 
   constructor(
     private dataService: DataService,
@@ -30,7 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       !this.dataService.data.logos.ready
     ) {
       //retrieve data from API back end
-      this.subs[0] = forkJoin(
+      this.sub = forkJoin(
         cols.map((col: string) => {
           return this.apiService.getApiObs('node', col); //standard data retrieval (i.e no image, no file)
         })
@@ -39,12 +40,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.apiService.formatApiData(cols[idx], item.data);
         });
         this._dates = this.getDaysMonthYear();
-        this.subs[1] = this.apiService //file and image data
-          .getApiObs('node', 'logos', data[1].data[0].files_id)
-          .subscribe((dta) => {
-            this.apiService.formatApiFiles('logos', dta.data);
-            this.dataService.displayLoading(false);
-          });
+        // this.subs[1] = this.apiService //file and image data
+        //   .getApiObs('node', 'logos', data[1].data[0].files_id)
+        //   .subscribe((dta) => {
+        //     this.apiService.formatApiFiles('logos', dta.data);
+        //     this.dataService.displayLoading(false);
+        //   });
       });
     } else this._dates = this.getDaysMonthYear(); //api data already initialized
   }
@@ -64,20 +65,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return { days, monthYear };
   }
   ngOnDestroy(): void {
-    if (this.subs.length > 0)
-      this.subs.map((sub) => {
-        sub.unsubscribe();
-      });
+    if (Object.keys(this.sub).length > 0) this.sub.unsubscribe();
   }
-
   get isToggled(): boolean {
     return this._isToggled;
   }
   get dates() {
     return this._dates;
   }
-  get logo() {
-    return this.fileService.data.logos.data.data['data' as keyof object];
+  get logoId() {
+    return this.dataService.logos[0]['files_id' as keyof object];
+  }
+  getLogoData(_id: string) {
+    // return this.fileService.getFileData(_id);
   }
   handleToggle() {
     this._isToggled = !this._isToggled;
