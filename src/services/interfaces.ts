@@ -19,6 +19,7 @@ export interface Artist {
   name: string;
   country: string;
   description: string;
+  albums: string;
   composition: string;
   style: string;
   files_id?: string;

@@ -81,6 +81,16 @@ export class ProgramComponent implements OnInit, AfterViewInit, OnDestroy {
       ).subscribe((data) => {
         data.map((item, idx) => {
           this.apiService.formatApiData(cols[idx], item.data);
+          if (['artists', 'partners'].indexOf(cols[idx]) !== -1) {
+            const _ids = _.filter(item.data, (itm) => {
+              return itm.files_id;
+            }).map((it) => {
+              return it.files_id;
+            });
+            _ids.map((_id: any) => {
+              this.apiService.setFileData(_id).subscribe();
+            });
+          }
         });
         this.initFilter();
         this.dataService.displayLoading(false);

@@ -11,7 +11,6 @@ import _ from 'lodash';
 import config from '../../config/config.json';
 import { ApiService } from '../../services/data/init/api.service';
 import { DataService } from '../../services/data/data.service';
-import { FilesService } from '../../services/data/files.service';
 import {
   Infos,
   Faq,
@@ -39,7 +38,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private dataService: DataService,
-    private fileService: FilesService,
     private apiService: ApiService,
     private router: Router
   ) {}
@@ -72,25 +70,16 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       ).subscribe((data) => {
         data.map((item, idx) => {
           this.apiService.formatApiData(cols[idx], item.data);
-          //file and image data
-          // if (cols[idx] === 'artists' || cols[idx] === 'partners') {
-          //   this.subs[1] = forkJoin(
-          //     item.data.map((itm: any) => {
-          //       return this.apiService.getApiObs(
-          //         'node',
-          //         cols[idx],
-          //         itm.files_id
-          //       );
-          //     })
-          //   ).subscribe((dta) => {
-          //     this.apiService.formatApiFiles(
-          //       cols[idx],
-          //       (dta as Array<object>).map((obj) => {
-          //         return obj['data' as keyof object];
-          //       })
-          //     );
-          //   });
-          // }
+          if (['artists', 'partners'].indexOf(cols[idx]) !== -1) {
+            const _ids = _.filter(item.data, (itm) => {
+              return itm.files_id;
+            }).map((it) => {
+              return it.files_id;
+            });
+            _ids.map((_id: any) => {
+              this.apiService.setFileData(_id).subscribe();
+            });
+          }
         });
         this.initData(true);
         this.dataService.displayLoading(false);
@@ -115,6 +104,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         });
         this.initData(false);
       });
+  }
+  getFileData(_id?: string) {
+    return _id ? this.apiService.fileData[_id as keyof object] : '';
   }
   initData(full: boolean) {
     if (full) {
@@ -169,10 +161,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   get newsletters() {
     return this._newsletters;
-  }
-  getFileData(col: string, _id?: string) {
-    // return this.fileService.getFileData(_id);
-    return '';
   }
 
   @HostListener('click', ['$event']) // prevent page reload when launching an anchor link

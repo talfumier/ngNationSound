@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, forkJoin } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import _ from 'lodash';
 import { DataService } from '../../services/data/data.service';
 import { Artist } from '../../services/interfaces';
-import { environment } from '../../config/environment';
 import { ApiService } from '../../services/data/init/api.service';
 
 @Component({
@@ -27,14 +27,10 @@ export class ArtistComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     window.scrollTo(0, 0);
 
-    if (
-      environment.apiMode !== 'local' &&
-      !this.dataService.data.artists.ready
-    ) {
+    if (!this.dataService.data.artists.ready) {
       //retrieve data from API back end > artists data are required in program page (should already be available from the home page api data loading)
-      document.getElementById('splashScreen')?.classList.remove('hidden');
+      this.dataService.displayLoading(true);
       const cols = [
-        'dates',
         'artists',
         'messages',
         'transports',
@@ -46,14 +42,24 @@ export class ArtistComponent implements OnInit, OnDestroy {
       ]; //page reload case > full api data reload required
       this.sub = forkJoin(
         cols.map((col: string) => {
-          return this.apiService.getApiObs('node', col);
+          return this.apiService.getApiObs('node', col); //standard data retrieval (i.e no image, no file)
         })
       ).subscribe((data) => {
         data.map((item, idx) => {
-          this.apiService.formatApiData(cols[idx], item);
+          this.apiService.formatApiData(cols[idx], item.data);
+          if (['artists', 'partners'].indexOf(cols[idx]) !== -1) {
+            const _ids = _.filter(item.data, (itm) => {
+              return itm.files_id;
+            }).map((it) => {
+              return it.files_id;
+            });
+            _ids.map((_id: any) => {
+              this.apiService.setFileData(_id).subscribe();
+            });
+          }
         });
         this.initData();
-        document.getElementById('splashScreen')?.classList.add('hidden');
+        this.dataService.displayLoading(false);
       });
     } else this.initData();
   }
@@ -66,9 +72,7 @@ export class ArtistComponent implements OnInit, OnDestroy {
   get artist(): Artist {
     return this._artist;
   }
-  getArtistPath(artist: Artist) {
-    // return environment.apiMode === 'local'
-    //   ? 'assets/images/artists/' + artist.filename
-    //   : artist.image;
+  getFileData(_id?: string) {
+    return _id ? this.apiService.fileData[_id as keyof object] : '';
   }
 }

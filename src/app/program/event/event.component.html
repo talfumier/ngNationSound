@@ -1,7 +1,7 @@
 <div class="artist-events">
   <div class="artist">
     <img
-      src="{{ getFileData(event) }}"
+      src="{{ getFileData(event.performer.files_id) }}"
       alt="{{ event.performer.name }}"
       [routerLink]="['/artist', event.performer.id]"
     />

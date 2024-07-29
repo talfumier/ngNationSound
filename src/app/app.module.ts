@@ -1,4 +1,4 @@
-import { NgModule,ErrorHandler} from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { SlickCarouselModule } from 'ngx-slick-carousel';
@@ -42,27 +42,21 @@ import { LoadingComponent } from './loading/loading.component';
     MapComponent,
     FaqComponent,
     TicketingComponent,
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot({timeOut:3000}),    
+    ToastrModule.forRoot({ timeOut: 3000 }),
     FormsModule,
     SlickCarouselModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [ 
-    { provide: ErrorHandler,useClass: GenericErrorHandler },
-    { provide: Window, useValue: window },    
+  providers: [
+    { provide: ErrorHandler, useClass: GenericErrorHandler },
+    { provide: Window, useValue: window },
     { provide: Document, useValue: document },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { 
-}
-
-
-
-
+export class AppModule {}

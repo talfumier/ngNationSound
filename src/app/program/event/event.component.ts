@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import { DataService } from '../../../services/data/data.service';
-import { FilesService } from './../../../services/data/files.service';
+import { ApiService } from '../../../services/data/init/api.service';
 import { ArtistEvents } from '../../../services/interfaces';
 import { removeAccents } from '../../utilities/functions/utlityFunctions';
 
@@ -16,10 +15,7 @@ export class EventComponent implements OnInit {
 
   private _event: ArtistEvents = {} as ArtistEvents;
 
-  constructor(
-    private dataService: DataService,
-    private fileService: FilesService
-  ) {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     this._event = this.data;
@@ -38,11 +34,7 @@ export class EventComponent implements OnInit {
     if (type.includes('rencontre')) return 'rencontre';
     return removeAccents(location);
   }
-  getArtistPath(event: ArtistEvents) {
-    // return environment.apiMode==="local"?('assets/images/artists/' + event.performer.filename):event.performer.image;
-  }
-  getFileData(event: ArtistEvents) {
-    return '';
-    // return this.fileService.getFileData(col, _id);
+  getFileData(_id?: string) {
+    return _id ? this.apiService.fileData[_id as keyof object] : '';
   }
 }

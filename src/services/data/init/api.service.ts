@@ -1,11 +1,10 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Buffer } from 'buffer';
-import { Observable, catchError, Subscription } from 'rxjs';
+import { Observable, catchError, Subscription, from, map } from 'rxjs';
 import _ from 'lodash';
 import config from '../../../config/config.json';
 import { DataService } from '../data.service';
-import { FilesService } from './../files.service';
 import { Transport } from '../../interfaces';
 import { ToastService } from '../../toast.service';
 import { environment } from '../../../config/environment';
@@ -16,11 +15,11 @@ import { environment } from '../../../config/environment';
 export class ApiService implements OnDestroy {
   private headers: any = {};
   private sub: Subscription = {} as Subscription;
+  private _fileData: object = {} as object;
 
   constructor(
     private http: HttpClient,
     private dataService: DataService,
-    // private fileService: FilesService,
     private toastService: ToastService
   ) {
     this.headers = new HttpHeaders({
@@ -44,8 +43,10 @@ export class ApiService implements OnDestroy {
           environment.production
             ? config.node_api_url_prod
             : config.node_api_url_dev
-        }/${!files_id ? 'entities' : 'files'}/${
-          !files_id ? col.slice(0, -1) : files_id + '?main=true'
+        }/${
+          !files_id
+            ? 'entities/' + col.slice(0, -1)
+            : 'files/' + (files_id !== 'all' ? files_id + '?main=true' : '')
         }`;
         break;
       case 'wp':
@@ -177,4 +178,21 @@ export class ApiService implements OnDestroy {
           };
     }
   }
+  get fileData() {
+    return this._fileData;
+  }
+  setFileData(_id: string): Observable<any> {
+    //file and image data
+    return new Observable<any>((item) => {
+      this.getApiObs('node', '', _id).subscribe((fileContainer) => {
+        this._fileData = {
+          ...this._fileData,
+          [_id]: fileContainer.data.data,
+        };
+        item.next(this._fileData);
+      });
+    });
+  }
+
+  //https://www.learnrxjs.io/learn-rxjs/operators/transformation/map
 }
