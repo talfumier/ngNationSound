@@ -7,10 +7,10 @@ import {
 } from '@angular/core';
 import { Subscription, forkJoin, switchMap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import _ from 'lodash';
 import * as L from 'leaflet';
 import { UmapService } from '../../services/map/umap.service';
 import { DataService } from './../../services/data/data.service';
-import { environment } from '../../config/environment';
 import { ApiService } from '../../services/data/init/api.service';
 
 @Component({
@@ -19,7 +19,7 @@ import { ApiService } from '../../services/data/init/api.service';
   styleUrl: './map.component.css',
 })
 export class MapComponent implements OnInit, OnDestroy {
-  private sub: Subscription = {} as Subscription;
+  private subs: Subscription[] = [];
   private map: L.Map = {} as L.Map;
   private stage: any = '';
   private _isFullScreen: boolean = false;
@@ -40,7 +40,7 @@ export class MapComponent implements OnInit, OnDestroy {
     window.scrollTo(0, 0);
     document.getElementById('header-map-link')?.classList.add('active');
 
-    if (!this.dataService.data.umap_pois.ready) {
+    if (!this.dataService.data.maps.ready) {
       //retrieve data from API back end
       this.dataService.displayLoading(true);
       if (!this.dataService.data.events.ready) {
@@ -55,48 +55,61 @@ export class MapComponent implements OnInit, OnDestroy {
           'events',
           'newsletters',
         ];
-        forkJoin(
+        this.subs[0] = forkJoin(
           cols.map((col: string) => {
             return this.apiService.getApiObs('node', col);
           })
         ).subscribe((data) => {
           data.map((item, idx) => {
-            this.apiService.formatApiData(cols[idx], item);
+            this.apiService.formatApiData(cols[idx], item.data);
+            if (['artists', 'partners'].indexOf(cols[idx]) !== -1) {
+              const _ids = _.filter(item.data, (itm) => {
+                return itm.files_id;
+              }).map((it) => {
+                return it.files_id;
+              });
+              _ids.map((_id: any) => {
+                this.apiService.setFileData(_id).subscribe();
+              });
+            }
           });
         });
       }
-      this.sub = this.apiService
-        .getApiObs('node', 'umap_pois')
-        .pipe(
-          switchMap((value) => {
-            //1st observable to retrieve map pois json file url, format it and store it in dataservice
-            this.apiService.formatApiData('umap_pois', value, true);
-            return this.apiService.getApiObs(
-              'node',
-              'umap_pois',
-              this.dataService.data.umap_pois.url
-            ); //set the 2nd observable using the url from 1st observable
-          })
-        )
+      this.subs[1] = this.apiService
+        .getApiObs('node', 'maps')
         .subscribe((data) => {
           //retrieves map pois, format them and initialize the map.
-          this.apiService.formatApiData('umap_pois', data, false);
-          this.map = this.umap.initMap(
-            this.dataService.data.umap_pois.data,
-            this.stage
-          );
-          this.dataService.displayLoading(false);
+          this.apiService.formatApiData('maps', data.data);
+          const _ids = _.filter(data.data, (itm) => {
+            return itm.files_id;
+          }).map((it) => {
+            return it.files_id;
+          });
+          _ids.map((_id: any) => {
+            this.apiService.setFileData(_id, 'maps').subscribe(() => {
+              this.map = this.umap.initMap(
+                JSON.parse(atob(this.apiService.fileData[_id as keyof object])),
+                this.stage
+              );
+              this.dataService.displayLoading(false);
+            });
+          });
         });
-    } else
+    } else {
+      //api data already initialized or local data
+      const _id = this.dataService.maps['files_id' as keyof object];
       this.map = this.umap.initMap(
-        this.dataService.data.umap_pois.data,
+        JSON.parse(atob(this.apiService.fileData[_id as keyof object])),
         this.stage
-      ); //api data already initialized or local data
+      );
+    }
   }
   ngOnDestroy(): void {
     document.getElementById('header-map-link')?.classList.remove('active');
 
-    if (Object.keys(this.sub).length > 0) this.sub.unsubscribe(); //unsubscribe to prevent memory leaks
+    this.subs.map((sub) => {
+      if (Object.keys(sub).length > 0) sub.unsubscribe(); //unsubscribe to prevent memory leaks
+    });
   }
   handleFullScreen(evt: Event) {
     this._isFullScreen = !this._isFullScreen;

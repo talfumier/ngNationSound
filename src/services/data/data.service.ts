@@ -21,7 +21,7 @@ export class DataService {
     passes: { data: [], ready: false },
     events: { data: [], ready: false },
     newsletters: { data: [], ready: false },
-    umap_pois: { url: '', data: {}, ready: false },
+    maps: { data: {}, ready: false },
   };
 
   constructor() {}
@@ -139,7 +139,7 @@ export class DataService {
   get newsLetters() {
     return this._data.newsletters;
   }
-  get umap_pois() {
-    return this._data.umap_pois.data;
+  get maps() {
+    return this._data.maps.data;
   }
 }

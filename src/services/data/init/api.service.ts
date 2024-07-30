@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Buffer } from 'buffer';
-import { Observable, catchError, Subscription, from, map } from 'rxjs';
+import { Observable, catchError, Subscription } from 'rxjs';
 import _ from 'lodash';
 import config from '../../../config/config.json';
 import { DataService } from '../data.service';
@@ -31,7 +31,7 @@ export class ApiService implements OnDestroy {
     });
   }
   ngOnDestroy(): void {
-    // if (Object.keys(this.sub).length > 0) this.sub.unsubscribe();
+    if (Object.keys(this.sub).length > 0) this.sub.unsubscribe();
   }
 
   getApiObs(api: string, col: string, files_id?: string): Observable<any> {
@@ -46,8 +46,8 @@ export class ApiService implements OnDestroy {
         }/${
           !files_id
             ? 'entities/' + col.slice(0, -1)
-            : 'files/' + (files_id !== 'all' ? files_id + '?main=true' : '')
-        }`;
+            : 'files/' + files_id + '?main=true'
+        }${files_id && col === 'maps' ? '&map=true' : ''}`;
         break;
       case 'wp':
         url = `${
@@ -138,6 +138,12 @@ export class ApiService implements OnDestroy {
           ready: true,
         };
         break;
+      case 'maps':
+        this.dataService.data[col] = {
+          data: data[0],
+          ready: true,
+        };
+        break;
       case 'transports':
         this.dataService.data.infos.data.transport = {
           car: [],
@@ -163,34 +169,23 @@ export class ApiService implements OnDestroy {
           ready: true,
         };
         break;
-      case 'umap_pois':
-        if (umap_pois_url) {
-          let url = data[0].acf.umap_json.url;
-          url = `${
-            environment.production ? config.wp_api_upload_url : '/api_uploads'
-          }/${url.slice(url.indexOf('uploads') + 8 - url.length)}`;
-          this.dataService.data[col] = { url, data: {}, ready: false };
-        } else
-          this.dataService.data[col] = {
-            ...this.dataService.data[col],
-            data,
-            ready: true,
-          };
     }
   }
   get fileData() {
     return this._fileData;
   }
-  setFileData(_id: string): Observable<any> {
+  setFileData(_id: string, col?: string): Observable<any> {
     //file and image data
     return new Observable<any>((item) => {
-      this.getApiObs('node', '', _id).subscribe((fileContainer) => {
-        this._fileData = {
-          ...this._fileData,
-          [_id]: fileContainer.data.data,
-        };
-        item.next(this._fileData);
-      });
+      this.sub = this.getApiObs('node', col ? col : '', _id).subscribe(
+        (fileContainer) => {
+          this._fileData = {
+            ...this._fileData,
+            [_id]: fileContainer.data.data,
+          };
+          item.next(this._fileData);
+        }
+      );
     });
   }
 

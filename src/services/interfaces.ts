@@ -112,7 +112,7 @@ export interface Model {
   passes: { data: Pass[]; ready: boolean };
   events: { data: Event[]; ready: boolean };
   newsletters: { data: Newsletter[]; ready: boolean };
-  umap_pois: { url: string; data: object; ready: boolean };
+  maps: { data: object; ready: boolean };
 }
 export interface FilesModel {
   logos: { data: File; ready: boolean };
