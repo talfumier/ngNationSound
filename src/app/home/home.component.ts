@@ -69,7 +69,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         })
       ).subscribe((data) => {
         data.map((item, idx) => {
-          this.apiService.formatApiData(cols[idx], item.data);
+          this.apiService.formatApiData(
+            cols[idx],
+            cols[idx] === 'artists' ? _.orderBy(item.data, 'name') : item.data
+          );
           if (['artists', 'partners'].indexOf(cols[idx]) !== -1) {
             const _ids = _.filter(item.data, (itm) => {
               return itm.files_id;
