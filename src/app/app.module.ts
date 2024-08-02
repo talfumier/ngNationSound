@@ -7,6 +7,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { httpInterceptor } from '../error/http.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -54,6 +56,7 @@ import { LoadingComponent } from './loading/loading.component';
   ],
   providers: [
     { provide: ErrorHandler, useClass: GenericErrorHandler },
+    provideHttpClient(withInterceptors([httpInterceptor])),
     { provide: Window, useValue: window },
     { provide: Document, useValue: document },
   ],

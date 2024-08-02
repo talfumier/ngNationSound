@@ -3,7 +3,6 @@ import { Subscription, forkJoin } from 'rxjs';
 import { DataService } from '../../services/data/data.service';
 import { FormattedPass } from '../../services/interfaces';
 import { ApiService } from '../../services/data/init/api.service';
-import { environment } from '../../config/environment';
 import config from '../../config/config.json';
 
 @Component({
@@ -24,19 +23,14 @@ export class TicketingComponent implements OnInit, OnDestroy {
     private dataService: DataService,
     private apiService: ApiService
   ) {
-    this._url = `${
-      environment.production ? config.wp_ticketing_url : '/tickets/'
-    }`;
+    this._url = `${config.wp_ticketing_url}`;
   }
   get url() {
     return this._url;
   }
 
   ngOnInit(): void {
-    if (
-      environment.apiMode !== 'local' &&
-      !this.dataService.data.passes.ready
-    ) {
+    if (!this.dataService.data.passes.ready) {
       //retrieve data from API back end
       this.dataService.displayLoading(true);
       document.getElementById('splashScreen')?.classList.remove('hidden');

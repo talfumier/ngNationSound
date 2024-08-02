@@ -6,7 +6,6 @@ import _ from 'lodash';
 import config from '../../../config/config.json';
 import { DataService } from '../data.service';
 import { Transport } from '../../interfaces';
-import { ToastService } from '../../toast.service';
 import { environment } from '../../../config/environment';
 
 @Injectable({
@@ -17,11 +16,7 @@ export class ApiService implements OnDestroy {
   private sub: Subscription = {} as Subscription;
   private _fileData: object = {} as object;
 
-  constructor(
-    private http: HttpClient,
-    private dataService: DataService,
-    private toastService: ToastService
-  ) {
+  constructor(private http: HttpClient, private dataService: DataService) {
     this.headers = new HttpHeaders({
       Authorization:
         'Basic ' +
@@ -59,40 +54,21 @@ export class ApiService implements OnDestroy {
       .get(url, { headers: api === 'wp' ? this.headers : null })
       .pipe(
         catchError((error) => {
-          let msg = '';
-          if (error.status === 0) {
-            msg = 'A client-side or network error occurred !';
-            console.log('Client side error occurred :', error.error);
-          } else {
-            msg =
-              'API backend returned an unsuccessful response code ' +
-              error.status +
-              ' ! Please retry later.';
-            console.log(new Date(), error.status, error.error);
-          }
-          this.dataService.displayLoading(false);
-          throw this.toastService.toastError(msg);
+          //catching of http errors done in http-interceptor service
+          throw this.dataService.displayLoading(false);
         })
       );
   }
-  postApiObs(col: string, data: any) {
+  postApiObs(data: any, col: string) {
     const url = `${
-      environment.production ? config.wp_api_std_url : '/api'
-    }/${col}`;
-    return this.http.post(url, data, { headers: this.headers }).pipe(
+      environment.production
+        ? config.node_api_url_prod
+        : config.node_api_url_dev
+    }${col}`;
+    return this.http.post(url, data).pipe(
       catchError((error) => {
-        let msg = '';
-        if (error.status === 0) {
-          msg = 'A client-side or network error occurred !';
-          console.log('Client side error occurred :', error.error);
-        } else {
-          msg =
-            'API backend returned an unsuccessful response code ' +
-            error.status +
-            ' ! Please retry later.';
-          console.log(new Date(), error.status, error.error);
-        }
-        throw this.toastService.toastError(msg);
+        //catching of http errors done in http-interceptor service
+        throw this.dataService.displayLoading(false);
       })
     );
   }

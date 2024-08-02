@@ -45,6 +45,8 @@ li {
   min-width:180px;
 }
 button {
+  display:flex;
+  align-items: stretch;
   font-size:2.4rem;
   background-color: var(--blue);
   border:2px solid var(--orange);
@@ -52,6 +54,7 @@ button {
   padding:10px 0;
 }
 button a {
+  width:100%;
   color: var(--white);
   font-weight: 600;
   text-decoration: none;
