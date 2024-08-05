@@ -3,7 +3,7 @@ import { Subscription, forkJoin } from 'rxjs';
 import { DataService } from '../../services/data/data.service';
 import { FormattedPass } from '../../services/interfaces';
 import { ApiService } from '../../services/data/init/api.service';
-import config from '../../config/config.json';
+import { environment } from '../../config/environment';
 
 @Component({
   selector: 'app-ticketing',
@@ -23,7 +23,7 @@ export class TicketingComponent implements OnInit, OnDestroy {
     private dataService: DataService,
     private apiService: ApiService
   ) {
-    this._url = `${config.wp_ticketing_url}`;
+    this._url = `${environment.wp_ticketing_url}`;
   }
   get url() {
     return this._url;

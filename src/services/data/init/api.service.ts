@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Buffer } from 'buffer';
 import { Observable, catchError, Subscription } from 'rxjs';
 import _ from 'lodash';
-import config from '../../../config/config.json';
 import { DataService } from '../data.service';
 import { Transport } from '../../interfaces';
 import { environment } from '../../../config/environment';
@@ -36,8 +35,8 @@ export class ApiService implements OnDestroy {
       case 'node':
         url = `${
           environment.production
-            ? config.node_api_url_prod
-            : config.node_api_url_dev
+            ? environment.node_api_url_prod
+            : environment.node_api_url_dev
         }/${
           !files_id
             ? 'entities/' + col.slice(0, -1)
@@ -46,7 +45,7 @@ export class ApiService implements OnDestroy {
         break;
       case 'wp':
         url = `${
-          environment.production ? config.wp_api_std_url : '/api'
+          environment.production ? environment.wp_api_std_url : '/api'
         }/${col}?acf_format=standard&_fields=id,title,acf&per_page=100`;
     }
 
@@ -62,8 +61,8 @@ export class ApiService implements OnDestroy {
   postApiObs(data: any, col: string) {
     const url = `${
       environment.production
-        ? config.node_api_url_prod
-        : config.node_api_url_dev
+        ? environment.node_api_url_prod
+        : environment.node_api_url_dev
     }${col}`;
     return this.http.post(url, data).pipe(
       catchError((error) => {

@@ -1,9 +1,4 @@
 {
-  "node_api_url_dev": "http://localhost:8000/api",
-  "node_api_url_prod": "http://localhost:8000/api",
-  "wp_api_std_url": "https://henri.mspr.dev/wp-json/wp/v2",
-  "wp_api_upload_url": "https://henri.mspr.dev/wp-content/uploads",
-  "wp_ticketing_url": "https://henri.mspr.dev/billetterie-festival-nationsound",
   "refresh_interval": 6e5,
   "carouselConfig": {
     "autoplay": true,
