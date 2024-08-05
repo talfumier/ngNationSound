@@ -44,3 +44,5 @@ Thumbs.db
 # Environment
 src/config/environment.ts
 src/.env
+
+.vercel

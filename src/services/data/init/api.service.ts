@@ -164,6 +164,4 @@ export class ApiService implements OnDestroy {
       );
     });
   }
-
-  //https://www.learnrxjs.io/learn-rxjs/operators/transformation/map
 }
