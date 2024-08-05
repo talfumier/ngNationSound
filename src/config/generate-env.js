@@ -5,6 +5,7 @@ const setEnv = () => {
   const targetPath = path.join(__dirname, "/environment.ts");
 
   const configFile = `export const environment = {
+    node_api_url_dev: 'http://localhost:8000/api',
     node_api_url_prod: '${process.env.NATIONSOUND_API_URL}',
     wp_appUser: '${process.env.NATIONSOUND_WP_APP_USER}',
     wp_appPwd: '${process.env.NATIONSOUND_WP_APP_PWD}',
