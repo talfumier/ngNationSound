@@ -181,7 +181,7 @@ div.section-content.faq {
   border:3px solid var(--orange);
   border-radius: 5px;  
   width: 90%;
-  height:350px;
+  height:400px;
   overflow-y: auto;
   overflow-x:hidden;
   max-width: 650px;
@@ -254,7 +254,7 @@ div.section-content.partners img {
     transform: rotate(0deg);
   }
   section.container-infos-faq {
-    grid-template-rows: auto;
+    grid-template-rows: 450px;
     grid-template-columns: repeat(2, auto);
   }
 }
