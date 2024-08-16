@@ -10,7 +10,6 @@ const setEnv = () => {
     wp_appUser: '${process.env.NATIONSOUND_WP_APP_USER}',
     wp_appPwd: '${process.env.NATIONSOUND_WP_APP_PWD}',
     wp_api_std_url: '${process.env.NATIONSOUND_WP_API_STD_URL}',
-    wp_api_upload_url: '${process.env.NATIONSOUND_WP_API_UPLOAD_URL}',
     wp_ticketing_url: '${process.env.NATIONSOUND_WP_TICKETING_URL}',
     production: true,
   };`;
