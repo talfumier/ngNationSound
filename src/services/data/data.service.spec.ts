@@ -1,10 +1,7 @@
-import { TestBed, inject } from '@angular/core/testing';
-
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
 import _ from 'lodash';
 import { differenceInCalendarDays } from 'date-fns';
 import { DataService } from './data.service';
-import { ApiService } from './init/api.service';
 import mockAPIData from './simulatedAPIData.json';
 
 function validHTML(htmlString: string): boolean {
@@ -14,7 +11,7 @@ function validHTML(htmlString: string): boolean {
   return error ? false : true;
 }
 describe('services', () => {
-  let apiService: ApiService, dataService: DataService;
+  let dataService: DataService;
   const cols = [
     'dates',
     'artists',
@@ -27,12 +24,8 @@ describe('services', () => {
     'newsletters',
   ];
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [DataService, ApiService],
-    });
+    TestBed.configureTestingModule({});
     dataService = TestBed.inject(DataService);
-    apiService = TestBed.inject(ApiService);
     mockAPIData.map((item, idx) => {
       dataService.formatApiData(
         cols[idx],
@@ -42,9 +35,6 @@ describe('services', () => {
   });
   it('dataService should be available', () => {
     expect(dataService).toBeTruthy();
-  });
-  it('apiService should be available', () => {
-    expect(apiService).toBeTruthy();
   });
   it('should call dataService.formatApiData() for formatting simulated data returned by the API and populate dataService data', () => {
     expect(dataService.artists.length).toEqual(15);
