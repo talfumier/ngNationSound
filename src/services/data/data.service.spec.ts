@@ -34,7 +34,7 @@ describe('services', () => {
     dataService = TestBed.inject(DataService);
     apiService = TestBed.inject(ApiService);
     mockAPIData.map((item, idx) => {
-      apiService.formatApiData(
+      dataService.formatApiData(
         cols[idx],
         cols[idx] === 'artists' ? _.orderBy(item.data, 'name') : item.data
       );
@@ -46,7 +46,7 @@ describe('services', () => {
   it('apiService should be available', () => {
     expect(apiService).toBeTruthy();
   });
-  it('should call apiService.formatApiData() for formatting simulated data returned by the API and populate dataService data', () => {
+  it('should call dataService.formatApiData() for formatting simulated data returned by the API and populate dataService data', () => {
     expect(dataService.artists.length).toEqual(15);
   });
   it('should have a initInnerHTML() method that initiates a innerHTML property as an array of strings of a given length', () => {

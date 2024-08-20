@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         })
       ).subscribe((data) => {
         data.map((item, idx) => {
-          this.apiService.formatApiData(cols[idx], item.data);
+          this.dataService.formatApiData(cols[idx], item.data);
         });
         const _id = data[1].data[0].files_id;
         this.apiService.setFileData(_id).subscribe((data) => {
