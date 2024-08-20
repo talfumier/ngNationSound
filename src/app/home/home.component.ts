@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         })
       ).subscribe((data) => {
         data.map((item, idx) => {
-          this.apiService.formatApiData(
+          this.dataService.formatApiData(
             cols[idx],
             cols[idx] === 'artists' ? _.orderBy(item.data, 'name') : item.data
           );
@@ -103,7 +103,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       )
       .subscribe((data) => {
         data.map((item, idx) => {
-          this.apiService.formatApiData(cls[idx], item);
+          this.dataService.formatApiData(cls[idx], item);
         });
         this.initData(false);
       });

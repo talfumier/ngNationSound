@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
 import _ from 'lodash';
 import { format } from 'date-fns';
-import { Poi, Dates, Artist, Event, Infos, Model } from '../interfaces';
+import {
+  Poi,
+  Dates,
+  Artist,
+  Event,
+  Infos,
+  Model,
+  Transport,
+} from '../interfaces';
 import { removeAccents } from '../../app/utilities/functions/utlityFunctions';
 
 @Injectable({
@@ -86,6 +94,82 @@ export class DataService {
       });
       if (ul.length > 0) this._innerHTML.push(ul + '</ul>');
     });
+  }
+
+  formatApiData(col: string, data: any) {
+    switch (col) {
+      case 'messages':
+        this._data.messages = {
+          data: data.map((msg: any) => {
+            return msg;
+          }),
+          ready: true,
+        };
+        break;
+      case 'dates':
+        this._data.dates = {
+          data: {
+            start_date: new Date(data[0].start_date),
+            end_date: new Date(data[0].end_date),
+          },
+          ready: true,
+        };
+        this._data.infos = {
+          data: {
+            opening: data[0].opening_hours,
+            street: data[0].street,
+            city: data[0].city,
+            lat: data[0].lat,
+            lng: data[0].lng,
+            transport: this._data.infos.data.transport,
+          },
+          ready: true,
+        };
+        break;
+      case 'logos':
+      case 'artists':
+      case 'partners':
+      case 'pois':
+      case 'faqs':
+      case 'events':
+      case 'newsletters':
+        this._data[col] = {
+          data,
+          ready: true,
+        };
+        break;
+      case 'maps':
+        this._data[col] = {
+          data: data[0],
+          ready: true,
+        };
+        break;
+      case 'transports':
+        this._data.infos.data.transport = {
+          car: [],
+          train: [],
+          plane: [],
+        };
+        _.sortBy(data, 'title', 'asc').map((item: any) => {
+          this._data.infos.data.transport[
+            item.transport_mean as keyof Transport
+          ].push(item.description);
+        });
+        break;
+      case 'tickets':
+        this._data.passes = {
+          data: data.map((item: any) => {
+            return {
+              category: item.acf.category,
+              pass1: item.acf.price_1day,
+              pass2: item.acf.price_2days,
+              pass3: item.acf.price_3days,
+            };
+          }),
+          ready: true,
+        };
+        break;
+    }
   }
   getArtistById(id: number): Artist {
     return _.filter(this._data.artists.data, (artist) => {

@@ -1,10 +1,7 @@
-import { TestBed, inject } from '@angular/core/testing';
-
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
 import _ from 'lodash';
 import { differenceInCalendarDays } from 'date-fns';
 import { DataService } from './data.service';
-import { ApiService } from './init/api.service';
 import mockAPIData from './simulatedAPIData.json';
 
 function validHTML(htmlString: string): boolean {
@@ -14,7 +11,7 @@ function validHTML(htmlString: string): boolean {
   return error ? false : true;
 }
 describe('services', () => {
-  let apiService: ApiService, dataService: DataService;
+  let dataService: DataService;
   const cols = [
     'dates',
     'artists',
@@ -27,14 +24,10 @@ describe('services', () => {
     'newsletters',
   ];
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [DataService, ApiService],
-    });
+    TestBed.configureTestingModule({});
     dataService = TestBed.inject(DataService);
-    apiService = TestBed.inject(ApiService);
     mockAPIData.map((item, idx) => {
-      apiService.formatApiData(
+      dataService.formatApiData(
         cols[idx],
         cols[idx] === 'artists' ? _.orderBy(item.data, 'name') : item.data
       );
@@ -43,10 +36,7 @@ describe('services', () => {
   it('dataService should be available', () => {
     expect(dataService).toBeTruthy();
   });
-  it('apiService should be available', () => {
-    expect(apiService).toBeTruthy();
-  });
-  it('should call apiService.formatApiData() for formatting simulated data returned by the API and populate dataService data', () => {
+  it('should call dataService.formatApiData() for formatting simulated data returned by the API and populate dataService data', () => {
     expect(dataService.artists.length).toEqual(15);
   });
   it('should have a initInnerHTML() method that initiates a innerHTML property as an array of strings of a given length', () => {

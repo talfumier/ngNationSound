@@ -61,7 +61,7 @@ export class MapComponent implements OnInit, OnDestroy {
           })
         ).subscribe((data) => {
           data.map((item, idx) => {
-            this.apiService.formatApiData(cols[idx], item.data);
+            this.dataService.formatApiData(cols[idx], item.data);
             if (['artists', 'partners'].indexOf(cols[idx]) !== -1) {
               const _ids = _.filter(item.data, (itm) => {
                 return itm.files_id;
@@ -79,7 +79,7 @@ export class MapComponent implements OnInit, OnDestroy {
         .getApiObs('node', 'maps')
         .subscribe((data) => {
           //retrieves map pois, format them and initialize the map.
-          this.apiService.formatApiData('maps', data.data);
+          this.dataService.formatApiData('maps', data.data);
           const _ids = _.filter(data.data, (itm) => {
             return itm.files_id;
           }).map((it) => {

@@ -52,14 +52,14 @@ export class TicketingComponent implements OnInit, OnDestroy {
           })
         ).subscribe((data) => {
           data.map((item, idx) => {
-            this.apiService.formatApiData(cols[idx], item);
+            this.dataService.formatApiData(cols[idx], item);
           });
         });
       }
       this.subs[1] = this.apiService
         .getApiObs('wp', 'tickets')
         .subscribe((data) => {
-          this.apiService.formatApiData('tickets', data);
+          this.dataService.formatApiData('tickets', data);
           this.formatData();
           this.dataService.displayLoading(false);
         });
