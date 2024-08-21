@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import _ from 'lodash';
-import { format } from 'date-fns';
+import { format, isWithinInterval, interval, addDays } from 'date-fns';
 import {
   Poi,
   Dates,
@@ -31,24 +31,41 @@ export class DataService {
     newsletters: { data: [], ready: false },
     maps: { data: {}, ready: false },
   };
+  private _days: number[] = [];
 
   constructor() {}
 
+  initDays() {
+    //initialization in header.component.ts
+    const int = interval(
+      this._data.dates.data.start_date,
+      this._data.dates.data.end_date
+    );
+    let i = 0;
+    const days = [];
+    do {
+      days.push(addDays(this._data.dates.data.start_date, i).getDate());
+      i += 1;
+    } while (
+      addDays(this._data.dates.data.start_date, i) <=
+      this._data.dates.data.end_date
+    );
+    this._days = days;
+  }
   initInnerHTML() {
     // data formatted as html string for use in events summary (home page)
     this._innerHTML = [''];
-    _.range(
-      this._data.dates.data.start_date.getDate(),
-      this._data.dates.data.end_date.getDate() + 1
-    ).map((day) => {
+    let dte = null;
+    this._days.map((day, idx) => {
+      dte = addDays(this._data.dates.data.start_date, idx);
       this._innerHTML.push(
         format(
           new Date(
-            this._data.dates.data.start_date.getFullYear(), //work-around to avoid 'invalid date' warning on ios devices
-            this._data.dates.data.start_date.getMonth(),
+            dte.getFullYear(), //work-around to avoid 'invalid date' warning on ios devices
+            dte.getMonth(),
             day
           ),
-          'dd MMMM'
+          'dd MMM'
         )
       );
     });
@@ -71,7 +88,13 @@ export class DataService {
       (day = ''), (ul = '');
       _.sortBy(
         _.filter(this._data.events.data, (evt) => {
-          return evt.location === stage.id;
+          return (
+            evt.location === stage.id &&
+            isWithinInterval(evt.date, {
+              start: this._data.dates.data.start_date,
+              end: addDays(this._data.dates.data.end_date, 1),
+            })
+          );
         }),
         'date',
         'asc'
@@ -180,6 +203,9 @@ export class DataService {
     const elt = document.getElementById('splashScreen');
     if (cs) elt?.classList.remove('hidden');
     else elt?.classList.add('hidden');
+  }
+  get days() {
+    return this._days;
   }
   get data() {
     return this._data;

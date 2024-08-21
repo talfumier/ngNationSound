@@ -5,9 +5,16 @@
     </div>
     <h1>
       <p>Nation Sound Festival</p>
-      <p [ngClass]="{ decoration: dates.days.length > 0 }" class="dates">
-        <span *ngFor="let day of dates.days" class="day">{{ day }}</span>
-        <span class="month-year">{{ dates.monthYear }}</span>
+      <p [ngClass]="{ decoration: dates[0].days.length > 0 }" class="dates">
+        <span *ngFor="let day of dates[0].days" class="day">{{ day }}</span>
+        <span class="month-year">{{ dates[0].monthYear }}</span>
+        <span *ngIf="dates.length > 1" class="no-decoration">
+          <span class="no-decoration separator">&</span>
+          <span *ngFor="let day of dates[1].days" class="day new-month">{{
+            day
+          }}</span>
+          <span class="month-year">{{ dates[1].monthYear }}</span>
+        </span>
       </p>
     </h1>
   </div>

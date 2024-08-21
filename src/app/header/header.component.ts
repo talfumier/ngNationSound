@@ -47,19 +47,42 @@ export class HeaderComponent implements OnInit, OnDestroy {
     } else this._dates = this.getDaysMonthYear(); //api data already initialized
   }
   getDaysMonthYear() {
-    const days = _.range(
-      this.dataService.dates.start_date.getDate(),
-      this.dataService.dates.end_date.getDate() + 1
-    );
-    const monthYear = format(
-      new Date(
-        this.dataService.dates.start_date.getFullYear(), //work-around to avoid 'invalid date' warning on ios devices
-        this.dataService.dates.start_date.getMonth(),
-        days[0]
+    this.dataService.initDays();
+    const monthYear = [
+      format(
+        new Date(
+          this.dataService.dates.start_date.getFullYear(), //work-around to avoid 'invalid date' warning on ios devices
+          this.dataService.dates.start_date.getMonth()
+        ),
+        'MMMM'
       ),
-      'MMMM yyyy'
-    );
-    return { days, monthYear };
+      format(
+        new Date(
+          this.dataService.dates.end_date.getFullYear(), //work-around to avoid 'invalid date' warning on ios devices
+          this.dataService.dates.end_date.getMonth()
+        ),
+        'MMM yyyy'
+      ),
+    ];
+    if (monthYear[1].includes(monthYear[0]))
+      return [{ days: this.dataService.days, monthYear: monthYear[1] }];
+    else {
+      let day0 = this.dataService.days[0] - 1;
+      const fltr = _.filter(this.dataService.days, (day, idx) => {
+        day0 += 1;
+        return idx === 0 || day === day0;
+      });
+      return [
+        {
+          days: fltr,
+          monthYear: monthYear[0],
+        },
+        {
+          days: this.dataService.days.slice(fltr.length),
+          monthYear: monthYear[1],
+        },
+      ];
+    }
   }
   ngOnDestroy(): void {
     if (Object.keys(this.sub).length > 0) this.sub.unsubscribe();
