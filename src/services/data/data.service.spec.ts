@@ -44,12 +44,13 @@ describe('services', () => {
       return poi.type === 'stage';
     });
     const n =
+      1 +
       (differenceInCalendarDays(
         dataService.dates.end_date,
         dataService.dates.start_date
       ) +
         2) *
-      (stages.length + 1);
+        stages.length;
     dataService.initInnerHTML();
     expect(dataService.innerHTML.length).toBe(n);
   });
