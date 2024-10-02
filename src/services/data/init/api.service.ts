@@ -36,6 +36,7 @@ export class ApiService implements OnDestroy {
           environment.production
             ? environment.node_api_url_prod
             : environment.node_api_url_dev
+          // :'/nodeapi'  //workaround to connect angular app on localhost to API on render
         }/${
           !files_id
             ? 'entities/' + col.slice(0, -1)
