@@ -4,4 +4,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Localhost Installation Guide
 
-Please refer to the ReadMe_dev.pdf in the project's root.
+Please refer to the 'ReadMe_dev.pdf' file in the project's root.
