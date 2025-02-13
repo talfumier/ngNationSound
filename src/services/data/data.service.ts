@@ -181,13 +181,9 @@ export class DataService {
         break;
       case 'tickets':
         this._data.passes = {
-          data: data.map((item: any) => {
-            return {
-              category: item.acf.category,
-              pass1: item.acf.price_1day,
-              pass2: item.acf.price_2days,
-              pass3: item.acf.price_3days,
-            };
+          data: data.data.map((item: any) => {
+            const { id, createdAt, updatedAt, ...rest } = item;
+            return rest;
           }),
           ready: true,
         };
