@@ -57,7 +57,7 @@ export class TicketingComponent implements OnInit, OnDestroy {
         });
       }
       this.subs[1] = this.apiService
-        .getApiObs('wp', 'tickets')
+        .getApiObs('node', 'tickets')
         .subscribe((data) => {
           this.dataService.formatApiData('tickets', data);
           this.formatData();
